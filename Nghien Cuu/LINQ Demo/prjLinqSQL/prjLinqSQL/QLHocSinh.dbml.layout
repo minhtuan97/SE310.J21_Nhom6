@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="QLHocSinh">
+  <DataContextMoniker Name="/QLHocSinhDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0ce58a90-9019-4f18-ad18-0bf47defe101" absoluteBounds="2.75, 2.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/QLHocSinhDataContext/HocSinh" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4ad2afc7-681a-43bd-bb81-d4f6d9fa0d6c" absoluteBounds="2.765, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
