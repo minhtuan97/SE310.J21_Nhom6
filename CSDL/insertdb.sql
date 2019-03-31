@@ -45,8 +45,8 @@ insert into TIEUSU values('TS0000002','123456789012','2017-01-01','2018-01-01','
 insert into TIEUSU values('TS0000003','123456789013','2017-01-01','2018-01-01','Tân Lập, Đông Hòa, Dĩ An, Bình Dương','Sinh viên','An Hòa, Đông Hòa, Dĩ An, Bình Dương');
 insert into TIEUSU values('TS0000004','123456789014','2017-01-01','2018-01-01','Tân Lập, Đông Hòa, Dĩ An, Bình Dương','Tài xế','Tân Lập, Đông Hòa, Dĩ An, Bình Dương');
 insert into TIEUSU values('TS0000005','123456789015','2017-01-01','2018-01-01','Tân Lập, Đông Hòa, Dĩ An, Bình Dương','Nông dân','Tân Lập, Đông Hòa, Dĩ An, Bình Dương');
-insert into TIEUSU values('TS0000006','123456789016','2017-01-017','2018-01-01','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh','Bác sĩ','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh');
-insert into TIEUSU values('TS0000007','123456789017','2017-01-017','2018-01-01','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh','Nghề tự do','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh');
+insert into TIEUSU values('TS0000006','123456789016','2017-01-01','2018-01-01','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh','Bác sĩ','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh');
+insert into TIEUSU values('TS0000007','123456789017','2017-01-01','2018-01-01','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh','Nghề tự do','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh');
 insert into TIEUSU values('TS0000008','123456789018','2017-01-01','2018-01-01','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh','Học sinh','Khu Phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh');
 
 /*Báng Tiền án tiền sự */
