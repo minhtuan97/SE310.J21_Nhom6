@@ -20,7 +20,7 @@ namespace GUI
         public Form_NhanKhau()
         {
             InitializeComponent();
-            dataGridView1.DataSource = nhankhaubus.GetAll().Tables["nhankhau"];
+            dataGridView1.DataSource = nhankhaubus.GetAll();
         }
 
         private void groupControl1_Paint(object sender, PaintEventArgs e)

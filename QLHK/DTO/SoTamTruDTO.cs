@@ -8,22 +8,23 @@ namespace DTO
 {
     public class SoTamTruDTO
     {
-        public string SoSoTamTru { get; set; }
-        public string MaChuHoTamTru { get; set; }
-        public string NoiTamTru { get; set; }
-        public DateTime NgayCap { get; set; }
-        public DateTime DenNgay { get; set; }
+        public SOTAMTRU db;
 
         public SoTamTruDTO() { }
 
         public SoTamTruDTO(string soSoTamTru, string maChuHoTamTru, string noiTamTru, 
             DateTime ngayCap, DateTime denNgay)
         {
-            SoSoTamTru = soSoTamTru;
-            MaChuHoTamTru = maChuHoTamTru;
-            NoiTamTru = noiTamTru;
-            NgayCap = ngayCap;
-            DenNgay = denNgay;
+            db.SOSOTAMTRU = soSoTamTru;
+            db.CHUHO = maChuHoTamTru;
+            db.NOITAMTRU = noiTamTru;
+            db.NGAYCAP = ngayCap;
+            db.DENNGAY = denNgay;
+        }
+
+        public SoTamTruDTO(SOTAMTRU dbs)
+        {
+            db = dbs;
         }
     }
 }

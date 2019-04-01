@@ -12,6 +12,7 @@ namespace BUS
     public class TieuSuBUS : AbstractFormBUS<TieuSuDTO>
     {
         public TieuSuBUS() : base() { }
+
         TieuSuDAO tieusu = new TieuSuDAO();
 
         public override List<TieuSuDTO> GetAll()

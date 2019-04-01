@@ -62,5 +62,11 @@
         <elementListCompartment Id="17e28a04-e0f7-4683-8965-0e6cc259bec5" absoluteBounds="0.765, 10.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <inheritanceConnector edgePoints="[(1.75 : 3.75); (1.75 : 3.375); (6.375 : 3.375); (6.375 : 5.89589680989583); (7.75 : 5.89589680989583); (7.75 : 5.52089680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="7a7fe09e-e9ef-4b01-9ff3-bde95e827b62">
+      <nodes>
+        <classShapeMoniker Id="2bd43a0b-9839-4465-8bf0-a60e9f6a4c62" />
+        <classShapeMoniker Id="12707c9c-2dac-43c9-a3bc-33f4da497046" />
+      </nodes>
+    </inheritanceConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

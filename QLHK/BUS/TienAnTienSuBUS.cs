@@ -12,9 +12,10 @@ namespace BUS
     public class TienAnTienSuBUS : AbstractFormBUS<TienAnTienSuDTO>
     {
         public TienAnTienSuBUS() : base() { }
+
         TienAnTienSuDAO tienantiensu = new TienAnTienSuDAO();
 
-        public override DataSet GetAll()
+        public override List<TienAnTienSuDTO> GetAll()
         {
             return tienantiensu.getAll();
         }
@@ -34,12 +35,12 @@ namespace BUS
             return tienantiensu.delete(r);
         }
 
-        public override bool Update(TienAnTienSuDTO data, int r)
+        public override bool Update(TienAnTienSuDTO data)
         {
-            return tienantiensu.update(data, r);
+            return tienantiensu.update(data);
         }
 
-        public DataSet TimKiem(string query)
+        public List<TienAnTienSuDTO> TimKiem(string query)
         {
             return tienantiensu.TimKiem(query);
         }

@@ -12,7 +12,7 @@ namespace BUS
     public class CanBoBUS:AbstractFormBUS<CanBoDTO>
     {
         CanBoDAO objcb = new CanBoDAO();
-        public override DataSet GetAll()
+        public override List<CanBoDTO> GetAll()
         {
             return objcb.getAll();
         }
@@ -24,17 +24,17 @@ namespace BUS
         {
             return objcb.delete(row);
         }
-        public override bool Update(CanBoDTO cb, int r)
+        public override bool Update(CanBoDTO cb)
         {
-            return objcb.update(cb, r);
+            return objcb.update(cb);
         }
         public override bool Add_Table(CanBoDTO data)
         {
             return objcb.insert_table(data);
         }
-        public DataSet TimKiem(string query)
+        public List<CanBoDTO> TimKiem(string query)
         {
-            return objcb.TimKiem(query);
+            return objcb.TimKiem(query).ToList();
         }
 
         public string GetMaNhanKhauThuongTruFromCanBo(string tendangnhap)

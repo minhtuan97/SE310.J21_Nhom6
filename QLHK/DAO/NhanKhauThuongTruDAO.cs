@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿//using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,164 +13,83 @@ namespace DAO
     {
         public NhanKhauThuongTruDAO() : base() { }
 
-        public override DataSet getAll()
+        public override List<NhanKhauThuongTruDTO> getAll()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM nhankhauthuongtru", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "nhankhauthuongtru");
-                return dataset;
+            var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
+                        select new NhanKhauThuongTruDTO {
+                            db=nktt
+                        };
 
+            return kq.ToList();
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
         }
 
-        public DataSet getAllJoinNhanKhau()
+        public List<NhanKhauThuongTruDTO> getAllJoinNhanKhau()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT Distinct * FROM nhankhau inner join nhankhauthuongtru on nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                //sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                //sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                //sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset);
-                return dataset;
+            var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
+                     join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
+                     select new NhanKhauThuongTruDTO
+                     {
+                         db = nktt
+                     };
 
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+            return kq.ToList();
         }
         public override bool insert_table(NhanKhauThuongTruDTO data)
         {
+            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
+
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["nhankhauthuongtru"].NewRow();
-                dr["manhankhauthuongtru"] = data.MaNhanKhauThuongTru;
-                dr["madinhdanh"] = data.MaDinhDanh;
-                dr["diachithuongtru"] = data.DiaChiThuongTru;
-                dr["quanhevoichuho"] = data.QuanHeVoiChuHo;
-                dr["sosohokhau"] = data.SoSoHoKhau;
-
-                dataset.Tables["nhankhauthuongtru"].Rows.Add(dr);
-                dataset.Tables["nhankhauthuongtru"].Rows.RemoveAt(dataset.Tables["nhankhauthuongtru"].Rows.Count - 1);
-                sqlda.Update(dataset, "nhankhauthuongtru");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
-        public override bool insert(NhanKhauThuongTruDTO nktt)
+        public override bool insert(NhanKhauThuongTruDTO data)
         {
+            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
+
             try
             {
-
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-
-                string sql = "insert into nhankhauthuongtru values(@manhankhauthuongtru,@madinhdanh, @noithuongtrutamtru, @quanhevoichuho, @sosohokhau)";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@manhankhauthuongtru", nktt.MaNhanKhauThuongTru);
-                cmd.Parameters.AddWithValue("@madinhdanh", nktt.MaDinhDanh);
-                cmd.Parameters.AddWithValue("@noithuongtrutamtru", nktt.NoiThuongTru);
-                cmd.Parameters.AddWithValue("@quanhevoichuho", nktt.QuanHeVoiChuHo);
-                cmd.Parameters.AddWithValue("@sosohokhau", nktt.SoSoHoKhau);
-
-                //cmd.Parameters.AddWithValue("@diachihientai", nktt.DiaChiHienTai);
-                //cmd.Parameters.AddWithValue("@trinhdohocvan", nktt.TrinhDoHocVan);
-                //cmd.Parameters.AddWithValue("@trinhdochuyenmon", nktt.TrinhDoChuyenMon);
-                //cmd.Parameters.AddWithValue("@biettiengdantoc", nktt.BietTiengDanToc);
-                //cmd.Parameters.AddWithValue("@trinhdongoaingu", nktt.TrinhDoNgoaiNgu);
-                //cmd.Parameters.AddWithValue("@noilamviec", nktt.NoiLamViec);
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
-
         }
         public bool XoaNKTT(string maNhanKhauthuongtru)
         {
+            var kq = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == maNhanKhauthuongtru).SingleOrDefault();
+
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sql = "delete from nhankhauthuongtru where manhankhauthuongtru=@manhankhauthuongtru";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@manhankhauthuongtru", maNhanKhauthuongtru);
-
-                cmd.ExecuteNonQuery();
+                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(kq);
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         public override bool delete(int row)
         {
+            NhanKhauThuongTruDTO[] nktt = this.getAll().ToArray();
             try
             {
-                dataset.Tables["nhankhauthuongtru"].Rows[row].Delete();
-                sqlda.Update(dataset, "nhankhauthuongtru");
+                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(nktt[row].db);
                 return true;
             }
             catch (Exception e)
@@ -180,43 +99,33 @@ namespace DAO
             return false;
 
         }
-        public override bool update(NhanKhauThuongTruDTO nktt, int r)
+        public override bool update(NhanKhauThuongTruDTO nktt)
         {
-            if (conn.State != ConnectionState.Open)
+            // Query the database for the row to be updated.
+            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.db.MANHANKHAUTHUONGTRU);
+
+            // Execute the query, and change the column values
+            // you want to change.
+            foreach (NHANKHAUTHUONGTRU kq in query)
             {
-                conn.Open();
+                kq.MANHANKHAUTHUONGTRU = nktt.db.MANHANKHAUTHUONGTRU;
+                kq.DIACHITHUONGTRU = nktt.db.DIACHITHUONGTRU;
+                kq.QUANHEVOICHUHO = nktt.db.QUANHEVOICHUHO;
+                kq.SOSOHOKHAU = nktt.db.SOSOHOKHAU;
+                // Insert any additional changes to column values.
             }
+            // Submit the changes to the database.
             try
             {
-
-                string sql = "update nhankhauthuongtru set diachithuongtru=@diachithuongtru, quanhevoichuho=@quanhevoichuho, sosohokhau=@sosohokhau " +
-                    "where manhankhauthuongtru=@manhankhauthuongtru";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@manhankhauthuongtru", nktt.MaNhanKhauThuongTru);
-                cmd.Parameters.AddWithValue("@diachithuongtru", nktt.DiaChiThuongTru);
-                cmd.Parameters.AddWithValue("@quanhevoichuho", nktt.QuanHeVoiChuHo);
-                cmd.Parameters.AddWithValue("@sosohokhau", nktt.SoSoHoKhau);
-
-
-                //cmd.Parameters.AddWithValue("@diachihientai", nktt.DiaChiHienTai);
-                //cmd.Parameters.AddWithValue("@trinhdohocvan", nktt.TrinhDoHocVan);
-                //cmd.Parameters.AddWithValue("@machuho", nktt.maChuHo);
-                //cmd.Parameters.AddWithValue("@trinhdochuyenmon", nktt.TrinhDoChuyenMon);
-                //cmd.Parameters.AddWithValue("@biettiengdantoc", nktt.BietTiengDanToc);
-                //cmd.Parameters.AddWithValue("@trinhdongoaingu", nktt.TrinhDoNgoaiNgu);
-                //cmd.Parameters.AddWithValue("@noilamviec", nktt.NoiLamViec);
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         //public bool doiChuHo(List<NhanKhauThuongTruDTO> danhSach, string maDinhDanhChuHo)
         //{
@@ -251,60 +160,34 @@ namespace DAO
         //    return true;
 
         //}
-        public DataSet TimKiem(string query)
+        public List<NhanKhauThuongTruDTO> TimKiem(string query)
         {
-            try
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM NHANKHAUTHUONGTRU" + query;
+            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
+            List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
+            foreach (NHANKHAUTHUONGTRU i in res)
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                if (!String.IsNullOrEmpty(query)) query = " where " + query;
-                sqlda = new MySqlDataAdapter("SELECT * FROM nhankhauthuongtru" + query, conn); /*where manhankhauthuongtru IS NOT NULL*/
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "nhankhauthuongtru");
-                return dataset;
+                NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
+                lst.Add(ts);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+
+            return lst;
         }
 
-        public DataSet TimKiemJoinNhanKhau(string query)
+        public List<NhanKhauThuongTruDTO> TimKiemJoinNhanKhau(string query)
         {
-            try
+            if (!String.IsNullOrEmpty(query)) query = " AND " + query;
+            query = "SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" + query;
+            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
+            List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
+            foreach (NHANKHAUTHUONGTRU i in res)
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                if (!String.IsNullOrEmpty(query)) query = " and " + query;
-                sqlda = new MySqlDataAdapter("SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" 
-                    + query, conn); /*where manhankhauthuongtru IS NOT NULL*/
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "nhankhauthuongtru");
-                return dataset;
+                NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
+                lst.Add(ts);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+
+            return lst;
         }
     }
     

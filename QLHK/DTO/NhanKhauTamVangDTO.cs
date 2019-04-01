@@ -8,22 +8,18 @@ namespace DTO
 {
     public class NhanKhauTamVangDTO: NhanKhau
     {
-        public string MaNhanKhauTamVang { get; set; }
-        public DateTime NgayBatDauTamVang { get; set; }
-        public DateTime NgayKetThucTamVang { get; set; }
-        public string LyDo { get; set; }
-        public string NoiDen { get; set; }
+        public NHANKHAUTAMVANG db;
 
         public NhanKhauTamVangDTO() { }
 
         public NhanKhauTamVangDTO(string maNhanKhauTamVang, DateTime ngayBatDauTamVang, DateTime ngayKetThucTamVang, string lyDo, string noiDen, string maDinhdDanh)
         {
-            MaNhanKhauTamVang = maNhanKhauTamVang;
-            MaDinhDanh = maDinhdDanh;
-            NgayBatDauTamVang = ngayBatDauTamVang;
-            NgayKetThucTamVang = ngayKetThucTamVang;
-            LyDo = lyDo;
-            NoiDen = noiDen;
+            db.MANHANKHAUTAMVANG = maNhanKhauTamVang;
+            db.MADINHDANH = maDinhdDanh;
+            db.NGAYBATDAUTAMVANG = ngayBatDauTamVang;
+            db.NGAYKETTHUCTAMVANG = ngayKetThucTamVang;
+            db.LYDO = lyDo;
+            db.NOIDEN = noiDen;
         }
         public NhanKhauTamVangDTO(string maNhanKhauTamVang, DateTime ngayBatDauTamVang, 
             DateTime ngayKetThucTamVang, string lyDo, string noiDen, string maDinhDanh, string hoTen, string tenKhac, 
@@ -34,11 +30,16 @@ namespace DTO
                  noiSinh, nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                  trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            MaNhanKhauTamVang = maNhanKhauTamVang;
-            NgayBatDauTamVang = ngayBatDauTamVang;
-            NgayKetThucTamVang = ngayKetThucTamVang;
-            LyDo = lyDo;
-            NoiDen = noiDen;
+            db.MANHANKHAUTAMVANG = maNhanKhauTamVang;
+            db.NGAYBATDAUTAMVANG = ngayBatDauTamVang;
+            db.NGAYKETTHUCTAMVANG = ngayKetThucTamVang;
+            db.LYDO = lyDo;
+            db.NOIDEN = noiDen;
+        }
+
+        public NhanKhauTamVangDTO(NHANKHAUTAMVANG dbs)
+        {
+            db = dbs;
         }
 
     }

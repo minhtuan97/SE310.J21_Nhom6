@@ -38,5 +38,11 @@ namespace DTO
             NhanKhau = new List<NHANKHAUTHUONGTRU>();
         }
 
+        public SoHoKhauDTO(SOHOKHAU shk, String tenchuho)
+        {
+            db = shk;
+            TenChuHo = tenchuho;
+        }
+
     }
 }

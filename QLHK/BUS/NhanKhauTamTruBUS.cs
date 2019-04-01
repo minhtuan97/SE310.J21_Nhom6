@@ -13,11 +13,11 @@ namespace BUS
     public class NhanKhauTamTruBUS: AbstractFormBUS<NhanKhauTamTruDTO>
     {
         NhanKhauTamTruDAO objnktt = new NhanKhauTamTruDAO();
-        public override DataSet GetAll()
+        public override List<NhanKhauTamTruDTO> GetAll()
         {
             return objnktt.getAll();
         }
-        public DataSet GetAllNhanKhauTamTru(string sosotamtru)
+        public List<NhanKhauTamTruDTO> GetAllNhanKhauTamTru(string sosotamtru)
         {
             return objnktt.getAllNhanKhauTT(sosotamtru);
         }
@@ -28,19 +28,20 @@ namespace BUS
 
         public bool AddNKTT(NhanKhauTamTruDTO nhankhautamtru)
         {
-            if(nhankhautamtru.MaNhanKhauTamTru=="" || nhankhautamtru.MaDinhDanh=="" || nhankhautamtru.HoTen =="" || nhankhautamtru.DanToc =="" 
-                || nhankhautamtru.NgheNghiep == "" || nhankhautamtru.QuocTich == "")
+            if(nhankhautamtru.db.MANHAKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == "" 
+                // || nhankhautamtru.db.HOTEN == "" || nhankhautamtru.DanToc =="" || nhankhautamtru.NgheNghiep == "" || nhankhautamtru.QuocTich == ""
+              )
             {
                 return false;
             }
             SoTamTruBUS stt = new SoTamTruBUS();
 
-            if (stt.Existed_NhanKhau(nhankhautamtru.MaDinhDanh))
+            if (stt.Existed_NhanKhau(nhankhautamtru.db.MADINHDANH))
             {
                 return false;
             }
 
-            double ngay = (nhankhautamtru.DenNgay - nhankhautamtru.TuNgay).TotalDays;
+            double ngay = (nhankhautamtru.db.DENNGAY - nhankhautamtru.db.TUNGAY).TotalDays;
             double sum = 730;
             if (ngay > sum)
             {
@@ -58,14 +59,14 @@ namespace BUS
         {
             return objnktt.delete(r);
         }
-        public override bool Update(NhanKhauTamTruDTO nhankhautamtru, int r)
+        public override bool Update(NhanKhauTamTruDTO nhankhautamtru)
         {
-            return objnktt.updateNhanKhauTamTru(nhankhautamtru, r);
+            return objnktt.updateNhanKhauTamTru(nhankhautamtru);
         }
 
-        public DataSet TimKiem(string madinhdanh)
+        public List<NhanKhauTamTruDTO> TimKiem(string query)
         {
-            return objnktt.TimKiem(madinhdanh);
+            return objnktt.TimKiem(query);
         }
         public override bool Add_Table(NhanKhauTamTruDTO data)
         {
@@ -75,45 +76,45 @@ namespace BUS
 
         //Load Data For Combobox
         //Lấy mã tỉnh thành phố
-        //public BindingSource Get_TinhThanhPho()
-        //{
+        public BindingSource Get_TinhThanhPho()
+        {
 
-        //    List<string> TinhThanh_List = new List<string>();
-        //    TinhThanh_List = objnktt.GetListTinhThanh();
+            List<string> TinhThanh_List = new List<string>();
+            TinhThanh_List = objnktt.GetListTinhThanh();
 
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = TinhThanh_List;
-        //    return bindingSource;
-        //}
-
-
-        //public BindingSource GetListQuanHuyen(string tentinhthanhpho)
-        //{
-        //    List<string> QuanHuyen_List = new List<string>();
-        //    QuanHuyen_List = objnktt.GetListQuanHuyen(tentinhthanhpho);
-
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = QuanHuyen_List;
-        //    return bindingSource;
-        //}
-
-        //public BindingSource GetListXaPhuong(string tenquanhuyen)
-        //{
-        //    List<string> XaPhuong_List = new List<string>();
-        //    XaPhuong_List = objnktt.GetListXaPhuong(tenquanhuyen);
-
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = XaPhuong_List;
-        //    return bindingSource;
-        //}
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = TinhThanh_List;
+            return bindingSource;
+        }
 
 
-        //public string[] SplitDiaChi(string diachi)
-        //{
-        //    string data = diachi;
-        //    string[] result = data.Split(',');
-        //    return result;
-        //}
+        public BindingSource GetListQuanHuyen(string tentinhthanhpho)
+        {
+            List<string> QuanHuyen_List = new List<string>();
+        QuanHuyen_List = objnktt.GetListQuanHuyen(tentinhthanhpho);
+
+            BindingSource bindingSource = new BindingSource();
+        bindingSource.DataSource = QuanHuyen_List;
+            return bindingSource;
+        }
+
+        public BindingSource GetListXaPhuong(string tenquanhuyen)
+        {
+            List<string> XaPhuong_List = new List<string>();
+            XaPhuong_List = objnktt.GetListXaPhuong(tenquanhuyen);
+
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = XaPhuong_List;
+            return bindingSource;
+        }
+
+
+        public string[] SplitDiaChi(string diachi)
+        {
+            string data = diachi;
+            string[] result = data.Split(',');
+            return result;
+        }
 
 
 
@@ -121,7 +122,7 @@ namespace BUS
         //
         //XỬ LÍ VỚI TIỀN ÁN TIỀN SỰ
         //
-        public DataSet GetTienAnTienSu(string madinhdanh)
+        public List<TienAnTienSuDTO> GetTienAnTienSu(string madinhdanh)
         {
             return objnktt.getTienAnTienSu(madinhdanh);
         }
@@ -135,7 +136,7 @@ namespace BUS
         //
         //XỬ LÍ VỚI TIỂU SỬ
         //
-        public DataSet GetTieuSu(string madinhdanh)
+        public List<TieuSuDTO> GetTieuSu(string madinhdanh)
         {
             return objnktt.getTieuSu(madinhdanh);
         }
@@ -145,6 +146,18 @@ namespace BUS
         {
             return objnktt.DeleteTieuSu(matieusu);
         }
+
+
+        public DateTime GetTuNgay(String madinhdanh)
+        {
+            return objnktt.NgayDangKyTamTru(madinhdanh);
+        }
+
+        public DateTime GetDenNgay(String madinhdanh)
+        {
+            return objnktt.ThoiHanSoTamTru(madinhdanh);
+        }
+
 
 
         //Tính toán số ngày giửa hai thời điểm
@@ -203,6 +216,5 @@ namespace BUS
 
             return 0;
         }
-
     }
 }
