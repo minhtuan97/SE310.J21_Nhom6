@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,95 +12,45 @@ namespace DAO
     {
         public SoTamTruDAO() : base() { }
 
-        public override DataSet getAll()
+        public override List<SoTamTruDTO> getAll()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT* , 'Delete' as 'Change' FROM sotamtru", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "sotamtru");
-                return dataset;
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+            var kq = from stt in qlhk.SOTAMTRUs
+                     select new SoTamTruDTO
+                     {
+                         db = stt,
+                     };
+                List<SoTamTruDTO> lst = kq.ToList();
+                return lst;
         }
 
 
-        public  DataSet getAllSoTamTru()
+        public List<SoTamTruDTO> getAllSoTamTru()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT * FROM sotamtru", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "sotamtru");
-                return dataset;
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+            var kq = from stt in qlhk.SOTAMTRUs
+                     select new SoTamTruDTO
+                     {
+                         db = stt,
+                     };
+            List<SoTamTruDTO> lst = kq.ToList();
+            return lst;
         }
 
 
         public override bool insert(SoTamTruDTO sotamtru)
         {
+
+            qlhk.SOTAMTRUs.InsertOnSubmit(sotamtru.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sql = "insert into sotamtru values(@sosotamtru, @chuhotamtru, @noitamtru, @ngaycap, @denngay)";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@sosotamtru", sotamtru.SoSoTamTru);
-                cmd.Parameters.AddWithValue("@chuhotamtru", sotamtru.MaChuHoTamTru);
-                cmd.Parameters.AddWithValue("@noitamtru", sotamtru.NoiTamTru);
-                cmd.Parameters.AddWithValue("@ngaycap", sotamtru.NgayCap);
-                cmd.Parameters.AddWithValue("@denngay", sotamtru.DenNgay);
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
 
 
@@ -112,40 +61,24 @@ namespace DAO
         /// <returns></returns>
         public List<string> getListMaDinhDanhBySoSoTamTru(string sosotamtru)
         {
-            DataTable dt = new DataTable();
-            List<string> madinhdanh_list = new List<string>();
-            if (conn.State != ConnectionState.Open)
+            List<string> ID_list = new List<string>();
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.SOSOTAMTRU == sosotamtru select x;
+            foreach (var tt in q)
             {
-                conn.Open();
-            }
-            string sql = "SELECT madinhdanh FROM nhankhautamtru WHERE sosotamtru='" + sosotamtru + "' ";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
-
-            madinhdanh_list = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("madinhdanh"))
-                      .ToList();
-            return madinhdanh_list;
+                ID_list.Add(tt.MADINHDANH);
+            }         
+            return ID_list;
         }
 
         public List<string> getListExperiedSoTamTru()
         {
-            DataTable dt = new DataTable();
-            List<string> sotamtru_list = new List<string>();
-            if (conn.State != ConnectionState.Open)
+            List<string> sosotamtru_list = new List<string>();
+            var q = from x in qlhk.SOTAMTRUs where x.DENNGAY<DateTime.Today select x;
+            foreach (var tt in q)
             {
-                conn.Open();
+                sosotamtru_list.Add(tt.SOSOTAMTRU);
             }
-            string sql = "SELECT SOSOTAMTRU FROM `sotamtru` WHERE DENNGAY<CURDATE() ";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
-
-            sotamtru_list = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("SOSOTAMTRU"))
-                      .ToList();
-            return sotamtru_list;
+            return sosotamtru_list;
         }
 
 
@@ -153,34 +86,30 @@ namespace DAO
         {
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
+                SoTamTruDTO stt = new SoTamTruDTO(qlhk.SOTAMTRUs.Single(x => x.SOSOTAMTRU == sosotamtru));
+                qlhk.SOTAMTRUs.DeleteOnSubmit(stt.db);
 
+
+                //Xóa nhân khẩu 
                 NhanKhauTamTruDAO nhankhautamtruDao = new NhanKhauTamTruDAO();
                 List<string> madinhdanh_list = getListMaDinhDanhBySoSoTamTru(sosotamtru);
 
                 //Xóa nhân khẩu tạm trú trong sổ tạm trú
-                for(int i=0; i < madinhdanh_list.Count; i++)
+                for (int i = 0; i < madinhdanh_list.Count; i++)
                 {
                     nhankhautamtruDao.XoaNKTT(madinhdanh_list[i]);
                 }
-                string sql = "delete from sotamtru where sosotamtru=@sosotamtru";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@sosotamtru", sosotamtru);
-                cmd.ExecuteNonQuery();
+
+
+                qlhk.SubmitChanges();
+                return true;
+
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.ToString());
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
 
 
@@ -189,10 +118,6 @@ namespace DAO
         {
                 try
                 {
-                    if (conn.State != ConnectionState.Open)
-                    {
-                        conn.Open();
-                    }
                      //Lấy list số sổ tạm trú quá hạn
                     List<string> sosotamtru_list = getListExperiedSoTamTru();
 
@@ -207,10 +132,6 @@ namespace DAO
                     Console.WriteLine(e.Message);
                     return false;
                 }
-                finally
-                {
-                    conn.Close();
-                }
             return true;
         }
 
@@ -218,8 +139,10 @@ namespace DAO
         {
             try
             {
-                dataset.Tables["sotamtru"].Rows[row].Delete();
-                sqlda.Update(dataset, "sotamtru");
+                List<SoTamTruDTO> kq = this.getAll();
+                SoTamTruDTO[] arr = kq.ToArray();
+                qlhk.SOTAMTRUs.DeleteOnSubmit(arr[row].db);
+                qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
@@ -227,89 +150,69 @@ namespace DAO
                 Console.WriteLine(e.Message);
             }
             return false;
-
         }
 
-        public override bool update(SoTamTruDTO sotamtru, int r)
+        public override bool update(SoTamTruDTO sotamtru)
         {
-            if (conn.State != ConnectionState.Open)
+            List<SOTAMTRU> query = qlhk.SOTAMTRUs.Where(x => x.SOSOTAMTRU == sotamtru.db.SOSOTAMTRU).Select(x => x).ToList();
+
+            //Execute
+            foreach (SOTAMTRU stt in query)
             {
-                conn.Open();
+                stt.CHUHO = sotamtru.db.CHUHO;
+                stt.NOITAMTRU = sotamtru.db.NOITAMTRU;
+                stt.NGAYCAP = sotamtru.db.NGAYCAP;
+                stt.DENNGAY = sotamtru.db.DENNGAY;
             }
+
             try
             {
-                string sql = "update sotamtru set chuho=@chuho, noitamtru=@noitamtru, ngaycap=@ngaycap, denngay=@denngay where sosotamtru=@sosotamtru";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@sosotamtru", sotamtru.SoSoTamTru);
-                cmd.Parameters.AddWithValue("@chuho", sotamtru.MaChuHoTamTru);
-                cmd.Parameters.AddWithValue("@noitamtru", sotamtru.NoiTamTru);
-                cmd.Parameters.AddWithValue("@ngaycap", sotamtru.NgayCap);
-                cmd.Parameters.AddWithValue("@denngay", sotamtru.DenNgay);
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
-        public DataSet TimKiem(string sosotamtru)
+
+
+        public List<SoTamTruDTO> TimKiem(string query)
         {
-            try
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM sotamtru" + query;
+            var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
+            List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
+            foreach (SOTAMTRU i in res)
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT * FROM sotamtru WHERE sosotamtru='"+sosotamtru+"'", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "sotamtru");
-                return dataset;
+                SoTamTruDTO ts = new SoTamTruDTO(i);
+                lst.Add(ts);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
+
+            return lst;
+         
         }
+
+
+
+
         public override bool insert_table(SoTamTruDTO data)
         {
+            qlhk.SOTAMTRUs.InsertOnSubmit(data.db);
             try
             {
-                DataRow dr = dataset.Tables["sotamtru"].NewRow();
-                dr["sosotamtru"] = data.SoSoTamTru;
-                dr["chuho"] = data.MaChuHoTamTru;
-                dr["noitamtru"] = data.NoiTamTru;
-                dr["ngaycap"] = data.NgayCap;
-                dr["denngay"] = data.DenNgay;
-
-                dataset.Tables["sotamtru"].Rows.Add(dr);
-                dataset.Tables["sotamtru"].Rows.RemoveAt(dataset.Tables["sotamtru"].Rows.Count - 1);
-                sqlda.Update(dataset, "sotamtru");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
+
         }
 
 
@@ -317,95 +220,87 @@ namespace DAO
 
         public List<string> GetListTinhThanh()
         {
-            DataTable dt = new DataTable();
             List<string> tinhthanh_list = new List<string>();
 
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
-            }
-            string sql = "SELECT ten FROM tinhthanhpho";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
+            //Cách 1
+            //var query = from x in qlhk.TINHTHANHPHOs select x;
 
-            tinhthanh_list = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("ten"))
-                      .ToList();
+            //foreach(var tt in query)
+            //{
+            //    tinhthanh_list.Add(tt.TEN);
+            //}
+
+
+            //Cách 2
+            //if (conn.State != ConnectionState.Open)
+            //{
+            //    conn.Open();
+            //}
+            //string sql = "SELECT ten FROM tinhthanhpho";
+            //MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+            //adapter.SelectCommand.CommandType = CommandType.Text;
+            //adapter.Fill(dt);
+
+            //tinhthanh_list = dt.AsEnumerable()
+            //          .Select(r => r.Field<string>("ten"))
+            //          .ToList();
+
             return tinhthanh_list;
         }
 
 
-        public string GetID_DiaChi(string table, string value, string nameColumn)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string find = value;
-                string ID;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sqltemp = "SELECT " + nameColumn + " FROM " + table + " WHERE ten='" + find + "'";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sqltemp, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
-
-                ID = dt.Rows[0][0].ToString();
-                return ID;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return "";
-        }
-
         public List<string> GetListQuanHuyen(string tentinhthanhpho)
         {
-            DataTable dt = new DataTable();
             List<string> quanhuyen_list = new List<string>();
 
-            string ID_TP = GetID_DiaChi("tinhthanhpho", tentinhthanhpho, "matp");
+            //Tìm ID Quận huyện tương ứng với TỈnh/TP
+            List<String> ID_list = new List<string>();
+            //var q = from x in qlhk.TINHTHANHPHOs where x.TEN == tentinhthanhpho select x;
+            //foreach (var tt in q)
+            //{
+            //    ID_list.Add(tt.MATP);
+            //}
+            String ID = ID_list.First();
 
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
-            }
-            string sql = "SELECT ten FROM quanhuyen WHERE matp='" + ID_TP + "' ";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
 
-            quanhuyen_list = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("ten"))
-                      .ToList();
+            //Lấy danh sách QUận Huyện
+            //var query = from x in qlhk.QUANHUYENs where x.MATP == ID select x;
+            //foreach (var qh in query)
+            //{
+            //    quanhuyen_list.Add(qh.TEN);
+            //}
+
             return quanhuyen_list;
         }
 
 
         public List<string> GetListXaPhuong(string tenquanhuyen)
         {
-            DataTable dt = new DataTable();
             List<string> xaphuong_list = new List<string>();
 
-            string ID_QH = GetID_DiaChi("quanhuyen", tenquanhuyen, "maqh");
+            //Tìm ID xã phường tương ứng với Quận huyện
+            List<string> ID_list = new List<string>();
+            //var q = from x in qlhk.XAPHUONGTHITRANs where x.ten == tenquanhuyen select x;
+            //foreach (var xp in q)
+            //{
+            //    ID_list.Add(xp.MAQH);
+            //}
+            //String ID = ID_list.First();
 
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
-            }
-            string sql = "SELECT ten FROM xaphuongthitran WHERE maqh='" + ID_QH + "' ";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
 
-            xaphuong_list = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("ten"))
-                      .ToList();
+            //Lấy danh sách QUận Huyện
+            //var q = from x in qlhk.XAPHUONGs where x.MAQH == ID select x;
+            //foreach (var xp in query)
+            //{
+            //    xaphuong_list.Add(xp.TEN);
+            //}
+
             return xaphuong_list;
         }
+
+
+
+
 
         /// <summary>
         /// Lấy danh sách tên nhân khẩu trong sổ tạm trú
@@ -414,21 +309,16 @@ namespace DAO
         /// <returns></returns>
         public List<string> ImportToComboboxMaChuHo(string sosotamtru)
         {
-            DataTable dt = new DataTable();
             List<string> list_tennhankhau = new List<string>();
 
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
-            }
-            string sql = "SELECT hoten FROM nhankhau inner join nhankhautamtru where nhankhau.madinhdanh=nhankhautamtru.madinhdanh and sosotamtru='" + sosotamtru + "' ";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            adapter.SelectCommand.CommandType = CommandType.Text;
-            adapter.Fill(dt);
+            var q = from nhankhau in qlhk.NHANKHAUs join nhankhautamtru in qlhk.NHANKHAUTAMTRUs
+                    on nhankhau.MADINHDANH equals nhankhautamtru.MADINHDANH
+                    where nhankhautamtru.SOSOTAMTRU == sosotamtru select nhankhau;
 
-            list_tennhankhau = dt.AsEnumerable()
-                      .Select(r => r.Field<string>("HoTen"))
-                      .ToList();
+            foreach (var tt in q)
+            {
+                list_tennhankhau.Add(tt.HOTEN);
+            }         
             return list_tennhankhau;
         }
 
@@ -437,19 +327,20 @@ namespace DAO
         {
             try
             {
-                DataTable dt = new DataTable();
-                string ID;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sqltemp = "SELECT manhankhautamtru FROM nhankhau inner join nhankhautamtru where nhankhau.madinhdanh=nhankhautamtru.madinhdanh and HOTEN='"+tennhankhau+"' and sosotamtru='"+sosotamtru+"'";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sqltemp, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
+                List<string> list_ID = new List<string>();
 
-                ID = dt.Rows[0][0].ToString();
-                return ID;
+                var q = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs
+                        join nhankhau in qlhk.NHANKHAUs
+                        on nhankhautamtru.MADINHDANH equals nhankhau.MADINHDANH
+                        where nhankhautamtru.SOSOTAMTRU == sosotamtru && nhankhau.HOTEN == tennhankhau
+                        select nhankhautamtru;
+
+                foreach (var tt in q)
+                {
+                    list_ID.Add(tt.MANHAKHAUTAMTRU);
+                }
+
+                return list_ID.First();
             }
             catch (Exception ex)
             {
@@ -462,19 +353,16 @@ namespace DAO
         {
             try
             {
-                DataTable dt = new DataTable();
-                string ID;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sqltemp = "SELECT chuho FROM sotamtru where sosotamtru='"+sosotamtru+"'";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sqltemp, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
+                List<string> list_ID = new List<string>();
 
-                ID = dt.Rows[0][0].ToString();
-                return ID;
+                var q = from sotamtru in qlhk.SOTAMTRUs
+                        where sotamtru.SOSOTAMTRU == sosotamtru
+                        select sotamtru;
+
+                foreach (var tt in q)
+                {
+                    list_ID.Add(tt.CHUHO);
+                }
             }
             catch (Exception ex)
             {
@@ -488,19 +376,20 @@ namespace DAO
         {
             try
             {
-                DataTable dt = new DataTable();
-                string machuho=FindMaChuHo(sosotamtru);
-                if (conn.State != ConnectionState.Open)
+                List<string> list_Ten = new List<string>();
+
+                var q = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs
+                        join nhankhau in qlhk.NHANKHAUs
+                        on nhankhautamtru.MADINHDANH equals nhankhau.MADINHDANH
+                        where nhankhautamtru.SOSOTAMTRU == sosotamtru
+                        select nhankhau;
+
+                foreach (var tt in q)
                 {
-                    conn.Open();
+                    list_Ten.Add(tt.HOTEN);
                 }
-                string sqltemp = "SELECT hoten FROM nhankhau INNER JOIN nhankhautamtru ON nhankhau.madinhdanh=nhankhautamtru.madinhdanh where manhankhautamtru='" + machuho + "'";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sqltemp, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
-                string ten = "";
-                ten = dt.Rows[0][0].ToString();
-                return ten;
+
+                return list_Ten.First();             
             }
             catch (Exception ex)
             {
@@ -510,165 +399,212 @@ namespace DAO
         }
 
 
-        //Xác định sự tồn tại của một trường trong một bảng
-        public int ExistedValue(string sql)
-        {
-            try
-            {
-                int numrow = 0;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                numrow = Convert.ToInt32(cmd.ExecuteScalar());
-                return numrow;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return 100;
-        }
-
-
+        //KIểm tra tồn tại
         public int Existed_SoTamTru(string sosotamtru)
         {
-            string sql = "SELECT COUNT(*) FROM sotamtru WHERE sosotamtru='" + sosotamtru + "'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from stt in qlhk.SOTAMTRUs where stt.SOSOTAMTRU == sosotamtru select stt;
+
+            foreach(SOTAMTRU q in query)
+            {
+                lst.Add(q.SOSOTAMTRU);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
         public int Existed_NhanKhau(string madinhdanh)
         {
-            string sql = "SELECT COUNT(*) FROM nhankhau WHERE madinhdanh='" + madinhdanh + "'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from nk in qlhk.NHANKHAUs where nk.MADINHDANH == madinhdanh select nk;
+
+            foreach (NHANKHAU q in query)
+            {
+                lst.Add(q.MADINHDANH);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
         public int Existed_NhanKhauTamTru(string manhankhautamtru)
         {
-            string sql = "SELECT COUNT(*) FROM nhankhautamtru WHERE manhankhautamtru='" + manhankhautamtru + "'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from nk in qlhk.NHANKHAUTAMTRUs where nk.MANHAKHAUTAMTRU == manhankhautamtru select nk;
+
+            foreach (NHANKHAUTAMTRU q in query)
+            {
+                lst.Add(q.MANHAKHAUTAMTRU);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
 
         public int Duplicated_NhanKhauTamTru(string manhankhautamtru, string sosotamtru)
         {
-            string sql = "SELECT COUNT(*) FROM nhankhautamtru inner join sotamtru ON nhankhautamtru.sosotamtru=sotamtru.sosotamtru WHERE manhankhautamtru='" + manhankhautamtru + "' and sotamtru.sosotamtru!='"+sosotamtru+"'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs join sotamtru in qlhk.SOTAMTRUs 
+                        on nhankhautamtru.SOSOTAMTRU equals sotamtru.SOSOTAMTRU
+                        where nhankhautamtru.MANHAKHAUTAMTRU == manhankhautamtru && sotamtru.SOSOTAMTRU == sosotamtru
+                        select nhankhautamtru;
+
+            foreach (NHANKHAUTAMTRU q in query)
+            {
+                lst.Add(q.MANHAKHAUTAMTRU);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
 
         public int Existed_TieuSu(string matieusu)
         {
-            string sql = "SELECT COUNT(*) FROM tieusu WHERE matieusu='" + matieusu + "'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from nk in qlhk.TIEUSUs where nk.MATIEUSU == matieusu select nk;
+
+            foreach (TIEUSU q in query)
+            {
+                lst.Add(q.MATIEUSU);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
         public int Existed_TienAn(string matienan)
         {
-            string sql = "SELECT COUNT(*) FROM tienantiensu WHERE matienantiensu='" + matienan + "'";
-            int num = ExistedValue(sql);
-            return num;
+            List<String> lst = new List<String>();
+
+            var query = from nk in qlhk.TIENANTIENSUs where nk.MATIENANTIENSU == matienan select nk;
+
+            foreach (TIENANTIENSU q in query)
+            {
+                lst.Add(q.MATIENANTIENSU);
+            }
+
+            if (lst.Count() > 0)
+            {
+                return lst.Count();
+            }
+            else return 0;
         }
 
         //GIA HẠN
 
-            //Lấy thời gian tạm trú
-        public DateTime GetDayFromSoTamTru(string sql)
-        {
-            DateTime date = new DateTime(12/12/1800);
-            try
-            {
-                DataTable dt = new DataTable();
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
-
-                date = Convert.ToDateTime(dt.Rows[0][0]);
-                return date;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return date;
-        }
-
 
         public DateTime ThoiHanSoTamTru(string sosotamtru)
         {
-            string sql = "SELECT denngay FROM sotamtru where sosotamtru='" + sosotamtru + "'";
-            return GetDayFromSoTamTru(sql);
+            DateTime date = new DateTime(12 / 12 / 1800);
+            List<DateTime> Date_list = new List<DateTime>();
+            var q = from x in qlhk.SOTAMTRUs where x.SOSOTAMTRU == sosotamtru select x;
+            foreach (var xp in q)
+            {
+                Date_list.Add(xp.DENNGAY);
+            }
+            date = Date_list.First();
+            return date;
         }
 
 
         public DateTime NgayDangKyTamTru(string sosotamtru)
         {
-            string sql = "SELECT ngaycap FROM sotamtru where sosotamtru='" + sosotamtru + "'";
-            return GetDayFromSoTamTru(sql);
+            DateTime date = new DateTime(12 / 12 / 1800);
+            List<DateTime> Date_list = new List<DateTime>();
+            var q = from x in qlhk.SOTAMTRUs where x.SOSOTAMTRU == sosotamtru select x;
+            foreach (var xp in q)
+            {
+                Date_list.Add(xp.NGAYCAP);
+            }
+            date = Date_list.First();
+            return date;
+        }
+
+
+        public DateTime getTuNgay(string manhankhautamtru)
+        {
+            DateTime date = new DateTime(12 / 12 / 1800);
+            List<DateTime> Date_list = new List<DateTime>();
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            foreach (var xp in q)
+            {
+                Date_list.Add(xp.TUNGAY);
+            }
+            date = Date_list.First();
+            return date;
+        }
+
+        public DateTime getDenNgay(string manhankhautamtru)
+        {
+            DateTime date = new DateTime(12 / 12 / 1800);
+            List<DateTime> Date_list = new List<DateTime>();
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            foreach (var xp in q)
+            {
+                Date_list.Add(xp.DENNGAY);
+            }
+            date = Date_list.First();
+            return date;
+        }
+
+
+        public String getNoiTamTru(string manhankhautamtru)
+        {
+            List<String> list = new List<String>();
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            foreach (var xp in q)
+            {
+                list.Add(xp.NOITAMTRU);
+            }
+            return list.First();
         }
 
 
         public bool InsertGiaHan(string sosotamtru, DateTime thoigian)
         {
-            if (conn.State != ConnectionState.Open)
+            //Query
+            var query = qlhk.SOTAMTRUs.Where(x => x.SOSOTAMTRU == sosotamtru).Select(x => x);
+
+            //Execute
+            foreach (SOTAMTRU NKTT in query)
             {
-                conn.Open();
+                NKTT.DENNGAY = thoigian;
             }
+
             try
             {
-                string sql = "update sotamtru set denngay=@denngay where sosotamtru=@sosotamtru";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@denngay", thoigian);
-                cmd.Parameters.AddWithValue("@sosotamtru", sosotamtru);
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
-        }
-
-
-        public string GetValue_Sub(string table, string value,string namecolumnWhere, string nameColumn)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string find = value;
-                string ID;
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                string sqltemp = "SELECT " + nameColumn + " FROM " + table + " WHERE "+ namecolumnWhere + "='" + find + "'";
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sqltemp, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
-
-                ID = dt.Rows[0][0].ToString();
-                return ID;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return "";
         }
 
 

@@ -14,14 +14,20 @@ namespace BUS
     public class SoTamTruBUS:AbstractFormBUS<SoTamTruDTO>
     {
         SoTamTruDAO SoTamTru = new SoTamTruDAO();
-        public override DataSet GetAll()
+        public override List<SoTamTruDTO> GetAll()
         {
             return SoTamTru.getAll();
         }
 
-        public DataSet GetAllSoTamTru()
+        public List<SoTamTruDTO> GetAllSoTamTru()
         {
             return SoTamTru.getAllSoTamTru();
+        }
+
+
+        public override bool Update(SoTamTruDTO data)
+        {
+            return SoTamTru.update(data);
         }
 
         public override bool Add(SoTamTruDTO sotamtru)
@@ -40,14 +46,10 @@ namespace BUS
         {
             return SoTamTru.delete(r);
         }
-        public override bool Update(SoTamTruDTO sotamtru, int r)
-        {
-            return SoTamTru.update(sotamtru, r);
-        }
 
-        public DataSet TimKiem(string sosotamtru)
+        public List<SoTamTruDTO> TimKiem(string query)
         {
-            return SoTamTru.TimKiem(sosotamtru);
+            return SoTamTru.TimKiem(query);
         }
 
         public bool DeleteExperiedSoTamTru()
@@ -59,45 +61,45 @@ namespace BUS
         //Load Data For Combobox
         //Lấy mã tỉnh thành phố
 
-        //public BindingSource Get_TinhThanhPho()
-        //{
+        public BindingSource Get_TinhThanhPho()
+        {
 
-        //    List<string> TinhThanh_List = new List<string>();
-        //    TinhThanh_List = SoTamTru.GetListTinhThanh();
+            List<string> TinhThanh_List = new List<string>();
+            TinhThanh_List = SoTamTru.GetListTinhThanh();
 
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = TinhThanh_List;
-        //    return bindingSource;
-        //}
-
-
-        //public BindingSource GetListQuanHuyen(string tentinhthanhpho)
-        //{
-        //    List<string> QuanHuyen_List = new List<string>();
-        //    QuanHuyen_List = SoTamTru.GetListQuanHuyen(tentinhthanhpho);
-
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = QuanHuyen_List;
-        //    return bindingSource;
-        //}
-
-        //public BindingSource GetListXaPhuong(string tenquanhuyen)
-        //{
-        //    List<string> XaPhuong_List = new List<string>();
-        //    XaPhuong_List = SoTamTru.GetListXaPhuong(tenquanhuyen);
-
-        //    BindingSource bindingSource = new BindingSource();
-        //    bindingSource.DataSource = XaPhuong_List;
-        //    return bindingSource;
-        //}
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = TinhThanh_List;
+            return bindingSource;
+        }
 
 
-        //public string[] SplitDiaChi(string diachi)
-        //{
-        //    string data = diachi;
-        //    string[] result = data.Split(',');
-        //    return result;
-        //}
+        public BindingSource GetListQuanHuyen(string tentinhthanhpho)
+        {
+            List<string> QuanHuyen_List = new List<string>();
+            QuanHuyen_List = SoTamTru.GetListQuanHuyen(tentinhthanhpho);
+
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = QuanHuyen_List;
+            return bindingSource;
+        }
+
+        public BindingSource GetListXaPhuong(string tenquanhuyen)
+        {
+            List<string> XaPhuong_List = new List<string>();
+            XaPhuong_List = SoTamTru.GetListXaPhuong(tenquanhuyen);
+
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = XaPhuong_List;
+            return bindingSource;
+        }
+
+
+        public string[] SplitDiaChi(string diachi)
+        {
+            string data = diachi;
+            string[] result = data.Split(',');
+            return result;
+        }
 
         public BindingSource ImportToComboboxMaChuHo(string sosotamtru)
         {
@@ -118,6 +120,8 @@ namespace BUS
         {
             return SoTamTru.FindTenChuHoTamTru(sosotamtru);
         }
+
+
 
 
         //XÁC ĐỊNH SỰ TỒN TẠI CỦA CÁC MÃ SỐ
@@ -196,6 +200,22 @@ namespace BUS
             return SoTamTru.ThoiHanSoTamTru(sosotamtru);
         }
 
+        public DateTime getTuNgay(string manhankhautamtru)
+        {
+            return SoTamTru.getTuNgay(manhankhautamtru);
+        }
+
+        public DateTime getDenNgay(string manhankhautamtru)
+        {
+            return SoTamTru.getDenNgay(manhankhautamtru);
+        }
+
+        public String getNoiTamTru(string manhankhautamtru)
+        {
+            return SoTamTru.getNoiTamTru(manhankhautamtru);
+        }
+
+
         //Kiểm tra hợp lệ để gia hạn cho sổ tạm trú
         public double CheckGiaHan(DateTime thoihangiahan, string sosotamtru)
         {
@@ -221,11 +241,6 @@ namespace BUS
             }
 
             return 0;
-        }
-
-        public string GetValue_Sub(string table, string value, string namecolumnWhere, string nameColumn)
-        {
-            return SoTamTru.GetValue_Sub(table, value, namecolumnWhere, nameColumn);
         }
 
     }

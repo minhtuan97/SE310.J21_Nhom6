@@ -64,7 +64,7 @@ namespace GUI
         {
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = sotamtruBus.GetAllSoTamTru().Tables["sotamtru"];
+            dataGridView1.DataSource = sotamtruBus.GetAllSoTamTru();
         }
 
         //Kiểm tra nhập đủ thông tin
@@ -170,9 +170,9 @@ namespace GUI
 
             ImportToComboboxMaChuHo();
 
-            txt_SoSoTamTru.Text = sotamtruDto.SoSoTamTru;
-            dt_TuNgay.Value = sotamtruDto.NgayCap;
-            dt_DenNgay.Value = sotamtruDto.DenNgay;
+            txt_SoSoTamTru.Text = sotamtruDto.db.SOSOTAMTRU;
+            dt_TuNgay.Value = sotamtruDto.db.NGAYCAP;
+            dt_DenNgay.Value = sotamtruDto.db.DENNGAY;
 
             txt_NoiTamTru.Text = noitamtru;
             ImportToComboboxMaChuHo(); 
@@ -319,12 +319,12 @@ namespace GUI
 
                 SoTamTruDTO sotamtru = new SoTamTruDTO(sosotamtru, machuhotamtru, choohiennay,tungay,denngay);
 
-                if (sotamtruBus.Update(sotamtru, r))
+                if (sotamtruBus.Update(sotamtru))
                 {
                     MessageBox.Show("Sửa thông tin sổ tạm trú "+sosotamtru+" thành công!");
                     LoadDataGridView();
                     ResetValueInput();
-                    dataGridView1.DataSource = sotamtruBus.TimKiem(sotamtru.SoSoTamTru).Tables[0];
+                    dataGridView1.DataSource = sotamtruBus.TimKiem(sotamtru.db.SOSOTAMTRU);
                 }
                 else
                 {
@@ -393,7 +393,7 @@ namespace GUI
             {
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                dataGridView1.DataSource = sotamtruBus.TimKiem(sosotamtru).Tables[0];
+                dataGridView1.DataSource = sotamtruBus.TimKiem(sosotamtru);
             }
             else
             {
@@ -460,7 +460,7 @@ namespace GUI
                     MessageBox.Show("Sửa thông tin sổ tạm trú " + sosotamtru + " thành công!");
                     LoadDataGridView();
                     ResetValueInput();
-                    dataGridView1.DataSource = sotamtruBus.TimKiem(sosotamtru).Tables[0];
+                    dataGridView1.DataSource = sotamtruBus.TimKiem(sosotamtru);
                 }
                 else
                 {
@@ -475,10 +475,10 @@ namespace GUI
         private void InputValueChuHo()
         {
             string manhankhautamtru = sotamtruBus.convertTentoMaNhanKhauTamTru(cbb_MaChuHo.Text.ToString(), txt_SoSoTamTru.Text.ToString());
-            string noitamtru = sotamtruBus.GetValue_Sub("nhankhautamtru", manhankhautamtru, "manhankhautamtru", "noitamtru");
-            DateTime ngaycap = Convert.ToDateTime(sotamtruBus.GetValue_Sub("nhankhautamtru", manhankhautamtru, "manhankhautamtru", "tungay"));
-            DateTime denngay = Convert.ToDateTime(sotamtruBus.GetValue_Sub("nhankhautamtru", manhankhautamtru, "manhankhautamtru", "denngay"));
-            //Set To Input
+            string noitamtru = sotamtruBus.getNoiTamTru(manhankhautamtru);
+
+            DateTime ngaycap = Convert.ToDateTime(sotamtruBus.getTuNgay(manhankhautamtru));
+            DateTime denngay = Convert.ToDateTime(sotamtruBus.getDenNgay(manhankhautamtru));
             txt_NoiTamTru.Text = noitamtru;
 
             dt_TuNgay.Value = ngaycap;
