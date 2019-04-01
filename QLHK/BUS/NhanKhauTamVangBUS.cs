@@ -29,20 +29,23 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override DataSet GetAll()
+        public override List<NhanKhauTamVangDTO> GetAll()
         {
             return obj.getAll();
         }
 
-        public override bool Update(NhanKhauTamVangDTO data, int r)
+        public override bool Update(NhanKhauTamVangDTO data)
         {
-            return obj.update(data, r);
+            return obj.update(data);
         }
+
         public DataSet TimKiem(string query)
         {
             return obj.TimKiemJoinNhanKhau(query);
         }
-        public DataSet TimKiemnhankhau(string query)
+
+
+        public List<NhanKhauTamVangDTO> TimKiemnhankhau(string query)
         {
             return obj.TimKiemNhanKhau(query);
         }

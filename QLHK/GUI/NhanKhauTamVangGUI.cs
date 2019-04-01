@@ -165,7 +165,7 @@ namespace GUI
             {
                 string matamvang = label_matamvang.Text.ToString();
                 nktv = new NhanKhauTamVangDTO(matamvang, ngaybd, ngaykt, lydo, noiden, madinhdanh);
-                if (nktvbus.Update(nktv,0) == true)
+                if (nktvbus.Update(nktv) == true)
                     MessageBox.Show("Sửa thành công");
                 else
                     MessageBox.Show("Sửa không thành công");
