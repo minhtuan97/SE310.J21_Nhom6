@@ -1,0 +1,6 @@
+C:\Users\minht\OneDrive\Máy tính\QLHK\DAO\obj\Debug\DAO.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\QLHK\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DAO\obj\Debug\DAO.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
+D:\github\SE310.J21_Nhom6\QLHK\DAO\obj\Debug\DAO.csprojAssemblyReference.cache
+D:\github\SE310.J21_Nhom6\QLHK\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
