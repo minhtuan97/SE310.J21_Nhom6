@@ -1,0 +1,9 @@
+C:\Users\minht\OneDrive\Máy tính\QLHK\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\QLHK\BUS\obj\Debug\BUS.csproj.ResolveComReference.cache
+C:\Users\minht\OneDrive\Máy tính\QLHK\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\BUS\obj\Debug\BUS.csproj.ResolveComReference.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\BUS\obj\Debug\BUS.csprojAssemblyReference.cache
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\BUS\obj\Debug\BUS.csproj.ResolveComReference.cache
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache

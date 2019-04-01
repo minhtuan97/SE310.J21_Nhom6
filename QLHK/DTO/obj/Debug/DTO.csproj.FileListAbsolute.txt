@@ -1,0 +1,27 @@
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DTO.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DTO.pdb
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DevExpress.Data.v17.1.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DevExpress.Xpo.v17.1.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DevExpress.Data.v17.1.xml
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\DevExpress.Xpo.v17.1.xml
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\de\DevExpress.Data.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\es\DevExpress.Data.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\ja\DevExpress.Data.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\ru\DevExpress.Data.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\de\DevExpress.Xpo.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\es\DevExpress.Xpo.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\ja\DevExpress.Xpo.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\bin\Debug\ru\DevExpress.Xpo.v17.1.resources.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\obj\Debug\DTO.csproj.CopyComplete
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\obj\Debug\DTO.dll
+C:\Users\minht\OneDrive\Máy tính\QLHK\DTO\obj\Debug\DTO.pdb
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.dll
+C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.pdb
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.dll
+D:\Projects\CSharp\DOAN\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.pdb
