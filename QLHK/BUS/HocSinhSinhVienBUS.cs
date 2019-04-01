@@ -11,43 +11,54 @@ namespace BUS
 {
     public class HocSinhSinhVienBUS : AbstractFormBUS<HocSinhSinhVienDTO>
     {
+        public HocSinhSinhVienBUS() : base() { }
+
         HocSinhSinhVienDAO objhssv = new HocSinhSinhVienDAO();
+
         NhanKhauDAO objnk = new NhanKhauDAO();
-        public override DataSet GetAll()
+
+        public override List<HocSinhSinhVienDTO> GetAll()
         {
             return objhssv.getAll();
         }
-        public DataSet GetAllJoinNhanKhau()
+
+        public List<HocSinhSinhVienDTO> GetAllJoinNhanKhau()
         {
             return objhssv.getAllJoinNhanKhau();
         }
+
         public override bool Add(HocSinhSinhVienDTO hssv)
         {
             if (isValidHSSV(hssv) == false)
                 return false;
             return objhssv.insert(hssv);
         }
+
         public bool XoaHSSV(string mssv)
         {
             return objhssv.XoaHHSV(mssv);
         }
+
         public override bool Delete(int r)
         {
             return objhssv.delete(r);
         }
-        public override bool Update(HocSinhSinhVienDTO hssv, int r)
+
+        public override bool Update(HocSinhSinhVienDTO hssv)
         {
-            return objhssv.update(hssv, r);
+            return objhssv.update(hssv);
         }
 
-        public DataSet TimKiem(string query)
+        public List<HocSinhSinhVienDTO> TimKiem(string query)
         {
             return objhssv.TimKiem(query);
         }
-        public DataSet TimKiemJoinNhanKhau(string query)
+
+        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
         {
             return objhssv.TimKiemJoinNhanKhau(query);
         }
+
         public DataTable TimKiemtheoCuTru(string madinhdanh)
         {
             DataTable dt1 = objhssv.TimKiem(" WHERE madinhdanh='" + madinhdanh + "'").Tables[0];
@@ -59,10 +70,12 @@ namespace BUS
             dt1.Merge(dt2);
             return dt1;
         }
+
         public override bool Add_Table(HocSinhSinhVienDTO hssv)
         {
             return objhssv.insert_table(hssv);
         }
+
         public bool isValidHSSV(HocSinhSinhVienDTO hssv)
         {
             if (!string.IsNullOrEmpty(hssv.MaHSSV) && !string.IsNullOrEmpty(hssv.MaDinhDanh) && !string.IsNullOrEmpty(hssv.Truong)

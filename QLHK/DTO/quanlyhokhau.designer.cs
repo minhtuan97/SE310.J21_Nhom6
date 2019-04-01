@@ -350,9 +350,10 @@ namespace DTO
 		private System.DateTime _THOIGIANKETTHUCTAMTRUTHUONGTRU;
 		
 		private string _VIPHAM;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
+        public HOCSINHSINHVIEN db_hssv;
+
+        #region Extensibility Method Definitions
+        partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnMAHSSVChanging(string value);
