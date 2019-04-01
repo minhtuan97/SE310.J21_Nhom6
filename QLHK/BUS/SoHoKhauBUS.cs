@@ -34,12 +34,12 @@ namespace BUS
         {
             return obj.delete(r);
         }
-        public override bool Update(SoHoKhauDTO sohk, int r = 0)
+        public override bool Update(SoHoKhauDTO sohk)
         {   
-            return  obj.update(sohk, r);
+            return  obj.update(sohk);
         }
 
-        public DataSet TimKiem(string query)
+        public List<SoHoKhauDTO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

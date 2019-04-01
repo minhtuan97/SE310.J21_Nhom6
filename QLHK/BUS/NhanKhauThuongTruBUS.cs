@@ -12,11 +12,11 @@ namespace BUS
     public class NhanKhauThuongTruBUS: AbstractFormBUS<NhanKhauThuongTruDTO>
     {
         NhanKhauThuongTruDAO obj = new NhanKhauThuongTruDAO();
-        public override DataSet GetAll()
+        public override List<NhanKhauThuongTruDTO> GetAll()
         {
             return obj.getAll();
         }
-        public DataSet GetAllJoinNhanKhau()
+        public List<NhanKhauThuongTruDTO> GetAllJoinNhanKhau()
         {
             return obj.getAllJoinNhanKhau();
         }
@@ -45,30 +45,23 @@ namespace BUS
         }
         public bool XoaNKTT(string maNKTT)
         {
-            DataSet search = obj.TimKiem("manhankhauthuongtru='" + maNKTT + "'");
-            if (search==null||search.Tables[0].Rows.Count == 0) return false;
-            NhanKhauDAO nk = new NhanKhauDAO();
-            return obj.XoaNKTT(maNKTT)&&nk.delete(search.Tables[0].Rows[0][1].ToString());
+            return obj.XoaNKTT(maNKTT);
         }
         public override bool Delete(int r)
         {
             return obj.delete(r);
         }
-        public override bool Update(NhanKhauThuongTruDTO nktt, int r)
+        public override bool Update(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
             
-            return nk.update(nktt, r)&& obj.update(nktt, r);
+            return nk.update(nktt)&& obj.update(nktt);
         }
-        public bool Update(NhanKhauThuongTruDTO nktt)
-        {
-            return obj.update(nktt, 0);
-        }
-        public DataSet TimKiem(string query)
+        public List<NhanKhauThuongTruDTO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }
-        public DataSet TimKiemJoinNhanKhau(string query)
+        public List<NhanKhauThuongTruDTO> TimKiemJoinNhanKhau(string query)
         {
             return obj.TimKiemJoinNhanKhau(query);
         }

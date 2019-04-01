@@ -9,10 +9,7 @@ namespace DTO
 {
     public class NhanKhauThuongTruDTO:NhanKhau
     {
-        public string MaNhanKhauThuongTru { get; set; }
-        public string DiaChiThuongTru { get; set; }
-        public string QuanHeVoiChuHo { get; set; }
-        public string SoSoHoKhau { get; set; }
+        public NHANKHAUTHUONGTRU db;
 
 
         public NhanKhauThuongTruDTO() { }
@@ -20,11 +17,11 @@ namespace DTO
         public NhanKhauThuongTruDTO(string maNhanKhauThuongTru, string diaChiThuongTru, 
             string quanHeVoiChuHo, string soSoHoKhau, string maDinhDanh)
         {
-            MaNhanKhauThuongTru = maNhanKhauThuongTru;
-            DiaChiThuongTru = diaChiThuongTru;
-            QuanHeVoiChuHo = quanHeVoiChuHo;
-            SoSoHoKhau = soSoHoKhau;
-            MaDinhDanh = maDinhDanh;
+            db.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
+            db.DIACHITHUONGTRU = diaChiThuongTru;
+            db.QUANHEVOICHUHO = quanHeVoiChuHo;
+            db.SOSOHOKHAU = soSoHoKhau;
+             db.MADINHDANH = maDinhDanh;
         }
 
         public NhanKhauThuongTruDTO(string maNhanKhauThuongTru, string diaChiThuongTru,
@@ -37,23 +34,28 @@ namespace DTO
                  noiSinh, nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                  trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            MaNhanKhauThuongTru = maNhanKhauThuongTru;
-            DiaChiThuongTru = diaChiThuongTru;
-            QuanHeVoiChuHo = quanHeVoiChuHo;
-            SoSoHoKhau = soSoHoKhau;
+            db.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
+            db.DIACHITHUONGTRU = diaChiThuongTru;
+            db.QUANHEVOICHUHO = quanHeVoiChuHo;
+            db.SOSOHOKHAU = soSoHoKhau;
         }
 
-        public NhanKhauThuongTruDTO(DataRow dt):base(dt["madinhdanh"].ToString(),dt["hoten"].ToString(), dt["tenkhac"].ToString(), DateTime.Parse(dt["ngaysinh"].ToString()),
-            dt["gioitinh"].ToString(), dt["noisinh"].ToString(), dt["nguyenquan"].ToString(), dt["dantoc"].ToString(), dt["tongiao"].ToString(), dt["quoctich"].ToString(),
-            dt["hochieu"].ToString(), dt["noithuongtru"].ToString(), dt["diachihiennay"].ToString(), dt["sdt"].ToString(), dt["trinhdohocvan"].ToString(),
-            dt["trinhdochuyenmon"].ToString(), dt["biettiengdantoc"].ToString(), dt["trinhdongoaingu"].ToString(), dt["nghenghiep"].ToString())
+        //public NhanKhauThuongTruDTO(DataRow dt):base(dt["madinhdanh"].ToString(),dt["hoten"].ToString(), dt["tenkhac"].ToString(), DateTime.Parse(dt["ngaysinh"].ToString()),
+        //    dt["gioitinh"].ToString(), dt["noisinh"].ToString(), dt["nguyenquan"].ToString(), dt["dantoc"].ToString(), dt["tongiao"].ToString(), dt["quoctich"].ToString(),
+        //    dt["hochieu"].ToString(), dt["noithuongtru"].ToString(), dt["diachihiennay"].ToString(), dt["sdt"].ToString(), dt["trinhdohocvan"].ToString(),
+        //    dt["trinhdochuyenmon"].ToString(), dt["biettiengdantoc"].ToString(), dt["trinhdongoaingu"].ToString(), dt["nghenghiep"].ToString())
+        //{
+        //    if (dt.ItemArray.Length == 0)
+        //        return;
+        //    MaNhanKhauThuongTru = dt["manhankhauthuongtru"].ToString();
+        //    DiaChiThuongTru = dt["diachithuongtru"].ToString();
+        //    QuanHeVoiChuHo = dt["quanhevoichuho"].ToString();
+        //    SoSoHoKhau = dt["sosohokhau"].ToString();
+        //}
+
+        public NhanKhauThuongTruDTO(NHANKHAUTHUONGTRU nktt)
         {
-            if (dt.ItemArray.Length == 0)
-                return;
-            MaNhanKhauThuongTru = dt["manhankhauthuongtru"].ToString();
-            DiaChiThuongTru = dt["diachithuongtru"].ToString();
-            QuanHeVoiChuHo = dt["quanhevoichuho"].ToString();
-            SoSoHoKhau = dt["sosohokhau"].ToString();
+            db = nktt;
         }
     }
 }
