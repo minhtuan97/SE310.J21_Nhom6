@@ -13,7 +13,7 @@ namespace BUS
     public class NhanKhauBUS:AbstractFormBUS<NhanKhau>
     {
         NhanKhauDAO objnhankhau = new NhanKhauDAO();
-        public override DataSet GetAll()
+        public override List<NhanKhau> GetAll()
         {
             return objnhankhau.getAll();
         }
@@ -25,27 +25,23 @@ namespace BUS
         {
             return objnhankhau.delete(madinhdanh);
         }
-        public override bool Update(NhanKhau nk, int r)
+        public override bool Update(NhanKhau nk)
         {
-            return objnhankhau.update(nk, r);
+            return objnhankhau.update(nk);
         }
         public override bool Delete(int row)
         {
             return objnhankhau.delete(row);
         }
-        public bool Update(NhanKhau nk)
-        {
-            return false;
-        }
         public override bool Add_Table(NhanKhau data)
         {
             return objnhankhau.insert_table(data);
         }
-        public DataSet TimKiem(string query)
+        public List<NhanKhau> TimKiem(string query)
         {
             return objnhankhau.TimKiem(query);
         }
-        public DataSet TimKiemTheoCuTru(string madinhdanh)
+        public List<NhanKhau> TimKiemTheoCuTru(string madinhdanh)
         {
             return objnhankhau.TimKiemTheoCuTru(madinhdanh);
         }

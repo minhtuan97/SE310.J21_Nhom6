@@ -8,7 +8,7 @@ namespace DTO
 {
     public class NhanKhau
     {
-        NHANKHAU db;
+        public NHANKHAU db;
 
         public quanlyhokhauDataContext qlhk;
 
@@ -16,6 +16,10 @@ namespace DTO
             qlhk = new quanlyhokhauDataContext();
         }
 
+        public NhanKhau(NHANKHAU dbs)
+        {
+            db = dbs;
+        }
         public NhanKhau(string maDinhDanh, string hoTen, string tenKhac, DateTime ngaySinh, 
             string gioiTinh, string noiSinh, string nguyenQuan, string danToc, string tonGiao, 
             string quocTich, string hoChieu, string noiThuongTru, string diaChiHienNay, 
@@ -26,21 +30,21 @@ namespace DTO
             db.HOTEN = hoTen;
             db.TENKHAC = tenKhac;
             db.NGAYSINH = ngaySinh;
-            GioiTinh = gioiTinh;
-            NoiSinh = noiSinh;
-            NguyenQuan = nguyenQuan;
-            DanToc = danToc;
-            TonGiao = tonGiao;
-            QuocTich = quocTich;
-            HoChieu = hoChieu;
-            NoiThuongTru = noiThuongTru;
-            DiaChiHienNay = diaChiHienNay;
-            SDT = sDT;
-            TrinhDoHocVan = trinhDoHocVan;
-            TrinhDoChuyenMon = trinhDoChuyenMon;
-            BietTiengDanToc = bietTiengDanToc;
-            TrinhDoNgoaiNgu = trinhDoNgoaiNgu;
-            NgheNghiep = ngheNghiep;
+            db.GIOITINH = gioiTinh;
+            db.NOISINH = noiSinh;
+            db.NGUYENQUAN = nguyenQuan;
+            db.DANTOC = danToc;
+            db.TONGIAO = tonGiao;
+            db.QUOCTICH = quocTich;
+            db.HOCHIEU = hoChieu;
+            db.NOITHUONGTRU = noiThuongTru;
+            db.DIACHIHIENNAY = diaChiHienNay;
+            db.SDT = sDT;
+            db.TRINHDOHOCVAN = trinhDoHocVan;
+            db.TRINHDOCHUYENMON = trinhDoChuyenMon;
+            db.BIETTIENGDANTOC = bietTiengDanToc;
+            db.TRINHDONGOAINGU = trinhDoNgoaiNgu;
+            db.NGHENGHIEP = ngheNghiep;
         }
     }
 }
