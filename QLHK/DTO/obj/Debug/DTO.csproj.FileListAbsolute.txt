@@ -21,3 +21,7 @@ C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.csprojAssemblyR
 C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.dll
 C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\DTO\obj\Debug\DTO.pdb
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.csprojAssemblyReference.cache
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.dll
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\DTO\obj\Debug\DTO.pdb

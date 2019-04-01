@@ -14,6 +14,17 @@ namespace DAO
         
         public TieuSuDAO() : base() { }
 
+        public override List<TieuSuDTO> getAll()
+        {
+            var kq = from tieusu in qlhk.TIEUSUs
+                     select new TieuSuDTO
+                     {
+                         db = tieusu,
+                     };
+            List<TieuSuDTO> x = kq.ToList();
+            return x;
+        }
+
         public override bool delete(int row)
         {
             try
@@ -28,17 +39,6 @@ namespace DAO
                 Console.WriteLine(e.Message);
             }
             return false;
-        }
-
-        public override List<TieuSuDTO> getAll()
-        {
-            var kq = from tieusu in qlhk.TIEUSUs
-                     select new TieuSuDTO
-                     {
-                         db=tieusu,
-                     };
-            List<TieuSuDTO> x = kq.ToList();
-            return x;
         }
 
         public override bool insert(TieuSuDTO data)

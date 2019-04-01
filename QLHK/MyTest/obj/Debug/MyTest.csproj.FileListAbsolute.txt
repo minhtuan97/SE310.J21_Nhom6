@@ -2,3 +2,5 @@ C:\Users\minht\OneDrive\Máy tính\QLHK\MyTest\obj\Debug\MyTest.csprojAssemblyRe
 C:\Users\minht\OneDrive\Máy tính\QLHK\MyTest\obj\Debug\MyTest.csproj.CoreCompileInputs.cache
 C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\MyTest\obj\Debug\MyTest.csprojAssemblyReference.cache
 C:\Users\minht\OneDrive\Máy tính\Cn.net\QLHK\MyTest\obj\Debug\MyTest.csproj.CoreCompileInputs.cache
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\MyTest\obj\Debug\MyTest.csprojAssemblyReference.cache
+C:\Users\SIVAI\Documents\GitHub\SE310.J21_Nhom6\QLHK\MyTest\obj\Debug\MyTest.csproj.CoreCompileInputs.cache
