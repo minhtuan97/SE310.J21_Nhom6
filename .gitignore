@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+QLHK/.vs/QLHK/v15/.suo
+*.ide-shm
+*.ide-wal
