@@ -13,30 +13,16 @@ namespace DAO
     {
         public TinhThanhPhoDAO() : base() { }
 
-        public override DataSet getAll()
+        public override List<TinhThanhPhoDTO> getAll()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM tinhthanhpho", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "tinhthanhpho");
-                return dataset;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
+            TinhThanhPhoDTO nk = new TinhThanhPhoDTO();
+            var kq = from quanhuyendto in qlhk.QUANHUYENs
+                     select new QuanHuyenDTO
+                     {
+                         db = quanhuyendto
+                     };
+            List<QuanHuyenDTO> x = kq.ToList();
+            return x;
         }
         public override bool insert_table(TinhThanhPhoDTO data)
         {

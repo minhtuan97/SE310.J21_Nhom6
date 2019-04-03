@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLHK" Class="quanlyhokhauDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-T2E7R4C\SQLEXPRESS;Initial Catalog=QLHK;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="QLHKConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-T2E7R4C\SQLEXPRESS;Initial Catalog=QLHK;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="QLHKConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CANBO" Member="CANBOs">
     <Type Name="CANBO">
       <Column Name="MACANBO" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -21,8 +21,8 @@
     </Type>
   </Table>
   <Table Name="dbo.NHANKHAU" Member="NHANKHAUs">
-    <Type Name="NHANKHAU" IsInheritanceDefault="true">
-      <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" IsDiscriminator="true" />
+    <Type Name="NHANKHAU">
+      <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="HOTEN" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="TENKHAC" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="NGAYSINH" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
@@ -41,13 +41,16 @@
       <Column Name="BIETTIENGDANTOC" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TRINHDONGOAINGU" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="NGHENGHIEP" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Type Name="NHANKHAUTHUONGTRU">
-        <Column Name="MANHANKHAUTHUONGTRU" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-        <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
-        <Column Name="DIACHITHUONGTRU" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-        <Column Name="QUANHEVOICHUHO" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-        <Column Name="SOSOHOKHAU" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
-      </Type>
+    </Type>
+  </Table>
+  <Table Name="dbo.NHANKHAUTAMVANG" Member="NHANKHAUTAMVANGs">
+    <Type Name="NHANKHAUTAMVANG">
+      <Column Name="MANHANKHAUTAMVANG" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYBATDAUTAMVANG" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYKETTHUCTAMVANG" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="LYDO" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="NOIDEN" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.NHANKHAUTAMTRU" Member="NHANKHAUTAMTRUs">
@@ -61,14 +64,21 @@
       <Column Name="SOSOTAMTRU" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.NHANKHAUTAMVANG" Member="NHANKHAUTAMVANGs">
-    <Type Name="NHANKHAUTAMVANG">
-      <Column Name="MANHANKHAUTAMVANG" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+  <Table Name="dbo.NHANKHAUTHUONGTRU" Member="NHANKHAUTHUONGTRUs">
+    <Type Name="NHANKHAUTHUONGTRU">
+      <Column Name="MANHANKHAUTHUONGTRU" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
-      <Column Name="NGAYBATDAUTAMVANG" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="NGAYKETTHUCTAMVANG" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="LYDO" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="NOIDEN" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DIACHITHUONGTRU" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QUANHEVOICHUHO" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SOSOHOKHAU" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QUANHUYEN" Member="QUANHUYENs">
+    <Type Name="QUANHUYEN">
+      <Column Name="maqh" Type="System.String" DbType="NVarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ten" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="kieu" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="matp" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.SOHOKHAU" Member="SOHOKHAUs">
@@ -108,6 +118,21 @@
       <Column Name="CHOO" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="NGHENGHIEP" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="NOILAMVIEC" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TINHTHANHPHO" Member="TINHTHANHPHOs">
+    <Type Name="TINHTHANHPHO">
+      <Column Name="matp" Type="System.String" DbType="NVarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ten" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="kieu" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.XAPHUONGTHITRAN" Member="XAPHUONGTHITRANs">
+    <Type Name="XAPHUONGTHITRAN">
+      <Column Name="maxp" Type="System.String" DbType="NVarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ten" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="kieu" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="maqh" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

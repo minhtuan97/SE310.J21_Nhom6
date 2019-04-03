@@ -13,97 +13,56 @@ namespace DAO
     {
         public QuanHuyenDAO() : base() { }
 
-        public override DataSet getAll()
+        public override List<QuanHuyenDTO> getAll()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM quanhuyen", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "quanhuyen");
-                return dataset;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
+            QuanHuyenDTO nk = new QuanHuyenDTO();
+            var kq = from quanhuyendto in qlhk.QUANHUYENs
+                     select new QuanHuyenDTO
+                     {
+                         db = quanhuyendto
+                     };
+            List<QuanHuyenDTO> x = kq.ToList();
+            return x;
         }
 
         public override bool insert(QuanHuyenDTO quanHuyen)
         {
+            qlhk.QUANHUYENs.InsertOnSubmit(quanHuyen.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["quanhuyen"].NewRow();
-                dr["maqh"] = quanHuyen.MaQH;
-                dr["matp"] = quanHuyen.MaTP;
-                dr["ten"] = quanHuyen.Ten;
-                dr["kieu"] = quanHuyen.Kieu;
-
-                dataset.Tables["quanhuyen"].Rows.Add(dr);
-                dataset.Tables["quanhuyen"].Rows.RemoveAt(dataset.Tables["quanhuyen"].Rows.Count - 1);
-                sqlda.Update(dataset, "quanhuyen");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         public override bool insert_table(QuanHuyenDTO data)
         {
+            qlhk.QUANHUYENs.InsertOnSubmit(data.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["quanhuyen"].NewRow();
-                dr["maqh"] = data.MaTP;
-                dr["ten"] = data.Ten;
-                dr["kieu"] = data.Kieu;
-                dr["matp"] = data.MaTP;
-                dataset.Tables["quanhuyen"].Rows.Add(dr);
-                dataset.Tables["quanhuyen"].Rows.RemoveAt(dataset.Tables["quanhuyen"].Rows.Count - 1);
-                sqlda.Update(dataset, "quanhuyen");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
 
         public override bool delete(int row)
         {
             try
             {
-                dataset.Tables["quanhuyen"].Rows[row].Delete();
-                sqlda.Update(dataset, "quanhuyen");
+                List<QuanHuyenDTO> kq = this.getAll();
+                QuanHuyenDTO[] arr = kq.ToArray();
+                qlhk.QUANHUYENs.DeleteOnSubmit(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -113,61 +72,55 @@ namespace DAO
             return false;
         }
 
-        public override bool update(QuanHuyenDTO quanHuyen, int r)
+        public override bool update(QuanHuyenDTO quanHuyen)
         {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
+            var query =
+               from qhtv in qlhk.QUANHUYENs
+               where quanHuyen.db.maqh == qhtv.maqh
+               select qhtv;
 
+            // Execute the query, and change the column values
+            // you want to change.
+
+            foreach (QUANHUYEN kq in query)
+            {
+                kq.maqh = quanHuyen.db.maqh;
+                kq.matp = quanHuyen.db.matp;
+                kq.kieu = quanHuyen.db.kieu;
+                kq.ten = quanHuyen.db.ten;
+
+            
             }
+
+            // Submit the changes to the database.
             try
             {
-                string sql = "update quanhuyen set ten=@ten, kieu=@kieu, matp =@matp where maqh =@maqh";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@maqh", quanHuyen.MaQH.ToString());
-                cmd.Parameters.AddWithValue("@matp", quanHuyen.MaTP.ToString());
-                cmd.Parameters.AddWithValue("@ten", quanHuyen.Ten.ToString());
-                cmd.Parameters.AddWithValue("@kieu", quanHuyen.Kieu.ToString());
-
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return false;
         }
 
-        public DataSet TimKiem(string query)
+        public List<QuanHuyenDTO> TimKiem(string query)
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM quanhuyen"+query, conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
 
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "quanhuyen");
-                return dataset;
-            }
-            catch (Exception e)
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM quanhuyen" + query;
+            var res = qlhk.ExecuteQuery<QUANHUYEN>(query).ToList();
+            List<QuanHuyenDTO> lst = new List<QuanHuyenDTO>();
+            foreach (QUANHUYEN i in res)
             {
-                Console.WriteLine(e.Message);
-                return null;
+                QuanHuyenDTO ts = new QuanHuyenDTO(i);
+                lst.Add(ts);
             }
-            finally
-            {
-                conn.Close();
-            }
+
+            return lst;
+            
         }
     }
 }

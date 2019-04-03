@@ -255,20 +255,6 @@
     <None Include="Them nk.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BUS\BUS.csproj">
-      <Project>{aca2e917-ab98-433d-b5d5-c431a8ff0b7b}</Project>
-      <Name>BUS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAO\DAO.csproj">
-      <Project>{f5c156c1-727b-4cc9-b934-4689a20515a1}</Project>
-      <Name>DAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DTO\DTO.csproj">
-      <Project>{b401d09f-8709-410e-a9e4-321e9ee41b32}</Project>
-      <Name>DTO</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +313,16 @@
   <ItemGroup>
     <Content Include="Resources\icon_qlhk_IM6_icon.ico" />
     <Content Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{aca2e917-ab98-433d-b5d5-c431a8ff0b7b}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{f5c156c1-727b-4cc9-b934-4689a20515a1}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
