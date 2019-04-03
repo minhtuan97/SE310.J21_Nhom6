@@ -16,75 +16,52 @@ namespace DAO
         public override List<TinhThanhPhoDTO> getAll()
         {
             TinhThanhPhoDTO nk = new TinhThanhPhoDTO();
-            var kq = from quanhuyendto in qlhk.QUANHUYENs
-                     select new QuanHuyenDTO
+            var kq = from tptv in qlhk.TINHTHANHPHOs
+                     select new TinhThanhPhoDTO
                      {
-                         db = quanhuyendto
+                         db = tptv
                      };
-            List<QuanHuyenDTO> x = kq.ToList();
+            List<TinhThanhPhoDTO> x = kq.ToList();
             return x;
         }
         public override bool insert_table(TinhThanhPhoDTO data)
         {
+            qlhk.TINHTHANHPHOs.InsertOnSubmit(data.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["tinhthanhpho"].NewRow();
-                dr["matp"] = data.MaTP;
-                dr["ten"] = data.Ten;
-                dr["kieu"] = data.Kieu;
-                dataset.Tables["tinhthanhpho"].Rows.Add(dr);
-                dataset.Tables["tinhthanhpho"].Rows.RemoveAt(dataset.Tables["tinhthanhpho"].Rows.Count - 1);
-                sqlda.Update(dataset, "tinhthanhpho");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
                 return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         public override bool insert(TinhThanhPhoDTO tinhThanh)
         {
+            qlhk.TINHTHANHPHOs.InsertOnSubmit(tinhThanh.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["tinhthanhpho"].NewRow();
-                dr["matp"] = tinhThanh.MaTP;
-                dr["ten"] = tinhThanh.Ten;
-                dr["kieu"] = tinhThanh.Kieu;
-
-                dataset.Tables["tinhthanhpho"].Rows.Add(dr);
-                dataset.Tables["v"].Rows.RemoveAt(dataset.Tables["tinhthanhpho"].Rows.Count - 1);
-                sqlda.Update(dataset, "tinhthanhpho");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
 
         public override bool delete(int row)
         {
             try
             {
-                dataset.Tables["tinhthanhpho"].Rows[row].Delete();
-                sqlda.Update(dataset, "tinhthanhpho");
+                List<TinhThanhPhoDTO> kq = this.getAll();
+                TinhThanhPhoDTO[] arr = kq.ToArray();
+                qlhk.TINHTHANHPHOs.DeleteOnSubmit(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -94,61 +71,49 @@ namespace DAO
             return false;
         }
 
-        public override bool update(TinhThanhPhoDTO tinhThanh, int r)
+        public override bool update(TinhThanhPhoDTO tinhThanh)
         {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
+            var query =
+               from tptv in qlhk.TINHTHANHPHOs
+               where tinhThanh.db.matp == tptv.matp
+               select tptv;
 
+            // Execute the query, and change the column values
+            // you want to change.
+
+            foreach (TINHTHANHPHO kq in query)
+            {
+                kq.matp = tinhThanh.db.matp;
+                kq.kieu = tinhThanh.db.kieu;
+                kq.ten = tinhThanh.db.ten;
             }
+
+            // Submit the changes to the database.
             try
             {
-                string sql = "update tinhthanhpho set ten=@ten, kieu=@kieu where matp =@matp";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@matp", tinhThanh.MaTP.ToString());
-                cmd.Parameters.AddWithValue("@ten", tinhThanh.Ten.ToString());
-                cmd.Parameters.AddWithValue("@kieu", tinhThanh.Kieu.ToString());
-
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return false;
         }
-        public DataSet TimKiem(string query)
+        public List<TinhThanhPhoDTO> TimKiem(string query)
         {
-            try
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM tinhthanhpho" + query;
+            var res = qlhk.ExecuteQuery<TINHTHANHPHO>(query).ToList();
+            List<TinhThanhPhoDTO> lst = new List<TinhThanhPhoDTO>();
+            foreach (TINHTHANHPHO i in res)
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM tinhthanhpho" + query, conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "tinhthanhpho");
-                return dataset;
+                TinhThanhPhoDTO ts = new TinhThanhPhoDTO(i);
+                lst.Add(ts);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
+
+            return lst;
         }
 
     }

@@ -13,94 +13,55 @@ namespace DAO
     {
         public XaPhuongThiTranDAO() : base() { }
 
-        public override DataSet getAll()
+        public override List<XaPhuongThiTranDTO> getAll()
         {
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM xaphuongthitran", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "xaphuongthitran");
-                return dataset;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
+            XaPhuongThiTranDTO nk = new XaPhuongThiTranDTO();
+            var kq = from xptttv in qlhk.XAPHUONGTHITRANs
+                     select new XaPhuongThiTranDTO
+                     {
+                         db = xptttv
+                     };
+            List<XaPhuongThiTranDTO> x = kq.ToList();
+            return x;
         }
 
         public override bool insert(XaPhuongThiTranDTO xaphuong)
         {
+            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(xaphuong.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["xaphuongthitran"].NewRow();
-                dr["maxa"] = xaphuong.MaQH;
-                dr["maqh"] = xaphuong.MaQH;
-                dr["ten"] = xaphuong.Ten;
-                dr["kieu"] = xaphuong.Kieu;
-
-                dataset.Tables["xaphuongthitran"].Rows.Add(dr);
-                dataset.Tables["v"].Rows.RemoveAt(dataset.Tables["xaphuongthitran"].Rows.Count - 1);
-                sqlda.Update(dataset, "xaphuongthitran");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         public override bool insert_table(XaPhuongThiTranDTO data)
         {
+            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(data.db);
             try
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                DataRow dr = dataset.Tables["xaphuongthitran"].NewRow();
-                dr["maxp"] = data.MaXP;
-                dr["ten"] = data.Ten;
-                dr["kieu"] = data.Kieu;
-                dr["maqh"] = data.MaQH;
-
-                dataset.Tables["xaphuongthitran"].Rows.Add(dr);
-                dataset.Tables["xaphuongthitran"].Rows.RemoveAt(dataset.Tables["xaphuongthitran"].Rows.Count - 1);
-                sqlda.Update(dataset, "xaphuongthitran");
+                qlhk.SubmitChanges();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                qlhk.SubmitChanges();
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return true;
         }
         public override bool delete(int row)
         {
             try
             {
-                dataset.Tables["xaphuongthitran"].Rows[row].Delete();
-                sqlda.Update(dataset, "xaphuongthitran");
+                List<XaPhuongThiTranDTO> kq = this.getAll();
+                XaPhuongThiTranDTO[] arr = kq.ToArray();
+                qlhk.XAPHUONGTHITRANs.DeleteOnSubmit(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -110,63 +71,51 @@ namespace DAO
             return false;
         }
 
-        public override bool update(XaPhuongThiTranDTO xaphuong, int r)
+        public override bool update(XaPhuongThiTranDTO xaphuong)
         {
-            if (conn.State != ConnectionState.Open)
-            {
-                conn.Open();
+            var query =
+                from xptttv in qlhk.XAPHUONGTHITRANs
+                where xaphuong.db.maxp == xptttv.maxp
+                select xptttv;
 
+            // Execute the query, and change the column values
+            // you want to change.
+
+            foreach (XAPHUONGTHITRAN kq in query)
+            {
+                kq.maxp = xaphuong.db.maxp;
+                kq.maqh = xaphuong.db.maqh;
+                kq.kieu = xaphuong.db.kieu;
+                kq.ten = xaphuong.db.ten;
             }
+
+            // Submit the changes to the database.
             try
             {
-                string sql = "update xaphuongthitran set ten=@ten, kieu=@kieu, maqh =@mqah where maxp =@maxp";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@maxp", xaphuong.MaQH.ToString());
-                cmd.Parameters.AddWithValue("@maqh", xaphuong.MaQH.ToString());
-                cmd.Parameters.AddWithValue("@ten", xaphuong.Ten.ToString());
-                cmd.Parameters.AddWithValue("@kieu", xaphuong.Kieu.ToString());
-
-                cmd.ExecuteNonQuery();
+                qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
             }
-            finally
-            {
-                conn.Close();
-            }
-            return false;
         }
 
-        public DataSet TimKiem(string query)
+        public List<XaPhuongThiTranDTO> TimKiem(string query)
         {
-            try
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM xaphuongthitran" + query;
+            var res = qlhk.ExecuteQuery<XAPHUONGTHITRAN>(query).ToList();
+            List<XaPhuongThiTranDTO> lst = new List<XaPhuongThiTranDTO>();
+            foreach (XAPHUONGTHITRAN i in res)
             {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM xaphuongthitran" + query, conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "xaphuongthitran");
-                return dataset;
+                XaPhuongThiTranDTO ts = new XaPhuongThiTranDTO(i);
+                lst.Add(ts);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
+
+            return lst;
         }
     }
 }

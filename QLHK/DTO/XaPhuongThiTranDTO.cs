@@ -12,6 +12,10 @@ namespace DTO
 
 
         public XaPhuongThiTranDTO() { }
+        public XaPhuongThiTranDTO( XAPHUONGTHITRAN x)
+        {
+            db = x;
+        }
         public XaPhuongThiTranDTO(string maxp, string ten, string kieu, string maqh)
         {
             db.maxp = maxp;

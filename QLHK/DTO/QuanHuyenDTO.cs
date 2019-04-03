@@ -10,8 +10,10 @@ namespace DTO
     {
         public QUANHUYEN db;
 
-
         public QuanHuyenDTO() { }
+        public QuanHuyenDTO(QUANHUYEN x) {
+            db = x;
+        }
         public QuanHuyenDTO(string maqh, string ten, string kieu, string matp)
         {
             db.maqh = maqh;
