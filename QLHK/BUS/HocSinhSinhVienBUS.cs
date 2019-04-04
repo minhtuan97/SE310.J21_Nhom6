@@ -49,7 +49,7 @@ namespace BUS
             return objhssv.update(hssv);
         }
 
-        public List<HocSinhSinhVienDTO> TimKiem(string query)
+        public DataTable TimKiem(string query)
         {
             return objhssv.TimKiem(query);
         }
@@ -61,7 +61,7 @@ namespace BUS
 
         public DataTable TimKiemtheoCuTru(string madinhdanh)
         {
-            DataTable dt1 = objhssv.TimKiem(" WHERE madinhdanh='" + madinhdanh + "'").Tables[0];
+            DataTable dt1 = objhssv.TimKiem(" WHERE madinhdanh='" + madinhdanh + "'");
             DataSet nhanKhau = objnk.TimKiemTheoCuTru(madinhdanh);
             DataTable dt2 = nhanKhau.Tables["thuongtru"].Rows.Count > 0? nhanKhau.Tables["thuongtru"]:nhanKhau.Tables["tamtru"];
 
@@ -78,9 +78,9 @@ namespace BUS
 
         public bool isValidHSSV(HocSinhSinhVienDTO hssv)
         {
-            if (!string.IsNullOrEmpty(hssv.MaHSSV) && !string.IsNullOrEmpty(hssv.MaDinhDanh) && !string.IsNullOrEmpty(hssv.Truong)
-                && !string.IsNullOrEmpty(hssv.DiaChiThuongTru) && !string.IsNullOrEmpty(hssv.TGBDTTTT.ToString()) 
-                && !string.IsNullOrEmpty(hssv.TGKTTTTT.ToString()))
+            if (!string.IsNullOrEmpty(hssv.dbhssv.MAHSSV) && !string.IsNullOrEmpty(hssv.dbhssv.MADINHDANH) && !string.IsNullOrEmpty(hssv.dbhssv.TRUONG)
+                && !string.IsNullOrEmpty(hssv.dbhssv.DIACHITHUONGTRU) && !string.IsNullOrEmpty(hssv.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString()) 
+                && !string.IsNullOrEmpty(hssv.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString()))
                 return true;
             return false;
         }

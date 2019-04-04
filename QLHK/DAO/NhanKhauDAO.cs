@@ -155,9 +155,76 @@ namespace DAO
             return lst;
         }
 
-        public List<NhanKhau> TimKiemTheoCuTru(string madinhdanh)
+        public DataSet TimKiemTheoCuTru(string madinhdanh)
         {
-            return null;
+            DataSet dataset = new DataSet();
+            var querytht = (from nktt in qlhk.NHANKHAUTHUONGTRUs.AsEnumerable()
+                                            join nk in qlhk.NHANKHAUs.AsEnumerable() on nktt.MADINHDANH equals nk.MADINHDANH
+                                            select new
+                                            {
+                                                nk.MADINHDANH,
+                                                nk.HOTEN ,
+                                                nk.TENKHAC,
+                                                nk.NGAYSINH,
+                                                nk.GIOITINH,
+                                                nk.NOISINH,
+                                                nk.NGUYENQUAN,
+                                                nk.DANTOC,
+                                                nk.TONGIAO,
+                                                nk.QUOCTICH,
+                                                nk.HOCHIEU,
+                                                nk.NOITHUONGTRU,
+                                                nk.DIACHIHIENNAY,
+                                                nk.SDT,
+                                                nk.TRINHDOHOCVAN,
+                                                nk.TRINHDOCHUYENMON,
+                                                nk.BIETTIENGDANTOC,
+                                                nk.TRINHDONGOAINGU,
+                                                nk.NGHENGHIEP,
+                                                nktt.MANHANKHAUTHUONGTRU,
+                                                nktt.QUANHEVOICHUHO,
+                                                nktt.SOSOHOKHAU,
+                                                nktt.DIACHITHUONGTRU
+                                            } ) as IEnumerable<DataRow>;
+            DataTable tbtht = querytht.CopyToDataTable();
+            tbtht.TableName = "thuongtru";
+            dataset.Tables.Add(tbtht);
+
+            var querytt = (from nktt in qlhk.NHANKHAUTAMTRUs.AsEnumerable()
+                            join nk in qlhk.NHANKHAUs.AsEnumerable() on nktt.MADINHDANH equals nk.MADINHDANH
+                            select new
+                            {
+                                nk.MADINHDANH,
+                                nk.HOTEN,
+                                nk.TENKHAC,
+                                nk.NGAYSINH,
+                                nk.GIOITINH,
+                                nk.NOISINH,
+                                nk.NGUYENQUAN,
+                                nk.DANTOC,
+                                nk.TONGIAO,
+                                nk.QUOCTICH,
+                                nk.HOCHIEU,
+                                nk.NOITHUONGTRU,
+                                nk.DIACHIHIENNAY,
+                                nk.SDT,
+                                nk.TRINHDOHOCVAN,
+                                nk.TRINHDOCHUYENMON,
+                                nk.BIETTIENGDANTOC,
+                                nk.TRINHDONGOAINGU,
+                                nk.NGHENGHIEP,
+                                nktt.MANHAKHAUTAMTRU,
+                                nktt.NOITAMTRU,
+                                nktt.SOSOTAMTRU,
+                                nktt.LYDO,
+                                nktt.TUNGAY,
+                                nktt.DENNGAY
+                            }) as IEnumerable<DataRow>;
+            DataTable tbtt = querytht.CopyToDataTable();
+            tbtt.TableName = "tamtru";
+            dataset.Tables.Add(tbtt);
+
+            return dataset;
         }
     }
 }

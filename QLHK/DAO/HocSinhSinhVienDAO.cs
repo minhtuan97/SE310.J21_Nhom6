@@ -121,19 +121,13 @@ namespace DAO
             }
         }
 
-        public List<HocSinhSinhVienDTO> TimKiem(string query)
+        public DataTable TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien" + query;
-            var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();
-            List<HocSinhSinhVienDTO> lst = new List<HocSinhSinhVienDTO>();
-            foreach (HOCSINHSINHVIEN i in res)
-            {
-                HocSinhSinhVienDTO ts = new HocSinhSinhVienDTO(i);
-                lst.Add(ts);
-            }
+            var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query) as IEnumerable<DataRow>;
 
-            return lst;
+            return res.CopyToDataTable();
         }
 
         // join 2 bảng ???

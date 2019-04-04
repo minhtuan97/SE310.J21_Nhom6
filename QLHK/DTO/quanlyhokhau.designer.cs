@@ -207,7 +207,7 @@ namespace DTO
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CANBO")]
-	public partial class CANBO : NHANKHAUTHUONGTRU, INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class CANBO : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1453,7 +1453,7 @@ namespace DTO
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NHANKHAUTHUONGTRU")]
-	public partial class NHANKHAUTHUONGTRU : NHANKHAU, INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class NHANKHAUTHUONGTRU : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
