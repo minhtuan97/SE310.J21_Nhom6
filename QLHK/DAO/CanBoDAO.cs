@@ -18,7 +18,7 @@ namespace DAO
             var kq = from canbo in qlhk.CANBOs
                      select new CanBoDTO
                      {
-                         db = canbo,
+                         dbcb = canbo,
                      };
 
             return kq.ToList();
@@ -28,7 +28,7 @@ namespace DAO
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             //qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
-            qlhk.CANBOs.InsertOnSubmit(data.db);
+            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
             try
             {
                 qlhk.SubmitChanges();
@@ -48,7 +48,7 @@ namespace DAO
             {
                 List<CanBoDTO> kq = this.getAll();
                 CanBoDTO[] arr = kq.ToArray();
-                qlhk.CANBOs.DeleteOnSubmit(arr[row].db);
+                qlhk.CANBOs.DeleteOnSubmit(arr[row].dbcb);
                 return true;
             }
             catch (Exception e)
@@ -62,16 +62,16 @@ namespace DAO
         {
 
             // Query the database for the row to be updated.
-            var query = qlhk.CANBOs.Where(q => q.MACANBO == cb.db.MACANBO);
+            var query = qlhk.CANBOs.Where(q => q.MACANBO == cb.dbcb.MACANBO);
 
             // Execute the query, and change the column values
             // you want to change.
             foreach (CANBO kq in query)
             {
-                kq.MANHANKHAUTHUONGTRU = cb.db.MANHANKHAUTHUONGTRU;
-                kq.TENTAIKHOAN = cb.db.TENTAIKHOAN;
-                kq.MATKHAU = cb.db.MATKHAU;
-                kq.LOAICANBO = cb.db.LOAICANBO;
+                kq.MANHANKHAUTHUONGTRU = cb.dbcb.MANHANKHAUTHUONGTRU;
+                kq.TENTAIKHOAN = cb.dbcb.TENTAIKHOAN;
+                kq.MATKHAU = cb.dbcb.MATKHAU;
+                kq.LOAICANBO = cb.dbcb.LOAICANBO;
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.
@@ -90,7 +90,7 @@ namespace DAO
         public override bool insert_table(CanBoDTO data)
         {
 
-            qlhk.CANBOs.InsertOnSubmit(data.db);
+            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
             try
             {
                 qlhk.SubmitChanges();
@@ -175,7 +175,7 @@ namespace DAO
                      join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
                      select new NhanKhauThuongTruDTO
                      {
-                         db = nktt
+                         dbnktt = nktt
                      };
 
             return kq.ToList();

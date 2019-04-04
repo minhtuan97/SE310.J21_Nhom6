@@ -22,13 +22,13 @@ namespace BUS
         }
         public bool isValidNhanKhauTT(NhanKhauThuongTruDTO nktt)
         {
-            if (!string.IsNullOrEmpty(nktt.HoTen) &&! string.IsNullOrEmpty(nktt.GioiTinh) &&! string.IsNullOrEmpty(nktt.NgaySinh.ToString())
-                &&! string.IsNullOrEmpty(nktt.DanToc) &&! string.IsNullOrEmpty(nktt.NgheNghiep) &&! string.IsNullOrEmpty(nktt.MaDinhDanh) 
-                &&! string.IsNullOrEmpty(nktt.HoChieu) &&! string.IsNullOrEmpty(nktt.NguyenQuan) &&! string.IsNullOrEmpty(nktt.NoiSinh) 
-                &&! string.IsNullOrEmpty(nktt.QuocTich) &&! string.IsNullOrEmpty(nktt.TonGiao) &&! string.IsNullOrEmpty(nktt.SDT) 
-                && nktt.MaNhanKhauThuongTru.IndexOf("TH")==0 &&! string.IsNullOrEmpty(nktt.SoSoHoKhau) &&! string.IsNullOrEmpty(nktt.NoiThuongTru)
-                &&! string.IsNullOrEmpty(nktt.DiaChiHienNay) &&! string.IsNullOrEmpty(nktt.TrinhDoHocVan) &&! string.IsNullOrEmpty(nktt.TrinhDoChuyenMon) 
-                &&! string.IsNullOrEmpty(nktt.QuanHeVoiChuHo))
+            if (!string.IsNullOrEmpty(nktt.db.HOTEN) &&! string.IsNullOrEmpty(nktt.db.GIOITINH) &&! string.IsNullOrEmpty(nktt.db.NGAYSINH.ToString())
+                &&! string.IsNullOrEmpty(nktt.db.DANTOC) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.MADINHDANH) 
+                &&! string.IsNullOrEmpty(nktt.db.HOCHIEU) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
+                &&! string.IsNullOrEmpty(nktt.db.QUOCTICH) &&! string.IsNullOrEmpty(nktt.db.TONGIAO) &&! string.IsNullOrEmpty(nktt.db.SDT) 
+                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 &&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU) &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
+                &&! string.IsNullOrEmpty(nktt.db.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.db.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.db.TRINHDOCHUYENMON) 
+                &&! string.IsNullOrEmpty(nktt.dbnktt.QUANHEVOICHUHO))
                 return true;
             return false;
         }

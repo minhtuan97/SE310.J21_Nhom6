@@ -17,7 +17,7 @@ namespace DAO
         {
             var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
                         select new NhanKhauThuongTruDTO {
-                            db=nktt
+                            dbnktt=nktt
                         };
 
             return kq.ToList();
@@ -30,15 +30,18 @@ namespace DAO
                      join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
                      select new NhanKhauThuongTruDTO
                      {
-                         db = nktt
+                         db = nk,
+                         dbnktt = nktt
                      };
 
             return kq.ToList();
         }
         public override bool insert_table(NhanKhauThuongTruDTO data)
         {
-            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
+            if(!String.IsNullOrEmpty(data.db.MADINHDANH))
+                qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            if (!String.IsNullOrEmpty(data.dbnktt.MADINHDANH))
+                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
 
             try
             {
@@ -54,8 +57,8 @@ namespace DAO
         }
         public override bool insert(NhanKhauThuongTruDTO data)
         {
-            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
 
             try
             {
@@ -89,7 +92,7 @@ namespace DAO
             NhanKhauThuongTruDTO[] nktt = this.getAll().ToArray();
             try
             {
-                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(nktt[row].db);
+                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(nktt[row].dbnktt);
                 return true;
             }
             catch (Exception e)
@@ -102,16 +105,16 @@ namespace DAO
         public override bool update(NhanKhauThuongTruDTO nktt)
         {
             // Query the database for the row to be updated.
-            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.db.MANHANKHAUTHUONGTRU);
+            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
 
             // Execute the query, and change the column values
             // you want to change.
             foreach (NHANKHAUTHUONGTRU kq in query)
             {
-                kq.MANHANKHAUTHUONGTRU = nktt.db.MANHANKHAUTHUONGTRU;
-                kq.DIACHITHUONGTRU = nktt.db.DIACHITHUONGTRU;
-                kq.QUANHEVOICHUHO = nktt.db.QUANHEVOICHUHO;
-                kq.SOSOHOKHAU = nktt.db.SOSOHOKHAU;
+                kq.MANHANKHAUTHUONGTRU = nktt.dbnktt.MANHANKHAUTHUONGTRU;
+                kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
+                kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
+                kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.

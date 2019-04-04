@@ -9,7 +9,7 @@ namespace DTO
 {
     public class NhanKhauThuongTruDTO:NhanKhau
     {
-        public NHANKHAUTHUONGTRU db;
+        public NHANKHAUTHUONGTRU dbnktt;
 
 
         public NhanKhauThuongTruDTO() { }
@@ -17,11 +17,11 @@ namespace DTO
         public NhanKhauThuongTruDTO(string maNhanKhauThuongTru, string diaChiThuongTru, 
             string quanHeVoiChuHo, string soSoHoKhau, string maDinhDanh)
         {
-            db.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
-            db.DIACHITHUONGTRU = diaChiThuongTru;
-            db.QUANHEVOICHUHO = quanHeVoiChuHo;
-            db.SOSOHOKHAU = soSoHoKhau;
-             db.MADINHDANH = maDinhDanh;
+            dbnktt.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
+            dbnktt.DIACHITHUONGTRU = diaChiThuongTru;
+            dbnktt.QUANHEVOICHUHO = quanHeVoiChuHo;
+            dbnktt.SOSOHOKHAU = soSoHoKhau;
+             dbnktt.MADINHDANH = maDinhDanh;
         }
 
         public NhanKhauThuongTruDTO(string maNhanKhauThuongTru, string diaChiThuongTru,
@@ -34,10 +34,10 @@ namespace DTO
                  noiSinh, nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                  trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            db.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
-            db.DIACHITHUONGTRU = diaChiThuongTru;
-            db.QUANHEVOICHUHO = quanHeVoiChuHo;
-            db.SOSOHOKHAU = soSoHoKhau;
+            dbnktt.MANHANKHAUTHUONGTRU = maNhanKhauThuongTru;
+            dbnktt.DIACHITHUONGTRU = diaChiThuongTru;
+            dbnktt.QUANHEVOICHUHO = quanHeVoiChuHo;
+            dbnktt.SOSOHOKHAU = soSoHoKhau;
         }
 
         //public NhanKhauThuongTruDTO(DataRow dt):base(dt["madinhdanh"].ToString(),dt["hoten"].ToString(), dt["tenkhac"].ToString(), DateTime.Parse(dt["ngaysinh"].ToString()),
@@ -55,7 +55,7 @@ namespace DTO
 
         public NhanKhauThuongTruDTO(NHANKHAUTHUONGTRU nktt)
         {
-            db = nktt;
+            dbnktt = nktt;
         }
     }
 }

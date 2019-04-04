@@ -9,17 +9,17 @@ namespace DTO
 {
     public class CanBoDTO: NhanKhauThuongTruDTO
     {
-        public CANBO db;
+        public CANBO dbcb;
         public CanBoDTO() : base() { }
 
         public CanBoDTO(string maCanBo, string tenTaiKhoan, string matKhau, string loaiCanBo, string str_manhankhauthuongtru)
         {
-            db.MACANBO = maCanBo;
-
-            db.TENTAIKHOAN = tenTaiKhoan;
-            db.MATKHAU= matKhau;
-            db.LOAICANBO = loaiCanBo;
-            db.MANHANKHAUTHUONGTRU = str_manhankhauthuongtru;
+            dbcb.MACANBO = maCanBo;
+            
+            dbcb.TENTAIKHOAN = tenTaiKhoan;
+            dbcb.MATKHAU= matKhau;
+            dbcb.LOAICANBO = loaiCanBo;
+            dbcb.MANHANKHAUTHUONGTRU = str_manhankhauthuongtru;
         }
 
         //public CanBoDTO(DataRow dt)
@@ -38,11 +38,11 @@ namespace DTO
 
         public CanBoDTO(CANBO cb)
         {
-            db = cb;
+            dbcb = cb;
         }
         public CanBoDTO(CanBoDTO a)
         {
-            db = a.db;
+            dbcb = a.dbcb;
         }
 
     }

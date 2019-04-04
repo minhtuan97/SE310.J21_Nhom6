@@ -41,7 +41,7 @@ namespace BUS
         {
             return objnhankhau.TimKiem(query);
         }
-        public List<NhanKhau> TimKiemTheoCuTru(string madinhdanh)
+        public DataSet TimKiemTheoCuTru(string madinhdanh)
         {
             return objnhankhau.TimKiemTheoCuTru(madinhdanh);
         }
