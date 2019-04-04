@@ -20,7 +20,7 @@ namespace DAO
         }
         public static DataSet getData(string query)
         {
-            
+            throw new NotImplementedException();
 
             //MySqlDataAdapter mDataAdapter = new MySqlDataAdapter(query, connection);
             //DataSet Ds = new DataSet();
@@ -42,11 +42,11 @@ namespace DAO
             //    closeConnection();
             //}
         }
-        public EnvironmentVariableTarget  gettable()
+        public static List<String> getTableName() //EnvironmentVariableTarget
         {
             quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
-            var listaTablas = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
-            return listaTablas;
+            var listTables = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
+            return listTables;
         }
 
 

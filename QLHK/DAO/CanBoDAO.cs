@@ -26,8 +26,8 @@ namespace DAO
 
         public override bool insert(CanBoDTO data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
+            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            //qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
             qlhk.CANBOs.InsertOnSubmit(data.db);
             try
             {

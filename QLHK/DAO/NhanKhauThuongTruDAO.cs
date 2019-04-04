@@ -37,7 +37,7 @@ namespace DAO
         }
         public override bool insert_table(NhanKhauThuongTruDTO data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
 
             try
@@ -54,7 +54,7 @@ namespace DAO
         }
         public override bool insert(NhanKhauThuongTruDTO data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
 
             try
