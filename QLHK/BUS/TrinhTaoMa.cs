@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using MySql.Data.MySqlClient;
 using DTO;
 using DAO;
 
@@ -12,63 +11,63 @@ namespace BUS
 {
     public static class TrinhTaoMa
     {
-        private static MySqlConnection conn = DBConnection<object>.getConnection();
+        public static quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
         #region các hàm lấy mã cuối cùng
         public static string getLastID_MaDinhDanh()
         {
             string sql = "SELECT madinhdanh FROM nhankhau ORDER BY madinhdanh DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<NHANKHAU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal)?"000000000000":lastVal;
         }
         public static string getLastID_SoSoHoKhau()
         {
             string sql = "SELECT sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<SOHOKHAU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
         public static string getLastID_MaNhanKhauThuongTru()
         {
             string sql = "SELECT manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "TH0000000" : lastVal;
         }
         public static string getLastID_SoSoTamTru()
         {
             string sql = "SELECT sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<SOTAMTRU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
         public static string getLastID_MaNhanKhauTamTru()
         {
             string sql = "SELECT manhankhautamtru FROM nhankhautamtru where manhankhautamtru LIKE 'TT%' ORDER BY manhankhautamtru DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<NHANKHAUTAMTRU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "TT0000000" : lastVal;
         }
 
         public static string getLastID_MaTieuSu()
         {
             string sql = "SELECT matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<TIEUSU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "TS0000000" : lastVal;
         }
 
         public static string getLastID_MaTienAnTienSu()
         {
             string sql = "SELECT matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<TIENANTIENSU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "TA0000000" : lastVal;
         }
         public static string getLastID_CanBo()
         {
             string sql = "SELECT macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<CANBO>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "CB0000000" : lastVal;
         }
         public static string getLastID_NhanKhauTamVang()
         {
             string sql = "SELECT manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC LIMIT 1;";
-            string lastVal = GetLastValueTable(sql);
+            string lastVal = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "TV0000000" : lastVal;
         }
 
@@ -78,29 +77,6 @@ namespace BUS
             string tt = getLastID_SoSoTamTru();
 
             return Int32.Parse(hk.Substring(2)) > Int32.Parse(tt.Substring(2)) ? hk : tt;
-        }
-
-        public static string GetLastValueTable(string sql)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                adapter.Fill(dt);
-                string value = "";
-                value = dt.Rows[0][0].ToString();
-                return value;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return "";
         }
 
         #endregion
@@ -128,31 +104,9 @@ namespace BUS
             string sausocuoi = null;
             string kq = null;
 
-            MySqlDataAdapter sqlda;
-            DataSet dataset = null;
-            MySqlCommandBuilder cmdbuilder;
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc", conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                sqlda.InsertCommand = cmdbuilder.GetInsertCommand();
-                sqlda.UpdateCommand = cmdbuilder.GetUpdateCommand();
-                sqlda.DeleteCommand = cmdbuilder.GetDeleteCommand();
-                dataset = new DataSet();
-                sqlda.Fill(dataset, "bangmadinhdanh");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
+            string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+            string madinhdanh = qlhk.ExecuteQuery<NHANKHAU>(sql).ToString();
+            
             int i_namsinh = Int16.Parse(namsinh);
             if (i_namsinh > 1900 & i_namsinh <= 1999)
             {
@@ -215,7 +169,7 @@ namespace BUS
             string str_madinhdanh;
             try
             {
-                str_madinhdanh = dataset.Tables["bangmadinhdanh"].Rows[0][0].ToString();
+                str_madinhdanh = madinhdanh;
             }
             catch (Exception e)
             {
