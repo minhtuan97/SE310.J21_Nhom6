@@ -13,7 +13,7 @@ namespace BUS
     {
         QuanHuyenDAO obj = new QuanHuyenDAO();
 
-        public override DataSet GetAll()
+        public override List<QuanHuyenDTO> GetAll()
         {
             return obj.getAll();
         }
@@ -27,16 +27,16 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(QuanHuyenDTO data, int r)
+        public override bool Update(QuanHuyenDTO data)
         {
-            return obj.update(data, r);
+            return obj.update(data);
         }
         public override bool Add_Table(QuanHuyenDTO data)
         {
             return obj.insert_table(data);
         }
 
-        public DataSet TimKiem(string query)
+        public List<QuanHuyenDTO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

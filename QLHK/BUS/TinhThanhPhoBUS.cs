@@ -13,7 +13,7 @@ namespace BUS
     {
         TinhThanhPhoDAO obj = new TinhThanhPhoDAO();
 
-        public override DataSet GetAll()
+        public override List<TinhThanhPhoDTO> GetAll()
         {
             return obj.getAll();
         }
@@ -27,9 +27,9 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(TinhThanhPhoDTO data, int r)
+        public override bool Update(TinhThanhPhoDTO data)
         {
-            return obj.update(data, r);
+            return obj.update(data);
         }
         public override bool Add_Table(TinhThanhPhoDTO data)
         {
@@ -37,7 +37,7 @@ namespace BUS
 
         }
 
-        public DataSet TimKiem(string query)
+        public List<TinhThanhPhoDTO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

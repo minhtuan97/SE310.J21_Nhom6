@@ -15,7 +15,7 @@ namespace BUS
     {
         XaPhuongThiTranDAO obj = new XaPhuongThiTranDAO();
 
-        public override DataSet GetAll()
+        public override List<XaPhuongThiTranDTO> GetAll()
         {
             return obj.getAll();
         }
@@ -32,12 +32,12 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(XaPhuongThiTranDTO data, int r)
+        public override bool Update(XaPhuongThiTranDTO data)
         {
-            return obj.update(data, r);
+            return obj.update(data);
         }
 
-        public DataSet TimKiem(string query)
+        public List<XaPhuongThiTranDTO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

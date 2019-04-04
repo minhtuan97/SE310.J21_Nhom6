@@ -15,7 +15,7 @@ namespace DAO
         public override List<HocSinhSinhVienDTO> getAll()
         {
             var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
-                     select new HOCSINHSINHVIEN
+                     select new HocSinhSinhVienDTO
                      {
                          dbhssv = hocsinhsinhvien,
                      };
@@ -24,12 +24,12 @@ namespace DAO
         }
 
         // join 2 bảng
-        public DataSet getAllJoinNhanKhau()
+        public List<HocSinhSinhVienDTO> getAllJoinNhanKhau()
         {
             var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
                      join nhankhau in qlhk.NHANKHAUs
                      on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-                     select new HOCSINHSINHVIEN
+                     select new HocSinhSinhVienDTO
                      {
                          dbhssv = hocsinhsinhvien,
                      };
@@ -137,78 +137,55 @@ namespace DAO
         }
 
         // join 2 bảng ???
-        public DataSet TimKiemJoinNhanKhau(string query)
+        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
         {
             var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
                      join nhankhau in qlhk.NHANKHAUs
                      on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-                     select new HOCSINHSINHVIEN
+                     select new HocSinhSinhVienDTO
                      {
                          dbhssv = hocsinhsinhvien,
                      };
             List<HocSinhSinhVienDTO> x = kq.ToList();
             return x;
-
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien, nhankhau " +
-                    "where nhankhau.madinhdanh=hocsinhsinhvien.madinhdanh " + query, conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                dataset = new DataSet();
-                sqlda.Fill(dataset);
-                return dataset;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
         }
-
         // join 2 bảng ???
         public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhauCuTru(string query)
         {
-            var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
-                     join nhankhau in qlhk.NHANKHAUs
-                     on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-                     select new HOCSINHSINHVIEN
-                     {
-                         dbhssv = hocsinhsinhvien,
-                     };
-            List<HocSinhSinhVienDTO> x = kq.ToList();
-            return x;
-
-            try
-            {
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-                sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien, nhankhau " +
-                    "where nhankhau.madinhdanh=hocsinhsinhvien.madinhdanh " + query, conn);
-                cmdbuilder = new MySqlCommandBuilder(sqlda);
-                dataset = new DataSet();
-                sqlda.Fill(dataset);
-                return dataset;
+                return null;
+                //    var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
+                //             join nhankhau in qlhk.NHANKHAUs
+                //             on hocsinhsinhvien.MADINHDANH equals query
+                //             select new HocSinhSinhVienDTO
+                //             {
+                //                 dbhssv = hocsinhsinhvien,
+                //             };
+                //    List<HocSinhSinhVienDTO> x = kq.ToList();
+                //    return x;
+                //        return null;
+                //    try
+                //    {
+                //        if (conn.State != ConnectionState.Open)
+                //        {
+                //            conn.Open();
+                //        }
+                //        sqlda = new MySqlDataAdapter("SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien, nhankhau " +
+                //            "where nhankhau.madinhdanh=hocsinhsinhvien.madinhdanh " + query, conn);
+                //        cmdbuilder = new MySqlCommandBuilder(sqlda);
+                //        dataset = new DataSet();
+                //        sqlda.Fill(dataset);
+                //        return dataset;
+                //    }
+                //    catch (Exception e)
+                //    {
+                //        Console.WriteLine(e.Message);
+                //    }
+                //    finally
+                //    {
+                //        conn.Close();
+                //    }
+                //    return null;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return null;
-        }
 
         public override bool insert(HocSinhSinhVienDTO hssv)
         {
