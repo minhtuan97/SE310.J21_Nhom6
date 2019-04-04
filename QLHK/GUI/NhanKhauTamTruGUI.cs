@@ -651,11 +651,11 @@ namespace GUI
 
             TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan,madinhdanh,banan,toidanh,hinhphat,ngayphat);
 
-            txt_MaTienAn.Text = tienan.MaTienAnTienSu;
-            txt_BanAn.Text = tienan.BanAn;
-            txtToiDanh.Text = tienan.ToiDanh;
-            txt_HinhPhat.Text = tienan.HinhPhat;
-            dtNgayPhat.Value = tienan.NgayPhat; 
+            txt_MaTienAn.Text = tienan.db.MATIENANTIENSU;
+            txt_BanAn.Text = tienan.db.BANAN;
+            txtToiDanh.Text = tienan.db.TOIDANH;
+            txt_HinhPhat.Text = tienan.db.HINHPHAT;
+            dtNgayPhat.Value = tienan.db.NGAYPHAT; 
 
 
         }
@@ -739,7 +739,7 @@ namespace GUI
                 TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh, toidanh, hinhphat, banan, ngayphat);
 
                 TienAnTienSuBUS tienanbus = new TienAnTienSuBUS();
-                if (tienanbus.Update(tienan, 0))
+                if (tienanbus.Update(tienan))
                 {
                     MessageBox.Show("Sửa tiền án tiền sự " + matienan + " cho nhân khẩu " + txt_HoTen.Text.ToString() + " thành công!");
                     ResetInputTienAn();
