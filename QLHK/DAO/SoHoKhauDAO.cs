@@ -23,10 +23,21 @@ namespace DAO
                          TenChuHo = qlhk.NHANKHAUs.Where(a => a.MADINHDANH == (
                            qlhk.NHANKHAUTHUONGTRUs.Where(b => b.MANHANKHAUTHUONGTRU == shkt.MACHUHO)
                            .Select(b1 => b1.MADINHDANH).SingleOrDefault()))
-                           .Select(a1 => a1.HOTEN).SingleOrDefault(),
-                         NhanKhau = qlhk.NHANKHAUTHUONGTRUs.Where(nk => nk.SOSOHOKHAU == shkt.SOSOHOKHAU).ToList<NHANKHAUTHUONGTRU>(),
+                           .Select(a1 => a1.HOTEN).SingleOrDefault()
+                         //NhanKhau = qlhk.NHANKHAUTHUONGTRUs.Where(nk => nk.SOSOHOKHAU == shkt.SOSOHOKHAU).ToList(),
 
                      };
+
+            //Lay thong tin nhan khau trong so ho khau
+            foreach (SoHoKhauDTO so in kq)
+            {
+                so.NhanKhau = (from nktt in qlhk.NHANKHAUTHUONGTRUs
+                              where nktt.SOSOHOKHAU == so.db.SOSOHOKHAU
+                              select new NhanKhauThuongTruDTO
+                              {
+                                  dbnktt = nktt
+                              }).ToList();
+            }
             List<SoHoKhauDTO> x = kq.ToList();
             return x;
         }
@@ -50,9 +61,9 @@ namespace DAO
         {
             qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
 
-            foreach (NHANKHAUTHUONGTRU item in data.NhanKhau)
+            foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
             {
-                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(item);
+                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(item.dbnktt);
             }
             try
             {

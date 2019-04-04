@@ -11,14 +11,14 @@ namespace DTO
     {
         public SOHOKHAU db;
         public string TenChuHo;
-        public List<NHANKHAUTHUONGTRU> NhanKhau { get; set; }
+        public List<NhanKhauThuongTruDTO> NhanKhau { get; set; }
 
         public SoHoKhauDTO() {
-            NhanKhau = new List<NHANKHAUTHUONGTRU>();
+            NhanKhau = new List<NhanKhauThuongTruDTO>();
         }
 
         public SoHoKhauDTO(string soSoHoKhau, string maChuHoThuongTru, string diaChi, 
-            DateTime ngayCap, string soDangKy, List<NHANKHAUTHUONGTRU> nhanKhau)
+            DateTime ngayCap, string soDangKy, List<NhanKhauThuongTruDTO> nhanKhau)
         {
             db.SOSOHOKHAU = soSoHoKhau;
             db.MACHUHO = maChuHoThuongTru;
@@ -35,7 +35,7 @@ namespace DTO
             db.DIACHI = diaChi;
             db.NGAYCAP = ngayCap;
             db.SODANGKY = soDangKy;
-            NhanKhau = new List<NHANKHAUTHUONGTRU>();
+            NhanKhau = new List<NhanKhauThuongTruDTO>();
         }
 
         public SoHoKhauDTO(SOHOKHAU shk, String tenchuho)

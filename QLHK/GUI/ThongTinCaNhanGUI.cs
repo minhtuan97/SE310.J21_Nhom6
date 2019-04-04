@@ -38,29 +38,29 @@ namespace GUI
             lblTaiKhoan.Text = tentaikhoan;
              
             NhanKhauThuongTruDTO nktt = canboBus.getTTNhanKhauThuongTru(manhankhauthuongtru)[0];
-            tbhoten.Text = nktt.HoTen;
-            tbdantoc.Text = nktt.DanToc;
-            tbNgheNghiep.Text = nktt.NgheNghiep;
-            dtpNgaySinh.Value = nktt.NgaySinh;
-            tbmadinhdanh.Text = nktt.MaDinhDanh;
-            tbhochieu.Text = nktt.HoChieu;
-            tbnguyenquan.Text = nktt.NguyenQuan;
-            tbtongiao.Text = nktt.TonGiao;
-            tbquoctich.Text = nktt.QuocTich;
-            tbsodienthoai.Text = nktt.SDT;
-            tbMaNKTT.Text = nktt.MaNhanKhauThuongTru;
-            tbSoSHK.Text = nktt.SoSoHoKhau;
-            tbDCThuongTru.Text = nktt.NoiThuongTru;
-            tbDCHienTai.Text = nktt.DiaChiHienNay;
-            tbTrinhDoHocVan.Text = nktt.TrinhDoHocVan;
-            tbTrinhDoCM.Text = nktt.TrinhDoChuyenMon;
-            tbBietTiengDanToc.Text = nktt.BietTiengDanToc;
-            tbTrinhDoNN.Text = nktt.TrinhDoNgoaiNgu;
-            tbQHVoiCH.Text = nktt.QuanHeVoiChuHo;
-            txt_NoiSinh.Text = nktt.NoiSinh;
+            tbhoten.Text = nktt.db.HOTEN;
+            tbdantoc.Text = nktt.db.DANTOC;
+            tbNgheNghiep.Text = nktt.db.NGHENGHIEP;
+            dtpNgaySinh.Value = nktt.db.NGAYSINH;
+            tbmadinhdanh.Text = nktt.db.MADINHDANH;
+            tbhochieu.Text = nktt.db.HOCHIEU;
+            tbnguyenquan.Text = nktt.db.NGUYENQUAN;
+            tbtongiao.Text = nktt.db.TONGIAO;
+            tbquoctich.Text = nktt.db.QUOCTICH;
+            tbsodienthoai.Text = nktt.db.SDT;
+            tbMaNKTT.Text = nktt.dbnktt.MANHANKHAUTHUONGTRU;
+            tbSoSHK.Text = nktt.dbnktt.SOSOHOKHAU;
+            tbDCThuongTru.Text = nktt.db.NOITHUONGTRU;
+            tbDCHienTai.Text = nktt.db.DIACHIHIENNAY;
+            tbTrinhDoHocVan.Text = nktt.db.TRINHDOHOCVAN;
+            tbTrinhDoCM.Text = nktt.db.TRINHDOCHUYENMON;
+            tbBietTiengDanToc.Text = nktt.db.BIETTIENGDANTOC;
+            tbTrinhDoNN.Text = nktt.db.TRINHDONGOAINGU;
+            tbQHVoiCH.Text = nktt.dbnktt.QUANHEVOICHUHO;
+            txt_NoiSinh.Text = nktt.db.NOISINH;
             
 
-            string gt = nktt.GioiTinh;
+            string gt = nktt.db.GIOITINH;
             if (gt == "nu") rdNu.Checked = true;
             else rdNam.Checked = true;
 

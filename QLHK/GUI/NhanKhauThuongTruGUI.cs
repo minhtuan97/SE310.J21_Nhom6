@@ -44,10 +44,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiCap.DataSource = ttp.GetAll();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiSinh.DataSource = ttp.GetAll();
             cbbNoiCap.SelectedValue = cbbNoiSinh.SelectedValue = "74";
         }
 
@@ -69,7 +69,7 @@ namespace GUI
             {
                 dGVTieuSu.DataSource = null;
                 dGVTieuSu.Rows.Clear();
-                dGVTieuSu.DataSource = tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Tables["tieusu"];
+                dGVTieuSu.DataSource = tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
                 for (int i = 0; i < dGVTieuSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -89,7 +89,7 @@ namespace GUI
             {
                 dGVTienAnTienSu.DataSource = null;
                 dGVTienAnTienSu.Rows.Clear();
-                dGVTienAnTienSu.DataSource = tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Tables["tienantiensu"];
+                dGVTienAnTienSu.DataSource = tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
                 for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -103,32 +103,32 @@ namespace GUI
         }
         private void fillData()
         {
-            tbhoten.Text = nkttDTO.HoTen;
-            tbTenKhac.Text = nkttDTO.TenKhac;
-            rdNam.Checked = (nkttDTO.GioiTinh == "nam"); rdNu.Checked = (nkttDTO.GioiTinh == "nu");
-            dtpNgaySinh.Value = nkttDTO.NgaySinh;
-            tbdantoc.Text = nkttDTO.DanToc;
-            tbNgheNghiep.Text = nkttDTO.NgheNghiep;
-            tbmadinhdanh.Text = nkttDTO.MaDinhDanh;
-            tbhochieu.Text = nkttDTO.HoChieu;
+            tbhoten.Text = nkttDTO.db.HOTEN;
+            tbTenKhac.Text = nkttDTO.db.TENKHAC;
+            rdNam.Checked = (nkttDTO.db.GIOITINH == "nam"); rdNu.Checked = (nkttDTO.db.GIOITINH == "nu");
+            dtpNgaySinh.Value = nkttDTO.db.NGAYSINH;
+            tbdantoc.Text = nkttDTO.db.DANTOC;
+            tbNgheNghiep.Text = nkttDTO.db.NGHENGHIEP;
+            tbmadinhdanh.Text = nkttDTO.db.MADINHDANH;
+            tbhochieu.Text = nkttDTO.db.HOCHIEU;
             dtpNgayCap.Value = DateTime.Now;
             cbbNoiCap.SelectedValue = "74";
-            tbnguyenquan.Text = nkttDTO.NguyenQuan;
-            cbbNoiSinh.Text = nkttDTO.NoiSinh;
-            tbquoctich.Text = nkttDTO.QuocTich;
-            tbtongiao.Text = nkttDTO.TonGiao;
-            tbsodienthoai.Text = nkttDTO.SDT;
+            tbnguyenquan.Text = nkttDTO.db.NGUYENQUAN;
+            cbbNoiSinh.Text = nkttDTO.db.NOISINH;
+            tbquoctich.Text = nkttDTO.db.QUOCTICH;
+            tbtongiao.Text = nkttDTO.db.TONGIAO;
+            tbsodienthoai.Text = nkttDTO.db.SDT;
 
-            tbMaNKTT.Text = nkttDTO.MaNhanKhauThuongTru;
-            tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.SoSoHoKhau)?tbSoSHK.Text:nkttDTO.SoSoHoKhau;
-            tbDCThuongTru.Text = nkttDTO.DiaChiThuongTru;
-            tbDCHienTai.Text = nkttDTO.DiaChiHienNay;
-            tbTrinhDoHocVan.Text = nkttDTO.TrinhDoHocVan;
-            tbTrinhDoCM.Text = nkttDTO.TrinhDoChuyenMon;
-            tbBietTiengDanToc.Text = nkttDTO.BietTiengDanToc;
-            tbTrinhDoNN.Text = nkttDTO.TrinhDoNgoaiNgu;
+            tbMaNKTT.Text = nkttDTO.dbnktt.MANHANKHAUTHUONGTRU;
+            tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.SOSOHOKHAU)?tbSoSHK.Text:nkttDTO.dbnktt.SOSOHOKHAU;
+            tbDCThuongTru.Text = nkttDTO.dbnktt.DIACHITHUONGTRU;
+            tbDCHienTai.Text = nkttDTO.db.DIACHIHIENNAY;
+            tbTrinhDoHocVan.Text = nkttDTO.db.TRINHDOHOCVAN;
+            tbTrinhDoCM.Text = nkttDTO.db.TRINHDOCHUYENMON;
+            tbBietTiengDanToc.Text = nkttDTO.db.BIETTIENGDANTOC;
+            tbTrinhDoNN.Text = nkttDTO.db.TRINHDONGOAINGU;
             tbNoiLamViec.Text = "Tỉnh Bình Dương";
-            tbQHVoiCH.Text = nkttDTO.QuanHeVoiChuHo;
+            tbQHVoiCH.Text = nkttDTO.dbnktt.QUANHEVOICHUHO;
 
             LoadtieuSu();
             Loadtienantiensu();
@@ -187,10 +187,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiCap.DataSource = ttp.GetAll();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiSinh.DataSource = ttp.GetAll();
         }
         public NhanKhauThuongTruGUI(string sosohokhau, string diachithuongtru)
         {
@@ -212,10 +212,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiCap.DataSource = ttp.GetAll();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiSinh.DataSource = ttp.GetAll();
         }
 
         public NhanKhauThuongTruGUI(string madinhdanh, int i, string tenChuHo = "")
@@ -234,15 +234,15 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiCap.DataSource = ttp.GetAll();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll().Tables[0];
+            cbbNoiSinh.DataSource = ttp.GetAll();
 
-            DataTable kq = nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Tables[0];
-            if (kq.Rows.Count > 0)
+            List<NhanKhauThuongTruDTO> kq = nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'");
+            if (kq.Count > 0)
             {
-                DataRow dt = kq.Rows[0];
+                NhanKhauThuongTruDTO dt = kq[0];
                 nkttDTO = new NhanKhauThuongTruDTO(dt);
 
                 fillData();
@@ -284,7 +284,7 @@ namespace GUI
                 rdNam.Checked ? "nam" : "nu", cbbNoiSinh.Text, tbnguyenquan.Text, tbdantoc.Text, tbtongiao.Text, tbquoctich.Text, tbhochieu.Text, tbDCThuongTru.Text,
                 tbDCHienTai.Text, tbsodienthoai.Text, tbTrinhDoHocVan.Text, tbTrinhDoCM.Text, tbBietTiengDanToc.Text, tbTrinhDoNN.Text, tbNgheNghiep.Text);
 
-            if (nktt.Update(nkttDTO, -1))
+            if (nktt.Update(nkttDTO))
             {
                 MessageBox.Show(this, "Thành công!");
             }
@@ -357,7 +357,7 @@ namespace GUI
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            if(nkttDTO != null) nktt.XoaNKTT(nkttDTO.MaNhanKhauThuongTru);
+            if(nkttDTO != null) nktt.XoaNKTT(nkttDTO.dbnktt.MANHANKHAUTHUONGTRU);
             nkttDTO = null;
             this.Close();
         }
@@ -460,7 +460,7 @@ namespace GUI
                         string manghenghiep = dGVTieuSu.Rows[row].Cells["nghenghiep"].Value.ToString();
                         string noilamviec = dGVTieuSu.Rows[row].Cells["noilamviec"].Value.ToString();
                         tieusudto = new TieuSuDTO(matieusu, madinhdanh, date_tgbd, date_tgkt, choo, manghenghiep, noilamviec);
-                        tieuSu.Update(tieusudto, row);
+                        tieuSu.Update(tieusudto);
                         LoadtieuSu();
                     }
                 }
@@ -516,7 +516,7 @@ namespace GUI
                         DateTime date_ngayphat = DateTime.Parse(ngayphat);
                         //string ghichu = dGVTienAnTienSu.Rows[row].Cells["ghichu"].Value.ToString();
                         tienanDTO = new TienAnTienSuDTO(matienantiensu, madinhdanh, banan, toidanh, hinhphat, date_ngayphat);
-                        tienAn.Update(tienanDTO, row);
+                        tienAn.Update(tienanDTO);
                         Loadtienantiensu(); 
                     }
                 }
@@ -551,10 +551,10 @@ namespace GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            DataTable kq = nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Tables[0];
-            if (kq.Rows.Count > 0)
+            List<NhanKhauThuongTruDTO> kq = nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'");
+            if (kq.Count > 0)
             {
-                DataRow dt = kq.Rows[0];
+                NhanKhauThuongTruDTO dt = kq[0];
                 nkttDTO = new NhanKhauThuongTruDTO(dt);
 
                 fillData();
@@ -568,10 +568,10 @@ namespace GUI
         
         private void btnTimKiemTT_Click(object sender, EventArgs e)
         {
-            DataTable kq = nktt.TimKiemJoinNhanKhau("manhankhauthuongtru='" + tbMaNKTT.Text + "'").Tables[0];
-            if (kq.Rows.Count > 0)
+            List<NhanKhauThuongTruDTO> kq = nktt.TimKiemJoinNhanKhau("manhankhauthuongtru='" + tbMaNKTT.Text + "'");
+            if (kq.Count > 0)
             {
-                DataRow dt = kq.Rows[0];
+                NhanKhauThuongTruDTO dt = kq[0];
                 nkttDTO = new NhanKhauThuongTruDTO(dt);
 
                 fillData();

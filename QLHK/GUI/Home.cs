@@ -25,7 +25,7 @@ namespace GUI
             InitializeComponent();
             this.ForeColor = Color.Black;
             this.cb = cb;
-            if (cb.db.LOAICANBO == "1") ribbonPageGroup10.Visible = false;
+            if (cb.dbcb.LOAICANBO == "1") ribbonPageGroup10.Visible = false;
         }
         private void Home_Load(object sender, EventArgs e)
         {
@@ -256,7 +256,7 @@ namespace GUI
             {
                 tabControl1.TabPages.Remove(page);
             }
-            ThongTinCaNhanGUI thongtin = new ThongTinCaNhanGUI(cb.db.TENTAIKHOAN);
+            ThongTinCaNhanGUI thongtin = new ThongTinCaNhanGUI(cb.dbcb.TENTAIKHOAN);
             int index = hamkiemtrtontai(tabControl1, thongtin);
             if (index >= 0)
             {

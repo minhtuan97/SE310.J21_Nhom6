@@ -32,7 +32,7 @@ namespace GUI
 
             cbbTinhThanh.DisplayMember = "ten";
             cbbTinhThanh.ValueMember = "matp";
-            cbbTinhThanh.DataSource = ttp.GetAll().Tables[0];
+            cbbTinhThanh.DataSource = ttp.GetAll();
             cbbTinhThanh.SelectedValue = "74";
             cbbQuanHuyen.SelectedValue = "724";
 
@@ -43,14 +43,14 @@ namespace GUI
         {
             cbbQuanHuyen.DisplayMember = "ten";
             cbbQuanHuyen.ValueMember = "maqh";
-            cbbQuanHuyen.DataSource = qh.TimKiem("matp='"+cbbTinhThanh.SelectedValue.ToString()+"'").Tables[0];
+            cbbQuanHuyen.DataSource = qh.TimKiem("matp='"+cbbTinhThanh.SelectedValue.ToString()+"'");
         }
 
         private void cbbQuanHuyen_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbbXaPhuong.DisplayMember = "ten";
             cbbXaPhuong.ValueMember = "maxp";
-            cbbXaPhuong.DataSource = xp.TimKiem("maqh='" + cbbQuanHuyen.SelectedValue.ToString() + "'").Tables[0];
+            cbbXaPhuong.DataSource = xp.TimKiem("maqh='" + cbbQuanHuyen.SelectedValue.ToString() + "'");
         }
 
         private void btnOk_Click(object sender, EventArgs e)
