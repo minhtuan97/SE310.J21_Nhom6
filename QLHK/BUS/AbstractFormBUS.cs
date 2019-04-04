@@ -11,6 +11,7 @@ namespace BUS
 {
     public abstract class AbstractFormBUS<T>
     {
+        
         public abstract List<T> GetAll();
         //public abstract DataSet GetAll();
         public abstract bool Add(T data);

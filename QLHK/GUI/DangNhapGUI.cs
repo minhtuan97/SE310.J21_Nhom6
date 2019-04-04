@@ -22,10 +22,17 @@ namespace GUI
 
         private void DangNhap()
         {
-            DataRow dt = DangNhapBUS.TimKiem(tbTaiKhoan.Text, tbMatKhau.Text);
+
+
+
+            List<CanBoDTO> dt = DangNhapBUS.TimKiem(tbTaiKhoan.Text, tbMatKhau.Text);
+            
             if (dt != null)
             {
-                cb = new CanBoDTO(dt);
+                foreach (CanBoDTO kq in dt)
+                {
+                    cb = new CanBoDTO(kq);
+                }
                 Home home = new Home(cb);
 
                 this.Hide();

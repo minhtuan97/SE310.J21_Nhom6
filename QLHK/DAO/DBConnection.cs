@@ -18,6 +18,38 @@ namespace DAO
         {
             qlhk = new quanlyhokhauDataContext();
         }
+        public static DataSet getData(string query)
+        {
+            
+
+            //MySqlDataAdapter mDataAdapter = new MySqlDataAdapter(query, connection);
+            //DataSet Ds = new DataSet();
+
+            //try
+            //{
+            //    openConnection();
+
+            //    mDataAdapter.Fill(Ds);
+            //    return Ds;
+            //}
+            //catch (Exception e)
+            //{
+            //    errorString += e.Message + "\n\n";
+            //    return null;
+            //}
+            //finally
+            //{
+            //    closeConnection();
+            //}
+        }
+        public EnvironmentVariableTarget  gettable()
+        {
+            quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
+            var listaTablas = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
+            return listaTablas;
+        }
+
+
         public abstract List<T> getAll();
         public abstract bool insert(T data);//can bo thao tac
         public abstract bool insert_table(T data);//admin thao tac

@@ -40,6 +40,10 @@ namespace DTO
         {
             db = cb;
         }
+        public CanBoDTO(CanBoDTO a)
+        {
+            db = a.db;
+        }
 
     }
 }

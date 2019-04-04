@@ -64,7 +64,7 @@ namespace GUI
             nhankhautamvangbus = new NhanKhauTamVangBUS();
 
 
-            DataSet tables = DBConnection<int>.getData("show tables from qlhk");
+            DataSet tables = DBConnection<int>.get();
             try
             {
                 foreach (DataRow item in tables.Tables[0].Rows)

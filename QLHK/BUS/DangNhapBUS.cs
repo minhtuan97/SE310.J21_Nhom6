@@ -14,14 +14,13 @@ namespace BUS
         static CanBoBUS cbBUS = new CanBoBUS();
         static CanBoDTO cb;
         static bool isSuccess = false;
-        public static DataRow TimKiem(string taikhoan, string matkhau)
+        public static List<CanBoDTO> TimKiem(string taikhoan, string matkhau)
         {
-            DataTable tb = cbBUS.TimKiem("tentaikhoan='" + taikhoan + "' AND matkhau='" + matkhau + "'").Tables[0];
-            if (tb.Rows.Count > 0)
+            List<CanBoDTO> tb = cbBUS.TimKiem("tentaikhoan='" + taikhoan + "' AND matkhau='" + matkhau + "'");
+            if(tb.Count>0)
             {
-                DataRow dt = tb.Rows[0];
                 isSuccess = true;
-                return dt;
+                return tb;
             }
 
             isSuccess= false;
