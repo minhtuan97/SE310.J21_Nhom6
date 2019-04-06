@@ -30,7 +30,7 @@ namespace GUI
             tienAn = new TienAnTienSuBUS();
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh=''").Tables["tienantiensu"];
+            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh=''");
 
         }
         private void clearData()
@@ -86,21 +86,24 @@ namespace GUI
             //textBox_vipham.Clear();
 
             //DataTable source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh LIKE '%" + textBox_madinhdanh.Text + "%'").Tables[0];
-            DataTable source = hssvbus.TimKiemJoinNhanKhau(" AND mahssv='" + textBox_mssv.Text + "'").Tables[0];
-            if (source.Rows.Count > 0)
+            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" AND mahssv='" + textBox_mssv.Text + "'");
+            if (source.Count > 0)
             {
-                DataRow data = source.Rows[0];
-                if (data.ItemArray.Length > 0)
+                List<HocSinhSinhVienDTO> data = source;
+                if (data.Count > 0)
                 {
-                    textBox_madinhdanh.Text = data["madinhdanh"].ToString();
-                    textBox_truong.Text = data["truong"].ToString();
-                    textBox_diachithuongtru.Text = data["diachithuongtru"].ToString();
-                    date_batdau.Text = data["thoigianbatdautamtruthuongtru"].ToString();
-                    date_ketthuc.Text = data["thoigianketthuctamtruthuongtru"].ToString();
+                    foreach (HocSinhSinhVienDTO a in data)
+                    {
+                        textBox_madinhdanh.Text = a.dbhssv.MADINHDANH;
+                        textBox_truong.Text = a.dbhssv.TRUONG;
+                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
+                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+                    }
                 }
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh='" + textBox_madinhdanh.Text + "'").Tables["tienantiensu"];
+                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh='" + textBox_madinhdanh.Text + "'");
             }
             else
             {
@@ -190,7 +193,7 @@ namespace GUI
             DateTime tgkt = date_ketthuc.Value.Date;
             string vipham = textBox_vipham.Text.ToString();
             hssvdto = new HocSinhSinhVienDTO(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
-            if (hssvbus.Update(hssvdto,-1))
+            if (hssvbus.Update(hssvdto))
             {
                 MessageBox.Show("Sửa thành công");
                 
@@ -205,7 +208,7 @@ namespace GUI
         private void textBox_madinhdanh_TextChanged(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh LIKE'%" + textBox_madinhdanh.Text + "%'").Tables["tienantiensu"];
+            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh LIKE'%" + textBox_madinhdanh.Text + "%'");
         }
         private void textBox_diachithuongtru_Enter(object sender, EventArgs e)
         {
@@ -279,21 +282,24 @@ namespace GUI
 
         private void btnTimKiem2_Click(object sender, EventArgs e)
         {
-            DataTable source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'").Tables[0];
-            if (source.Rows.Count > 0)
+            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
+            if (source.Count > 0)
             {
-                DataRow data = source.Rows[0];
-                if (data.ItemArray.Length > 0)
+                List<HocSinhSinhVienDTO> data = source;
+                if (data.Count > 0)
                 {
-                    textBox_mssv.Text = data["mahssv"].ToString();
-                    textBox_truong.Text = data["truong"].ToString();
-                    textBox_diachithuongtru.Text = data["diachithuongtru"].ToString();
-                    date_batdau.Text = data["thoigianbatdautamtruthuongtru"].ToString();
-                    date_ketthuc.Text = data["thoigianketthuctamtruthuongtru"].ToString();
+                    foreach (HocSinhSinhVienDTO a in data)
+                    {
+                        textBox_mssv.Text = a.dbhssv.MAHSSV;
+                        textBox_truong.Text = a.dbhssv.TRUONG;
+                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
+                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+                    }
                 }
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Tables["tienantiensu"];
+                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
             }
             else
             {

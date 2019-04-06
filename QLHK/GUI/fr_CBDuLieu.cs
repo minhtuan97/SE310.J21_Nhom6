@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using DTO;
 using BUS;
 using DAO;
+using System.Data.Linq.Mapping;
 
 
 namespace GUI
@@ -63,19 +64,13 @@ namespace GUI
             canbobus = new CanBoBUS();
             nhankhautamvangbus = new NhanKhauTamVangBUS();
 
+            quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
+            var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
+            foreach (var r in datamodel.GetTables())
+            {
+                comboBox1.Items.Add(r.ToString());
+            }
 
-            DataSet tables = DBConnection<int>.get();
-            try
-            {
-                foreach (DataRow item in tables.Tables[0].Rows)
-                {
-                    comboBox1.Items.Add(item[0].ToString());
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         private void LoadData()

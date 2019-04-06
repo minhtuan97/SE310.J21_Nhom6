@@ -63,7 +63,7 @@ namespace MyTest
         [Test, Order(2), TestCaseSource("Array_SoHoKhau_Update")]
         public void SuaSoHoKhau(SoHoKhauDTO SoHoKhau)
         {
-            Assert.AreEqual(true, SoHoKhau_BUS.Update(SoHoKhau, 0));
+            Assert.AreEqual(true, SoHoKhau_BUS.Update(SoHoKhau));
         }
 
 
