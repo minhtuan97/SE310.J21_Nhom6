@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLHK" Class="quanlyhokhauDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-T2E7R4C\SQLEXPRESS;Initial Catalog=QLHK;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="QLHKConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-0L5NRCB;Initial Catalog=QLHK;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="QLHKConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CANBO" Member="CANBOs">
     <Type Name="CANBO">
       <Column Name="MACANBO" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
