@@ -18,7 +18,7 @@ namespace GUI
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run(new DangNhapGUI());
+            Application.Run(new HocSinhSinhVienGUI());
         }
     }
 }

@@ -86,7 +86,7 @@ namespace GUI
             //textBox_vipham.Clear();
 
             //DataTable source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh LIKE '%" + textBox_madinhdanh.Text + "%'").Tables[0];
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" AND mahssv='" + textBox_mssv.Text + "'");
+            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
             if (source.Count > 0)
             {
                 List<HocSinhSinhVienDTO> data = source;
@@ -112,6 +112,7 @@ namespace GUI
             }
 
         }
+
 
         private void button_Them_Click(object sender, EventArgs e)
         {

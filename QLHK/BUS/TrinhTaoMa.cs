@@ -22,7 +22,7 @@ namespace BUS
         }
         public static string getLastID_SoSoHoKhau()
         {
-            string sql = "SELECT sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC LIMIT 1;";
+            string sql = "SELECT Top 1 sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC";
             string lastVal = qlhk.ExecuteQuery<SOHOKHAU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
@@ -34,7 +34,7 @@ namespace BUS
         }
         public static string getLastID_SoSoTamTru()
         {
-            string sql = "SELECT sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC LIMIT 1;";
+            string sql = "SELECT top 1 sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC;";
             string lastVal = qlhk.ExecuteQuery<SOTAMTRU>(sql).ToString();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
