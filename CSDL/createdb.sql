@@ -8,17 +8,18 @@
 /*==============================================================*/
 
 create database QLHK;
+go
 use QLHK;
 
 create table HOCSINHSINHVIEN
 (
     MAHSSV                              char(9)         not null,
     MADINHDANH                          char(12)        not null,
-    TRUONG                              text            not null,
-    DIACHITHUONGTRU                     text            not null,
-    THOIGIANBATDAUTAMTRUTHUONGTRU       date            not null,
-    THOIGIANKETTHUCTAMTRUTHUONGTRU      date            not null,
-    VIPHAM                              text                    ,
+    TRUONG                              nvarchar(50)    not null,
+    DIACHITHUONGTRU                     nvarchar(50)    not null,
+    THOIGIANBATDAUTAMTRUTHUONGTRU       smalldatetime   not null,
+    THOIGIANKETTHUCTAMTRUTHUONGTRU      smalldatetime   not null,
+    VIPHAM                              nvarchar(100)                    ,
 
     primary key (MAHSSV)
 );
@@ -29,24 +30,24 @@ create table HOCSINHSINHVIEN
 create table NHANKHAU
 (
     MADINHDANH          char(12)                        not null,
-    HOTEN               text                            not null,
-    TENKHAC             text                                    ,
-    NGAYSINH            date                            not null,
-    GIOITINH            varchar(10)                     not null,
-    NOISINH             text                            not null,
-    NGUYENQUAN          text                            not null,
+    HOTEN               nvarchar(50)                            not null,
+    TENKHAC             nvarchar(50)                                    ,
+    NGAYSINH            smalldatetime                            not null,
+    GIOITINH            varchar(200)                     not null,
+    NOISINH             nvarchar(100)                            not null,
+    NGUYENQUAN          nvarchar(100)                            not null,
     DANTOC              varchar(20)                     not null,  
     TONGIAO             varchar(20)                     not null,
     QUOCTICH            varchar(20)                     not null,
     HOCHIEU             varchar(20)                             ,
-    NOITHUONGTRU        text                            not null,
-    DIACHIHIENNAY       text                            not null,
+    NOITHUONGTRU        nvarchar(100)                            not null,
+    DIACHIHIENNAY       nvarchar(100)                            not null,
     SDT                 char(10)                                ,
-    TRINHDOHOCVAN       text                                    ,
-    TRINHDOCHUYENMON    text                                    ,
-    BIETTIENGDANTOC     text                                    ,
-    TRINHDONGOAINGU     text                                    ,
-    NGHENGHIEP          text                            not null,
+    TRINHDOHOCVAN       nvarchar(100)                                    ,
+    TRINHDOCHUYENMON    nvarchar(100)                                    ,
+    BIETTIENGDANTOC     nvarchar(100)                                    ,
+    TRINHDONGOAINGU     nvarchar(100)                                    ,
+    NGHENGHIEP          nvarchar(100)                            not null,
   
     primary key (MADINHDANH)
 );
@@ -58,8 +59,8 @@ create table NHANKHAUTHUONGTRU
 (
     MANHANKHAUTHUONGTRU     char(9)                     not null,
     MADINHDANH              char(12)                    not null,
-    DIACHITHUONGTRU         text                        not null,
-    QUANHEVOICHUHO          text                                ,
+    DIACHITHUONGTRU         nvarchar(100)                        not null,
+    QUANHEVOICHUHO          nvarchar(100)                                ,
     SOSOHOKHAU              char(9)                     not null,
 
     primary key (MANHANKHAUTHUONGTRU)
@@ -72,10 +73,10 @@ create table NHANKHAUTAMVANG
 (
     MANHANKHAUTAMVANG       char(9)                     not null,         
     MADINHDANH              char(12)                     not null,
-    NGAYBATDAUTAMVANG       date                        not null,
-    NGAYKETTHUCTAMVANG      date                        not null,
-    LYDO                    text                        not null,
-    NOIDEN                  text                        not null,
+    NGAYBATDAUTAMVANG       smalldatetime                        not null,
+    NGAYKETTHUCTAMVANG      smalldatetime                        not null,
+    LYDO                    nvarchar(100)                        not null,
+    NOIDEN                  nvarchar(100)                        not null,
 
     primary key (MANHANKHAUTAMVANG)
 );
@@ -87,10 +88,10 @@ create table NHANKHAUTAMTRU
 (
     MANHAKHAUTAMTRU         char(9)                     not null,
     MADINHDANH              char(12)                    not null,
-    NOITAMTRU               text                        not null,
-    TUNGAY                  date                        not null,
-    DENNGAY                 date                        not null,
-    LYDO                    text                        not null,
+    NOITAMTRU               nvarchar(100)                        not null,
+    TUNGAY                  smalldatetime                        not null,
+    DENNGAY                 smalldatetime                        not null,
+    LYDO                    nvarchar(100)                        not null,
     SOSOTAMTRU              char(9)                     not null,
 
     primary key (MANHAKHAUTAMTRU)
@@ -103,8 +104,8 @@ create table SOHOKHAU
 (
     SOSOHOKHAU              char(9)                     not null,
     MACHUHO                   char(9)                     not null,
-    DIACHI                     text                        not null,
-    NGAYCAP                 date                        not null,
+    DIACHI                     nvarchar(100)                        not null,
+    NGAYCAP                 smalldatetime                        not null,
     SODANGKY                char(7)                     not null,
 
     primary key (SOSOHOKHAU)
@@ -117,9 +118,9 @@ create table SOTAMTRU
 (
     SOSOTAMTRU              char(9)                     not null,
     CHUHO                   char(9)                     not null,
-    NOITAMTRU               text                        not null,
-    NGAYCAP                 date                        not null,
-    DENNGAY                 date                        not null,
+    NOITAMTRU               nvarchar(100)                        not null,
+    NGAYCAP                 smalldatetime                        not null,
+    DENNGAY                 smalldatetime                        not null,
 
     primary key (SOSOTAMTRU)   
 );
@@ -131,11 +132,11 @@ create table TIEUSU
 (
     MATIEUSU                char(9)                     not null,
     MADINHDANH              char(12)                    not null,
-    THOIGIANBATDAU          date                        not null,
-    THOIGIANKETTHUC         date                        not null,
-    CHOO                    text                        not null,
-    NGHENGHIEP              text                        not null,
-    NOILAMVIEC              text                        not null,
+    THOIGIANBATDAU          smalldatetime                        not null,
+    THOIGIANKETTHUC         smalldatetime                        not null,
+    CHOO                    nvarchar(100)                        not null,
+    NGHENGHIEP              nvarchar(100)                        not null,
+    NOILAMVIEC              nvarchar(100)                        not null,
 
     primary key (MATIEUSU)
 );
@@ -147,10 +148,10 @@ create table TIENANTIENSU
 (
     MATIENANTIENSU          char(9)                     not null,
     MADINHDANH              char(12)                    not null,
-    TOIDANH                 text                        not null,
-    HINHPHAT                text                        not null,
-    BANAN                   text                        not null,  
-    NGAYPHAT                date                        not null,
+    TOIDANH                 nvarchar(100)                        not null,
+    HINHPHAT                nvarchar(100)                        not null,
+    BANAN                   nvarchar(100)                        not null,  
+    NGAYPHAT                smalldatetime                        not null,
 
     primary key (MATIENANTIENSU)
 );
@@ -162,9 +163,9 @@ create table CANBO
 (
     MACANBO                 char(9)                     not null,
     MANHANKHAUTHUONGTRU     char(9)                     not null,
-    TENTAIKHOAN             text                        not null,
-    MATKHAU                 text                        not null,
-    LOAICANBO               text                        not null,
+    TENTAIKHOAN             nvarchar(100)                        not null,
+    MATKHAU                 nvarchar(100)                        not null,
+    LOAICANBO               nvarchar(100)                        not null,
 
     primary key (MACANBO)
 );

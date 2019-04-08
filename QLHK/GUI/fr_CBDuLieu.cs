@@ -68,7 +68,7 @@ namespace GUI
             var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
             foreach (var r in datamodel.GetTables())
             {
-                comboBox1.Items.Add(r.ToString());
+                comboBox1.Items.Add(r.TableName.ToString());
             }
 
         }
