@@ -29,8 +29,8 @@ insert into NHANKHAUTAMTRU values('TT0000002',N'123456789017',N'Tân Lập, Đô
 insert into NHANKHAUTAMTRU values('TT0000003',N'123456789018',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'2018-01-01',N'2018-12-01',N'Đi học',N'ST0000002');
 
 /*Báng Sổ hộ khẩu */
-insert into SOHOKHAU values('SH0000001',N'TH0000001',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'2018-01-01',N'1234568');
-insert into SOHOKHAU values('SH0000002',N'TH0000004',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'2018-01-01',N'1234567');
+insert into SOHOKHAU values('080000001',N'TH0000001',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'2018-01-01',N'1234568');
+insert into SOHOKHAU values('080000002',N'TH0000004',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'2018-01-01',N'1234567');
 
 /*Báng Nhân khẩu thường trú */
 insert into NHANKHAUTHUONGTRU values('TH0000001',N'123456789011',N'Tân Lập, Đông Hòa, Dĩ An, Bình Dương',N'',N'SH0000001');

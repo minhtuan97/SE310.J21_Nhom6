@@ -133,15 +133,27 @@ namespace DAO
         // join 2 bảng ???
         public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
         {
-            var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
-                     join nhankhau in qlhk.NHANKHAUs
-                     on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-                     select new HocSinhSinhVienDTO
-                     {
-                         dbhssv = hocsinhsinhvien,
-                     };
-            List<HocSinhSinhVienDTO> x = kq.ToList();
-            return x;
+            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+            query = "SELECT * FROM HOCSINHSINHVIEN JOIN NHANKHAU ON HOCSINHSINHVIEN.MADINHDANH=NHANKHAU.MADINHDANH " + query;
+            var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();
+            List<HocSinhSinhVienDTO> lst = new List<HocSinhSinhVienDTO>();
+            foreach (HOCSINHSINHVIEN i in res)
+            {
+                HocSinhSinhVienDTO ts = new HocSinhSinhVienDTO(i);
+                lst.Add(ts);
+            }
+            return lst;
+
+
+            //var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
+            //         join nhankhau in qlhk.NHANKHAUs
+            //         on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
+            //         select new HocSinhSinhVienDTO
+            //         {
+            //             dbhssv = hocsinhsinhvien,
+            //         };
+            //List<HocSinhSinhVienDTO> x = kq.ToList();
+            //return x;
         }
         // join 2 bảng ???
         public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhauCuTru(string query)
