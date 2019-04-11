@@ -105,7 +105,7 @@ namespace BUS
             string kq = null;
 
             string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
-            string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single()
+            string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
 
 
             int i_namsinh = Int16.Parse(namsinh);
