@@ -16,58 +16,58 @@ namespace BUS
         #region các hàm lấy mã cuối cùng
         public static string getLastID_MaDinhDanh()
         {
-            string sql = "SELECT madinhdanh FROM nhankhau ORDER BY madinhdanh DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<NHANKHAU>(sql).ToString();
+            string sql = "SELECT top 1 madinhdanh FROM nhankhau ORDER BY madinhdanh DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal)?"000000000000":lastVal;
         }
         public static string getLastID_SoSoHoKhau()
         {
             string sql = "SELECT Top 1 sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC";
-            string lastVal = qlhk.ExecuteQuery<SOHOKHAU>(sql).ToString();
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
         public static string getLastID_MaNhanKhauThuongTru()
         {
-            string sql = "SELECT manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(sql).ToString();
+            string sql = "SELECT top 1 manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "TH0000000" : lastVal;
         }
         public static string getLastID_SoSoTamTru()
         {
             string sql = "SELECT top 1 sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC;";
-            string lastVal = qlhk.ExecuteQuery<SOTAMTRU>(sql).ToString();
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "080000000" : lastVal;
         }
         public static string getLastID_MaNhanKhauTamTru()
         {
-            string sql = "SELECT manhankhautamtru FROM nhankhautamtru where manhankhautamtru LIKE 'TT%' ORDER BY manhankhautamtru DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<NHANKHAUTAMTRU>(sql).ToString();
+            string sql = "SELECT top 1 manhankhautamtru FROM nhankhautamtru where manhankhautamtru LIKE 'TT%' ORDER BY manhankhautamtru DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "TT0000000" : lastVal;
         }
 
         public static string getLastID_MaTieuSu()
         {
-            string sql = "SELECT matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<TIEUSU>(sql).ToString();
+            string sql = "SELECT top 1 matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "TS0000000" : lastVal;
         }
 
         public static string getLastID_MaTienAnTienSu()
         {
-            string sql = "SELECT matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<TIENANTIENSU>(sql).ToString();
+            string sql = "SELECT top 1 matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "TA0000000" : lastVal;
         }
         public static string getLastID_CanBo()
         {
-            string sql = "SELECT macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<CANBO>(sql).ToString();
+            string sql = "SELECT top 1 macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "CB0000000" : lastVal;
         }
         public static string getLastID_NhanKhauTamVang()
         {
-            string sql = "SELECT manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC LIMIT 1;";
-            string lastVal = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(sql).ToString();
+            string sql = "SELECT top 1 manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC;";
+            string lastVal = qlhk.ExecuteQuery<String>(sql).Single();
             return string.IsNullOrEmpty(lastVal) ? "TV0000000" : lastVal;
         }
 
@@ -105,8 +105,9 @@ namespace BUS
             string kq = null;
 
             string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
-            string madinhdanh = qlhk.ExecuteQuery<NHANKHAU>(sql).ToString();
-            
+            string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single()
+
+
             int i_namsinh = Int16.Parse(namsinh);
             if (i_namsinh > 1900 & i_namsinh <= 1999)
             {
