@@ -182,9 +182,9 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" + query;
-            var res = qlhk.ExecuteQuery<NhanKhauThuongTruDTO>(query);
+            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query);
             List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
-            foreach (NhanKhauThuongTruDTO i in res)
+            foreach (NHANKHAUTHUONGTRU i in res)
             {
                 NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
                 lst.Add(ts);

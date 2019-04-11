@@ -56,6 +56,7 @@ namespace DTO
         public NhanKhauThuongTruDTO(NHANKHAUTHUONGTRU nktt)
         {
             dbnktt = nktt;
+            db = nktt.NHANKHAU;
         }
 
         public NhanKhauThuongTruDTO(NhanKhauThuongTruDTO nktt)

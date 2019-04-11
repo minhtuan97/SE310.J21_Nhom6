@@ -105,7 +105,7 @@ namespace GUI
         {
             tbhoten.Text = nkttDTO.db.HOTEN;
             tbTenKhac.Text = nkttDTO.db.TENKHAC;
-            rdNam.Checked = (nkttDTO.db.GIOITINH == "nam"); rdNu.Checked = (nkttDTO.db.GIOITINH == "nu");
+            rdNam.Checked = (nkttDTO.db.GIOITINH == "Nam"); rdNu.Checked = (nkttDTO.db.GIOITINH == "Nữ");
             dtpNgaySinh.Value = nkttDTO.db.NGAYSINH;
             tbdantoc.Text = nkttDTO.db.DANTOC;
             tbNgheNghiep.Text = nkttDTO.db.NGHENGHIEP;

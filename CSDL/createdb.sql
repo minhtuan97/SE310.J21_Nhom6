@@ -33,13 +33,13 @@ create table NHANKHAU
     HOTEN               nvarchar(50)                            not null,
     TENKHAC             nvarchar(50)                                    ,
     NGAYSINH            smalldatetime                            not null,
-    GIOITINH            varchar(200)                     not null,
+    GIOITINH            nvarchar(200)                     not null,
     NOISINH             nvarchar(100)                            not null,
     NGUYENQUAN          nvarchar(100)                            not null,
-    DANTOC              varchar(20)                     not null,  
-    TONGIAO             varchar(20)                     not null,
-    QUOCTICH            varchar(20)                     not null,
-    HOCHIEU             varchar(20)                             ,
+    DANTOC              nvarchar(20)                     not null,  
+    TONGIAO             nvarchar(20)                     not null,
+    QUOCTICH            nvarchar(20)                     not null,
+    HOCHIEU             nvarchar(20)                             ,
     NOITHUONGTRU        nvarchar(100)                            not null,
     DIACHIHIENNAY       nvarchar(100)                            not null,
     SDT                 char(10)                                ,
@@ -170,7 +170,6 @@ create table CANBO
     primary key (MACANBO)
 );
 
-/*
 alter table NHANKHAUTAMTRU add constraint FK_NKTT_NK foreign key (MADINHDANH)
     references NHANKHAU (MADINHDANH);
 alter table NHANKHAUTAMTRU add constraint FK_NKTT_STT foreign key (SOSOTAMTRU)
@@ -181,10 +180,9 @@ alter table NHANKHAUTAMVANG add constraint FK_NKTV_NK foreign key (MADINHDANH)
     references NHANKHAU (MADINHDANH);
 alter table NHANKHAUTHUONGTRU add constraint FK_NKTTRU_NK foreign key (MADINHDANH)
     references NHANKHAU (MADINHDANH);
-alter table NHANKHAUTHUONGTRU add constraint FK_NKTTRU_STTRU foreign key (SOSOHOKHAU)
+alter table NHANKHAUTHUONGTRU add constraint FK_NKTTRU_SHK foreign key (SOSOHOKHAU)
     references SOHOKHAU (SOSOHOKHAU);
 alter table SOHOKHAU add constraint FK_NSHK_NKTTRU foreign key (MACHUHO)
     references NHANKHAUTHUONGTRU (MANHANKHAUTHUONGTRU);
 alter table SOTAMTRU add constraint FK_STT_NKTT foreign key (CHUHO)
     references NHANKHAUTAMTRU (MANHANKHAUTAMTRU);
-	*/
