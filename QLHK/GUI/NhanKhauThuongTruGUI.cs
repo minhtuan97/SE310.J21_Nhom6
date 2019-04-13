@@ -44,10 +44,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll();
+            cbbNoiCap.DataSource = ttp.GetAll().Select(r=>r.db.ten).ToList();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll();
+            cbbNoiSinh.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
             cbbNoiCap.SelectedValue = cbbNoiSinh.SelectedValue = "74";
         }
 

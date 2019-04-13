@@ -9,7 +9,7 @@ namespace DTO
 {
     public class NhanKhauThuongTruDTO:NhanKhau
     {
-        public NHANKHAUTHUONGTRU dbnktt;
+        public NHANKHAUTHUONGTRU dbnktt = new NHANKHAUTHUONGTRU();
 
 
         public NhanKhauThuongTruDTO() { }

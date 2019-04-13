@@ -159,7 +159,7 @@ namespace DAO
             //Execute
             foreach (SOTAMTRU stt in query)
             {
-                stt.CHUHO = sotamtru.db.CHUHO;
+                stt.MACHUHO = sotamtru.db.MACHUHO;
                 stt.NOITAMTRU = sotamtru.db.NOITAMTRU;
                 stt.NGAYCAP = sotamtru.db.NGAYCAP;
                 stt.DENNGAY = sotamtru.db.DENNGAY;
@@ -361,7 +361,7 @@ namespace DAO
 
                 foreach (var tt in q)
                 {
-                    list_ID.Add(tt.CHUHO);
+                    list_ID.Add(tt.MACHUHO);
                 }
             }
             catch (Exception ex)

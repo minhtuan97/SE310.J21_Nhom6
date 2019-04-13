@@ -16,7 +16,7 @@ namespace DTO
             DateTime ngayCap, DateTime denNgay)
         {
             db.SOSOTAMTRU = soSoTamTru;
-            db.CHUHO = maChuHoTamTru;
+            db.MACHUHO  = maChuHoTamTru;
             db.NOITAMTRU = noiTamTru;
             db.NGAYCAP = ngayCap;
             db.DENNGAY = denNgay;

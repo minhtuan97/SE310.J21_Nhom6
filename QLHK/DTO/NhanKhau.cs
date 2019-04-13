@@ -8,7 +8,7 @@ namespace DTO
 {
     public class NhanKhau
     {
-        public NHANKHAU db;
+        public NHANKHAU db = new NHANKHAU();
 
         public quanlyhokhauDataContext qlhk;
 
