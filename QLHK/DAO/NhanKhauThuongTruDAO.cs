@@ -57,7 +57,7 @@ namespace DAO
         }
         public override bool insert(NhanKhauThuongTruDTO data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
 
             try
@@ -68,7 +68,7 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+               // qlhk.SubmitChanges();
                 return false;
             }
         }
