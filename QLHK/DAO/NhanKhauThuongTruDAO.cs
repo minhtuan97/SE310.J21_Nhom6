@@ -59,7 +59,7 @@ namespace DAO
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
-
+            data.dbnktt.MADINHDANH = data.db.MADINHDANH;
             try
             {
                 qlhk.SubmitChanges();

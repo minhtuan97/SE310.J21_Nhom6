@@ -40,7 +40,7 @@ namespace GUI
             LoadtieuSu();
             //dGVTienAnTienSu.DataSource = tienAn.GetAll().Tables[0];
             Loadtienantiensu();
-            //themMaDinhDanhBang(); hàm này để chạy 2 cái datafridview bị lỗi.... ô sửa lại đi
+            themMaDinhDanhBang(); //hàm này để chạy 2 cái datafridview bị lỗi.... ô sửa lại đi
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
@@ -69,7 +69,10 @@ namespace GUI
             {
                 dGVTieuSu.DataSource = null;
                 dGVTieuSu.Rows.Clear();
-                dGVTieuSu.DataSource = tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
+
+                ////////Sửa dữ liệu vào DataGridView
+                var bList = new BindingList<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                dGVTieuSu.DataSource = new BindingSource( bList, null);
                 for (int i = 0; i < dGVTieuSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -89,7 +92,9 @@ namespace GUI
             {
                 dGVTienAnTienSu.DataSource = null;
                 dGVTienAnTienSu.Rows.Clear();
-                dGVTienAnTienSu.DataSource = tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
+
+                var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
                 for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();

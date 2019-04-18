@@ -37,7 +37,8 @@ namespace BUS
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            return nk.insert(nktt)&&obj.insert(nktt);
+            nk.insert(nktt);
+            return obj.insert(nktt);
         }
         public override bool Add_Table(NhanKhauThuongTruDTO data)
         {
