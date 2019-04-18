@@ -381,7 +381,7 @@ go
 /* Table: NHANKHAUTAMTRU                                        */
 /*==============================================================*/
 create table NHANKHAUTAMTRU (
-   MANHAKHAUTAMTRU      char(9)              not null,
+   MANHANKHAUTAMTRU     char(9)              not null,
    MADINHDANH           char(12)             not null,
    SOSOTAMTRU           char(9)              null,
    NOITAMTRU            nvarchar(100)        not null,

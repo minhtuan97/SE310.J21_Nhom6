@@ -9,6 +9,7 @@ namespace DTO
     public class HocSinhSinhVienDTO
     {
         public HOCSINHSINHVIEN dbhssv;
+        public NHANKHAU dbnk;
 
         public HocSinhSinhVienDTO() : base() { }
 
@@ -27,6 +28,7 @@ namespace DTO
         public HocSinhSinhVienDTO(HOCSINHSINHVIEN dbs)
         {
             dbhssv = dbs;
+            dbnk = dbs.NHANKHAU;
         }
     }
 }

@@ -283,7 +283,7 @@ namespace GUI
 
         private void btnTimKiem2_Click(object sender, EventArgs e)
         {
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
+            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau("nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
             if (source.Count > 0)
             {
                 List<HocSinhSinhVienDTO> data = source;

@@ -143,19 +143,7 @@ namespace DAO
                 lst.Add(ts);
             }
             return lst;
-
-
-            //var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
-            //         join nhankhau in qlhk.NHANKHAUs
-            //         on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-            //         select new HocSinhSinhVienDTO
-            //         {
-            //             dbhssv = hocsinhsinhvien,
-            //         };
-            //List<HocSinhSinhVienDTO> x = kq.ToList();
-            //return x;
         }
-        // join 2 bảng ???
         public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhauCuTru(string query)
         {
                 return null;
