@@ -161,8 +161,8 @@ namespace BUS
             string sausocuoi = null;
             string kq = null;
 
-            string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
-            string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
+            //string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+            //string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
 
 
             int i_namsinh = Int16.Parse(namsinh);
@@ -227,6 +227,8 @@ namespace BUS
             string str_madinhdanh;
             try
             {
+                string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+                string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
                 str_madinhdanh = madinhdanh;
             }
             catch (Exception e)
