@@ -37,8 +37,12 @@ namespace BUS
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            nk.insert(nktt);
-            return obj.insert(nktt);
+            if (nk.insert(nktt))
+            {
+                if (obj.insert(nktt))
+                    return true;
+            }
+            return false;
         }
         public override bool Add_Table(NhanKhauThuongTruDTO data)
         {
@@ -55,8 +59,12 @@ namespace BUS
         public override bool Update(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
-            
-            return nk.update(nktt)&& obj.update(nktt);
+            if (nk.update(nktt))
+            {
+                if (obj.update(nktt))
+                    return true;
+            }
+            return false;
         }
         public List<NhanKhauThuongTruDTO> TimKiem(string query)
         {
