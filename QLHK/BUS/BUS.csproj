@@ -50,6 +50,7 @@
     <Compile Include="CanBoHoKhau.cs" />
     <Compile Include="CreateWordHelper.cs" />
     <Compile Include="DangNhapBUS.cs" />
+    <Compile Include="DataHelper.cs" />
     <Compile Include="NhanKhauTamVangBUS.cs" />
     <Compile Include="SoHoKhauBUS.cs" />
     <Compile Include="NhanKhauThuongTruBUS.cs" />

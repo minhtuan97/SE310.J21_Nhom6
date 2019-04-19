@@ -41,7 +41,17 @@ namespace BUS
 
         public List<SoHoKhauDTO> TimKiem(string query)
         {
-            return obj.TimKiem(query);
+            List<SoHoKhauDTO>list = obj.TimKiem(query);
+            if (list.Count > 0)
+            {
+                
+                foreach (SoHoKhauDTO item in list)
+                {
+                    item.NhanKhau = nktt.TimKiem("SOSOHOKHAU='" + item.db.SOSOHOKHAU + "'");
+                }
+            }
+
+            return list;
         }
 
         //public SoHoKhauDTO TimSo(string sosohokhau)

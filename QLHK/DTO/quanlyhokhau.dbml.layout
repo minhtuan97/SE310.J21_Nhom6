@@ -80,21 +80,21 @@
         <elementListCompartment Id="039e10d0-032b-4a06-b1ed-e89421b246ca" absoluteBounds="6.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.75 : 11.8381168619792); (1.75 : 13.4527498372396); (2.19791916666667 : 13.4527498372396 : JumpStart); (2.36458583333333 : 13.4527498372396 : JumpEnd); (3.5 : 13.4527498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 11.8381168619792); (1.75 : 13.4527498372396); (3.5 : 13.4527498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_HOCSINHSINHVIEN" />
       <nodes>
         <classShapeMoniker Id="ca605b83-49ea-4e1c-8f2f-315ebeb91343" />
         <classShapeMoniker Id="9bb5cf2a-6705-4b95-aa61-16b7680546bc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 7.375); (1.75 : 6.19794840494792); (6.04166666666667 : 6.19794840494792 : JumpStart); (6.20833333333333 : 6.19794840494792 : JumpEnd); (6.5 : 6.19794840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 7.375); (1.75 : 6.19794840494792); (6.04166666666667 : 6.19794840494792 : JumpStart); (6.20833333333333 : 6.19794840494792 : JumpEnd); (6.5 : 6.19794840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_NHANKHAUTAMTRU" />
       <nodes>
         <classShapeMoniker Id="ca605b83-49ea-4e1c-8f2f-315ebeb91343" />
         <classShapeMoniker Id="ee7a6077-610c-4d1f-9f7f-26f8cb1ba124" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.10659912109375); (3.5 : 8.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 8.10659912109375); (3.5 : 8.10659912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_NHANKHAUTAMVANG" />
       <nodes>
         <classShapeMoniker Id="ca605b83-49ea-4e1c-8f2f-315ebeb91343" />
@@ -136,25 +136,52 @@
         <classShapeMoniker Id="ee7a6077-610c-4d1f-9f7f-26f8cb1ba124" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 10.6065991210937); (3.5 : 10.6065991210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.6065991210937); (3.5 : 10.6065991210937)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_TIENANTIENSU" />
       <nodes>
         <classShapeMoniker Id="ca605b83-49ea-4e1c-8f2f-315ebeb91343" />
         <classShapeMoniker Id="8a4fa3b9-db79-42f2-a135-9388969a1cc9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.2812525 : 11.8381168619792); (2.2812525 : 19.2027498372396); (3.5 : 19.2027498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.2812525 : 11.8381168619792); (2.2812525 : 19.2027498372396); (3.5 : 19.2027498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_TIEUSU" />
       <nodes>
         <classShapeMoniker Id="ca605b83-49ea-4e1c-8f2f-315ebeb91343" />
         <classShapeMoniker Id="4a294ae2-336d-47c5-a593-eb1fb1d363e1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.75 : 1.69314697265625); (9.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.75 : 1.69314697265625); (9.5 : 1.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/TINHTHANHPHO/TINHTHANHPHO_QUANHUYEN" />
       <nodes>
         <classShapeMoniker Id="7873e3c3-41c9-4dac-ada7-7308f79397ff" />
         <classShapeMoniker Id="1f9ed4c3-fa4b-4bd6-aa49-643025717e00" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1ac4f183-646a-4cd8-97a5-4bd2fb27fcb3" absoluteBounds="6.5, 9, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/quanlyhokhauDataContext/NHANKHAUTHUONGTRU" />
+      <nestedChildShapes>
+        <elementListCompartment Id="516f9cf7-1398-4736-b6a7-011672cd78bb" absoluteBounds="6.515, 9.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.5 : 9.76044840494792); (9.25 : 9.76044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAUTHUONGTRU/NHANKHAUTHUONGTRU_CANBO" />
+      <nodes>
+        <classShapeMoniker Id="1ac4f183-646a-4cd8-97a5-4bd2fb27fcb3" />
+        <classShapeMoniker Id="34c4c241-de4f-43f4-ad5e-7d7ba226dc25" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 9.28125); (6.04166666666667 : 9.28125 : JumpStart); (6.20833333333333 : 9.28125 : JumpEnd); (6.5 : 9.28125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_NHANKHAUTHUONGTRU" />
+      <nodes>
+        <classShapeMoniker Id="e6d8d02c-5148-4a1c-8225-c7922a1cd9b3" />
+        <classShapeMoniker Id="1ac4f183-646a-4cd8-97a5-4bd2fb27fcb3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 2.52089680989583); (6.125 : 2.89589680989583); (6.125 : 10.0573254049479); (6.5 : 10.0573254049479)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/quanlyhokhauDataContext/SOHOKHAU/SOHOKHAU_NHANKHAUTHUONGTRU" />
+      <nodes>
+        <classShapeMoniker Id="828bbf9b-dec8-4158-858b-5e2bbf597a11" />
+        <classShapeMoniker Id="1ac4f183-646a-4cd8-97a5-4bd2fb27fcb3" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
