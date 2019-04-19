@@ -104,33 +104,18 @@ namespace DAO
         }
 
 
-        public DataSet TimKiemJoinNhanKhau(string query)
+        public List<NhanKhauTamVangDTO> TimKiemJoinNhanKhau(string query)
         {
-            //try
-            //{
-            //    List < NhanKhauTamVangDTO >
-
-
-            //    if (conn.State != ConnectionState.Open)
-            //    {
-            //        conn.Open();
-            //    }
-            //    sqlda = new MySqlDataAdapter("SELECT * FROM nhankhau left join nhankhautamvang " +
-            //        "on nhankhau.madinhdanh=nhankhautamvang.madinhdanh" + query + " ORDER BY ngayketthuctamvang DESC", conn);
-            //    cmdbuilder = new MySqlCommandBuilder(sqlda);
-            //    dataset = new DataSet();
-            //    sqlda.Fill(dataset, "timkiem");
-            //    return dataset;
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-            //finally
-            //{
-            //    conn.Close();
-            //}
-            return null;
+            query = "SELECT * FROM nhankhau left join nhankhautamvang " +
+                    "on nhankhau.madinhdanh=nhankhautamvang.madinhdanh" + query + " ORDER BY ngayketthuctamvang DESC";
+            var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query);
+            List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
+            foreach (NHANKHAUTAMVANG i in res)
+            {
+                NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
+                lst.Add(ts);
+            }
+            return lst;
         }
 
 
@@ -159,8 +144,8 @@ namespace DAO
             List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
             foreach (NHANKHAUTHUONGTRU i in res)
             {
-                //NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
-                //lst.Add(ts);
+                NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
+                lst.Add(ts);
             }
 
             if (lst.Count() > 0)

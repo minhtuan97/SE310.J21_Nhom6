@@ -8,7 +8,7 @@ namespace DTO
 {
     public class NhanKhauTamVangDTO: NhanKhau
     {
-        public NHANKHAUTAMVANG db;
+        public NHANKHAUTAMVANG db= new NHANKHAUTAMVANG();
 
         public NhanKhauTamVangDTO() { }
 

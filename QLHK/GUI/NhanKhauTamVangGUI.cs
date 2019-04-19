@@ -24,50 +24,50 @@ namespace GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            DataTable kq = nktvbus.TimKiem(" where nhankhau.madinhdanh='" + textBox_madinhdanh.Text + "'").Tables["timkiem"];
-            if (kq.Rows.Count > 0)
+            List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhau.madinhdanh='" + textBox_madinhdanh.Text + "'");
+            NhanKhauTamVangDTO a = kq[0];
+            if (a!=null)
             {
-                DataRow dt = kq.Rows[0];
-                textBox_hoten.Text = dt["hoten"].ToString();
-                tbNgaySinh.Text = dt["ngaysinh"].ToString();
-                tbdantoc.Text = dt["dantoc"].ToString();
-                tbNgheNghiep.Text = dt["nghenghiep"].ToString();
-                if (dt["gioitinh"].ToString() == "nam")
+                textBox_hoten.Text = a.db.NHANKHAU.HOTEN.ToString();
+                tbNgaySinh.Text = a.db.NHANKHAU.NGAYSINH.ToString();
+                tbdantoc.Text = a.db.NHANKHAU.DANTOC.ToString();
+                tbNgheNghiep.Text = a.db.NHANKHAU.NGHENGHIEP.ToString();
+                if (a.db.NHANKHAU.GIOITINH.ToString() == "nam")
                 {
                     rdNam.Checked = true;
                 }
-                if (dt["gioitinh"].ToString() == "nu")
+                if (a.db.NHANKHAU.GIOITINH.ToString() == "nu")
                 {
                     rdNu.Checked = true;
                 }
                 //tongiao
-                textBox_tongiao.Text = dt["tongiao"].ToString();
+                textBox_tongiao.Text = a.db.NHANKHAU.TONGIAO.ToString();
                 //nguyenquan
-                tbnguyenquan.Text = dt["nguyenquan"].ToString();
+                tbnguyenquan.Text = a.db.NHANKHAU.NGUYENQUAN.ToString();
                 //noisinh
-                tbNoiSinh.Text = dt["noisinh"].ToString();
+                tbNoiSinh.Text = a.db.NHANKHAU.NOISINH.ToString();
                 //quoctich
-                tbquoctich.Text = dt["quoctich"].ToString();
+                tbquoctich.Text = a.db.NHANKHAU.QUOCTICH.ToString();
                 //hochieu
-                tbhochieu.Text = dt["hochieu"].ToString();
+                tbhochieu.Text = a.db.NHANKHAU.HOCHIEU.ToString();
                 //sdt
-                tbsodienthoai.Text = dt["sdt"].ToString();
+                tbsodienthoai.Text = a.db.NHANKHAU.SDT.ToString();
                 //ngaycap
                 //tbNgayCap.Text = dt["ngaycap"].ToString();
                 //noicap
                 //tbNoiCap.Text = dt["noicap"].ToString();
                 //noithuongtru
-                tbDCThuongTru.Text = dt["noithuongtru"].ToString();
+                tbDCThuongTru.Text = a.db.NHANKHAU.NOITHUONGTRU.ToString();
                 //diachihientai
-                tbDCHienTai.Text = dt["diachihiennay"].ToString();
+                tbDCHienTai.Text = a.db.NHANKHAU.DIACHIHIENNAY.ToString();
 
-                if (nktvbus.TimKiemThuongtru(" where madinhdanh='" + textBox_madinhdanh.Text + "'") == 1)
+                if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 1)
                     rd_tamtru.Checked = true;
-                if (nktvbus.TimKiemThuongtru(" where madinhdanh='" + textBox_madinhdanh.Text + "'") == 0)
+                if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 0)
                         rd_thuongtru.Checked = true;
                 DateTime secondDateTime = DateTime.Now;
 
-                if (dt["ngayketthuctamvang"].ToString() == "")
+                if (a.db.NGAYKETTHUCTAMVANG.ToString() == "")
 
                 {
 
@@ -78,17 +78,17 @@ namespace GUI
                     dtpNgayKetThuc.Value = secondDateTime;
                     return;
                 }
-                    DateTime ngayketthuc = DateTime.Parse(dt["ngayketthuctamvang"].ToString());
+                    DateTime ngayketthuc = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
                 //int compare = DateTime.Compare(ngayketthuc, secondDateTime);
                 if (secondDateTime<ngayketthuc)
                 {
-                    label_matamvang.Text = dt["manhankhautamvang"].ToString();
-                    tbLyDo.Text = dt["lydo"].ToString();
-                    textBox_noiden.Text = dt["noiden"].ToString();
-                    if (dt["ngaybatdautamvang"].ToString() != "")
-                        dtpNgayBatDau.Value = DateTime.Parse(dt["ngaybatdautamvang"].ToString());
-                    if (dt["ngayketthuctamvang"].ToString() != "")
-                        dtpNgayKetThuc.Value = DateTime.Parse(dt["ngayketthuctamvang"].ToString());
+                    label_matamvang.Text = a.db.MANHANKHAUTAMVANG.ToString();
+                    tbLyDo.Text = a.db.LYDO.ToString();
+                    textBox_noiden.Text = a.db.NOIDEN.ToString();
+                    if (a.db.NGAYBATDAUTAMVANG.ToString() != "")
+                        dtpNgayBatDau.Value = DateTime.Parse(a.db.NGAYBATDAUTAMVANG.ToString());
+                    if (a.db.NGAYKETTHUCTAMVANG.ToString() != "")
+                        dtpNgayKetThuc.Value = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
                 }
                 else
                 {

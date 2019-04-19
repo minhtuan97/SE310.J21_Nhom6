@@ -39,7 +39,7 @@ namespace BUS
             return obj.update(data);
         }
 
-        public DataSet TimKiem(string query)
+        public List<NhanKhauTamVangDTO> TimKiem(string query)
         {
             return obj.TimKiemJoinNhanKhau(query);
         }
