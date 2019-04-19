@@ -14,7 +14,7 @@ namespace DTO
 
         public NhanKhauTamTruDTO(string maNhanKhauTamTru, string noiTamTru, DateTime tuNgay, DateTime denNgay, string lyDo, string soSoTamTru, string str_MaDinhDanh)
         {
-            db.MANHAKHAUTAMTRU = maNhanKhauTamTru;
+            db.MANHANKHAUTAMTRU = maNhanKhauTamTru;
             db.NOITAMTRU = noiTamTru;
             db.TUNGAY = tuNgay;
             db.DENNGAY = denNgay;
@@ -32,7 +32,7 @@ namespace DTO
                 noiSinh,nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                 trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            db.MANHAKHAUTAMTRU = maNhanKhauTamTru;
+            db.MANHANKHAUTAMTRU = maNhanKhauTamTru;
             db.NOITAMTRU = noiTamTru;
             db.TUNGAY = tuNgay;
             db.DENNGAY = denNgay;
