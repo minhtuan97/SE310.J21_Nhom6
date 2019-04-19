@@ -332,7 +332,7 @@ go
 /*==============================================================*/
 create table HOCSINHSINHVIEN (
    MAHSSV               char(9)              not null,
-   MADINHDANH           char(12)             not null,
+   MADINHDANH           char(12)             null,
    TRUONG               nvarchar(50)         not null,
    DIACHITHUONGTRU      nvarchar(100)        not null,
    THOIGIANBATDAUTAMTRUTHUONGTRU smalldatetime        not null,
@@ -382,13 +382,13 @@ go
 /*==============================================================*/
 create table NHANKHAUTAMTRU (
    MANHANKHAUTAMTRU     char(9)              not null,
-   MADINHDANH           char(12)             not null,
+   MADINHDANH           char(12)             null,
    SOSOTAMTRU           char(9)              null,
    NOITAMTRU            nvarchar(100)        not null,
    TUNGAY               smalldatetime        not null,
    DENNGAY              smalldatetime        not null,
    LYDO                 nvarchar(100)        not null,
-   constraint PK_NHANKHAUTAMTRU primary key (MANHAKHAUTAMTRU)
+   constraint PK_NHANKHAUTAMTRU primary key (MANHANKHAUTAMTRU)
 )
 go
 
@@ -435,8 +435,8 @@ go
 /*==============================================================*/
 create table NHANKHAUTHUONGTRU (
    MANHANKHAUTHUONGTRU  char(9)              not null,
-   MADINHDANH           char(12)             not null,
-   SOSOHOKHAU           char(9)              not null,
+   MADINHDANH           char(12)             null,
+   SOSOHOKHAU           char(9)              null,
    DIACHITHUONGTRU      nvarchar(100)        not null,
    QUANHEVOICHUHO       nvarchar(100)        null,
    constraint PK_NHANKHAUTHUONGTRU primary key (MANHANKHAUTHUONGTRU)
@@ -484,7 +484,7 @@ go
 /*==============================================================*/
 create table SOHOKHAU (
    SOSOHOKHAU           char(9)              not null,
-   MACHUHO                char(9)              null,
+   MACHUHO                char(9)            null,
    DIACHI               nvarchar(100)        not null,
    NGAYCAP              smalldatetime        not null,
    SODANGKY             char(7)              not null,
@@ -498,7 +498,7 @@ go
 /*==============================================================*/
 create table SOTAMTRU (
    SOSOTAMTRU           char(9)              not null,
-   MACHUHO                char(9)              null,
+   MACHUHO                char(9)            null,
    NOITAMTRU            nvarchar(100)        not null,
    NGAYCAP              smalldatetime        not null,
    DENNGAY              smalldatetime        not null,

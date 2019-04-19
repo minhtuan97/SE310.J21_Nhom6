@@ -8,8 +8,8 @@ namespace DTO
 {
     public class HocSinhSinhVienDTO
     {
-        public HOCSINHSINHVIEN dbhssv;
-        public NHANKHAU dbnk;
+        public HOCSINHSINHVIEN dbhssv= new HOCSINHSINHVIEN();
+        public NHANKHAU dbnk= new NHANKHAU();
 
         public HocSinhSinhVienDTO() : base() { }
 

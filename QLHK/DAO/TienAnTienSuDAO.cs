@@ -110,7 +110,7 @@ namespace DAO
         public List<TienAnTienSuDTO> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM tienantiensu" + query;
+            query = "SELECT * FROM tienantiensu" + query;
             var res = qlhk.ExecuteQuery<TIENANTIENSU>(query).ToList();
             List<TienAnTienSuDTO> lst = new List<TienAnTienSuDTO>();
             foreach (TIENANTIENSU i in res)

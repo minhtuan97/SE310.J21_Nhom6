@@ -109,12 +109,6 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_NhanKhau.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_NhanKhau.Designer.cs">
-      <DependentUpon>Form_NhanKhau.cs</DependentUpon>
-    </Compile>
     <Compile Include="NhanKhauTamTruGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,9 +179,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_NhanKhau.resx">
-      <DependentUpon>Form_NhanKhau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanKhauTamTruGUI.resx">
       <DependentUpon>NhanKhauTamTruGUI.cs</DependentUpon>

@@ -52,40 +52,6 @@ namespace GUI
         
         private void button_timkiem_Click(object sender, EventArgs e)
         {
-            //string query = null;
-            //string mssv = textBox_mssv.Text.ToString();
-            //string madinhdanh = textBox_madinhdanh.Text.ToString();
-            //string truong = textBox_truong.Text.ToString();
-            //string diachi = textBox_diachithuongtru.Text.ToString();
-            //string vipham = textBox_vipham.Text.ToString();
-            //if (mssv != "") query = query + " mssv='"+mssv+"'";
-            //if (madinhdanh != "")
-            //{
-            //    if (query != null) query = query + " and madinhdanh='" + madinhdanh + "'";
-            //    else query =" madinhdanh='" + madinhdanh + "'";
-            //}
-
-            //if ( truong!= "")
-            //{
-            //    if(query!=null) query = query + " and truong='" + truong + "'";
-            //    else query =" truong='" + truong + "'";
-            //}
-            //if ( diachi!= "")
-            //{
-            //    if (query != null) query = query + " and diachi='" + diachi + "'";
-            //    else query =" diachi='" + diachi + "'";
-            //}
-            //if (query != null) query = " where" + query;
-            //dataGridView1.DataSource = null;
-            //dataGridView1.Rows.Clear();
-            //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh='"+ madinhdanh + "'").Tables["tienantiensu"];
-            //textBox_mssv.Clear();
-            //textBox_madinhdanh.Clear();
-            //textBox_truong.Clear();
-            //textBox_diachithuongtru.Clear();
-            //textBox_vipham.Clear();
-
-            //DataTable source = hssvbus.TimKiemJoinNhanKhau(" AND nhankhau.madinhdanh LIKE '%" + textBox_madinhdanh.Text + "%'").Tables[0];
             List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
             if (source.Count > 0)
             {
@@ -103,7 +69,24 @@ namespace GUI
                 }
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh='" + textBox_madinhdanh.Text + "'");
+                
+
+                //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
+                try
+                {
+                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+                    dataGridView1.DataSource = new BindingSource(bList, null);
+                    //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
+                    //{
+                    //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
+                    //}
+                    button_xoa.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {
@@ -123,6 +106,7 @@ namespace GUI
             DateTime tgbd = date_batdau.Value.Date;
             DateTime tgkt = date_ketthuc.Value.Date;
             string vipham = textBox_vipham.Text.ToString();
+    
             hssvdto = new HocSinhSinhVienDTO(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
             if (hssvbus.Add(hssvdto))
             {
@@ -160,28 +144,6 @@ namespace GUI
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //textBox_mssv.Clear();
-            //textBox_madinhdanh.Clear();
-            //textBox_truong.Clear();
-            //textBox_diachithuongtru.Clear();
-            //textBox_vipham.Clear();
-            //int r = e.RowIndex;
-            //if (r >= dataGridView1.RowCount - 1||r<0) return;
-            //string mssv = dataGridView1.Rows[r].Cells["mssv"].Value.ToString();
-            //string madinhdanh = dataGridView1.Rows[r].Cells["madinhdanh"].Value.ToString();
-            //string truong = dataGridView1.Rows[r].Cells["truong"].Value.ToString();
-            //string diachi = dataGridView1.Rows[r].Cells["diachithuongtru"].Value.ToString();
-            //DateTime tgbd = DateTime.Parse(dataGridView1.Rows[r].Cells["thoigianbatdautamtruthuongtru"].Value.ToString());
-            //DateTime tgkt = DateTime.Parse(dataGridView1.Rows[r].Cells["thoigianketthuctamtruthuongtru"].Value.ToString());
-            //string vipham = dataGridView1.Rows[r].Cells["vipham"].Value.ToString();
-            //HocSinhSinhVienDTO hssv = new HocSinhSinhVienDTO(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
-            //textBox_mssv.Text = hssv.MSSV;
-            //textBox_madinhdanh.Text = hssv.MaDinhDanh;
-            //textBox_truong.Text = hssv.Truong;
-            //textBox_diachithuongtru.Text = hssv.DiaChiThuongTru;
-            //date_batdau.Value = hssv.TGBDTTTT;
-            //date_ketthuc.Value = hssv.TGKTTTTT;
-            //textBox_vipham.Text = hssv.ViPham;
         }
 
         private void button_sua_Click(object sender, EventArgs e)
@@ -300,7 +262,23 @@ namespace GUI
                 }
                 dataGridView1.DataSource = null;
                 dataGridView1.Rows.Clear();
-                dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
+                //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
+                try
+                {
+                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+                    dataGridView1.DataSource = new BindingSource(bList, null);
+                    //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
+                    //{
+                    //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
+                    //}
+                    button_xoa.Enabled = true;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {
@@ -308,6 +286,16 @@ namespace GUI
 
             }
            
+        }
+
+        private void textBox_mssv_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HocSinhSinhVienGUI_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

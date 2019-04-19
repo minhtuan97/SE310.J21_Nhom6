@@ -192,7 +192,6 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
                 return false;
             }
         }

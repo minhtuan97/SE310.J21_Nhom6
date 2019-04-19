@@ -162,6 +162,7 @@
             this.textBox_mssv.Name = "textBox_mssv";
             this.textBox_mssv.Size = new System.Drawing.Size(151, 20);
             this.textBox_mssv.TabIndex = 7;
+            this.textBox_mssv.TextChanged += new System.EventHandler(this.textBox_mssv_TextChanged);
             // 
             // label7
             // 
@@ -291,6 +292,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HocSinhSinhVienGUI";
             this.Text = "HocSinhSinhVienGUI";
+            this.Load += new System.EventHandler(this.HocSinhSinhVienGUI_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
