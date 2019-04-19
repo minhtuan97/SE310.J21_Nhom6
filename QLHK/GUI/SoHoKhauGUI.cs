@@ -134,7 +134,7 @@ namespace GUI
                     item.dbnktt.SOHOKHAU = shkDTO.db;
                     item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
                     item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                    item.qlhk.SubmitChanges();
+                    nktt.Update(item);
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
                 MessageBox.Show(this, "Tạo sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -146,10 +146,13 @@ namespace GUI
                 shk.Update(shkDTO);
                 foreach (NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
                 {
-                    item.dbnktt.SOHOKHAU = shkDTO.db;
-                    item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                    item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                    item.qlhk.SubmitChanges();
+                    if(item.dbnktt.SOSOHOKHAU != shkDTO.db.SOSOHOKHAU|| item.dbnktt.DIACHITHUONGTRU != shkDTO.db.DIACHI)
+                    {
+                        item.dbnktt.SOHOKHAU = shkDTO.db;
+                        item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                        item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                        nktt.Update(item);
+                    }
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
                 MessageBox.Show(this, "Cập nhật sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);

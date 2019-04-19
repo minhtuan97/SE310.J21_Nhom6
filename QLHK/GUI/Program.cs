@@ -18,7 +18,7 @@ namespace GUI
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run(new HocSinhSinhVienGUI());
+            Application.Run(new SoHoKhauGUI());
         }
     }
 }
