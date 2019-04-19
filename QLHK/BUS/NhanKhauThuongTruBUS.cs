@@ -24,9 +24,9 @@ namespace BUS
         {
             if (!string.IsNullOrEmpty(nktt.db.HOTEN) &&! string.IsNullOrEmpty(nktt.db.GIOITINH) &&! string.IsNullOrEmpty(nktt.db.NGAYSINH.ToString())
                 &&! string.IsNullOrEmpty(nktt.db.DANTOC) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.MADINHDANH) 
-                &&! string.IsNullOrEmpty(nktt.db.HOCHIEU) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
+                /*&&! string.IsNullOrEmpty(nktt.db.HOCHIEU)*/ &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
                 &&! string.IsNullOrEmpty(nktt.db.QUOCTICH) &&! string.IsNullOrEmpty(nktt.db.TONGIAO) &&! string.IsNullOrEmpty(nktt.db.SDT) 
-                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 &&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU) &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
+                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU)*/ &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
                 &&! string.IsNullOrEmpty(nktt.db.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.db.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.db.TRINHDOCHUYENMON) 
                 &&! string.IsNullOrEmpty(nktt.dbnktt.QUANHEVOICHUHO))
                 return true;
@@ -37,8 +37,12 @@ namespace BUS
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            nk.insert(nktt);
-            return obj.insert(nktt);
+            if (nk.insert(nktt))
+            {
+                if (obj.insert(nktt))
+                    return true;
+            }
+            return false;
         }
         public override bool Add_Table(NhanKhauThuongTruDTO data)
         {
@@ -55,8 +59,12 @@ namespace BUS
         public override bool Update(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
-            
-            return nk.update(nktt)&& obj.update(nktt);
+            if (nk.update(nktt))
+            {
+                if (obj.update(nktt))
+                    return true;
+            }
+            return false;
         }
         public List<NhanKhauThuongTruDTO> TimKiem(string query)
         {
