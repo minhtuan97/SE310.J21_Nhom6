@@ -70,7 +70,6 @@
             this.tbSoSoHoKhau.Name = "tbSoSoHoKhau";
             this.tbSoSoHoKhau.Size = new System.Drawing.Size(226, 20);
             this.tbSoSoHoKhau.TabIndex = 1;
-            this.tbSoSoHoKhau.TextChanged += new System.EventHandler(this.tbSoSoHoKhau_TextChanged);
             // 
             // label2
             // 

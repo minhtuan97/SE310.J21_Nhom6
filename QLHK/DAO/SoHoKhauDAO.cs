@@ -61,10 +61,10 @@ namespace DAO
         {
             qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
 
-            foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
-            {
-                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(item.dbnktt);
-            }
+            //foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
+            //{
+            //    qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(item.dbnktt);
+            //}
             try
             {
                 qlhk.SubmitChanges();

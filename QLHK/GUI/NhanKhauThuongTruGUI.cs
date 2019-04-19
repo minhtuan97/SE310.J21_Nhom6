@@ -192,10 +192,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll();
+            cbbNoiCap.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll();
+            cbbNoiSinh.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
         }
         public NhanKhauThuongTruGUI(string sosohokhau, string diachithuongtru)
         {
@@ -217,10 +217,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll();
+            cbbNoiCap.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll();
+            cbbNoiSinh.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
         }
 
         public NhanKhauThuongTruGUI(string madinhdanh, int i, string tenChuHo = "")
@@ -239,10 +239,10 @@ namespace GUI
 
             cbbNoiCap.DisplayMember = "ten";
             cbbNoiCap.ValueMember = "matp";
-            cbbNoiCap.DataSource = ttp.GetAll();
+            cbbNoiCap.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
             cbbNoiSinh.DisplayMember = "ten";
             cbbNoiSinh.ValueMember = "matp";
-            cbbNoiSinh.DataSource = ttp.GetAll();
+            cbbNoiSinh.DataSource = ttp.GetAll().Select(r => r.db.ten).ToList();
 
             List<NhanKhauThuongTruDTO> kq = nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'");
             if (kq.Count > 0)
@@ -269,7 +269,7 @@ namespace GUI
             //string gioiTinh = rdNam.Checked ? "nam" : "nu";
 
 
-            nkttDTO = new NhanKhauThuongTruDTO(tbMaNKTT.Text,tbDCThuongTru.Text, tbQHVoiCH.Text, tbSoSHK.Text, tbmadinhdanh.Text, tbhoten.Text, tbTenKhac.Text, dtpNgaySinh.Value,
+            nkttDTO = new NhanKhauThuongTruDTO(tbMaNKTT.Text,tbDCThuongTru.Text, tbQHVoiCH.Text, null/*tbSoSHK.Text*/, tbmadinhdanh.Text, tbhoten.Text, tbTenKhac.Text, dtpNgaySinh.Value,
                 rdNam.Checked?"nam":"nu",cbbNoiSinh.Text, tbnguyenquan.Text, tbdantoc.Text, tbtongiao.Text, tbquoctich.Text, tbhochieu.Text, tbDCThuongTru.Text,
                 tbDCHienTai.Text, tbsodienthoai.Text,tbTrinhDoHocVan.Text,tbTrinhDoCM.Text,tbBietTiengDanToc.Text, tbTrinhDoNN.Text,tbNgheNghiep.Text);
 

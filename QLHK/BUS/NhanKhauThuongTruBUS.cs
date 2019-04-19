@@ -24,9 +24,9 @@ namespace BUS
         {
             if (!string.IsNullOrEmpty(nktt.db.HOTEN) &&! string.IsNullOrEmpty(nktt.db.GIOITINH) &&! string.IsNullOrEmpty(nktt.db.NGAYSINH.ToString())
                 &&! string.IsNullOrEmpty(nktt.db.DANTOC) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.MADINHDANH) 
-                &&! string.IsNullOrEmpty(nktt.db.HOCHIEU) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
+                /*&&! string.IsNullOrEmpty(nktt.db.HOCHIEU)*/ &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
                 &&! string.IsNullOrEmpty(nktt.db.QUOCTICH) &&! string.IsNullOrEmpty(nktt.db.TONGIAO) &&! string.IsNullOrEmpty(nktt.db.SDT) 
-                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 &&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU) &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
+                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU)*/ &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
                 &&! string.IsNullOrEmpty(nktt.db.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.db.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.db.TRINHDOCHUYENMON) 
                 &&! string.IsNullOrEmpty(nktt.dbnktt.QUANHEVOICHUHO))
                 return true;
