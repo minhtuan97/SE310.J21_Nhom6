@@ -17,6 +17,7 @@ namespace GUI
     {
         NhanKhauTamTruBUS nkttBus;
         NhanKhauTamTruDTO nkttDto;
+        SoTamTruBUS soTamTruBUS;
 
         string madinhdanhForInsert = "";
         string madinhdanhForSearch = "";
@@ -235,6 +236,26 @@ namespace GUI
         //Thêm một nhân khẩu tạm trú
         private void btnThem_Click(object sender, EventArgs e)
         {
+            //Thêm sổ tạm trú nếu chưa có
+            soTamTruBUS = new SoTamTruBUS();
+            string sosotamtru = txtSoSoTamTru1.Text.ToString();
+
+            //Chua co so tam tru nay
+            if (!soTamTruBUS.ExistedSoTamTru(sosotamtru))
+            {
+                SoTamTruDTO stt = new SoTamTruDTO(sosotamtru, "", "", DateTime.Now, DateTime.Now);
+                if (soTamTruBUS.Add(stt))
+                {
+                    MessageBox.Show("Them so tam tru thanh cong");
+                }
+                else
+                {
+                    MessageBox.Show("Them so tam tru khong thanh cong");
+                }
+            }
+
+
+
             string manhankhautamtru = txtMaNhanKhauTamTru1.Text.ToString();
             string madinhdanh = txtMaDinhDanh1.Text.ToString();
 
@@ -252,11 +273,6 @@ namespace GUI
             }
             string hoten = txt_HoTen.Text.ToString();
 
-            if (sotamtru.Existed_NhanKhau(madinhdanh))
-            {
-                MessageBox.Show("nhân khẩu tạm trú " + hoten + " đã có trong hệ thống !");
-                return;
-            }
 
             //Kiểm tra tổng ngày tạm trú không quá 2 năm
             DateTime ngaycap = dt_TuNgay.Value.Date;
@@ -272,7 +288,7 @@ namespace GUI
 
 
             string diachihiennay =txtDiaChiHienNay.Text.ToString();
-            string sosotamtru = txtSoSoTamTru1.Text.ToString();
+            
             
 
             string nghenghiep = txt_NgheNghiep.Text.ToString();
@@ -1087,7 +1103,57 @@ namespace GUI
 
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = nkttBus.TimKiem(madinhdanh);
+
+            List<NhanKhauTamTruDTO> kq = nkttBus.TimKiemNKTT(madinhdanh);
+
+            if (kq.Count > 0)
+            {
+                NhanKhauTamTruDTO dt = kq[0];
+                nkttDto = new NhanKhauTamTruDTO(dt);
+
+                fillData();
+            }
+            else
+            {
+                MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+            MessageBox.Show("Tim Thanh COng");
         }
+
+
+        private void fillData()
+        {
+            txt_HoTen.Text = nkttDto.db.HOTEN;
+            txt_TenKhac.Text = nkttDto.db.TENKHAC;
+            rdNam.Checked = (nkttDto.db.GIOITINH == "Nam"); rdNu.Checked = (nkttDto.db.GIOITINH == "Nữ");
+            dt_NgaySinh.Value = nkttDto.db.NGAYSINH;
+            txt_DanToc.Text = nkttDto.db.DANTOC;
+            txt_NgheNghiep.Text = nkttDto.db.NGHENGHIEP;
+            txtMaDinhDanh1.Text = nkttDto.db.MADINHDANH;
+            txt_HoChieu.Text = nkttDto.db.HOCHIEU;
+
+            txt_NguyenQuan.Text = nkttDto.db.NGUYENQUAN;
+            txtNoiSinh.Text = nkttDto.db.NOISINH;
+            txt_QuocTich.Text = nkttDto.db.QUOCTICH;
+            txt_TonGiao.Text = nkttDto.db.TONGIAO;
+            txt_SoDienThoai.Text = nkttDto.db.SDT;
+
+            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
+           // tbSoSHK.Text = string.IsNullOrEmpty(nkttDto.dbnktamtru.SOSOTAMTRU) ? tbSoSHK.Text : nkttDTO.dbnktt.SOSOHOKHAU;
+            txtDiaChiHienNay.Text = nkttDto.db.DIACHIHIENNAY;
+
+            txt_TrinhDoHocVan.Text = nkttDto.db.TRINHDOHOCVAN;
+            txt_TrinhDoChuyenMon.Text = nkttDto.db.TRINHDOCHUYENMON;
+            txt_BietTiengDanToc.Text = nkttDto.db.BIETTIENGDANTOC;
+            txt_TrinhDoNgoaiNgu.Text = nkttDto.db.TRINHDONGOAINGU;
+            //txt_NoiLamViec.Text = nkttDto.db.NOI
+            //tbQHVoiCH.Text = nkttDto.dbnktt.QUANHEVOICHUHO;
+
+            //LoadtieuSu();
+            //Loadtienantiensu();
+        }
+
     }
 }

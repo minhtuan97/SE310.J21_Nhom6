@@ -8,7 +8,7 @@ namespace DTO
 {
     public class SoTamTruDTO
     {
-        public SOTAMTRU db;
+        public SOTAMTRU db = new SOTAMTRU();
 
         public SoTamTruDTO() { }
 

@@ -72,7 +72,7 @@ namespace DTO
     #endregion
 		
 		public quanlyhokhauDataContext() : 
-				base(global::DTO.Properties.Settings.Default.QLHKConnectionString1, mappingSource)
+				base(global::DTO.Properties.Settings.Default.QLHKConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -648,7 +648,7 @@ namespace DTO
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12)")]
 		public string MADINHDANH
 		{
 			get
@@ -1495,7 +1495,7 @@ namespace DTO
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _MANHAKHAUTAMTRU;
+		private string _MANHANKHAUTAMTRU;
 		
 		private string _MADINHDANH;
 		
@@ -1517,8 +1517,8 @@ namespace DTO
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnMANHAKHAUTAMTRUChanging(string value);
-    partial void OnMANHAKHAUTAMTRUChanged();
+    partial void OnMANHANKHAUTAMTRUChanging(string value);
+    partial void OnMANHANKHAUTAMTRUChanged();
     partial void OnMADINHDANHChanging(string value);
     partial void OnMADINHDANHChanged();
     partial void OnSOSOTAMTRUChanging(string value);
@@ -1540,27 +1540,27 @@ namespace DTO
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MANHAKHAUTAMTRU", DbType="Char(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MANHAKHAUTAMTRU
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MANHANKHAUTAMTRU", DbType="Char(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MANHANKHAUTAMTRU
 		{
 			get
 			{
-				return this._MANHAKHAUTAMTRU;
+				return this._MANHANKHAUTAMTRU;
 			}
 			set
 			{
-				if ((this._MANHAKHAUTAMTRU != value))
+				if ((this._MANHANKHAUTAMTRU != value))
 				{
-					this.OnMANHAKHAUTAMTRUChanging(value);
+					this.OnMANHANKHAUTAMTRUChanging(value);
 					this.SendPropertyChanging();
-					this._MANHAKHAUTAMTRU = value;
-					this.SendPropertyChanged("MANHAKHAUTAMTRU");
-					this.OnMANHAKHAUTAMTRUChanged();
+					this._MANHANKHAUTAMTRU = value;
+					this.SendPropertyChanged("MANHANKHAUTAMTRU");
+					this.OnMANHANKHAUTAMTRUChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12)")]
 		public string MADINHDANH
 		{
 			get
@@ -2039,8 +2039,28 @@ namespace DTO
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maqh", DbType="NVarChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string maqh
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MANHANKHAUTHUONGTRU", DbType="Char(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MANHANKHAUTHUONGTRU
+		{
+			get
+			{
+				return this._MANHANKHAUTHUONGTRU;
+			}
+			set
+			{
+				if ((this._MANHANKHAUTHUONGTRU != value))
+				{
+					this.OnMANHANKHAUTHUONGTRUChanging(value);
+					this.SendPropertyChanging();
+					this._MANHANKHAUTHUONGTRU = value;
+					this.SendPropertyChanged("MANHANKHAUTHUONGTRU");
+					this.OnMANHANKHAUTHUONGTRUChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12)")]
+		public string MADINHDANH
 		{
 			get
 			{
@@ -2059,8 +2079,8 @@ namespace DTO
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ten", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string ten
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SOSOHOKHAU", DbType="Char(9)")]
+		public string SOSOHOKHAU
 		{
 			get
 			{

@@ -203,25 +203,7 @@ namespace GUI
 
             string machuhotamtru = sotamtru.convertTentoMaNhanKhauTamTru(cbb_MaChuHo.Text.ToString(), sosotamtru);
 
-            //Kiểm tra sự tồn tại của mã số sổ tạm trú
-            if (sotamtruBus.ExistedSoTamTru(sosotamtru))
-            {
-                MessageBox.Show("Sổ tạm trú " + sosotamtru + " đã có ! vui lòng kiểm tra lại!");
-                return ;
-            }
-
-            //Kiểm tra sự tồn tại của mã nhân khẩu tạm trú để làm chủ hộ
-            if (!sotamtruBus.Existed_NhanKhauTamTru(machuhotamtru))
-            {
-                MessageBox.Show("Chưa đăng ký tạm trú cho nhân khẩu có mã " + machuhotamtru + " !");
-                return;
-            }
-            //Kiểm tra chủ hộ này có nằm trong một sổ tạm trú khác hay không?
-            if (sotamtruBus.Duplicated_NhanKhauTamTru(machuhotamtru, sosotamtru))
-            {
-                MessageBox.Show("Nhân khẩu tạm trú " + machuhotamtru + " đang ở trong sổ tạm trú khác!");
-                return;
-            }
+    
             DateTime tungay = dt_TuNgay.Value.Date;
             DateTime denngay = dt_DenNgay.Value.Date;
 
@@ -245,7 +227,7 @@ namespace GUI
 
             sotamtruDto = new SoTamTruDTO(sosotamtru,machuhotamtru, choohiennay, tungay, denngay);
 
-            if (sotamtruBus.Add(sotamtruDto))
+            if (sotamtruBus.Update(sotamtruDto))
             {
                 MessageBox.Show("Đăng ký tạm trú có sổ tạm trú "+sosotamtru+" thành công!");
                 LoadDataGridView();
