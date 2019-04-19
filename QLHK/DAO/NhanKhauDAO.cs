@@ -48,7 +48,7 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                //qlhk.SubmitChanges();
                 return false;
             }
 

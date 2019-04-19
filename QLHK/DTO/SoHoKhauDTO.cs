@@ -9,7 +9,7 @@ namespace DTO
 {
     public class SoHoKhauDTO
     {
-        public SOHOKHAU db;
+        public SOHOKHAU db= new SOHOKHAU();
         public string TenChuHo;
         public List<NhanKhauThuongTruDTO> NhanKhau { get; set; }
 
