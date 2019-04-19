@@ -20,7 +20,7 @@ namespace DAO
             var query = from nhankhau in qlhk.NHANKHAUs
                         join nhankhautamtru in qlhk.NHANKHAUTAMTRUs on nhankhau.MADINHDANH equals nhankhautamtru.MADINHDANH
                         where nhankhautamtru.SOSOTAMTRU == sosotamtru
-                        select new NhanKhauTamTruDTO(nhankhautamtru.MANHAKHAUTAMTRU, nhankhautamtru.NOITAMTRU, 
+                        select new NhanKhauTamTruDTO(nhankhautamtru.MANHANKHAUTAMTRU, nhankhautamtru.NOITAMTRU, 
                         nhankhautamtru.TUNGAY, nhankhautamtru.DENNGAY, nhankhautamtru.LYDO, nhankhautamtru.SOSOTAMTRU, 
                         nhankhau.MADINHDANH, nhankhau.HOTEN, nhankhau.TENKHAC, nhankhau.NGAYSINH, nhankhau.GIOITINH, 
                         nhankhau.NOISINH, nhankhau.NGUYENQUAN, nhankhau.DANTOC, nhankhau.TONGIAO, nhankhau.QUOCTICH, 
@@ -39,26 +39,30 @@ namespace DAO
             var kq = from nktt in qlhk.NHANKHAUTAMTRUs
                      select new NhanKhauTamTruDTO
                      {
-                         db = nktt,
+                         dbnktamtru = nktt,
                      };
             List<NhanKhauTamTruDTO> lst_NK = kq.ToList();
             return lst_NK;
         }
 
 
-        public override bool insert(NhanKhauTamTruDTO nktt)
+        public override bool insert(NhanKhauTamTruDTO data)
         {
+            if (!String.IsNullOrEmpty(data.db.MADINHDANH))
+            {
+                qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            }
+            if (!String.IsNullOrEmpty(data.dbnktamtru.MADINHDANH))
+            {
+                qlhk.NHANKHAUTAMTRUs.InsertOnSubmit(data.dbnktamtru);
+            }
 
-            qlhk.NHANKHAUTAMTRUs.InsertOnSubmit(nktt.db);
             try
             {
                 qlhk.SubmitChanges();
                 return true;
-            }
-            catch (Exception e)
+            }catch(Exception e)
             {
-                Console.WriteLine(e);
-                qlhk.SubmitChanges();
                 return false;
             }
 
@@ -74,7 +78,7 @@ namespace DAO
                 //NHANKHAUTAMTRU nk = new NHANKHAUTAMTRU();
                 //nk = qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh);
                 NhanKhauTamTruDTO nktt = new NhanKhauTamTruDTO(qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh));
-                qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(nktt.db);
+                qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(nktt.dbnktamtru);
 
                 NhanKhauDAO nk = new NhanKhauDAO();
                 nk.delete(madinhdanh);
@@ -103,7 +107,7 @@ namespace DAO
             {
                 List<NhanKhauTamTruDTO> kq = this.getAll();
                 NhanKhauTamTruDTO[] arr = kq.ToArray();
-                qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(arr[row].db);
+ //               qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(arr[row].db);
                 qlhk.SubmitChanges();
                 return true;
             }
@@ -122,11 +126,11 @@ namespace DAO
             //Execute
             foreach(NHANKHAUTAMTRU NKTT in query)
             {
-                NKTT.NOITAMTRU = nktt.db.NOITAMTRU;
-                NKTT.TUNGAY = nktt.db.TUNGAY;
-                NKTT.DENNGAY = nktt.db.DENNGAY;
-                NKTT.LYDO = nktt.db.LYDO;
-                NKTT.SOSOTAMTRU = nktt.db.SOSOTAMTRU;
+                NKTT.NOITAMTRU = nktt.dbnktamtru.NOITAMTRU;
+                NKTT.TUNGAY = nktt.dbnktamtru.TUNGAY;
+                NKTT.DENNGAY = nktt.dbnktamtru.DENNGAY;
+                NKTT.LYDO = nktt.dbnktamtru.LYDO;
+                NKTT.SOSOTAMTRU = nktt.dbnktamtru.SOSOTAMTRU;
             }
 
 
@@ -159,11 +163,11 @@ namespace DAO
             //Execute
             foreach (NHANKHAUTAMTRU NKTT in query)
             {
-                NKTT.NOITAMTRU = data.db.NOITAMTRU;
-                NKTT.TUNGAY = data.db.TUNGAY;
-                NKTT.DENNGAY = data.db.DENNGAY;
-                NKTT.LYDO = data.db.LYDO;
-                NKTT.SOSOTAMTRU = data.db.SOSOTAMTRU;
+                NKTT.NOITAMTRU = data.dbnktamtru.NOITAMTRU;
+                NKTT.TUNGAY = data.dbnktamtru.TUNGAY;
+                NKTT.DENNGAY = data.dbnktamtru.DENNGAY;
+                NKTT.LYDO = data.dbnktamtru.LYDO;
+                NKTT.SOSOTAMTRU = data.dbnktamtru.SOSOTAMTRU;
             }
 
 
@@ -204,10 +208,31 @@ namespace DAO
         }
 
 
+        public List<NhanKhauTamTruDTO> TimKiemNKTT(string madinhdanh)
+        {
+            String query = "SELECT * FROM nhankhautamtru where madinhdanh=" + madinhdanh;
+            var res = qlhk.ExecuteQuery<NHANKHAUTAMTRU>(query).ToList();
+            List<NhanKhauTamTruDTO> lst = new List<NhanKhauTamTruDTO>();
+            foreach (NHANKHAUTAMTRU i in res)
+            {
+                NhanKhauTamTruDTO ts = new NhanKhauTamTruDTO(i);
+                lst.Add(ts);
+            }
+
+            return lst;
+
+            //string sql = "SELECT  nhankhau.MaDinhDanh, MaNhanKhauTamTru, HoTen,TenKhac,NgaySinh," +
+            //    " GioiTinh,NoiSinh,NguyenQuan,DanToc,TonGiao,QuocTich,HoChieu,NoiThuongTru,DiaChiHienNay," +
+            //    "SDT,TrinhDoHocVan,TrinhDoChuyenMon,BietTiengDanToc,TrinhDoNgoaiNgu, NgheNghiep, SoSoTamTru,NoiTamTru,TuNgay,DenNgay,LyDo " +
+            //    "FROM nhankhautamtru inner join nhankhau " +
+            //    "WHERE nhankhautamtru.madinhdanh=nhankhau.madinhdanh and nhankhau.madinhdanh='" + madinhdanh + "'";
+        }
+
+        
 
         public override bool insert_table(NhanKhauTamTruDTO data)
         {
-            qlhk.NHANKHAUTAMTRUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTAMTRUs.InsertOnSubmit(data.dbnktamtru);
             try
             {
                 qlhk.SubmitChanges();

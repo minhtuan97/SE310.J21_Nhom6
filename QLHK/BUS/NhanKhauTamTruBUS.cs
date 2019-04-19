@@ -28,7 +28,7 @@ namespace BUS
 
         public bool AddNKTT(NhanKhauTamTruDTO nhankhautamtru)
         {
-            if(nhankhautamtru.db.MANHAKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == "" 
+            if(nhankhautamtru.dbnktamtru.MANHANKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == "" 
                 // || nhankhautamtru.db.HOTEN == "" || nhankhautamtru.DanToc =="" || nhankhautamtru.NgheNghiep == "" || nhankhautamtru.QuocTich == ""
               )
             {
@@ -41,7 +41,7 @@ namespace BUS
                 return false;
             }
 
-            double ngay = (nhankhautamtru.db.DENNGAY - nhankhautamtru.db.TUNGAY).TotalDays;
+            double ngay = (nhankhautamtru.dbnktamtru.DENNGAY - nhankhautamtru.dbnktamtru.TUNGAY).TotalDays;
             double sum = 730;
             if (ngay > sum)
             {
@@ -68,6 +68,12 @@ namespace BUS
         {
             return objnktt.TimKiem(query);
         }
+
+        public List<NhanKhauTamTruDTO> TimKiemNKTT(string madinhdanh)
+        {
+            return objnktt.TimKiemNKTT(madinhdanh);
+        }
+
         public override bool Add_Table(NhanKhauTamTruDTO data)
         {
             return objnktt.insert_table(data);

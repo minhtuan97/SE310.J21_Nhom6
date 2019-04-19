@@ -8,19 +8,19 @@ namespace DTO
 {
     public class NhanKhauTamTruDTO : NhanKhau
     {
-        public NHANKHAUTAMTRU db;
+        public NHANKHAUTAMTRU dbnktamtru = new NHANKHAUTAMTRU();
 
         public NhanKhauTamTruDTO() : base() { }
 
         public NhanKhauTamTruDTO(string maNhanKhauTamTru, string noiTamTru, DateTime tuNgay, DateTime denNgay, string lyDo, string soSoTamTru, string str_MaDinhDanh)
         {
-            db.MANHAKHAUTAMTRU = maNhanKhauTamTru;
-            db.NOITAMTRU = noiTamTru;
-            db.TUNGAY = tuNgay;
-            db.DENNGAY = denNgay;
-            db.LYDO = lyDo;
-            db.SOSOTAMTRU = soSoTamTru;
-            db.MADINHDANH = str_MaDinhDanh;
+            dbnktamtru.MANHANKHAUTAMTRU = maNhanKhauTamTru;
+            dbnktamtru.NOITAMTRU = noiTamTru;
+            dbnktamtru.TUNGAY = tuNgay;
+            dbnktamtru.DENNGAY = denNgay;
+            dbnktamtru.LYDO = lyDo;
+            dbnktamtru.SOSOTAMTRU = soSoTamTru;
+            dbnktamtru.MADINHDANH = str_MaDinhDanh;
         }
 
         public NhanKhauTamTruDTO(string maNhanKhauTamTru, string noiTamTru, DateTime tuNgay, DateTime denNgay, string lyDo, string soSoTamTru, 
@@ -32,18 +32,27 @@ namespace DTO
                 noiSinh,nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                 trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            db.MANHAKHAUTAMTRU = maNhanKhauTamTru;
-            db.NOITAMTRU = noiTamTru;
-            db.TUNGAY = tuNgay;
-            db.DENNGAY = denNgay;
-            db.LYDO = lyDo;
-            db.SOSOTAMTRU = soSoTamTru;
-            db.MADINHDANH = maDinhDanh;
+            dbnktamtru.MANHANKHAUTAMTRU = maNhanKhauTamTru;
+            dbnktamtru.NOITAMTRU = noiTamTru;
+            dbnktamtru.TUNGAY = tuNgay;
+            dbnktamtru.DENNGAY = denNgay;
+            dbnktamtru.LYDO = lyDo;
+            dbnktamtru.SOSOTAMTRU = soSoTamTru;
+            dbnktamtru.MADINHDANH = maDinhDanh;
         }
 
-        public NhanKhauTamTruDTO(NHANKHAUTAMTRU dbs)
+
+
+        public NhanKhauTamTruDTO(NHANKHAUTAMTRU nktt)
         {
-            db = dbs;
+            dbnktamtru = nktt;
+            db = nktt.NHANKHAU;
+        }
+
+        public NhanKhauTamTruDTO(NhanKhauTamTruDTO nktt)
+        {
+            db = nktt.db;
+            dbnktamtru = nktt.dbnktamtru;
         }
 
 

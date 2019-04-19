@@ -337,7 +337,7 @@ namespace DAO
 
                 foreach (var tt in q)
                 {
-                    list_ID.Add(tt.MANHAKHAUTAMTRU);
+                    list_ID.Add(tt.MANHANKHAUTAMTRU);
                 }
 
                 return list_ID.First();
@@ -402,13 +402,13 @@ namespace DAO
         //KIểm tra tồn tại
         public int Existed_SoTamTru(string sosotamtru)
         {
-            List<String> lst = new List<String>();
+            List<string> lst = new List<string>();
 
             var query = from stt in qlhk.SOTAMTRUs where stt.SOSOTAMTRU == sosotamtru select stt;
 
             foreach(SOTAMTRU q in query)
             {
-                lst.Add(q.SOSOTAMTRU);
+                lst.Add(q.SOSOTAMTRU.ToString());
             }
 
             if (lst.Count() > 0)
@@ -440,11 +440,11 @@ namespace DAO
         {
             List<String> lst = new List<String>();
 
-            var query = from nk in qlhk.NHANKHAUTAMTRUs where nk.MANHAKHAUTAMTRU == manhankhautamtru select nk;
+            var query = from nk in qlhk.NHANKHAUTAMTRUs where nk.MANHANKHAUTAMTRU == manhankhautamtru select nk;
 
             foreach (NHANKHAUTAMTRU q in query)
             {
-                lst.Add(q.MANHAKHAUTAMTRU);
+                lst.Add(q.MANHANKHAUTAMTRU);
             }
 
             if (lst.Count() > 0)
@@ -461,12 +461,12 @@ namespace DAO
 
             var query = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs join sotamtru in qlhk.SOTAMTRUs 
                         on nhankhautamtru.SOSOTAMTRU equals sotamtru.SOSOTAMTRU
-                        where nhankhautamtru.MANHAKHAUTAMTRU == manhankhautamtru && sotamtru.SOSOTAMTRU == sosotamtru
+                        where nhankhautamtru.MANHANKHAUTAMTRU == manhankhautamtru && sotamtru.SOSOTAMTRU == sosotamtru
                         select nhankhautamtru;
 
             foreach (NHANKHAUTAMTRU q in query)
             {
-                lst.Add(q.MANHAKHAUTAMTRU);
+                lst.Add(q.MANHANKHAUTAMTRU);
             }
 
             if (lst.Count() > 0)
@@ -548,7 +548,7 @@ namespace DAO
         {
             DateTime date = new DateTime(12 / 12 / 1800);
             List<DateTime> Date_list = new List<DateTime>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 Date_list.Add(xp.TUNGAY);
@@ -561,7 +561,7 @@ namespace DAO
         {
             DateTime date = new DateTime(12 / 12 / 1800);
             List<DateTime> Date_list = new List<DateTime>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 Date_list.Add(xp.DENNGAY);
@@ -574,7 +574,7 @@ namespace DAO
         public String getNoiTamTru(string manhankhautamtru)
         {
             List<String> list = new List<String>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 list.Add(xp.NOITAMTRU);

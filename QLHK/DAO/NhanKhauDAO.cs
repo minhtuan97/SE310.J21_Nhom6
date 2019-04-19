@@ -213,7 +213,7 @@ namespace DAO
                                 nk.BIETTIENGDANTOC,
                                 nk.TRINHDONGOAINGU,
                                 nk.NGHENGHIEP,
-                                nktt.MANHAKHAUTAMTRU,
+                                nktt.MANHANKHAUTAMTRU,
                                 nktt.NOITAMTRU,
                                 nktt.SOSOTAMTRU,
                                 nktt.LYDO,

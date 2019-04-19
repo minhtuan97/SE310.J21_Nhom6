@@ -122,6 +122,7 @@
             this.txt_MaTieuSu = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.btnTim1 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -130,7 +131,6 @@
             this.txtSoSoTamTru1 = new System.Windows.Forms.TextBox();
             this.btnReset1 = new System.Windows.Forms.Button();
             this.btnXong1 = new System.Windows.Forms.Button();
-            this.btnTim1 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -1046,8 +1046,18 @@
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(1277, 429);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(1277, 749);
             this.xtraScrollableControl1.TabIndex = 51;
+            // 
+            // btnTim1
+            // 
+            this.btnTim1.Location = new System.Drawing.Point(891, 50);
+            this.btnTim1.Name = "btnTim1";
+            this.btnTim1.Size = new System.Drawing.Size(75, 23);
+            this.btnTim1.TabIndex = 59;
+            this.btnTim1.Text = "Tìm kiếm";
+            this.btnTim1.UseVisualStyleBackColor = true;
+            this.btnTim1.Click += new System.EventHandler(this.btnTim1_Click);
             // 
             // label18
             // 
@@ -1118,21 +1128,11 @@
             this.btnXong1.UseVisualStyleBackColor = true;
             this.btnXong1.Click += new System.EventHandler(this.btnXong1_Click);
             // 
-            // btnTim1
-            // 
-            this.btnTim1.Location = new System.Drawing.Point(891, 50);
-            this.btnTim1.Name = "btnTim1";
-            this.btnTim1.Size = new System.Drawing.Size(75, 23);
-            this.btnTim1.TabIndex = 59;
-            this.btnTim1.Text = "Tìm kiếm";
-            this.btnTim1.UseVisualStyleBackColor = true;
-            this.btnTim1.Click += new System.EventHandler(this.btnTim1_Click);
-            // 
             // NhanKhauTamTruGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1277, 429);
+            this.ClientSize = new System.Drawing.Size(1277, 749);
             this.Controls.Add(this.xtraScrollableControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NhanKhauTamTruGUI";
