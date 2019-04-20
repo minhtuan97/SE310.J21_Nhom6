@@ -50,6 +50,27 @@ namespace DAO
             }
         }
 
+        public bool deleteTS(TIEUSU ts)
+        {
+            if (ts==null||string.IsNullOrEmpty(ts.MATIEUSU))
+                return false;
+            
+
+             qlhk.TIEUSUs.DeleteOnSubmit(ts);
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public override bool delete(int row)
         {
             try

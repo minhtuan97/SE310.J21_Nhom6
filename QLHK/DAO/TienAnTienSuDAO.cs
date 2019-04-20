@@ -53,6 +53,26 @@ namespace DAO
             }
         }
 
+        public bool deleteTATS(TIENANTIENSU ta)
+        {
+            if (ta == null || string.IsNullOrEmpty(ta.MATIENANTIENSU))
+                return false;
+
+            qlhk.TIENANTIENSUs.DeleteOnSubmit(ta);
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public override List<TienAnTienSuDTO> getAll()
         {
             var kq = from tienantiensu in qlhk.TIENANTIENSUs

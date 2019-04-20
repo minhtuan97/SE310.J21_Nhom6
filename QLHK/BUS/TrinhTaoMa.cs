@@ -172,7 +172,8 @@ namespace BUS
                 {
                     str_magioitinh = "0";
                 }
-                if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0)
+                else
                 {
                     str_magioitinh = "1";
                 }
@@ -183,7 +184,8 @@ namespace BUS
                 {
                     str_magioitinh = "2";
                 }
-                if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0)
+                else
                 {
                     str_magioitinh = "3";
                 }
@@ -194,7 +196,8 @@ namespace BUS
                 {
                     str_magioitinh = "4";
                 }
-                if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0)
+                else
                 {
                     str_magioitinh = "5";
                 }
@@ -205,7 +208,8 @@ namespace BUS
                 {
                     str_magioitinh = "6";
                 }
-                if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0)
+                else
                 {
                     str_magioitinh = "7";
                 }
@@ -216,7 +220,8 @@ namespace BUS
                 {
                     str_magioitinh = "8";
                 }
-                if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0)
+                else
                 {
                     str_magioitinh = "9";
                 }
@@ -227,7 +232,7 @@ namespace BUS
             string str_madinhdanh;
             try
             {
-                string sql = "select top 1 madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+                string sql = "select top 1 madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "' ORDER BY madinhdanh desc";
                 string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
                 str_madinhdanh = madinhdanh;
             }

@@ -106,45 +106,54 @@ namespace DAO
         }
         public override bool update(NhanKhauThuongTruDTO nktt)
         {
-            // Query the database for the row to be updated.
-            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
-
-            // Execute the query, and change the column values
-            // you want to change.
-            foreach (NHANKHAUTHUONGTRU kq in query)
-            {
-                //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
-                //{
-                if(kq.NHANKHAU != nktt.dbnktt.NHANKHAU)
-                {
-                    kq.NHANKHAU = nktt.dbnktt.NHANKHAU;
-                    kq.MADINHDANH = nktt.dbnktt.MADINHDANH;
-                }
-                    
-                    kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
-                    kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
-                if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
-                {
-                    kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
-                    kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
-                }
-                
-                //    break;
-                //}
-                
-                // Insert any additional changes to column values.
-            }
-            // Submit the changes to the database.
             try
             {
                 qlhk.SubmitChanges();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-                return false;
+
+                // Query the database for the row to be updated.
+                var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
+
+                // Execute the query, and change the column values
+                // you want to change.
+                foreach (NHANKHAUTHUONGTRU kq in query)
+                {
+                    //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
+                    //{
+                    if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH)
+                    {
+                        if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
+                        kq.MADINHDANH = nktt.db.MADINHDANH;
+                    }
+
+                    kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
+                    kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
+                    if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
+                    {
+                        if (nktt.dbnktt.SOHOKHAU != null && nktt.dbnktt.SOSOHOKHAU != null) kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
+                        kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
+                    }
+
+                    //    break;
+                    //}
+
+                    // Insert any additional changes to column values.
+                }
+                // Submit the changes to the database.
+                try
+                {
+                    qlhk.SubmitChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                    return false;
+                }
             }
         }
         //public bool doiChuHo(List<NhanKhauThuongTruDTO> danhSach, string maDinhDanhChuHo)

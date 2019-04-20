@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class NhanKhauThuongTruGUI : Form
     {
-        NhanKhauBUS nk;
+        NhanKhauBUS nk= new NhanKhauBUS();
         NhanKhauThuongTruBUS nktt;
         TieuSuBUS tieuSu;
         public TieuSuDTO tieusudto;
@@ -132,8 +132,8 @@ namespace GUI
             tbsodienthoai.Text = nkttDTO.db.SDT;
 
             tbMaNKTT.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.MANHANKHAUTHUONGTRU)?tbMaNKTT.Text: nkttDTO.dbnktt.MANHANKHAUTHUONGTRU;
-            tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.SOSOHOKHAU)?tbSoSHK.Text:nkttDTO.dbnktt.SOSOHOKHAU;
-            tbDCThuongTru.Text = nkttDTO.dbnktt.DIACHITHUONGTRU;
+            tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.SOSOHOKHAU) ?tbSoSHK.Text:nkttDTO.dbnktt.SOSOHOKHAU;
+            tbDCThuongTru.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.DIACHITHUONGTRU) ?tbDCThuongTru.Text:nkttDTO.dbnktt.DIACHITHUONGTRU;
             tbDCHienTai.Text = nkttDTO.db.DIACHIHIENNAY;
             tbTrinhDoHocVan.Text = nkttDTO.db.TRINHDOHOCVAN;
             tbTrinhDoCM.Text = nkttDTO.db.TRINHDOCHUYENMON;
@@ -332,6 +332,7 @@ namespace GUI
             if (nktt.Update(nkttDTO))
             {
                 MessageBox.Show(this, "Thành công!");
+               
             }
             else
             {
@@ -404,7 +405,7 @@ namespace GUI
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            if(nkttDTO != null) nktt.XoaNKTT(nkttDTO);
+            //if(nkttDTO != null) nktt.XoaNKTT(nkttDTO);
             nkttDTO = null;
             this.Close();
         }

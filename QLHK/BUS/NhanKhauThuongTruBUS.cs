@@ -52,9 +52,31 @@ namespace BUS
         public bool XoaNKTT(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
+            TieuSuDAO ts = new TieuSuDAO();
+            TienAnTienSuDAO ta = new TienAnTienSuDAO();
+            string madinhdanh = nktt.dbnktt.MADINHDANH;
+            List<TieuSuDTO> tsdto = ts.TimKiem("madinhdanh='" + madinhdanh + "'");
+            List<TienAnTienSuDTO> tadto = ta.TimKiem("madinhdanh='" + madinhdanh + "'");
+
+            foreach (TieuSuDTO s in tsdto)
+            {
+                if (!ts.deleteTS(s.db))
+                {
+                    return false;
+                }
+            }
+
+            foreach (TienAnTienSuDTO a in tadto)
+            {
+                if (!ta.deleteTATS(a.db))
+                {
+                    return false;
+                }
+            }
+
             if (obj.XoaNKTT(nktt.dbnktt.MANHANKHAUTHUONGTRU))
             {
-                if (nk.delete(nktt.dbnktt.MADINHDANH))
+                if (nk.delete(madinhdanh))
                     return true;
             }
             return false;
