@@ -175,7 +175,8 @@ namespace DAO
                      join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
                      select new NhanKhauThuongTruDTO
                      {
-                         dbnktt = nktt
+                         dbnktt = nktt,
+                         db = nk
                      };
 
             return kq.ToList();
