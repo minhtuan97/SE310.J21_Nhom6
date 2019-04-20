@@ -88,6 +88,7 @@ namespace DAO
                 return false;
             }
         }
+
         public override bool delete(int row)
         {
             NhanKhauThuongTruDTO[] nktt = this.getAll().ToArray();

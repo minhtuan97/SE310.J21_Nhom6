@@ -30,6 +30,11 @@ namespace BUS
             return tienantiensu.insert_table(data);
         }
 
+        public bool DeleteTATS(string id)
+        {
+            return tienantiensu.deleteTATS(id);
+        }
+
         public override bool Delete(int r)
         {
             return tienantiensu.delete(r);

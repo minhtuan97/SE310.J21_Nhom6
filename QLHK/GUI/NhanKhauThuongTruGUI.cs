@@ -75,8 +75,8 @@ namespace GUI
                 //var bList = new BindingList<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
                 //dGVTieuSu.DataSource = new BindingSource( bList, null);
 
-                //dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
-                dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.dbnktt).ToList());
+                dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.dbnktt).ToList());
 
                 for (int i = 0; i < dGVTieuSu.Rows.Count; i++)
                 {
@@ -98,8 +98,10 @@ namespace GUI
                 dGVTienAnTienSu.DataSource = null;
                 dGVTienAnTienSu.Rows.Clear();
 
-                var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
-                dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
+                //var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
+                dGVTienAnTienSu.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+
                 for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -470,7 +472,9 @@ namespace GUI
                         if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Đang xóa...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             int rowIndex = e.RowIndex;
-                            tieuSu.Delete(rowIndex);
+                            string matieusu = dGVTieuSu.Rows[rowIndex].Cells["matieusu"].Value.ToString();
+                            tieuSu.DeleteTS(matieusu);
+                            LoadtieuSu();
                         }
                     }
                     else if (Task == "Insert")
@@ -528,7 +532,9 @@ namespace GUI
                         if (MessageBox.Show("Bạn có chắc chắm muốn xóa không?", "Đang xóa...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             int rowIndex = e.RowIndex;
-                            tienAn.Delete(rowIndex);
+                            string matienantiensu = dGVTienAnTienSu.Rows[rowIndex].Cells["matienantiensu"].Value.ToString();
+                            tienAn.DeleteTATS(matienantiensu);
+                            Loadtienantiensu();
                         }
                     }
                     else if (Task == "Insert")

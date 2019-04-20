@@ -34,6 +34,11 @@ namespace BUS
         {
             return tieusu.delete(r);
         }
+        
+        public bool DeleteTS(string id)
+        {
+            return tieusu.deleteTS(id);
+        }
 
         public override bool Update(TieuSuDTO data)
         {

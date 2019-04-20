@@ -68,6 +68,11 @@ namespace BUS
                 }
             }
             table.Columns.Add(new DataColumn("Change"));
+
+            foreach (DataRow item in table.Rows)
+            {
+                item[table.Columns.Count - 1] = "Delete";
+            }
             
 
             return table;
