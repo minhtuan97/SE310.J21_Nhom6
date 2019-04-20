@@ -260,6 +260,7 @@
             this.datagridview.Name = "datagridview";
             this.datagridview.Size = new System.Drawing.Size(724, 150);
             this.datagridview.TabIndex = 23;
+            this.datagridview.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridview_CellClick);
             // 
             // SoTamTruGUI
             // 

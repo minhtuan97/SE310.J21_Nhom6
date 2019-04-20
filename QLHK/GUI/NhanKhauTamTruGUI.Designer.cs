@@ -425,7 +425,6 @@
             this.rdNu.TabIndex = 52;
             this.rdNu.Text = "Nữ";
             this.rdNu.UseVisualStyleBackColor = true;
-            this.rdNu.CheckedChanged += new System.EventHandler(this.rdNu_CheckedChanged);
             // 
             // rdNam
             // 
@@ -438,7 +437,6 @@
             this.rdNam.TabStop = true;
             this.rdNam.Text = "Nam";
             this.rdNam.UseVisualStyleBackColor = true;
-            this.rdNam.CheckedChanged += new System.EventHandler(this.rdNam_CheckedChanged);
             // 
             // btnSua
             // 
@@ -560,7 +558,6 @@
             this.dt_NgaySinh.Name = "dt_NgaySinh";
             this.dt_NgaySinh.Size = new System.Drawing.Size(143, 20);
             this.dt_NgaySinh.TabIndex = 17;
-            this.dt_NgaySinh.ValueChanged += new System.EventHandler(this.dt_NgaySinh_ValueChanged);
             // 
             // label9
             // 
@@ -708,7 +705,6 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(590, 272);
             this.dataGridView1.TabIndex = 16;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // groupBox1
             // 

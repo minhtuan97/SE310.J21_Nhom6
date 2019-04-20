@@ -106,7 +106,7 @@ namespace GUI
             if (rdTamTru.Checked)
             {
                 stt = new SoTamTruBUS();
-                List<SoTamTruDTO> sttdto = stt.TimKiem(value);
+                List<SoTamTruDTO> sttdto = stt.TimKiem("sosotamtru='" + value + "'");
                 if (sttdto.Count > 0)
                 {
                     SoTamTruGUI fr_SoTamTru = new SoTamTruGUI(value);
@@ -136,7 +136,7 @@ namespace GUI
 
                 //Tìm trong bảng nhân khẩu tạm trú
                 nktamtru = new NhanKhauTamTruBUS();
-                List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem(value);
+                List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem("madinhdanh='" + value + "'");
                 if (nktt.Count > 0)
                 {
                     NhanKhauTamTruGUI fr_NhanKhauTamTru = new NhanKhauTamTruGUI(value, "1");
