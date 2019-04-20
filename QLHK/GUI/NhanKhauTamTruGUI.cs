@@ -17,6 +17,7 @@ namespace GUI
     {
         NhanKhauTamTruBUS nkttBus;
         NhanKhauTamTruDTO nkttDto;
+        
         SoTamTruBUS soTamTruBUS;
 
         string madinhdanhForInsert = "";
@@ -196,6 +197,8 @@ namespace GUI
         {
             InitializeComponent();
             this.sosotamtru = Sosotamtru;
+            TienAnTienSuBUS tienSuBUS = new TienAnTienSuBUS();
+            dtGV_TienAnTienSu.DataSource = DataHelper.ListToDatatable<TIENANTIENSU>(tienSuBUS.GetAll().Select(r=>r.db).ToList());
         }
 
         //constructor for search a ciziten
@@ -227,7 +230,6 @@ namespace GUI
             else
             {            
                 txtSoSoTamTru1.Text = sosotamtru;
-
                 LoadDataGridView();
                 GenerateAllID();
             }
@@ -295,8 +297,8 @@ namespace GUI
 
 
             string gioitinh = "";
-            if (rdNam.Checked) gioitinh = "nam";
-            else gioitinh = "nu";
+            if (rdNam.Checked) gioitinh = "Nam";
+            else gioitinh = "Nữ";
 
 
             string dantoc = txt_DanToc.Text.ToString();
@@ -361,7 +363,7 @@ namespace GUI
                 return;
             }
 
-            madinhdanh = madinhdanhForInsert;
+          //  madinhdanh = madinhdanhForInsert;
 
             SoTamTruBUS sotamtruBus = new SoTamTruBUS();
             if (!sotamtruBus.Existed_NhanKhau(madinhdanh))
@@ -371,15 +373,6 @@ namespace GUI
             }
 
             NhanKhauTamTruBUS nktt = new NhanKhauTamTruBUS();
-
-            DateTime DN_temp = Convert.ToDateTime(nktt.GetTuNgay(madinhdanh));
-            DateTime TN_temp = Convert.ToDateTime(nktt.GetDenNgay(madinhdanh));
-            if(DN_temp!=dt_DenNgay.Value.Date || TN_temp != dt_TuNgay.Value.Date)
-            {
-                MessageBox.Show("Bạn không được thay đổi thời gian tạm trú");
-                return;
-            }
-
 
             //Nhập không đầy đủ
             if (!isInputTrueThongTinTamTru())
@@ -465,12 +458,11 @@ namespace GUI
                 return;
             }
 
-            madinhdanh = madinhdanhForInsert;
 
             SoTamTruBUS sotamtruBus = new SoTamTruBUS();
             if (!sotamtruBus.Existed_NhanKhau(madinhdanh))
             {
-                MessageBox.Show("Nhân khẩu tạm trú "+hoten+" không tồn tại !");
+                MessageBox.Show("Nhân khẩu tạm trú " + hoten + " không tồn tại !");
                 return;
             }
 
@@ -1117,9 +1109,6 @@ namespace GUI
             {
                 MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
-            MessageBox.Show("Tim Thanh COng");
         }
 
 
@@ -1127,7 +1116,8 @@ namespace GUI
         {
             txt_HoTen.Text = nkttDto.db.HOTEN;
             txt_TenKhac.Text = nkttDto.db.TENKHAC;
-            rdNam.Checked = (nkttDto.db.GIOITINH == "Nam"); rdNu.Checked = (nkttDto.db.GIOITINH == "Nữ");
+            rdNam.Checked = (nkttDto.db.GIOITINH == "Nam");
+            rdNu.Checked = (nkttDto.db.GIOITINH == "Nữ");
             dt_NgaySinh.Value = nkttDto.db.NGAYSINH;
             txt_DanToc.Text = nkttDto.db.DANTOC;
             txt_NgheNghiep.Text = nkttDto.db.NGHENGHIEP;
@@ -1141,15 +1131,23 @@ namespace GUI
             txt_SoDienThoai.Text = nkttDto.db.SDT;
 
             txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
-           // tbSoSHK.Text = string.IsNullOrEmpty(nkttDto.dbnktamtru.SOSOTAMTRU) ? tbSoSHK.Text : nkttDTO.dbnktt.SOSOHOKHAU;
+            
             txtDiaChiHienNay.Text = nkttDto.db.DIACHIHIENNAY;
 
             txt_TrinhDoHocVan.Text = nkttDto.db.TRINHDOHOCVAN;
             txt_TrinhDoChuyenMon.Text = nkttDto.db.TRINHDOCHUYENMON;
             txt_BietTiengDanToc.Text = nkttDto.db.BIETTIENGDANTOC;
             txt_TrinhDoNgoaiNgu.Text = nkttDto.db.TRINHDONGOAINGU;
-            //txt_NoiLamViec.Text = nkttDto.db.NOI
-            //tbQHVoiCH.Text = nkttDto.dbnktt.QUANHEVOICHUHO;
+
+            txtNoiThuongTru.Text = nkttDto.db.NOITHUONGTRU;
+            txtNoiTamTru.Text = nkttDto.dbnktamtru.NOITAMTRU;
+
+            dt_TuNgay.Value = nkttDto.dbnktamtru.TUNGAY;
+            dt_DenNgay.Value = nkttDto.dbnktamtru.DENNGAY;
+
+            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
+            txt_LyDo.Text = nkttDto.dbnktamtru.LYDO;
+            txtSoSoTamTru1.Text = nkttDto.dbnktamtru.SOSOTAMTRU;
 
             //LoadtieuSu();
             //Loadtienantiensu();
