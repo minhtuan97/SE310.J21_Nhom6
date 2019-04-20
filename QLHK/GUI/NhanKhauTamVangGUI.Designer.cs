@@ -98,6 +98,7 @@
             this.textBox_madinhdanh.Name = "textBox_madinhdanh";
             this.textBox_madinhdanh.Size = new System.Drawing.Size(126, 20);
             this.textBox_madinhdanh.TabIndex = 1;
+            this.textBox_madinhdanh.TextChanged += new System.EventHandler(this.textBox_madinhdanh_TextChanged);
             // 
             // groupBox1
             // 

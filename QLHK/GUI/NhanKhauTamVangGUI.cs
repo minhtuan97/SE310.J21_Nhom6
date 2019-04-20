@@ -24,10 +24,12 @@ namespace GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhau.madinhdanh='" + textBox_madinhdanh.Text + "'");
-            NhanKhauTamVangDTO a = kq[0];
-            if (a!=null)
+
+            List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhautamvang.madinhdanh='" + textBox_madinhdanh.Text + "'");
+            if (kq.Count!=0)
             {
+                NhanKhauTamVangDTO a = kq[0];
+
                 textBox_hoten.Text = a.db.NHANKHAU.HOTEN.ToString();
                 tbNgaySinh.Text = a.db.NHANKHAU.NGAYSINH.ToString();
                 tbdantoc.Text = a.db.NHANKHAU.DANTOC.ToString();
@@ -104,6 +106,8 @@ namespace GUI
             }
             else
             {
+                textBox_hoten.Text = null;
+
                 MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -128,25 +132,71 @@ namespace GUI
 
         private void btnThemTV_Click(object sender, EventArgs e)
         {
+            //string madinhdanh = textBox_madinhdanh.Text.ToString();
+            //string lydo = tbLyDo.Text.ToString();
+            //string noiden = textBox_noiden.Text.ToString();
+            //DateTime ngaybd = dtpNgayBatDau.Value.Date;
+            //DateTime ngaykt = dtpNgayKetThuc.Value.Date;
+            //if(madinhdanh==null||lydo==null||noiden==null || DateTime.Compare(ngaykt, ngaybd) <= 0)
+            //{
+            //    MessageBox.Show("Vui lòng nhập đủ, chính xác thông tin!");
+            //    return;
+            //}
+            //else
+            //{
+
+            //    nktv = new NhanKhauTamVangDTO(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()), ngaybd, ngaykt, lydo, noiden, madinhdanh);
+            //    if (nktvbus.Add(nktv) == true)
+            //        MessageBox.Show("Thêm thành công");
+            //    else
+            //        MessageBox.Show("Thêm không thành công");
+            //}
+
+
+
+
+
+
+
+
+
             string madinhdanh = textBox_madinhdanh.Text.ToString();
             string lydo = tbLyDo.Text.ToString();
             string noiden = textBox_noiden.Text.ToString();
-            DateTime ngaybd = dtpNgayBatDau.Value.Date;
+            DateTime ngaybd= dtpNgayBatDau.Value.Date;
             DateTime ngaykt = dtpNgayKetThuc.Value.Date;
-            if(madinhdanh==null||lydo==null||noiden==null || DateTime.Compare(ngaykt, ngaybd) <= 0)
+            if(madinhdanh==null || lydo==null || noiden==null || ngaybd==null || ngaykt==null || DateTime.Compare(ngaykt,ngaybd) <=0)
             {
-                MessageBox.Show("Vui lòng nhập đủ, chính xác thông tin!");
+                MessageBox.Show("Vui long dien day du thong tin","canh bao",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
             else
             {
-
-                nktv = new NhanKhauTamVangDTO(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()), ngaybd, ngaykt, lydo, noiden, madinhdanh);
-                if (nktvbus.Add(nktv) == true)
-                    MessageBox.Show("Thêm thành công");
+                nktv = new NhanKhauTamVangDTO(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()),ngaybd, ngaykt, lydo,noiden, madinhdanh);
+                if(nktvbus.Add(nktv)==true)
+                {
+                    MessageBox.Show("cap nhap thnah cong", "canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 else
-                    MessageBox.Show("Thêm không thành công");
+                {
+                    MessageBox.Show("khong the cap nhap", "canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private void btnSuaTV_Click(object sender, EventArgs e)
@@ -213,6 +263,12 @@ namespace GUI
 
             MessageBox.Show(this, "Đã tạo thành công file thông tin với tên: " + dstPath, "Thành công",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void textBox_madinhdanh_TextChanged(object sender, EventArgs e)
+        {
+            //textBox_hoten = null;
+
         }
     }
 }

@@ -68,7 +68,7 @@ namespace GUI
             var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
             foreach (var r in datamodel.GetTables())
             {
-                comboBox1.Items.Add(r.TableName.ToString());
+                comboBox1.Items.Add(r.RowType.Name.ToString());
             }
 
         }
@@ -80,7 +80,7 @@ namespace GUI
                 case "canbo":
                     try
                     {
-                        dataGridView1.DataSource = canbobus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<CANBO>(canbobus.GetAll().Select(r=>r.dbcb).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
