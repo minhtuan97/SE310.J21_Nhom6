@@ -104,57 +104,67 @@ namespace DAO
             return false;
 
         }
-        public override bool update(NhanKhauThuongTruDTO nktt)
+
+        public bool updateTTThuongTru(string manktt, SOHOKHAU shk)
         {
+            NHANKHAUTHUONGTRU nk = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == manktt).FirstOrDefault();
+
+            //nk.SOHOKHAU = shk;
+            nk.SOSOHOKHAU = shk.SOSOHOKHAU;
+            nk.DIACHITHUONGTRU = shk.DIACHI;
             try
             {
                 qlhk.SubmitChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                // Query the database for the row to be updated.
-                var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
-
-                // Execute the query, and change the column values
-                // you want to change.
-                foreach (NHANKHAUTHUONGTRU kq in query)
-                {
-                    //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
-                    //{
-                    if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH)
-                    {
-                        if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
-                        kq.MADINHDANH = nktt.db.MADINHDANH;
-                    }
-
-                    kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
-                    kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
-                    if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
-                    {
-                        if (nktt.dbnktt.SOHOKHAU != null && nktt.dbnktt.SOSOHOKHAU != null) kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
-                        kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
-                    }
-
-                    //    break;
-                    //}
-
-                    // Insert any additional changes to column values.
-                }
-                // Submit the changes to the database.
-                try
-                {
-                    qlhk.SubmitChanges();
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    // Provide for exceptions.
-                    return false;
-                }
+                return false;
             }
+        }
+        public override bool update(NhanKhauThuongTruDTO nktt)
+        {
+            // Query the database for the row to be updated.
+            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
+
+            // Execute the query, and change the column values
+            // you want to change.
+            foreach (NHANKHAUTHUONGTRU kq in query)
+            {
+                //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
+                //{
+                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH)
+                {
+                    if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
+                    kq.MADINHDANH = nktt.db.MADINHDANH;
+                }
+
+                kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
+                kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
+                if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
+                {
+                    if (nktt.dbnktt.SOHOKHAU != null && nktt.dbnktt.SOSOHOKHAU != null) kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
+                    kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
+                }
+
+                //    break;
+                //}
+
+                // Insert any additional changes to column values.
+            }
+            // Submit the changes to the database.
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
+            }
+
         }
         //public bool doiChuHo(List<NhanKhauThuongTruDTO> danhSach, string maDinhDanhChuHo)
         //{

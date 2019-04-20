@@ -169,7 +169,7 @@
             this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.label25);
             this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Location = new System.Drawing.Point(385, 13);
+            this.groupBox3.Location = new System.Drawing.Point(448, 16);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(465, 364);
             this.groupBox3.TabIndex = 15;
@@ -350,7 +350,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(821, 439);
+            this.btnOk.Location = new System.Drawing.Point(856, 386);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(87, 38);
             this.btnOk.TabIndex = 30;
@@ -360,7 +360,7 @@
             // 
             // btnHuy
             // 
-            this.btnHuy.Location = new System.Drawing.Point(821, 483);
+            this.btnHuy.Location = new System.Drawing.Point(856, 438);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(87, 38);
             this.btnHuy.TabIndex = 31;
@@ -383,7 +383,7 @@
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(937, 512);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(975, 512);
             this.xtraScrollableControl1.TabIndex = 0;
             // 
             // label21
@@ -452,7 +452,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Location = new System.Drawing.Point(6, 12);
+            this.groupBox1.Location = new System.Drawing.Point(22, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(362, 363);
             this.groupBox1.TabIndex = 0;
@@ -487,7 +487,7 @@
             this.cbbNoiCap.Location = new System.Drawing.Point(245, 186);
             this.cbbNoiCap.Name = "cbbNoiCap";
             this.cbbNoiCap.Size = new System.Drawing.Size(105, 21);
-            this.cbbNoiCap.TabIndex = 9;
+            this.cbbNoiCap.TabIndex = 8;
             // 
             // rdNu
             // 
@@ -505,7 +505,7 @@
             this.dtpNgayCap.Location = new System.Drawing.Point(83, 188);
             this.dtpNgayCap.Name = "dtpNgayCap";
             this.dtpNgayCap.Size = new System.Drawing.Size(102, 20);
-            this.dtpNgayCap.TabIndex = 8;
+            this.dtpNgayCap.TabIndex = 7;
             // 
             // rdNam
             // 
@@ -681,7 +681,7 @@
             this.tbhochieu.Location = new System.Drawing.Point(84, 225);
             this.tbhochieu.Name = "tbhochieu";
             this.tbhochieu.Size = new System.Drawing.Size(268, 20);
-            this.tbhochieu.TabIndex = 7;
+            this.tbhochieu.TabIndex = 9;
             // 
             // label6
             // 
@@ -749,7 +749,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 512);
+            this.ClientSize = new System.Drawing.Size(975, 512);
             this.Controls.Add(this.xtraScrollableControl1);
             this.Name = "NhanKhauThuongTruGUI";
             this.Text = "Nhân khẩu thường trú";
