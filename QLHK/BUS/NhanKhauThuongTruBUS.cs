@@ -26,7 +26,7 @@ namespace BUS
                 &&! string.IsNullOrEmpty(nktt.db.DANTOC) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.MADINHDANH) 
                 /*&&! string.IsNullOrEmpty(nktt.db.HOCHIEU)*/ &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
                 &&! string.IsNullOrEmpty(nktt.db.QUOCTICH) &&! string.IsNullOrEmpty(nktt.db.TONGIAO) &&! string.IsNullOrEmpty(nktt.db.SDT) 
-                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU)*/ &&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)
+                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU)*/ /*&&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)*/
                 &&! string.IsNullOrEmpty(nktt.db.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.db.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.db.TRINHDOCHUYENMON) 
                 &&! string.IsNullOrEmpty(nktt.dbnktt.QUANHEVOICHUHO))
                 return true;
@@ -37,7 +37,8 @@ namespace BUS
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            if (nk.insert(nktt))
+            List<NhanKhau> ls = nk.TimKiem("madinhdanh='" + nktt.db.MADINHDANH + "'");
+            if (nk.insert(nktt)|| ls.Count > 0)
             {
                 if (obj.insert(nktt))
                     return true;
@@ -48,9 +49,15 @@ namespace BUS
         {
             return obj.insert_table(data);
         }
-        public bool XoaNKTT(string maNKTT)
+        public bool XoaNKTT(NhanKhauThuongTruDTO nktt)
         {
-            return obj.XoaNKTT(maNKTT);
+            NhanKhauDAO nk = new NhanKhauDAO();
+            if (obj.XoaNKTT(nktt.dbnktt.MANHANKHAUTHUONGTRU))
+            {
+                if (nk.delete(nktt.dbnktt.MADINHDANH))
+                    return true;
+            }
+            return false;
         }
         public override bool Delete(int r)
         {

@@ -227,7 +227,7 @@ namespace BUS
             string str_madinhdanh;
             try
             {
-                string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+                string sql = "select top 1 madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
                 string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
                 str_madinhdanh = madinhdanh;
             }

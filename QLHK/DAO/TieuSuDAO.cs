@@ -25,6 +25,31 @@ namespace DAO
             return x;
         }
 
+        public bool deleteTS(String id)
+        {
+            var kq =
+            from ts in qlhk.TIEUSUs
+            where ts.MATIEUSU == id
+            select ts;
+
+            foreach (var detail in kq)
+            {
+                qlhk.TIEUSUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public override bool delete(int row)
         {
             try
@@ -68,7 +93,7 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                //qlhk.SubmitChanges();
                 return false;
             }
         }

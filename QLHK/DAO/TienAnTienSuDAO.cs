@@ -28,6 +28,31 @@ namespace DAO
             return false;
         }
 
+        public bool deleteTATS(string id)
+        {
+            var kq =
+            from ts in qlhk.TIENANTIENSUs
+            where ts.MATIENANTIENSU == id
+            select ts;
+
+            foreach (var detail in kq)
+            {
+                qlhk.TIENANTIENSUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public override List<TienAnTienSuDTO> getAll()
         {
             var kq = from tienantiensu in qlhk.TIENANTIENSUs

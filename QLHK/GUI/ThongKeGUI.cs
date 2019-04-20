@@ -43,25 +43,25 @@ namespace GUI
             tbNhanKhauTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString());
             tbNKThanhThiTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "noithuongtru not like '%xã%'");
             tbNKNuTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "gioitinh='nu'");
-            tbNK14TH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(CURDATE())-YEAR(ngaysinh)>=14");
+            tbNK14TH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(GETDATE())-YEAR(ngaysinh)>=14");
 
             tbHoKoTH.Text = ThongKeBUS.DemSoHoKhau("sohokhau.sosohokhau", cbbThoiGian.SelectedValue.ToString(), false);
             tbNhanKhauKoTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "", false);
             tbNKThanhThiKoTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "noithuongtru not like '%xã%'", false);
             tbNKNuKoTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "gioitinh='nu'", false);
-            tbNK14KoTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(CURDATE())-YEAR(ngaysinh)>=14", false);
+            tbNK14KoTH.Text = ThongKeBUS.DemNhanKhauThuongTru("nhankhauthuongtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(GETDATE())-YEAR(ngaysinh)>=14", false);
 
             tbHoTT.Text = ThongKeBUS.DemSoTamTru("sotamtru.sosotamtru", cbbThoiGian.SelectedValue.ToString());
             tbNhanKhauTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString());
             tbNKThanhThiTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "noithuongtru not like '%xã%'");
             tbNKNuTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "gioitinh='nu'");
-            tbNK14TT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(CURDATE())-YEAR(ngaysinh)>=14");
+            tbNK14TT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(GETDATE())-YEAR(ngaysinh)>=14");
 
             tbHoKoTT.Text = ThongKeBUS.DemSoTamTru("sotamtru.sosotamtru", cbbThoiGian.SelectedValue.ToString(), false);
             tbNhanKhauKoTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "", false);
             tbNKThanhThiKoTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "noithuongtru not like '%xã%'", false);
             tbNKNuKoTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "gioitinh='nu'", false);
-            tbNK14KoTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(CURDATE())-YEAR(ngaysinh)>=14", false);
+            tbNK14KoTT.Text = ThongKeBUS.DemNhanKhauTamTru("nhankhautamtru.madinhdanh", cbbThoiGian.SelectedValue.ToString(), "YEAR(GETDATE())-YEAR(ngaysinh)>=14", false);
 
         }
 

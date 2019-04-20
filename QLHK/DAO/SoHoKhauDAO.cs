@@ -86,8 +86,12 @@ namespace DAO
             {
                 foreach (var item in nktt)
                 {
-                    if(item.db.SOSOHOKHAU==soSoHoKhau)
+                    if (item.db.SOSOHOKHAU == soSoHoKhau)
+                    {
                         qlhk.SOHOKHAUs.DeleteOnSubmit(item.db);
+                        qlhk.SubmitChanges();
+                        break;
+                    }
                 }
                 return true;
             }
