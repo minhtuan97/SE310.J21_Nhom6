@@ -27,6 +27,7 @@ namespace GUI
         public NhanKhauThuongTruGUI()
         {
             InitializeComponent();
+            nk = new NhanKhauBUS();
             nktt = new NhanKhauThuongTruBUS();
             tieuSu = new TieuSuBUS();
             tienAn = new TienAnTienSuBUS();
@@ -71,8 +72,12 @@ namespace GUI
                 dGVTieuSu.Rows.Clear();
 
                 ////////Sửa dữ liệu vào DataGridView
-                var bList = new BindingList<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
-                dGVTieuSu.DataSource = new BindingSource( bList, null);
+                //var bList = new BindingList<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTieuSu.DataSource = new BindingSource( bList, null);
+
+                dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.dbnktt).ToList());
+
                 for (int i = 0; i < dGVTieuSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -93,8 +98,10 @@ namespace GUI
                 dGVTienAnTienSu.DataSource = null;
                 dGVTienAnTienSu.Rows.Clear();
 
-                var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
-                dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
+                //var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
+                dGVTienAnTienSu.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+
                 for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                 {
                     DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -124,7 +131,7 @@ namespace GUI
             tbtongiao.Text = nkttDTO.db.TONGIAO;
             tbsodienthoai.Text = nkttDTO.db.SDT;
 
-            tbMaNKTT.Text = nkttDTO.dbnktt.MANHANKHAUTHUONGTRU;
+            tbMaNKTT.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.MANHANKHAUTHUONGTRU)?tbMaNKTT.Text: nkttDTO.dbnktt.MANHANKHAUTHUONGTRU;
             tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.SOSOHOKHAU)?tbSoSHK.Text:nkttDTO.dbnktt.SOSOHOKHAU;
             tbDCThuongTru.Text = nkttDTO.dbnktt.DIACHITHUONGTRU;
             tbDCHienTai.Text = nkttDTO.db.DIACHIHIENNAY;
@@ -137,6 +144,38 @@ namespace GUI
 
             LoadtieuSu();
             Loadtienantiensu();
+        }
+
+        private void cleanData()
+        {
+            tbhoten.Text = "";
+            tbTenKhac.Text = "";
+            rdNam.Checked = true;
+            dtpNgaySinh.Value = DateTime.Today;
+            tbdantoc.Text = "";
+            tbNgheNghiep.Text = "";
+            tbmadinhdanh.Text = "";
+            tbhochieu.Text = "";
+            dtpNgayCap.Value = DateTime.Now;
+            cbbNoiCap.SelectedValue = "74";
+            tbnguyenquan.Text = "";
+            cbbNoiSinh.SelectedValue = "74";
+            tbquoctich.Text = "";
+            tbtongiao.Text = "";
+            tbsodienthoai.Text = "";
+
+            tbMaNKTT.Text = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaNhanKhauThuongTru());
+            tbSoSHK.Text = string.IsNullOrEmpty(nkttDTO.dbnktt.SOSOHOKHAU) ? tbSoSHK.Text : nkttDTO.dbnktt.SOSOHOKHAU;
+            tbDCThuongTru.Text = "";
+            tbDCHienTai.Text = "";
+            tbTrinhDoHocVan.Text = "";
+            tbTrinhDoCM.Text = "";
+            tbBietTiengDanToc.Text = "";
+            tbTrinhDoNN.Text = "";
+            tbNoiLamViec.Text = "Tỉnh Bình Dương";
+            tbQHVoiCH.Text = "";
+
+            dGVTienAnTienSu.DataSource = dGVTieuSu.DataSource = null;
         }
 
         private void xuatFile()
@@ -285,7 +324,8 @@ namespace GUI
         }
         private void button_sua_Click(object sender, EventArgs e)
         {
-            nkttDTO = new NhanKhauThuongTruDTO(tbMaNKTT.Text, tbDCThuongTru.Text, tbQHVoiCH.Text, tbSoSHK.Text, tbmadinhdanh.Text, tbhoten.Text, tbTenKhac.Text, dtpNgaySinh.Value,
+            nkttDTO = new NhanKhauThuongTruDTO(string.IsNullOrEmpty(tbMaNKTT.Text)?null: tbMaNKTT.Text, tbDCThuongTru.Text, tbQHVoiCH.Text, string.IsNullOrEmpty(tbSoSHK.Text) ? null : tbSoSHK.Text, 
+                string.IsNullOrEmpty(tbmadinhdanh.Text) ? null : tbmadinhdanh.Text, tbhoten.Text, tbTenKhac.Text, dtpNgaySinh.Value,
                 rdNam.Checked ? "nam" : "nu", cbbNoiSinh.Text, tbnguyenquan.Text, tbdantoc.Text, tbtongiao.Text, tbquoctich.Text, tbhochieu.Text, tbDCThuongTru.Text,
                 tbDCHienTai.Text, tbsodienthoai.Text, tbTrinhDoHocVan.Text, tbTrinhDoCM.Text, tbBietTiengDanToc.Text, tbTrinhDoNN.Text, tbNgheNghiep.Text);
 
@@ -312,9 +352,11 @@ namespace GUI
                 this.lyDo = ck.lyDo;
                 this.noiDen = ck.noiDen;
                 xuatFile();
-                if (nktt.XoaNKTT(tbMaNKTT.Text))
+                if (nktt.XoaNKTT(nkttDTO))
                 {
                     MessageBox.Show(this, "Thành công!");
+                    nkttDTO = new NhanKhauThuongTruDTO();
+                    cleanData();
                 }
                 else
                 {
@@ -362,7 +404,7 @@ namespace GUI
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            if(nkttDTO != null) nktt.XoaNKTT(nkttDTO.dbnktt.MANHANKHAUTHUONGTRU);
+            if(nkttDTO != null) nktt.XoaNKTT(nkttDTO);
             nkttDTO = null;
             this.Close();
         }
@@ -430,7 +472,9 @@ namespace GUI
                         if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Đang xóa...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             int rowIndex = e.RowIndex;
-                            tieuSu.Delete(rowIndex);
+                            string matieusu = dGVTieuSu.Rows[rowIndex].Cells["matieusu"].Value.ToString();
+                            tieuSu.DeleteTS(matieusu);
+                            LoadtieuSu();
                         }
                     }
                     else if (Task == "Insert")
@@ -488,7 +532,9 @@ namespace GUI
                         if (MessageBox.Show("Bạn có chắc chắm muốn xóa không?", "Đang xóa...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             int rowIndex = e.RowIndex;
-                            tienAn.Delete(rowIndex);
+                            string matienantiensu = dGVTienAnTienSu.Rows[rowIndex].Cells["matienantiensu"].Value.ToString();
+                            tienAn.DeleteTATS(matienantiensu);
+                            Loadtienantiensu();
                         }
                     }
                     else if (Task == "Insert")
@@ -566,7 +612,14 @@ namespace GUI
             }
             else
             {
-                MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                List<NhanKhau> kqnk = nk.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
+                if (kqnk.Count>0)
+                {
+                    nkttDTO = new NhanKhauThuongTruDTO(kqnk[0].db);
+                    fillData();
+                }
+                else 
+                    MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

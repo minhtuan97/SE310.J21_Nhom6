@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DTO;
 
 namespace BUS
 {
@@ -35,6 +36,46 @@ namespace BUS
             }
             //put a breakpoint here and check datatable
             return dataTable;
+        }
+
+        public static DataTable ListToDataTableWithChange<T>(List<T> items)
+        {
+            DataTable table = ListToDatatable<T>(items);
+
+            //if (table.Rows.Count > 0)
+            //{
+
+            //    DataRow fRow = table.Rows[0];
+            //    for (int i = 0; i < table.Columns.Count; i++)
+            //    {
+            //        if (fRow[i].ToString().Contains("DTO."))
+            //        {
+            //            table.Columns.RemoveAt(i);
+            //            i--;
+            //        }
+            //    }
+            //}
+
+            for (int i = 0; i < table.Columns.Count; i++)
+            {
+                Type t = table.Columns[i].DataType;
+                if ( t==typeof(CANBO) || t == typeof(HOCSINHSINHVIEN) || t == typeof(NHANKHAU) || t == typeof(NHANKHAUTAMTRU) || t == typeof(NHANKHAUTAMVANG) 
+                    || t == typeof(NHANKHAUTHUONGTRU) || t == typeof(QUANHUYEN) || t == typeof(SOHOKHAU) || t == typeof(SOTAMTRU) 
+                    || t == typeof(TIENANTIENSU) || t == typeof(TIEUSU) || t == typeof(TINHTHANHPHO) || t == typeof(XAPHUONGTHITRAN))
+                {
+                    table.Columns.RemoveAt(i);
+                    i--;
+                }
+            }
+            table.Columns.Add(new DataColumn("Change"));
+
+            foreach (DataRow item in table.Rows)
+            {
+                item[table.Columns.Count - 1] = "Delete";
+            }
+            
+
+            return table;
         }
 
         public static DataTable mergeTwoTables(DataTable table1, DataTable table2, string joinColumn)

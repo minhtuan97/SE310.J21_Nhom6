@@ -8,7 +8,7 @@ namespace DTO
 {
     public class TienAnTienSuDTO
     {
-        public TIENANTIENSU db;
+        public TIENANTIENSU db= new TIENANTIENSU();
         
         public TienAnTienSuDTO() { }
 

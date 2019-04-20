@@ -79,6 +79,7 @@ namespace DAO
             try
             {
                 qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(kq);
+                qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
@@ -87,6 +88,7 @@ namespace DAO
                 return false;
             }
         }
+
         public override bool delete(int row)
         {
             NhanKhauThuongTruDTO[] nktt = this.getAll().ToArray();
@@ -111,10 +113,25 @@ namespace DAO
             // you want to change.
             foreach (NHANKHAUTHUONGTRU kq in query)
             {
-                kq.MANHANKHAUTHUONGTRU = nktt.dbnktt.MANHANKHAUTHUONGTRU;
-                kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
-                kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
-                kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
+                //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
+                //{
+                if(kq.NHANKHAU != nktt.dbnktt.NHANKHAU)
+                {
+                    kq.NHANKHAU = nktt.dbnktt.NHANKHAU;
+                    kq.MADINHDANH = nktt.dbnktt.MADINHDANH;
+                }
+                    
+                    kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
+                    kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
+                if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
+                {
+                    kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
+                    kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
+                }
+                
+                //    break;
+                //}
+                
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.

@@ -13,12 +13,12 @@ namespace GUI
         static void Main()
         {
             DevExpress.Skins.SkinManager.EnableFormSkins();
-           // UserLookAndFeel.Default.SetSkinStyle("DevExpress Dark Style");
+            // UserLookAndFeel.Default.SetSkinStyle("DevExpress Dark Style");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run(new SoHoKhauGUI());
+            Application.Run(new NhanKhauThuongTruGUI());
         }
     }
 }

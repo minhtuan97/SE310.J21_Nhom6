@@ -59,6 +59,12 @@ namespace DTO
             db = nktt.NHANKHAU;
         }
 
+        public NhanKhauThuongTruDTO(NHANKHAU nk)
+        {
+            dbnktt = new NHANKHAUTHUONGTRU();
+            db = nk;
+        }
+
         public NhanKhauThuongTruDTO(NhanKhauThuongTruDTO nktt)
         {
             db = nktt.db;

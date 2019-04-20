@@ -265,8 +265,8 @@ namespace GUI
                 //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
                 try
                 {
-                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
-                    dataGridView1.DataSource = new BindingSource(bList, null);
+                    DataTable bList = DataHelper.ListToDatatable( tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+                    dataGridView1.DataSource = bList;//new BindingSource(bList, null);
                     //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                     //{
                     //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
