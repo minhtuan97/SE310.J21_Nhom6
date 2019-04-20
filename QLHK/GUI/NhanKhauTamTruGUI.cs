@@ -17,6 +17,8 @@ namespace GUI
     {
         NhanKhauTamTruBUS nkttBus;
         NhanKhauTamTruDTO nkttDto;
+        TieuSuBUS tieusuBus = new TieuSuBUS();
+        TienAnTienSuBUS tienantiensuBus = new TienAnTienSuBUS();
         
         SoTamTruBUS soTamTruBUS;
 
@@ -197,8 +199,8 @@ namespace GUI
         {
             InitializeComponent();
             this.sosotamtru = Sosotamtru;
-            TienAnTienSuBUS tienSuBUS = new TienAnTienSuBUS();
-            dtGV_TienAnTienSu.DataSource = DataHelper.ListToDatatable<TIENANTIENSU>(tienSuBUS.GetAll().Select(r=>r.db).ToList());
+            dtGV_TienAnTienSu.DataSource = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.GetAll().Select(r=>r.db).ToList());
+
         }
 
         //constructor for search a ciziten
@@ -212,7 +214,6 @@ namespace GUI
         public NhanKhauTamTruGUI()
         {
             InitializeComponent();
-
         }
 
 
@@ -524,44 +525,6 @@ namespace GUI
                 quoctich, hochieu, noithuongtru, diachihiennay, sdt,trinhdohocvan, trinhdochuyenmon, 
                 biettiengdantoc,trinhdongoaingu, nghenghiep);
 
-            //txtMaDinhDanh1.Text = nhankhautamtru.db.MaDinhDanh;
-            //txtMaNhanKhauTamTru1.Text = nhankhautamtru.MaNhanKhauTamTru;
-            //txt_HoTen.Text = nhankhautamtru.HoTen;
-
-            //string gt = nhankhautamtru.GioiTinh;
-            //if ( gt == "nam")
-            //    this.rdNam.Checked = true;
-            //else
-            //    this.rdNu.Checked = true;
-
-
-            //txtSoSoTamTru1.Text = nhankhautamtru.SoSoTamTru;
-            //dt_NgaySinh.Value = nhankhautamtru.NgaySinh;
-            //txt_DanToc.Text = nhankhautamtru.DanToc;
-            //txt_QuocTich.Text = nhankhautamtru.QuocTich;
-            //txt_TonGiao.Text = nhankhautamtru.TonGiao;
-            //txt_NgheNghiep.Text = nhankhautamtru.NgheNghiep;
-            //txt_SoDienThoai.Text = nhankhautamtru.SDT;
-            //txt_HoChieu.Text = nhankhautamtru.HoChieu;
-            //txtMaDinhDanh1.Text = nhankhautamtru.MaDinhDanh;
-
-            //txt_TenKhac.Text = nhankhautamtru.TenKhac;
-            //txt_TrinhDoHocVan.Text = nhankhautamtru.TrinhDoHocVan;
-            //txt_TrinhDoChuyenMon.Text = nhankhautamtru.TrinhDoChuyenMon;
-            //txt_BietTiengDanToc.Text = nhankhautamtru.BietTiengDanToc;
-            //txt_TrinhDoNgoaiNgu.Text = nhankhautamtru.TrinhDoNgoaiNgu;
-            //txt_LyDo.Text = nhankhautamtru.LyDo;
-
-            //dt_TuNgay.Value = nhankhautamtru.TuNgay;
-            //dt_DenNgay.Value = nhankhautamtru.DenNgay;
-
-            //txt_NguyenQuan.Text = nhankhautamtru.NguyenQuan;
-            //txtNoiSinh.Text = nhankhautamtru.NoiSinh;
-            //txtDiaChiHienNay.Text = nhankhautamtru.DiaChiHienNay;
-            //txtNoiThuongTru.Text = nhankhautamtru.NoiThuongTru;
-            //txtNoiTamTru.Text = nhankhautamtru.NoiTamTru;
-
-
             //Hiễn thị tiền án tiền sự
             LoadDataGridViewTienAN();
             LoadDataGridViewTieuSu();
@@ -583,7 +546,21 @@ namespace GUI
         {
             dtGV_TienAnTienSu.DataSource = null;
             dtGV_TienAnTienSu.Rows.Clear();
-            dtGV_TienAnTienSu.DataSource = nkttBus.GetTienAnTienSu(txtMaDinhDanh1.Text.ToString());
+
+            if (string.IsNullOrEmpty(txtMaDinhDanh1.Text)) return;
+            try
+            {
+
+                DataTable tb = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
+                tb.Columns.RemoveAt(tb.Columns.Count - 1);
+
+                dtGV_TienAnTienSu.DataSource = tb;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ResetInputTienAn()
@@ -629,12 +606,9 @@ namespace GUI
             DateTime ngayphat = dtNgayPhat.Value.Date;
 
             TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh,toidanh,hinhphat, banan,ngayphat);
-
-            TienAnTienSuBUS tienanbus = new TienAnTienSuBUS();
-            if (tienanbus.Add(tienan))
+            if (tienantiensuBus.Add(tienan))
             {
                 MessageBox.Show("Thêm tiền án tiền sự " + matienan + " cho nhân khẩu " + txt_HoTen.Text.ToString() + " thành công!");
-                ResetInputTienAn();
                 LoadDataGridViewTienAN();
             }
             else
@@ -695,7 +669,7 @@ namespace GUI
                 {
                     MessageBox.Show("Xóa tiền án tiền sự "+matienan+" cho nhân khẩu " + txt_HoTen.Text.ToString() + " thành công!");
                     LoadDataGridViewTienAN();
-                    ResetInputTienAn();
+                    
                 }
                 else
                 {
@@ -744,10 +718,9 @@ namespace GUI
                 DateTime ngayphat = dtNgayPhat.Value.Date;
 
 
-                TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh, toidanh, hinhphat, banan, ngayphat);
+                TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh, banan, toidanh, hinhphat, ngayphat);
 
-                TienAnTienSuBUS tienanbus = new TienAnTienSuBUS();
-                if (tienanbus.Update(tienan))
+                if (tienantiensuBus.Update(tienan))
                 {
                     MessageBox.Show("Sửa tiền án tiền sự " + matienan + " cho nhân khẩu " + txt_HoTen.Text.ToString() + " thành công!");
                     ResetInputTienAn();
@@ -773,7 +746,22 @@ namespace GUI
         {
             dtGV_TieuSu.DataSource = null;
             dtGV_TieuSu.Rows.Clear();
-            dtGV_TieuSu.DataSource = nkttBus.GetTieuSu(txtMaDinhDanh1.Text.ToString());
+
+            if (string.IsNullOrEmpty(txtMaDinhDanh1.Text)) return;
+            try
+            {
+
+                DataTable tb = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
+                tb.Columns.RemoveAt(tb.Columns.Count - 1);
+
+                dtGV_TieuSu.DataSource = tb;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         public void ResetInputTieuSu()
@@ -822,7 +810,6 @@ namespace GUI
 
             TieuSuDTO tieusu = new TieuSuDTO(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
 
-            TieuSuBUS tieusuBus = new TieuSuBUS();
 
             if (tieusuBus.Add(tieusu))
             {
@@ -840,7 +827,7 @@ namespace GUI
         private void dtGV_TieuSu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string matieusu = dtGV_TieuSu.Rows[e.RowIndex].Cells[0].Value.ToString();
-            string madinhdanh = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            string madinhdanh = txtMaDinhDanh1.Text;
             DateTime thoigianbatdau = Convert.ToDateTime(dtGV_TieuSu.Rows[e.RowIndex].Cells[2].Value.ToString());
             DateTime thoigianketthuc = Convert.ToDateTime(dtGV_TieuSu.Rows[e.RowIndex].Cells[3].Value.ToString());
             string choo = dtGV_TieuSu.Rows[e.RowIndex].Cells[4].Value.ToString();
@@ -930,22 +917,22 @@ namespace GUI
 
                 TieuSuDTO tieusu = new TieuSuDTO(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
 
-                TieuSuBUS tieusuBus = new TieuSuBUS();
 
                 if (tieusuBus.Update(tieusu))
                 {
                     MessageBox.Show("Sửa tiểu sử "+matieusu+" cho nhân khẩu "+txt_HoTen.Text.ToString()+" thành công !");
-                    LoadDataGridViewTieuSu();
-                    ResetInputTieuSu();
                 }
                 else
                 {
                     MessageBox.Show("Sửa tiểu sử "+matieusu+" cho nhân khẩu "+txt_HoTen.Text.ToString()+" thất bại !");
                 }
+
+                
             }
-            else if (dialogResult == DialogResult.No)
-            {
-            }
+
+            LoadDataGridViewTieuSu();
+            ResetInputTieuSu();
+
         }
 
 
@@ -1098,6 +1085,11 @@ namespace GUI
 
             List<NhanKhauTamTruDTO> kq = nkttBus.TimKiemNKTT(madinhdanh);
 
+            DataTable t1 = DataHelper.ListToDataTableWithChange<NHANKHAU>(kq.Select(r => r.db).ToList());
+            DataTable t2 = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(kq.Select(r => r.dbnktamtru).ToList());
+
+            dataGridView1.DataSource = DataHelper.mergeTwoTables(t1, t2, "MADINHDANH");
+
             if (kq.Count > 0)
             {
                 NhanKhauTamTruDTO dt = kq[0];
@@ -1149,9 +1141,8 @@ namespace GUI
             txt_LyDo.Text = nkttDto.dbnktamtru.LYDO;
             txtSoSoTamTru1.Text = nkttDto.dbnktamtru.SOSOTAMTRU;
 
-            //LoadtieuSu();
-            //Loadtienantiensu();
+            LoadDataGridViewTienAN();
+            LoadDataGridViewTieuSu();
         }
-
     }
 }

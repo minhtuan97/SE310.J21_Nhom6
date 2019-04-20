@@ -83,11 +83,11 @@ namespace DAO
                 NhanKhauDAO nk = new NhanKhauDAO();
                 nk.delete(madinhdanh);
 
-                //TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MADINHDANH == madinhdanh));
-                //qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
+                TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MADINHDANH == madinhdanh));
+                qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
 
-                //TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MADINHDANH == madinhdanh));
-                //qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
+                TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MADINHDANH == madinhdanh));
+                qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
 
                 qlhk.SubmitChanges();
                 return true;
@@ -294,8 +294,8 @@ namespace DAO
         {
             try
             {
-                //TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == matienan));
-                //qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
+                TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == matienan));
+                qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
 
                 qlhk.SubmitChanges();
                 return true;
