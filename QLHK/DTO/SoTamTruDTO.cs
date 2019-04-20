@@ -10,7 +10,11 @@ namespace DTO
     {
         public SOTAMTRU db = new SOTAMTRU();
 
-        public SoTamTruDTO() { }
+        public List<NhanKhauTamTruDTO> NhanKhau { get; set; }
+
+        public SoTamTruDTO() {
+            NhanKhau = new List<NhanKhauTamTruDTO>();
+        }
 
         public SoTamTruDTO(string soSoTamTru, string maChuHoTamTru, string noiTamTru, 
             DateTime ngayCap, DateTime denNgay)
@@ -22,9 +26,26 @@ namespace DTO
             db.DENNGAY = denNgay;
         }
 
+        public SoTamTruDTO(string soSoTamTru, string maChuHoTamTru, string noiTamTru,
+        DateTime ngayCap, DateTime denNgay, List<NhanKhauTamTruDTO> nhanKhau)
+        {
+            db.SOSOTAMTRU = soSoTamTru;
+            db.MACHUHO = maChuHoTamTru;
+            db.NOITAMTRU = noiTamTru;
+            db.NGAYCAP = ngayCap;
+            db.DENNGAY = denNgay;
+            NhanKhau = new List<NhanKhauTamTruDTO>();
+        }
+
+
         public SoTamTruDTO(SOTAMTRU dbs)
         {
             db = dbs;
+        }
+
+        public SoTamTruDTO(SoTamTruDTO stt)
+        {
+            db = stt.db;
         }
     }
 }

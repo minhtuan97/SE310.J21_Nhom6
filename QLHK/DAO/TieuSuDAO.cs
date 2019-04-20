@@ -109,7 +109,7 @@ namespace DAO
             // Execute the query, and change the column values
             // you want to change.
 
-            foreach (TIEUSU kq in query)
+            foreach (TIEUSU kq in query.ToList())
             {
                 kq.MADINHDANH = tieusu.db.MADINHDANH;
                 kq.THOIGIANBATDAU = tieusu.db.THOIGIANBATDAU;

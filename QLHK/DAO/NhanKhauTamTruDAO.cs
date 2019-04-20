@@ -73,23 +73,39 @@ namespace DAO
         {
             try
             {
-                //Tìm nhân khẩu tt với mã định danh
-                //Cách 1
-                //NHANKHAUTAMTRU nk = new NHANKHAUTAMTRU();
-                //nk = qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh);
+
+                //Xoa tieu su
+                List<String> listMaTieuSu = new List<string>();
+                listMaTieuSu = qlhk.TIEUSUs.Where(x => x.MADINHDANH == madinhdanh).Select(x=>x.MATIEUSU).ToList();
+
+                for(int i=0; i<listMaTieuSu.Count; i++)
+                {
+                    TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MATIEUSU == listMaTieuSu[i]));
+                    qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
+                }
+
+                qlhk.SubmitChanges();
+
+                //Xoa tien an tien su
+                List<String> listMaTienan = new List<string>();
+                listMaTienan = qlhk.TIENANTIENSUs.Where(x => x.MADINHDANH == madinhdanh).Select(x => x.MATIENANTIENSU).ToList();
+
+                for (int i = 0; i < listMaTieuSu.Count; i++)
+                {
+                    TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == listMaTienan[i]));
+                    qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
+                }
+                qlhk.SubmitChanges();
+
+                //Xoa nhan khau tam tru
                 NhanKhauTamTruDTO nktt = new NhanKhauTamTruDTO(qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh));
                 qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(nktt.dbnktamtru);
 
-                NhanKhauDAO nk = new NhanKhauDAO();
+                qlhk.SubmitChanges();
+
+                NhanKhauDAO nk= new NhanKhauDAO();
                 nk.delete(madinhdanh);
 
-                //TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MADINHDANH == madinhdanh));
-                //qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
-
-                TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MADINHDANH == madinhdanh));
-                qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
-
-                qlhk.SubmitChanges();
                 return true;
 
             }
@@ -122,9 +138,8 @@ namespace DAO
         {
             //Query
             var query = qlhk.NHANKHAUTAMTRUs.Where(x => x.MADINHDANH == nktt.db.MADINHDANH).Select(x=>x);
-
             //Execute
-            foreach(NHANKHAUTAMTRU NKTT in query)
+            foreach (NHANKHAUTAMTRU NKTT in query)
             {
                 NKTT.NOITAMTRU = nktt.dbnktamtru.NOITAMTRU;
                 NKTT.TUNGAY = nktt.dbnktamtru.TUNGAY;
@@ -134,10 +149,29 @@ namespace DAO
             }
 
 
-            //UPdate thông tin nhân khẩu
-            //NhanKhau nhankhau = new NhanKhau(nktt.db.MADINHDANH, nktt.db.HoTen, tenkhac, ngaysinh,
-            //    gioitinh, noisinh, nguyenquan, dantoc, tongiao, quoctich, hochieu, noithuongtru,
-            //    diachihiennay, sdt, trinhdohocvan, trinhdochuyenmon, biettiengdantoc, trinhdongoaingu, nghenghiep);
+            var query1 = qlhk.NHANKHAUs.Where(x => x.MADINHDANH == nktt.db.MADINHDANH).Select(x => x);
+            foreach (NHANKHAU NK in query1)
+            {
+                NK.HOTEN = nktt.db.HOTEN;
+                NK.TENKHAC = nktt.db.TENKHAC;
+                NK.NGAYSINH = nktt.db.NGAYSINH;
+                NK.GIOITINH = nktt.db.GIOITINH;
+                NK.NOISINH = nktt.db.NOISINH;
+                NK.NGUYENQUAN = nktt.db.NGUYENQUAN;
+                NK.DANTOC = nktt.db.DANTOC;
+                NK.TONGIAO = nktt.db.TONGIAO;
+                NK.QUOCTICH = nktt.db.QUOCTICH;
+                NK.HOCHIEU = nktt.db.HOCHIEU;
+                NK.NOITHUONGTRU = nktt.db.NOITHUONGTRU;
+                NK.DIACHIHIENNAY = nktt.db.DIACHIHIENNAY;
+                NK.SDT = nktt.db.SDT;
+                NK.TRINHDOHOCVAN = nktt.db.TRINHDOHOCVAN;
+                NK.TRINHDOCHUYENMON = nktt.db.TRINHDOCHUYENMON;
+                NK.BIETTIENGDANTOC = nktt.db.BIETTIENGDANTOC;
+                NK.TRINHDONGOAINGU = nktt.db.TRINHDONGOAINGU;
+                NK.NGHENGHIEP = nktt.db.NGHENGHIEP;
+            }
+
 
 
             try
@@ -148,7 +182,6 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                // Provide for exceptions.
                 return false;
             }
 
@@ -199,12 +232,6 @@ namespace DAO
             }
 
             return lst;
-
-                //string sql = "SELECT  nhankhau.MaDinhDanh, MaNhanKhauTamTru, HoTen,TenKhac,NgaySinh," +
-                //    " GioiTinh,NoiSinh,NguyenQuan,DanToc,TonGiao,QuocTich,HoChieu,NoiThuongTru,DiaChiHienNay," +
-                //    "SDT,TrinhDoHocVan,TrinhDoChuyenMon,BietTiengDanToc,TrinhDoNgoaiNgu, NgheNghiep, SoSoTamTru,NoiTamTru,TuNgay,DenNgay,LyDo " +
-                //    "FROM nhankhautamtru inner join nhankhau " +
-                //    "WHERE nhankhautamtru.madinhdanh=nhankhau.madinhdanh and nhankhau.madinhdanh='" + madinhdanh + "'";
         }
 
 
@@ -220,12 +247,6 @@ namespace DAO
             }
 
             return lst;
-
-            //string sql = "SELECT  nhankhau.MaDinhDanh, MaNhanKhauTamTru, HoTen,TenKhac,NgaySinh," +
-            //    " GioiTinh,NoiSinh,NguyenQuan,DanToc,TonGiao,QuocTich,HoChieu,NoiThuongTru,DiaChiHienNay," +
-            //    "SDT,TrinhDoHocVan,TrinhDoChuyenMon,BietTiengDanToc,TrinhDoNgoaiNgu, NgheNghiep, SoSoTamTru,NoiTamTru,TuNgay,DenNgay,LyDo " +
-            //    "FROM nhankhautamtru inner join nhankhau " +
-            //    "WHERE nhankhautamtru.madinhdanh=nhankhau.madinhdanh and nhankhau.madinhdanh='" + madinhdanh + "'";
         }
 
         
@@ -247,87 +268,6 @@ namespace DAO
         }
 
 
-
-        //Get Data for Tinh Thanh Pho, Quan Huyen, Xa Phuong Thi Tran
-        public List<string> GetListTinhThanh()
-        {
-            List<string> tinhthanh_list = new List<string>();
-
-            //Cách 1
-            //var query = from x in qlhk.TINHTHANHPHOs select x;
-
-            //foreach(var tt in query)
-            //{
-            //    tinhthanh_list.Add(tt.TEN);
-            //}
-
-
-            //Cách 2
-            //if (conn.State != ConnectionState.Open)
-            //{
-            //    conn.Open();
-            //}
-            //string sql = "SELECT ten FROM tinhthanhpho";
-            //MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            //adapter.SelectCommand.CommandType = CommandType.Text;
-            //adapter.Fill(dt);
-
-            //tinhthanh_list = dt.AsEnumerable()
-            //          .Select(r => r.Field<string>("ten"))
-            //          .ToList();
-
-            return tinhthanh_list;
-        }
-
-
-        public List<string> GetListQuanHuyen(string tentinhthanhpho)
-        {
-            List<string> quanhuyen_list = new List<string>();
-
-            //Tìm ID Quận huyện tương ứng với TỈnh/TP
-            List<String> ID_list = new List<string>();
-            //var q = from x in qlhk.TINHTHANHPHOs where x.TEN == tentinhthanhpho select x;
-            //foreach (var tt in q)
-            //{
-            //    ID_list.Add(tt.MATP);
-            //}
-            String ID = ID_list.First();
-
-
-            //Lấy danh sách QUận Huyện
-            //var query = from x in qlhk.QUANHUYENs where x.MATP == ID select x;
-            //foreach (var qh in query)
-            //{
-            //    quanhuyen_list.Add(qh.TEN);
-            //}
-
-            return quanhuyen_list;
-        }
-
-        public List<string> GetListXaPhuong(string tenquanhuyen)
-        {
-            List<string> xaphuong_list = new List<string>();
-
-            //Tìm ID xã phường tương ứng với Quận huyện
-            List<string> ID_list = new List<string>();
-            //var q = from x in qlhk.XAPHUONGTHITRANs where x.ten == tenquanhuyen select x;
-            //foreach (var xp in q)
-            //{
-            //    ID_list.Add(xp.MAQH);
-            //}
-            //String ID = ID_list.First();
-
-
-            //Lấy danh sách QUận Huyện
-            //var q = from x in qlhk.XAPHUONGs where x.MAQH == ID select x;
-            //foreach (var xp in query)
-            //{
-            //    xaphuong_list.Add(xp.TEN);
-            //}
-
-            return xaphuong_list;
-
-        }
 
 
 
@@ -358,8 +298,8 @@ namespace DAO
         {
             try
             {
-                //TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == matienan));
-                //qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
+                TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == matienan));
+                qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
 
                 qlhk.SubmitChanges();
                 return true;
@@ -441,7 +381,7 @@ namespace DAO
             {
                 Date_list.Add(xp.TUNGAY);
             }
-            date = Date_list.First();
+            date = Date_list[0];
             return date;
         }
 

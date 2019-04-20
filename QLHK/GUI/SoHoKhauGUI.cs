@@ -84,7 +84,7 @@ namespace GUI
 
             tbSoSoHoKhau.Text = sosohokhau;
             List<SoHoKhauDTO> ds = shk.TimKiem("sosohokhau='"+sosohokhau+"'");
-            SoHoKhauDTO shkDTO = ds[0];
+            shkDTO = ds[0];
 
             taoDanhSachNhanKhau();
 

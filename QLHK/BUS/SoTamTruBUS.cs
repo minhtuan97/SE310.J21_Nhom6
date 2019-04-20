@@ -14,6 +14,7 @@ namespace BUS
     public class SoTamTruBUS:AbstractFormBUS<SoTamTruDTO>
     {
         SoTamTruDAO SoTamTru = new SoTamTruDAO();
+        NhanKhauTamTruDAO nktt = new NhanKhauTamTruDAO();
         public override List<SoTamTruDTO> GetAll()
         {
             return SoTamTru.getAll();
@@ -49,8 +50,24 @@ namespace BUS
 
         public List<SoTamTruDTO> TimKiem(string query)
         {
-            return SoTamTru.TimKiem(query);
+            List<SoTamTruDTO> list = SoTamTru.TimKiem(query);
+            if (list.Count > 0)
+            {
+                foreach (SoTamTruDTO item in list)
+                {
+                    item.NhanKhau = nktt.TimKiem("SOSOTAMTRU='" + item.db.SOSOTAMTRU + "'");
+                }
+            }
+
+            return list;
         }
+
+        public List<SoTamTruDTO> TimKiemSoTamTru(string sosotamtru)
+        {
+            return SoTamTru.TimKiemSoTamTru(sosotamtru);
+        }
+
+        
 
         public bool DeleteExperiedSoTamTru()
         {
@@ -58,48 +75,7 @@ namespace BUS
         }
 
 
-        //Load Data For Combobox
-        //Lấy mã tỉnh thành phố
-
-        public BindingSource Get_TinhThanhPho()
-        {
-
-            List<string> TinhThanh_List = new List<string>();
-            TinhThanh_List = SoTamTru.GetListTinhThanh();
-
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = TinhThanh_List;
-            return bindingSource;
-        }
-
-
-        public BindingSource GetListQuanHuyen(string tentinhthanhpho)
-        {
-            List<string> QuanHuyen_List = new List<string>();
-            QuanHuyen_List = SoTamTru.GetListQuanHuyen(tentinhthanhpho);
-
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = QuanHuyen_List;
-            return bindingSource;
-        }
-
-        public BindingSource GetListXaPhuong(string tenquanhuyen)
-        {
-            List<string> XaPhuong_List = new List<string>();
-            XaPhuong_List = SoTamTru.GetListXaPhuong(tenquanhuyen);
-
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = XaPhuong_List;
-            return bindingSource;
-        }
-
-
-        public string[] SplitDiaChi(string diachi)
-        {
-            string data = diachi;
-            string[] result = data.Split(',');
-            return result;
-        }
+       
 
         public BindingSource ImportToComboboxMaChuHo(string sosotamtru)
         {

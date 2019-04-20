@@ -182,7 +182,22 @@ namespace DAO
         public List<SoTamTruDTO> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM sotamtru" + query;
+            query = "SELECT * FROM sotamtru" + query;
+            var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
+            List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
+            foreach (SOTAMTRU i in res)
+            {
+                SoTamTruDTO stt = new SoTamTruDTO(i);
+                lst.Add(stt);
+            }
+
+            return lst;
+        }
+
+
+        public List<SoTamTruDTO> TimKiemSoTamTru(string sosotamtru)
+        {
+            string query = "SELECT * FROM sotamtru where sosotamtru=" + sosotamtru;
             var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
             List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
             foreach (SOTAMTRU i in res)
@@ -192,9 +207,8 @@ namespace DAO
             }
 
             return lst;
-         
         }
-
+        
 
 
 
@@ -215,88 +229,6 @@ namespace DAO
 
         }
 
-
-        //Lấy thông tin của Chỗ ở trong bảng thành phố, quận huyện, xã phường thị trấn
-
-        public List<string> GetListTinhThanh()
-        {
-            List<string> tinhthanh_list = new List<string>();
-
-            //Cách 1
-            //var query = from x in qlhk.TINHTHANHPHOs select x;
-
-            //foreach(var tt in query)
-            //{
-            //    tinhthanh_list.Add(tt.TEN);
-            //}
-
-
-            //Cách 2
-            //if (conn.State != ConnectionState.Open)
-            //{
-            //    conn.Open();
-            //}
-            //string sql = "SELECT ten FROM tinhthanhpho";
-            //MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
-            //adapter.SelectCommand.CommandType = CommandType.Text;
-            //adapter.Fill(dt);
-
-            //tinhthanh_list = dt.AsEnumerable()
-            //          .Select(r => r.Field<string>("ten"))
-            //          .ToList();
-
-            return tinhthanh_list;
-        }
-
-
-        public List<string> GetListQuanHuyen(string tentinhthanhpho)
-        {
-            List<string> quanhuyen_list = new List<string>();
-
-            //Tìm ID Quận huyện tương ứng với TỈnh/TP
-            List<String> ID_list = new List<string>();
-            //var q = from x in qlhk.TINHTHANHPHOs where x.TEN == tentinhthanhpho select x;
-            //foreach (var tt in q)
-            //{
-            //    ID_list.Add(tt.MATP);
-            //}
-            String ID = ID_list.First();
-
-
-            //Lấy danh sách QUận Huyện
-            //var query = from x in qlhk.QUANHUYENs where x.MATP == ID select x;
-            //foreach (var qh in query)
-            //{
-            //    quanhuyen_list.Add(qh.TEN);
-            //}
-
-            return quanhuyen_list;
-        }
-
-
-        public List<string> GetListXaPhuong(string tenquanhuyen)
-        {
-            List<string> xaphuong_list = new List<string>();
-
-            //Tìm ID xã phường tương ứng với Quận huyện
-            List<string> ID_list = new List<string>();
-            //var q = from x in qlhk.XAPHUONGTHITRANs where x.ten == tenquanhuyen select x;
-            //foreach (var xp in q)
-            //{
-            //    ID_list.Add(xp.MAQH);
-            //}
-            //String ID = ID_list.First();
-
-
-            //Lấy danh sách QUận Huyện
-            //var q = from x in qlhk.XAPHUONGs where x.MAQH == ID select x;
-            //foreach (var xp in query)
-            //{
-            //    xaphuong_list.Add(xp.TEN);
-            //}
-
-            return xaphuong_list;
-        }
 
 
 
@@ -378,13 +310,15 @@ namespace DAO
             {
                 List<string> list_Ten = new List<string>();
 
-                var q = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs
+                var p = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs
                         join nhankhau in qlhk.NHANKHAUs
                         on nhankhautamtru.MADINHDANH equals nhankhau.MADINHDANH
-                        where nhankhautamtru.SOSOTAMTRU == sosotamtru
+                        join sotamtru in qlhk.SOTAMTRUs
+                        on nhankhautamtru.MANHANKHAUTAMTRU equals sotamtru.MACHUHO
+                        where sotamtru.SOSOTAMTRU == sosotamtru
                         select nhankhau;
 
-                foreach (var tt in q)
+                foreach (var tt in p)
                 {
                     list_Ten.Add(tt.HOTEN);
                 }
