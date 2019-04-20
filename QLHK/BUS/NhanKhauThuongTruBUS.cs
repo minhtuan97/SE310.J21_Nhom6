@@ -85,6 +85,10 @@ namespace BUS
         {
             return obj.delete(r);
         }
+        public bool updateTTThuongTru(string manktt, SOHOKHAU shk)
+        {
+            return obj.updateTTThuongTru(manktt, shk);
+        }
         public override bool Update(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();

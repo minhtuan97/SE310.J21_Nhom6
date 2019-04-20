@@ -147,10 +147,10 @@ namespace GUI
                 updateOK = shk.Add(shkDTO);
                 foreach(NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
                 {
-                    item.dbnktt.SOHOKHAU = shkDTO.db;
-                    item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                    item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                    updateOK = nktt.Update(item);
+                    //item.dbnktt.SOHOKHAU = shkDTO.db;
+                    //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                    //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                    updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
                 if (updateOK)
@@ -171,10 +171,10 @@ namespace GUI
                 {
                     if(item.dbnktt.SOSOHOKHAU != shkDTO.db.SOSOHOKHAU|| item.dbnktt.DIACHITHUONGTRU != shkDTO.db.DIACHI)
                     {
-                        item.dbnktt.SOHOKHAU = shkDTO.db;
-                        item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                        item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                        updateOK = nktt.Update(item);
+                        //item.dbnktt.SOHOKHAU = shkDTO.db;
+                        //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                        //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                        updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                     }
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());

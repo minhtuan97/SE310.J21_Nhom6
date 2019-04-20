@@ -57,7 +57,7 @@
             this.btnOK.Location = new System.Drawing.Point(150, 95);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -76,14 +76,14 @@
             this.tbNoiDen.Location = new System.Drawing.Point(65, 56);
             this.tbNoiDen.Name = "tbNoiDen";
             this.tbNoiDen.Size = new System.Drawing.Size(252, 20);
-            this.tbNoiDen.TabIndex = 1;
+            this.tbNoiDen.TabIndex = 2;
             // 
             // btnHuy
             // 
             this.btnHuy.Location = new System.Drawing.Point(242, 95);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(75, 23);
-            this.btnHuy.TabIndex = 2;
+            this.btnHuy.TabIndex = 4;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.UseVisualStyleBackColor = true;
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
