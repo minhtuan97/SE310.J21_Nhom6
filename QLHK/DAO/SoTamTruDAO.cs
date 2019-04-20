@@ -181,18 +181,6 @@ namespace DAO
 
         public List<SoTamTruDTO> TimKiem(string query)
         {
-            //if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            //query = "SELECT *, 'Delete' as 'Change' FROM sotamtru" + query;
-            //var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
-            //List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
-            //foreach (SOTAMTRU i in res)
-            //{
-            //    SoTamTruDTO ts = new SoTamTruDTO(i);
-            //    lst.Add(ts);
-            //}
-
-            //return lst;
-
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sotamtru" + query;
             var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();

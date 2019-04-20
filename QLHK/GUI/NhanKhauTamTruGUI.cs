@@ -69,8 +69,8 @@ namespace GUI
         /// 
         public string GioiTinh()
         {
-            if (rdNam.Checked) return "nam";
-            else return "nu";
+            if (rdNam.Checked) return "Nam";
+            else return "Nữ";
         }
 
         public void TaoMaDinhDanh()
@@ -82,17 +82,16 @@ namespace GUI
 
         private void rdNam_CheckedChanged(object sender, EventArgs e)
         {
-            TaoMaDinhDanh();
+
         }
 
         private void rdNu_CheckedChanged(object sender, EventArgs e)
         {
-            TaoMaDinhDanh();
+
         }
 
         private void dt_NgaySinh_ValueChanged(object sender, EventArgs e)
         {
-            TaoMaDinhDanh();
         }
 
 
@@ -225,8 +224,6 @@ namespace GUI
             {
                 txtMaDinhDanh1.Text = madinhdanhForSearch;
                 btnTim1_Click(sender, e);
-                DataGridViewCellEventArgs arg = new DataGridViewCellEventArgs(0, 0);
-                dataGridView1_CellClick(sender, arg);
             }
             else
             {            
@@ -249,11 +246,11 @@ namespace GUI
                 SoTamTruDTO stt = new SoTamTruDTO(sosotamtru, "", "", DateTime.Now, DateTime.Now);
                 if (soTamTruBUS.Add(stt))
                 {
-                    MessageBox.Show("Them so tam tru thanh cong");
+
                 }
                 else
                 {
-                    MessageBox.Show("Them so tam tru khong thanh cong");
+
                 }
             }
 
@@ -390,8 +387,8 @@ namespace GUI
                 string nghenghiep = txt_NgheNghiep.Text.ToString();
 
                 string gioitinh = "";
-                if (rdNam.Checked) gioitinh = "nam";
-                else gioitinh = "nu";
+                if (rdNam.Checked) gioitinh = "Nam";
+                else gioitinh = "Nữ";
 
                 string dantoc = txt_DanToc.Text.ToString();
                 string hochieu = txt_HoChieu.Text.ToString();
@@ -486,52 +483,6 @@ namespace GUI
             {
             }
 
-        }
-
-        //Lấy thông tin từ datagridview vào input
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string madinhdanh = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            string manhankhautamtru = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            string hoten = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-            string tenkhac = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            DateTime ngaysinh = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[4].Value);
-            string gioitinh = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-            string noisinh = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-            string nguyenquan = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
-            string dantoc = dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString();
-            string tongiao = dataGridView1.Rows[e.RowIndex].Cells[9].Value.ToString();
-            string quoctich = dataGridView1.Rows[e.RowIndex].Cells[10].Value.ToString();
-            string hochieu = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString();
-            string noithuongtru = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString();
-            string diachihiennay = dataGridView1.Rows[e.RowIndex].Cells[13].Value.ToString();
-            string sdt = dataGridView1.Rows[e.RowIndex].Cells[14].Value.ToString();
-            string trinhdohocvan = dataGridView1.Rows[e.RowIndex].Cells[15].Value.ToString();
-            string trinhdochuyenmon = dataGridView1.Rows[e.RowIndex].Cells[16].Value.ToString();
-            string biettiengdantoc = dataGridView1.Rows[e.RowIndex].Cells[17].Value.ToString();
-            string trinhdongoaingu = dataGridView1.Rows[e.RowIndex].Cells[18].Value.ToString();
-            string nghenghiep = dataGridView1.Rows[e.RowIndex].Cells[19].Value.ToString();
-            string sosotamtru = dataGridView1.Rows[e.RowIndex].Cells[20].Value.ToString();
-            string noitamtru = dataGridView1.Rows[e.RowIndex].Cells[21].Value.ToString();
-            DateTime tungay = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[22].Value);
-            DateTime denngay = Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[23].Value);
-            string lydo = dataGridView1.Rows[e.RowIndex].Cells[24].Value.ToString();
-
-
-            madinhdanhForInsert = madinhdanh;
-
-            NhanKhauTamTruDTO nhankhautamtru = new NhanKhauTamTruDTO(manhankhautamtru, noitamtru, tungay,denngay,lydo, 
-                sosotamtru, madinhdanh, hoten, tenkhac, ngaysinh, gioitinh, noisinh, nguyenquan, dantoc, tongiao, 
-                quoctich, hochieu, noithuongtru, diachihiennay, sdt,trinhdohocvan, trinhdochuyenmon, 
-                biettiengdantoc,trinhdongoaingu, nghenghiep);
-
-            //Hiễn thị tiền án tiền sự
-            LoadDataGridViewTienAN();
-            LoadDataGridViewTieuSu();
-            ResetInputTienAn();
-            ResetInputTieuSu();
-            txt_MaTienAn.Text = GenerateMaTienAnTienSu();
-            txt_MaTieuSu.Text = GenerateMaTieuSu(); 
         }
 
 

@@ -73,30 +73,38 @@ namespace DAO
         {
             try
             {
-                //Tìm nhân khẩu tt với mã định danh
-                //Cách 1
-                //NHANKHAUTAMTRU nk = new NHANKHAUTAMTRU();
-                //nk = qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh);
 
-                TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MADINHDANH == madinhdanh));
-                qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
-                qlhk.SubmitChanges();
+                //Xoa tieu su
+                List<String> listMaTieuSu = new List<string>();
+                listMaTieuSu = qlhk.TIEUSUs.Where(x => x.MADINHDANH == madinhdanh).Select(x=>x.MATIEUSU).ToList();
 
-
-                TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MADINHDANH == madinhdanh));
-                qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
-
+                for(int i=0; i<listMaTieuSu.Count; i++)
+                {
+                    TieuSuDTO tieusu = new TieuSuDTO(qlhk.TIEUSUs.Single(x => x.MATIEUSU == listMaTieuSu[i]));
+                    qlhk.TIEUSUs.DeleteOnSubmit(tieusu.db);
+                }
 
                 qlhk.SubmitChanges();
 
+                //Xoa tien an tien su
+                List<String> listMaTienan = new List<string>();
+                listMaTienan = qlhk.TIENANTIENSUs.Where(x => x.MADINHDANH == madinhdanh).Select(x => x.MATIENANTIENSU).ToList();
 
+                for (int i = 0; i < listMaTieuSu.Count; i++)
+                {
+                    TienAnTienSuDTO tienan = new TienAnTienSuDTO(qlhk.TIENANTIENSUs.Single(x => x.MATIENANTIENSU == listMaTienan[i]));
+                    qlhk.TIENANTIENSUs.DeleteOnSubmit(tienan.db);
+                }
+                qlhk.SubmitChanges();
+
+                //Xoa nhan khau tam tru
                 NhanKhauTamTruDTO nktt = new NhanKhauTamTruDTO(qlhk.NHANKHAUTAMTRUs.Single(x => x.MADINHDANH == madinhdanh));
                 qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(nktt.dbnktamtru);
 
-
                 qlhk.SubmitChanges();
 
-
+                NhanKhauDAO nk= new NhanKhauDAO();
+                nk.delete(madinhdanh);
 
                 return true;
 
@@ -224,12 +232,6 @@ namespace DAO
             }
 
             return lst;
-
-                //string sql = "SELECT  nhankhau.MaDinhDanh, MaNhanKhauTamTru, HoTen,TenKhac,NgaySinh," +
-                //    " GioiTinh,NoiSinh,NguyenQuan,DanToc,TonGiao,QuocTich,HoChieu,NoiThuongTru,DiaChiHienNay," +
-                //    "SDT,TrinhDoHocVan,TrinhDoChuyenMon,BietTiengDanToc,TrinhDoNgoaiNgu, NgheNghiep, SoSoTamTru,NoiTamTru,TuNgay,DenNgay,LyDo " +
-                //    "FROM nhankhautamtru inner join nhankhau " +
-                //    "WHERE nhankhautamtru.madinhdanh=nhankhau.madinhdanh and nhankhau.madinhdanh='" + madinhdanh + "'";
         }
 
 
@@ -245,12 +247,6 @@ namespace DAO
             }
 
             return lst;
-
-            //string sql = "SELECT  nhankhau.MaDinhDanh, MaNhanKhauTamTru, HoTen,TenKhac,NgaySinh," +
-            //    " GioiTinh,NoiSinh,NguyenQuan,DanToc,TonGiao,QuocTich,HoChieu,NoiThuongTru,DiaChiHienNay," +
-            //    "SDT,TrinhDoHocVan,TrinhDoChuyenMon,BietTiengDanToc,TrinhDoNgoaiNgu, NgheNghiep, SoSoTamTru,NoiTamTru,TuNgay,DenNgay,LyDo " +
-            //    "FROM nhankhautamtru inner join nhankhau " +
-            //    "WHERE nhankhautamtru.madinhdanh=nhankhau.madinhdanh and nhankhau.madinhdanh='" + madinhdanh + "'";
         }
 
         

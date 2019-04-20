@@ -80,16 +80,6 @@ namespace BUS
         }
 
 
- 
-
-
-        public string[] SplitDiaChi(string diachi)
-        {
-            string data = diachi;
-            string[] result = data.Split(',');
-            return result;
-        }
-
 
 
 
