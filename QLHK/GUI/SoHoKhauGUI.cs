@@ -31,6 +31,13 @@ namespace GUI
             taoDanhSachNhanKhau();
         }
         #region Các hàm hỗ trợ
+        private void reloadSHK()
+        {
+            if (shkDTO == null || shkDTO.db == null)
+                return;
+
+            shkDTO = shk.TimKiem("sosohokhau='" + shkDTO.db.SOSOHOKHAU + "'")[0];
+        }
         private void taoDanhSachNhanKhau()
         {
             if (shkDTO == null || shkDTO.NhanKhau == null)
@@ -133,37 +140,52 @@ namespace GUI
                 MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            bool updateOK = true;
             if (shkDTO.db==null||string.IsNullOrEmpty(shkDTO.db.SOSOHOKHAU))
             {
                 shkDTO = new SoHoKhauDTO(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
-                shk.Add(shkDTO);
+                updateOK = shk.Add(shkDTO);
                 foreach(NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
                 {
-                    item.dbnktt.SOHOKHAU = shkDTO.db;
-                    item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                    item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                    nktt.Update(item);
+                    //item.dbnktt.SOHOKHAU = shkDTO.db;
+                    //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                    //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                    updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
-                MessageBox.Show(this, "Tạo sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (updateOK)
+                {
+                    MessageBox.Show(this, "Tạo sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Tạo sổ hộ khẩu Thất bại!", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
                 shkDTO = new SoHoKhauDTO(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
 
-                shk.Update(shkDTO);
+                updateOK = shk.Update(shkDTO);
                 foreach (NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
                 {
                     if(item.dbnktt.SOSOHOKHAU != shkDTO.db.SOSOHOKHAU|| item.dbnktt.DIACHITHUONGTRU != shkDTO.db.DIACHI)
                     {
-                        item.dbnktt.SOHOKHAU = shkDTO.db;
-                        item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                        item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                        nktt.Update(item);
+                        //item.dbnktt.SOHOKHAU = shkDTO.db;
+                        //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                        //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                        updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                     }
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
-                MessageBox.Show(this, "Cập nhật sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (updateOK)
+                {
+                    MessageBox.Show(this, "Cập nhật sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Cập nhật sổ hộ khẩu Thất bại!", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             btnXoa.Enabled = true;
@@ -240,7 +262,7 @@ namespace GUI
                 {
                     if (shkDTO.NhanKhau.Any(i => i.dbnktt.MANHANKHAUTHUONGTRU == a.nkttDTO.dbnktt.MANHANKHAUTHUONGTRU))
                         return;
-                    shkDTO.NhanKhau.Add(a.nkttDTO);
+                    reloadSHK();
 
                     cbbChuHo.DataSource = null;
                     cbbChuHo.Items.Clear();
@@ -259,11 +281,17 @@ namespace GUI
                 return;
             }
 
+            nkDuocChon.dbnktt.SOHOKHAU = null;
             nkDuocChon.dbnktt.SOSOHOKHAU = null;
-            nktt.Update(nkDuocChon);
 
             //nktt.XoaNKTT(nkDuocChon.MaNhanKhauThuongTru);
-            MessageBox.Show(this, "Đã xóa nhân khẩu thành công!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(nktt.Update(nkDuocChon))
+                MessageBox.Show(this, "Đã xóa nhân khẩu thành công!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show(this, "Đã xóa nhân khẩu thất bại!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            reloadSHK();
+            taoDanhSachNhanKhau();
 
         }
 
@@ -287,6 +315,7 @@ namespace GUI
                     {
                         item.dbnktt.SOHOKHAU = null;
                         item.dbnktt.SOSOHOKHAU = null;
+                        item.dbnktt.DIACHITHUONGTRU = null;
                         condition = nktt.Update(item);
                     }
                 //}

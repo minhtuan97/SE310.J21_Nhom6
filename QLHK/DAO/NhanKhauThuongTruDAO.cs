@@ -104,6 +104,24 @@ namespace DAO
             return false;
 
         }
+
+        public bool updateTTThuongTru(string manktt, SOHOKHAU shk)
+        {
+            NHANKHAUTHUONGTRU nk = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == manktt).FirstOrDefault();
+
+            //nk.SOHOKHAU = shk;
+            nk.SOSOHOKHAU = shk.SOSOHOKHAU;
+            nk.DIACHITHUONGTRU = shk.DIACHI;
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         public override bool update(NhanKhauThuongTruDTO nktt)
         {
             // Query the database for the row to be updated.
@@ -115,23 +133,23 @@ namespace DAO
             {
                 //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
                 //{
-                if(kq.NHANKHAU != nktt.dbnktt.NHANKHAU)
+                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH)
                 {
-                    kq.NHANKHAU = nktt.dbnktt.NHANKHAU;
-                    kq.MADINHDANH = nktt.dbnktt.MADINHDANH;
+                    if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
+                    kq.MADINHDANH = nktt.db.MADINHDANH;
                 }
-                    
-                    kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
-                    kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
+
+                kq.DIACHITHUONGTRU = nktt.dbnktt.DIACHITHUONGTRU;
+                kq.QUANHEVOICHUHO = nktt.dbnktt.QUANHEVOICHUHO;
                 if (kq.SOSOHOKHAU != nktt.dbnktt.SOSOHOKHAU)
                 {
-                    kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
+                    if (nktt.dbnktt.SOHOKHAU != null && nktt.dbnktt.SOSOHOKHAU != null) kq.SOHOKHAU = nktt.dbnktt.SOHOKHAU;
                     kq.SOSOHOKHAU = nktt.dbnktt.SOSOHOKHAU;
                 }
-                
+
                 //    break;
                 //}
-                
+
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.
@@ -146,6 +164,7 @@ namespace DAO
                 // Provide for exceptions.
                 return false;
             }
+
         }
         //public bool doiChuHo(List<NhanKhauThuongTruDTO> danhSach, string maDinhDanhChuHo)
         //{
