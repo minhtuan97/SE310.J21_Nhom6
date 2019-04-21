@@ -88,6 +88,30 @@ namespace DAO
                 return false;
             }
         }
+        public bool deleteNKTT(string id)
+        {
+            var kq =
+            from nktt in qlhk.NHANKHAUTHUONGTRUs
+            where nktt.MANHANKHAUTHUONGTRU == id
+            select nktt;
+
+            foreach (var detail in kq)
+            {
+                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
 
         public override bool delete(int row)
         {

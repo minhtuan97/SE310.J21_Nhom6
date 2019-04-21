@@ -101,6 +101,30 @@ namespace DAO
             }
             return false;
         }
+        public bool deleteSHK(string id)
+        {
+            var kq =
+            from shk in qlhk.SOHOKHAUs
+            where shk.SOSOHOKHAU == id
+            select shk;
+
+            foreach (var detail in kq)
+            {
+                qlhk.SOHOKHAUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             SoHoKhauDTO[] nktt = this.getAll().ToArray();

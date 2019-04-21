@@ -47,7 +47,10 @@ namespace BUS
         {
             return SoTamTru.delete(r);
         }
-
+        public bool deleteSTT(string id)
+        {
+            return SoTamTru.deleteSTT(id);
+        }
         public List<SoTamTruDTO> TimKiem(string query)
         {
             List<SoTamTruDTO> list = SoTamTru.TimKiem(query);

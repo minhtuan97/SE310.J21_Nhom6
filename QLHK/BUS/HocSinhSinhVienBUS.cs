@@ -43,6 +43,10 @@ namespace BUS
         {
             return objhssv.delete(r);
         }
+        public bool DeleteHSSV(string id)
+        {
+            return objhssv.deleteHSSV(id);
+        }
 
         public override bool Update(HocSinhSinhVienDTO hssv)
         {

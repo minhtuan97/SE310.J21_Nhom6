@@ -135,6 +135,30 @@ namespace DAO
             return true;
         }
 
+        public bool deleteSTT(string id)
+        {
+            var kq =
+            from stt in qlhk.SOTAMTRUs
+            where stt.SOSOTAMTRU == id
+            select stt;
+
+            foreach (var detail in kq)
+            {
+                qlhk.SOTAMTRUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             try

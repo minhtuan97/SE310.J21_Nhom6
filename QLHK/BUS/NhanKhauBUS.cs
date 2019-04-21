@@ -33,6 +33,10 @@ namespace BUS
         {
             return objnhankhau.delete(row);
         }
+        public bool DeleteNK(string id)
+        {
+            return objnhankhau.deleteNK(id);
+        }
         public override bool Add_Table(NhanKhau data)
         {
             return objnhankhau.insert_table(data);
