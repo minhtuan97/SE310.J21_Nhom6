@@ -9,7 +9,7 @@ namespace DTO
     public class NhanKhauTamVangDTO: NhanKhau
     {
         public NHANKHAUTAMVANG db= new NHANKHAUTAMVANG();
-
+       
         public NhanKhauTamVangDTO() { }
 
         public NhanKhauTamVangDTO(string maNhanKhauTamVang, DateTime ngayBatDauTamVang, DateTime ngayKetThucTamVang, string lyDo, string noiDen, string maDinhdDanh)

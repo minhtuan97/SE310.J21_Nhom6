@@ -42,6 +42,21 @@ namespace DAO
 
         public override bool insert(NhanKhauTamVangDTO data)
         {
+            //qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
+            //try
+            //{
+            //    qlhk.SubmitChanges();
+            //    return true;
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    //qlhk.SubmitChanges();
+            //    return false;
+            //}
+
+
+
             qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
             try
             {
@@ -51,9 +66,30 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
                 return false;
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -78,8 +114,10 @@ namespace DAO
         public override bool update(NhanKhauTamVangDTO data)
         {
             //Query
-            var query = qlhk.NHANKHAUTAMVANGs.Where(x => x.MANHANKHAUTAMVANG == data.db.MANHANKHAUTAMVANG).Select(x => x);
 
+
+            var query = qlhk.NHANKHAUTAMVANGs.Where(r => r.MANHANKHAUTAMVANG == data.db.MANHANKHAUTAMVANG).ToList();
+            //var listmanktv = query.Select(r => r.MANHANKHAUTAMVANG).ToList();
             //Execute
             foreach (NHANKHAUTAMVANG NKTV in query)
             {
@@ -106,16 +144,23 @@ namespace DAO
 
         public List<NhanKhauTamVangDTO> TimKiemJoinNhanKhau(string query)
         {
-            query = "SELECT * FROM nhankhau left join nhankhautamvang " +
-                    "on nhankhau.madinhdanh=nhankhautamvang.madinhdanh" + query + " ORDER BY ngayketthuctamvang DESC";
+            query = "SELECT * FROM nhankhautamvang" + query + " ORDER BY ngayketthuctamvang DESC";
             var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query);
             List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
-            foreach (NHANKHAUTAMVANG i in res)
+            try
             {
-                NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
-                lst.Add(ts);
+                foreach (NHANKHAUTAMVANG i in res)
+                {
+                    NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
+                    lst.Add(ts);
+                }
+                return lst;
             }
-            return lst;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
 

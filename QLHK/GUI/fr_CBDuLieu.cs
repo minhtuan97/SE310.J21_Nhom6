@@ -68,7 +68,7 @@ namespace GUI
             var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
             foreach (var r in datamodel.GetTables())
             {
-                comboBox1.Items.Add(r.TableName.ToString());
+                comboBox1.Items.Add(r.RowType.Name.ToString());
             }
 
         }
@@ -77,10 +77,10 @@ namespace GUI
         {
             switch (comboBox1.Text)
             {
-                case "canbo":
+                case "CANBO":
                     try
                     {
-                        dataGridView1.DataSource = canbobus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<CANBO>(canbobus.GetAll().Select(r=>r.dbcb).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -92,10 +92,10 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "hocsinhsinhvien":
+                case "HOCSINHSINHVIEN":
                     try
                     {
-                        dataGridView1.DataSource = hssvbus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange < HOCSINHSINHVIEN > (hssvbus.GetAll().Select(r => r.dbhssv).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -108,7 +108,7 @@ namespace GUI
                     }
                     break;
 
-                case "nhankhau":
+                case "NHANKHAU":
                     try
                     {
                         dataGridView1.DataSource = nhankhaubus.GetAll();
@@ -124,7 +124,7 @@ namespace GUI
                     }
                     break;
 
-                case "nhankhautamvang":
+                case "NHANKHAUTAMVANG":
                     try
                     {
                         dataGridView1.DataSource = nhankhautamvangbus.GetAll();
@@ -139,7 +139,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "nhankhautamtru":
+                case "NHANKHAUTAMTRU":
                     try
                     {
                         dataGridView1.DataSource = nktamtrubus.GetAll();
@@ -154,7 +154,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "nhankhauthuongtru":
+                case "NHANKHAUTHUONGTRU":
                     try
                     {
                         dataGridView1.DataSource = nkthuongtrubus.GetAll();
@@ -169,7 +169,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "quanhuyen":
+                case "QUANHUYEN":
                     try
                     {
                         dataGridView1.DataSource = quanhuyenbus.GetAll();
@@ -184,7 +184,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "sohokhau":
+                case "SOHOKHAU":
                     try
                     {
                         dataGridView1.DataSource = sohokhaubus.GetAll();
@@ -199,7 +199,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "sotamtru":
+                case "SOTAMTRU":
                     try
                     {
                         dataGridView1.DataSource = sotamtrubus.GetAll();
@@ -214,7 +214,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "tienantiensu":
+                case "TIENANTIENSU":
                     try
                     {
                         dataGridView1.DataSource = tienantiensubus.GetAll();
@@ -229,7 +229,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "tieusu":
+                case "TIEUSU":
                     try
                     {
                         dataGridView1.DataSource = tieusubus.GetAll();
@@ -244,7 +244,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "tinhthanhpho":
+                case "TINHTHANHPHO":
                     try
                     {
                         dataGridView1.DataSource = tinhthanhphobus.GetAll();
@@ -259,7 +259,7 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "xaphuongthitran":
+                case "XAPHUONGTHITRAN":
                     try
                     {
                         dataGridView1.DataSource = xaphuongthitranbus.GetAll();
