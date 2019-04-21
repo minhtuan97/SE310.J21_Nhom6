@@ -8,7 +8,7 @@ namespace DTO
 {
     public class TinhThanhPhoDTO
     {
-        public TINHTHANHPHO db;
+        public TINHTHANHPHO db = new TINHTHANHPHO();
 
         public TinhThanhPhoDTO() { }
         public TinhThanhPhoDTO(TINHTHANHPHO x)

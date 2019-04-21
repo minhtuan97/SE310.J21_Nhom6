@@ -27,6 +27,10 @@ namespace BUS
         {
             return obj.insert_table(data);
         }
+        public bool deleteXPTT(string id)
+        {
+            return obj.deleteXPTT(id);
+        }
         public override bool Delete(int r)
         {
             return obj.delete(r);

@@ -56,6 +56,31 @@ namespace DAO
             }
         }
 
+        public bool deleteQH(string id)
+        {
+            var kq =
+            from qh in qlhk.QUANHUYENs
+            where qh.maqh == id
+            select qh;
+
+            foreach (var detail in kq)
+            {
+                qlhk.QUANHUYENs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
+
         public override bool delete(int row)
         {
             try

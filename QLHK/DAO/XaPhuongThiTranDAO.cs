@@ -55,6 +55,30 @@ namespace DAO
                 return false;
             }
         }
+        public bool deleteXPTT(string id)
+        {
+            var kq =
+            from xptt in qlhk.XAPHUONGTHITRANs
+            where xptt.maxp == id
+            select xptt;
+
+            foreach (var detail in kq)
+            {
+                qlhk.XAPHUONGTHITRANs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             try

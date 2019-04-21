@@ -21,7 +21,10 @@ namespace BUS
         {
             return obj.insert(data);
         }
-
+        public bool deleteTTP(string id)
+        {
+            return obj.deleteTTP(id);
+        }
         public override bool Delete(int r)
         {
             return obj.delete(r);

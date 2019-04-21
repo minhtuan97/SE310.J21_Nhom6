@@ -54,6 +54,30 @@ namespace DAO
                 return false;
             }
         }
+        public bool deleteTTP(string id)
+        {
+            var kq =
+           from ttp in qlhk.TINHTHANHPHOs
+           where ttp.matp == id
+           select ttp;
+
+            foreach (var detail in kq)
+            {
+                qlhk.TINHTHANHPHOs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
 
         public override bool delete(int row)
         {
