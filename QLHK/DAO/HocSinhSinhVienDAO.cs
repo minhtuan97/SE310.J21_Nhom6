@@ -68,7 +68,30 @@ namespace DAO
             }
             return false;
         }
+        public bool deleteHSSV(string id)
+        {
+            var kq =
+            from hssv in qlhk.HOCSINHSINHVIENs
+            where hssv.MAHSSV == id
+            select hssv;
 
+            foreach (var detail in kq)
+            {
+                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             try
@@ -98,9 +121,10 @@ namespace DAO
 
             foreach (HOCSINHSINHVIEN kq in query)
             {
-                kq.MAHSSV = hssv.dbhssv.MAHSSV;
+                //kq.MAHSSV = hssv.dbhssv.MAHSSV;
                 kq.MADINHDANH = hssv.dbhssv.MADINHDANH;
                 kq.TRUONG = hssv.dbhssv.TRUONG;
+                kq.DIACHITHUONGTRU = hssv.dbhssv.DIACHITHUONGTRU;
                 kq.THOIGIANBATDAUTAMTRUTHUONGTRU = hssv.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU;
                 kq.THOIGIANKETTHUCTAMTRUTHUONGTRU = hssv.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU;
                 kq.VIPHAM = hssv.dbhssv.VIPHAM;

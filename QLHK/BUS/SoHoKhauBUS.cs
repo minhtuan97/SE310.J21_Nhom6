@@ -30,6 +30,10 @@ namespace BUS
         {
             return obj.XoaSoHK(soSoHoKhau);
         }
+        public bool deleteSHK(string id)
+        {
+            return obj.deleteSHK(id);
+        }
         public override bool Delete(int r)
         {
             return obj.delete(r);

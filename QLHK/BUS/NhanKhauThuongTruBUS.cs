@@ -81,6 +81,10 @@ namespace BUS
             }
             return false;
         }
+        public bool deleteNKTT(string id)
+        {
+            return obj.deleteNKTT(id);
+        }
         public override bool Delete(int r)
         {
             return obj.delete(r);

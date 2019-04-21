@@ -12,6 +12,31 @@ namespace DAO
     {
         public NhanKhauTamVangDAO() : base() { }
 
+
+        public bool deleteNKTV(string id)
+        {
+            var kq =
+            from nktv in qlhk.NHANKHAUTAMVANGs
+            where nktv.MANHANKHAUTAMVANG == id
+            select nktv;
+
+            foreach (var detail in kq)
+            {
+                qlhk.NHANKHAUTAMVANGs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             try
