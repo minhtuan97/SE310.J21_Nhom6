@@ -41,7 +41,30 @@ namespace DAO
                 return false;
             }
         }
+        public bool deleteCB(string id)
+        {
+            var kq =
+            from cb in qlhk.CANBOs
+            where cb.MACANBO == id
+            select cb;
 
+            foreach (var detail in kq)
+            {
+                qlhk.CANBOs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
         public override bool delete(int row)
         {
             try

@@ -24,6 +24,10 @@ namespace BUS
         {
             return objcb.delete(row);
         }
+        public bool deleteCB(string id)
+        {
+            return objcb.deleteCB(id);
+        }
         public override bool Update(CanBoDTO cb)
         {
             return objcb.update(cb);

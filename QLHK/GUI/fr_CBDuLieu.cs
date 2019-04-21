@@ -111,7 +111,7 @@ namespace GUI
                 case "NHANKHAU":
                     try
                     {
-                        dataGridView1.DataSource = nhankhaubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAU>(nhankhaubus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -127,7 +127,7 @@ namespace GUI
                 case "NHANKHAUTAMVANG":
                     try
                     {
-                        dataGridView1.DataSource = nhankhautamvangbus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMVANG>(nhankhautamvangbus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -142,7 +142,7 @@ namespace GUI
                 case "NHANKHAUTAMTRU":
                     try
                     {
-                        dataGridView1.DataSource = nktamtrubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(nktamtrubus.GetAll().Select(r => r.dbnktamtru).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -157,7 +157,7 @@ namespace GUI
                 case "NHANKHAUTHUONGTRU":
                     try
                     {
-                        dataGridView1.DataSource = nkthuongtrubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nkthuongtrubus.GetAll().Select(r => r.dbnktt).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -169,25 +169,11 @@ namespace GUI
                         MessageBox.Show(ex.Message);
                     }
                     break;
-                case "QUANHUYEN":
-                    try
-                    {
-                        dataGridView1.DataSource = quanhuyenbus.GetAll();
-                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                        {
-                            DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
-                            dataGridView1[dataGridView1.ColumnCount - 1, i] = linkCell;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
+                
                 case "SOHOKHAU":
                     try
                     {
-                        dataGridView1.DataSource = sohokhaubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOHOKHAU>(sohokhaubus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -202,7 +188,7 @@ namespace GUI
                 case "SOTAMTRU":
                     try
                     {
-                        dataGridView1.DataSource = sotamtrubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOTAMTRU>(sotamtrubus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -217,7 +203,7 @@ namespace GUI
                 case "TIENANTIENSU":
                     try
                     {
-                        dataGridView1.DataSource = tienantiensubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienantiensubus.GetAll().Select(r=>r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -232,7 +218,7 @@ namespace GUI
                 case "TIEUSU":
                     try
                     {
-                        dataGridView1.DataSource = tieusubus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusubus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -247,7 +233,22 @@ namespace GUI
                 case "TINHTHANHPHO":
                     try
                     {
-                        dataGridView1.DataSource = tinhthanhphobus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TINHTHANHPHO>(tinhthanhphobus.GetAll().Select(r => r.db).ToList());
+                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                            dataGridView1[dataGridView1.ColumnCount - 1, i] = linkCell;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    break;
+                case "QUANHUYEN":
+                    try
+                    {
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<QUANHUYEN>(quanhuyenbus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -262,7 +263,7 @@ namespace GUI
                 case "XAPHUONGTHITRAN":
                     try
                     {
-                        dataGridView1.DataSource = xaphuongthitranbus.GetAll();
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<XAPHUONGTHITRAN>(xaphuongthitranbus.GetAll().Select(r => r.db).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -282,7 +283,7 @@ namespace GUI
         {
            switch (comboBox1.Text)
             {
-                case "canbo":
+                case "CANBO":
                     try
                     {
                         if (e.ColumnIndex == dataGridView1.ColumnCount - 1)
@@ -293,7 +294,9 @@ namespace GUI
                                 if (MessageBox.Show("Bạn có chắc chắm muốn xóa không?", "Đang xóa...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
                                     int rowIndex = e.RowIndex;
-                                    canbobus.Delete(rowIndex);
+                                    string macanbo = dataGridView1.Rows[rowIndex].Cells["macanbo"].Value.ToString();
+                                    canbobus.deleteCB(macanbo);
+                                    LoadData();
                                 }
                             }
                             else if (Task == "Insert")
@@ -306,11 +309,7 @@ namespace GUI
                                 string loaicanbo = dataGridView1.Rows[row].Cells["loaicanbo"].Value.ToString();
                                 canbo = new CanBoDTO(macanbo, tentaikhoan, matkhau, loaicanbo, manhankhauthuongtru);
                                 canbobus.Add_Table(canbo);
-                                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
-                                dataGridView1.Rows[e.RowIndex].Cells[dataGridView1.ColumnCount - 1].Value = "Delete";
-
-
-
+                                LoadData();
                             }
                             else if (Task == "Update")
                             {
@@ -1005,28 +1004,28 @@ namespace GUI
                 //dataGridView1[0,lastRow].Value= TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaTieuSu());
                 switch(comboBox1.Text)
                 {
-                    case "canbo":
+                    case "CANBO":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_CanBo());
                         break;
-                    case "nhankhautamtru":
+                    case "NHANKHAUTAMTRU":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaNhanKhauTamTru());
                         break;
-                    case "nhankhautamvang":
+                    case "NHANKHAUTAMVANG":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang());
                         break;
-                    case "nhankhauthuongtru":
+                    case "NHANKHAUTHUONGTRU":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaNhanKhauThuongTru());
                         break;
-                    case "sohokhau":
+                    case "SOHOKHAU":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_SoHoKhauSoTamTru());
                         break;
-                    case "sotamtru":
+                    case "SOTAMTRU":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_SoHoKhauSoTamTru());
                         break;
-                    case "tienantiensu":
+                    case "TIENANTIEN":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaTienAnTienSu());
                         break;
-                    case "tieusu":
+                    //case "TIEUSU":
                         dataGridView1[0, lastRow].Value = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_MaTieuSu());
                         break;
                 }
