@@ -55,9 +55,17 @@ namespace BUS
         {
             return objnktt.XoaNKTT(madinhdanh);
         }
+        public bool DeleteNKTT(string id)
+        {
+            return objnktt.deletenktt(id);
+        }
         public override bool Delete(int r)
         {
             return objnktt.delete(r);
+        }
+        public bool UpdateNKTT(NhanKhauTamTruDTO nktt)
+        {
+            return objnktt.updatenktt(nktt);
         }
         public override bool Update(NhanKhauTamTruDTO nhankhautamtru)
         {

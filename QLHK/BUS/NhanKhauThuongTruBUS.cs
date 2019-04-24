@@ -93,6 +93,10 @@ namespace BUS
         {
             return obj.updateTTThuongTru(manktt, shk);
         }
+        public bool UpdateNKTT(NhanKhauThuongTruDTO nktt)
+        {
+            return obj.update(nktt);
+        }
         public override bool Update(NhanKhauThuongTruDTO nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();

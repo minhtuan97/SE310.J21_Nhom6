@@ -116,6 +116,30 @@ namespace DAO
             }
         }
 
+        public bool deletenktt(string id)
+        {
+            var kq =
+           from nktt in qlhk.NHANKHAUTAMTRUs
+           where nktt.MANHANKHAUTAMTRU == id
+           select nktt;
+
+            foreach (var detail in kq)
+            {
+                qlhk.NHANKHAUTAMTRUs.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+                // Provide for exceptions.
+            }
+        }
 
         public override bool delete(int row)
         {
@@ -132,6 +156,38 @@ namespace DAO
                 Console.WriteLine(e.Message);
             }
             return false;
+        }
+
+        public bool updatenktt(NhanKhauTamTruDTO nktt)
+        {
+            // Query the database for the row to be updated.
+            var query = qlhk.NHANKHAUTAMTRUs.Where(q => q.MANHANKHAUTAMTRU == nktt.dbnktamtru.MANHANKHAUTAMTRU);
+
+            // Execute the query, and change the column values
+            // you want to change.
+            foreach (NHANKHAUTAMTRU kq in query)
+            {
+                kq.MANHANKHAUTAMTRU = nktt.dbnktamtru.MANHANKHAUTAMTRU;
+                kq.MADINHDANH = nktt.dbnktamtru.MADINHDANH;
+                kq.SOSOTAMTRU = nktt.dbnktamtru.SOSOTAMTRU;
+                kq.NOITAMTRU = nktt.dbnktamtru.NOITAMTRU;
+                kq.TUNGAY = nktt.dbnktamtru.TUNGAY;
+                kq.DENNGAY = nktt.dbnktamtru.DENNGAY;
+                kq.LYDO = nktt.dbnktamtru.LYDO;
+                // Insert any additional changes to column values.
+            }
+            // Submit the changes to the database.
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
+            }
         }
 
         public bool updateNhanKhauTamTru(NhanKhauTamTruDTO nktt)
@@ -262,7 +318,7 @@ namespace DAO
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                //qlhk.SubmitChanges();
                 return false;
             }
         }

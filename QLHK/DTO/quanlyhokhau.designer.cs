@@ -72,7 +72,7 @@ namespace DTO
     #endregion
 		
 		public quanlyhokhauDataContext() : 
-				base(global::DTO.Properties.Settings.Default.QLHKConnectionString2, mappingSource)
+				base(global::DTO.Properties.Settings.Default.QLHKConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

@@ -8,7 +8,7 @@ namespace DTO
 {
     public class QuanHuyenDTO
     {
-        public QUANHUYEN db;
+        public QUANHUYEN db= new QUANHUYEN();
 
         public QuanHuyenDTO() { }
         public QuanHuyenDTO(QUANHUYEN x) {

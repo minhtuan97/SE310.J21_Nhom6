@@ -8,7 +8,7 @@ namespace DTO
 {
     public class XaPhuongThiTranDTO
     {
-        public XAPHUONGTHITRAN db;
+        public XAPHUONGTHITRAN db= new XAPHUONGTHITRAN();
 
 
         public XaPhuongThiTranDTO() { }

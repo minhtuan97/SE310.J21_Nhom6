@@ -26,7 +26,7 @@ namespace DAO.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-F1B7BR9\SQLEXPRESS;Initial Catalog=QLHK;Integrated Security=T" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-T2E7R4C\SQLEXPRESS;Initial Catalog=QLHK;Integrated Security=T" +
             "rue")]
         public string QLHKConnectionString {
             get {

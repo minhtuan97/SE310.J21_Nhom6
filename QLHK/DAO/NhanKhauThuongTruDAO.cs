@@ -157,7 +157,7 @@ namespace DAO
             {
                 //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
                 //{
-                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH)
+                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH && nktt.db.MADINHDANH!=null)
                 {
                     if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
                     kq.MADINHDANH = nktt.db.MADINHDANH;
