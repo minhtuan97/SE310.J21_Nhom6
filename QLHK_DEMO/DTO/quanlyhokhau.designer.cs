@@ -22,7 +22,6 @@ namespace DTO
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="QLHK")]
 	public partial class quanlyhokhauDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -72,7 +71,7 @@ namespace DTO
     #endregion
 		
 		public quanlyhokhauDataContext() : 
-				base(global::DTO.Properties.Settings.Default.QLHKConnectionString, mappingSource)
+				base(global::DTO.Properties.Settings.Default.quanlyhokhauDataContextConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

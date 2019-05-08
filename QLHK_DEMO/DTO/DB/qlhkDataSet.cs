@@ -10,7 +10,7 @@ namespace DTO.DB
 {
     public class qlhkDataSet
     {
-        protected static string connString = "Data Source=DESKTOP-0L5NRCB;Initial Catalog = QLHK; Integrated Security = True";
+        protected static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\DB\\quanlyhokhauDataContext.mdf;Integrated Security=True";
         protected static SqlConnection connection = new SqlConnection(connString);
 
         public DataTable CANBO = getData("SELECT * FROM CANBO");
