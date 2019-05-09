@@ -10,8 +10,6 @@ using System.Windows.Forms;
 using BUS;
 using DTO;
 using DTO.DB;
-using System.Xml.Linq;
-using System.IO;
 
 namespace GUI
 {
@@ -21,24 +19,9 @@ namespace GUI
         public DangNhapGUI()
         {
             InitializeComponent();
-            //qlhkDataSet ds = new qlhkDataSet();
-            //var data = from d in ds.dbDataSet.Tables["CANBO"].AsEnumerable()
-            //           select new 
-            //           {
-            //               id = d["MACANBO"]
-            //           };
+            qlhkDataSet ds = new qlhkDataSet();
 
-            //tbTaiKhoan.Text = data.ToList().First().id.ToString();
-            XElement qlhk = XElement.Parse(File.ReadAllText(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml"));
-
-            var data = from c in qlhk.Descendants("table").Where(e=>(string)e.Attribute("name")== "canbo")
-                       select new
-                       {
-                           id = c.Descendants("column").Where(e => (string)e.Attribute("name") == "MACANBO").FirstOrDefault().Value
-                       };
-
-            tbTaiKhoan.Text = data.ToList().First().id.ToString();
-
+            tbTaiKhoan.Text = ds.dbDataSet.Tables[0].Rows[0].ItemArray[0].ToString();
         }
 
         private void DangNhap()
