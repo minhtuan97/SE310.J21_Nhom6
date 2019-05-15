@@ -29,14 +29,17 @@ namespace GUI
             //           };
 
             //tbTaiKhoan.Text = data.ToList().First().id.ToString();
-            XElement qlhk = XElement.Parse(File.ReadAllText(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml"));
+            //XElement qlhk = XElement.Parse(File.ReadAllText(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml"));
 
-            var data = from c in qlhk.Descendants("table").Where(e=>(string)e.Attribute("name")== "canbo")
-                       select new
-                       {
-                           id = c.Descendants("column").Where(e => (string)e.Attribute("name") == "MACANBO").FirstOrDefault().Value
-                       };
+            //var data = from c in qlhk.Descendants("table").Where(e=>(string)e.Attribute("name")== "canbo")
+            //           select new
+            //           {
+            //               id = c.Descendants("column").Where(e => (string)e.Attribute("name") == "MACANBO").FirstOrDefault().Value
+            //           };
 
+            CanBoBUS cb = new CanBoBUS();
+
+            var data = cb.GetAll().Select(e=>new { id= e.dbcb.MACANBO});
             tbTaiKhoan.Text = data.ToList().First().id.ToString();
 
         }

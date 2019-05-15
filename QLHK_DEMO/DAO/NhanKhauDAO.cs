@@ -13,7 +13,6 @@ namespace DAO
         public NhanKhauDAO() : base() { }
         public override List<NhanKhau> getAll()
         {
-            NhanKhau nk = new NhanKhau();
             var kq = from nkdto in qlhk.NHANKHAUs
                      select new NhanKhau
                      {

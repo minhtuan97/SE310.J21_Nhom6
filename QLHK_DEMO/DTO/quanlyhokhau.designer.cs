@@ -22,6 +22,7 @@ namespace DTO
 	using System;
 	
 	
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="qlhk")]
 	public partial class quanlyhokhauDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -202,6 +203,20 @@ namespace DTO
 			{
 				return this.GetTable<TINHTHANHPHO>();
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTableNames")]
+		public ISingleResult<getTableNamesResult> getTableNames()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<getTableNamesResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetNHANKHAUByMADINHDANH")]
+		public ISingleResult<GetNHANKHAUByMADINHDANHResult> GetNHANKHAUByMADINHDANH([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string madinhdanh)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), madinhdanh);
+			return ((ISingleResult<GetNHANKHAUByMADINHDANHResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3447,6 +3462,382 @@ namespace DTO
 		{
 			this.SendPropertyChanging();
 			entity.TINHTHANHPHO = null;
+		}
+	}
+	
+	public partial class getTableNamesResult
+	{
+		
+		private string _TABLE_NAME;
+		
+		public getTableNamesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_NAME", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string TABLE_NAME
+		{
+			get
+			{
+				return this._TABLE_NAME;
+			}
+			set
+			{
+				if ((this._TABLE_NAME != value))
+				{
+					this._TABLE_NAME = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetNHANKHAUByMADINHDANHResult
+	{
+		
+		private string _MADINHDANH;
+		
+		private string _HOTEN;
+		
+		private string _TENKHAC;
+		
+		private System.DateTime _NGAYSINH;
+		
+		private string _GIOITINH;
+		
+		private string _NOISINH;
+		
+		private string _NGUYENQUAN;
+		
+		private string _DANTOC;
+		
+		private string _TONGIAO;
+		
+		private string _QUOCTICH;
+		
+		private string _HOCHIEU;
+		
+		private string _NOITHUONGTRU;
+		
+		private string _DIACHIHIENNAY;
+		
+		private string _SDT;
+		
+		private string _TRINHDOHOCVAN;
+		
+		private string _TRINHDOCHUYENMON;
+		
+		private string _BIETTIENGDANTOC;
+		
+		private string _TRINHDONGOAINGU;
+		
+		private string _NGHENGHIEP;
+		
+		public GetNHANKHAUByMADINHDANHResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MADINHDANH", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string MADINHDANH
+		{
+			get
+			{
+				return this._MADINHDANH;
+			}
+			set
+			{
+				if ((this._MADINHDANH != value))
+				{
+					this._MADINHDANH = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HOTEN", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string HOTEN
+		{
+			get
+			{
+				return this._HOTEN;
+			}
+			set
+			{
+				if ((this._HOTEN != value))
+				{
+					this._HOTEN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENKHAC", DbType="NVarChar(50)")]
+		public string TENKHAC
+		{
+			get
+			{
+				return this._TENKHAC;
+			}
+			set
+			{
+				if ((this._TENKHAC != value))
+				{
+					this._TENKHAC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYSINH", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime NGAYSINH
+		{
+			get
+			{
+				return this._NGAYSINH;
+			}
+			set
+			{
+				if ((this._NGAYSINH != value))
+				{
+					this._NGAYSINH = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GIOITINH", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string GIOITINH
+		{
+			get
+			{
+				return this._GIOITINH;
+			}
+			set
+			{
+				if ((this._GIOITINH != value))
+				{
+					this._GIOITINH = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NOISINH", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string NOISINH
+		{
+			get
+			{
+				return this._NOISINH;
+			}
+			set
+			{
+				if ((this._NOISINH != value))
+				{
+					this._NOISINH = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGUYENQUAN", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string NGUYENQUAN
+		{
+			get
+			{
+				return this._NGUYENQUAN;
+			}
+			set
+			{
+				if ((this._NGUYENQUAN != value))
+				{
+					this._NGUYENQUAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DANTOC", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string DANTOC
+		{
+			get
+			{
+				return this._DANTOC;
+			}
+			set
+			{
+				if ((this._DANTOC != value))
+				{
+					this._DANTOC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TONGIAO", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string TONGIAO
+		{
+			get
+			{
+				return this._TONGIAO;
+			}
+			set
+			{
+				if ((this._TONGIAO != value))
+				{
+					this._TONGIAO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QUOCTICH", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string QUOCTICH
+		{
+			get
+			{
+				return this._QUOCTICH;
+			}
+			set
+			{
+				if ((this._QUOCTICH != value))
+				{
+					this._QUOCTICH = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HOCHIEU", DbType="NVarChar(20)")]
+		public string HOCHIEU
+		{
+			get
+			{
+				return this._HOCHIEU;
+			}
+			set
+			{
+				if ((this._HOCHIEU != value))
+				{
+					this._HOCHIEU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NOITHUONGTRU", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string NOITHUONGTRU
+		{
+			get
+			{
+				return this._NOITHUONGTRU;
+			}
+			set
+			{
+				if ((this._NOITHUONGTRU != value))
+				{
+					this._NOITHUONGTRU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIACHIHIENNAY", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string DIACHIHIENNAY
+		{
+			get
+			{
+				return this._DIACHIHIENNAY;
+			}
+			set
+			{
+				if ((this._DIACHIHIENNAY != value))
+				{
+					this._DIACHIHIENNAY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SDT", DbType="Char(10)")]
+		public string SDT
+		{
+			get
+			{
+				return this._SDT;
+			}
+			set
+			{
+				if ((this._SDT != value))
+				{
+					this._SDT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRINHDOHOCVAN", DbType="NVarChar(100)")]
+		public string TRINHDOHOCVAN
+		{
+			get
+			{
+				return this._TRINHDOHOCVAN;
+			}
+			set
+			{
+				if ((this._TRINHDOHOCVAN != value))
+				{
+					this._TRINHDOHOCVAN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRINHDOCHUYENMON", DbType="NVarChar(100)")]
+		public string TRINHDOCHUYENMON
+		{
+			get
+			{
+				return this._TRINHDOCHUYENMON;
+			}
+			set
+			{
+				if ((this._TRINHDOCHUYENMON != value))
+				{
+					this._TRINHDOCHUYENMON = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BIETTIENGDANTOC", DbType="NVarChar(100)")]
+		public string BIETTIENGDANTOC
+		{
+			get
+			{
+				return this._BIETTIENGDANTOC;
+			}
+			set
+			{
+				if ((this._BIETTIENGDANTOC != value))
+				{
+					this._BIETTIENGDANTOC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRINHDONGOAINGU", DbType="NVarChar(100)")]
+		public string TRINHDONGOAINGU
+		{
+			get
+			{
+				return this._TRINHDONGOAINGU;
+			}
+			set
+			{
+				if ((this._TRINHDONGOAINGU != value))
+				{
+					this._TRINHDONGOAINGU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGHENGHIEP", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string NGHENGHIEP
+		{
+			get
+			{
+				return this._NGHENGHIEP;
+			}
+			set
+			{
+				if ((this._NGHENGHIEP != value))
+				{
+					this._NGHENGHIEP = value;
+				}
+			}
 		}
 	}
 }

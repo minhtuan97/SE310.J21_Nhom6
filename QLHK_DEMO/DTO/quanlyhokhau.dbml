@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="quanlyhokhauDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DB\quanlyhokhauDataContext.mdf;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="quanlyhokhauDataContextConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="qlhk" Class="quanlyhokhauDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DB\qlhk.mdf;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="quanlyhokhauDataContextConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CANBO" Member="CANBOs">
     <Type Name="CANBO">
       <Column Name="MACANBO" Type="System.String" DbType="Char(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -157,4 +157,33 @@
       <Association Name="TINHTHANHPHO_QUANHUYEN" Member="QUANHUYENs" ThisKey="matp" OtherKey="matp" Type="QUANHUYEN" />
     </Type>
   </Table>
+  <Function Name="dbo.getTableNames" Method="getTableNames">
+    <ElementType Name="getTableNamesResult">
+      <Column Name="TABLE_NAME" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetNHANKHAUByMADINHDANH" Method="GetNHANKHAUByMADINHDANH">
+    <Parameter Name="madinhdanh" Type="System.String" DbType="VarChar(12)" />
+    <ElementType Name="GetNHANKHAUByMADINHDANHResult">
+      <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="HOTEN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TENKHAC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="GIOITINH" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="NOISINH" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NGUYENQUAN" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DANTOC" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="TONGIAO" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="QUOCTICH" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="HOCHIEU" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="NOITHUONGTRU" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DIACHIHIENNAY" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="TRINHDOHOCVAN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TRINHDOCHUYENMON" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BIETTIENGDANTOC" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TRINHDONGOAINGU" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NGHENGHIEP" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

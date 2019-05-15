@@ -109,12 +109,12 @@
     <Content Include="DB\qlhk.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="DB\quanlyhokhauDataContext.mdf">
+    <Content Include="DB\qlhk.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB\quanlyhokhauDataContext_log.ldf">
+    <Content Include="DB\qlhk_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>quanlyhokhauDataContext.mdf</DependentUpon>
+      <DependentUpon>qlhk.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
