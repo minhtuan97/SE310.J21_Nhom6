@@ -80,7 +80,7 @@
         <elementListCompartment Id="c49e6812-5a28-4a56-ac9e-6a02176b3b16" absoluteBounds="11.265, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.59375 : 6); (6.59375 : 3.50390898016561); (8.125 : 3.50390898016561)]" manuallyRouted="true" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.59375 : 6); (6.59375 : 3.50390898016561); (8.125 : 3.50390898016561)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_HOCSINHSINHVIEN" />
       <nodes>
         <classShapeMoniker Id="1ef70b9c-fa72-438f-a70a-890c0b1bb8f8" />
@@ -94,7 +94,7 @@
         <classShapeMoniker Id="70daf056-44ba-485b-93f3-d821e26630c1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.375 : 6.66909912109375); (8.125 : 6.66909912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.375 : 6.66909912109375); (8.125 : 6.66909912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_NHANKHAUTAMVANG" />
       <nodes>
         <classShapeMoniker Id="1ef70b9c-fa72-438f-a70a-890c0b1bb8f8" />
@@ -143,7 +143,7 @@
         <classShapeMoniker Id="2dc12127-29f0-4216-9072-fe1c85e413a7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.375 : 10.1690584309896); (8.125 : 10.1690584309896)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.375 : 10.1690584309896); (8.125 : 10.1690584309896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/quanlyhokhauDataContext/NHANKHAU/NHANKHAU_TIEUSU" />
       <nodes>
         <classShapeMoniker Id="1ef70b9c-fa72-438f-a70a-890c0b1bb8f8" />

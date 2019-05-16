@@ -42,6 +42,8 @@ namespace GUI
             var data = cb.GetAll().Select(e=>new { id= e.dbcb.MACANBO});
             tbTaiKhoan.Text = data.ToList().First().id.ToString();
 
+
+            DAO.ViDu.TruyVanSQL.truyVanWhere();
         }
 
         private void DangNhap()

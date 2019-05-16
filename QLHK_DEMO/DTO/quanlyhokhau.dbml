@@ -164,7 +164,7 @@
   </Function>
   <Function Name="dbo.GetNHANKHAUByMADINHDANH" Method="GetNHANKHAUByMADINHDANH">
     <Parameter Name="madinhdanh" Type="System.String" DbType="VarChar(12)" />
-    <ElementType Name="GetNHANKHAUByMADINHDANHResult">
+    <ElementType Name="GetNHANKHAUByMADINHDANHResult1">
       <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
       <Column Name="HOTEN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TENKHAC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />

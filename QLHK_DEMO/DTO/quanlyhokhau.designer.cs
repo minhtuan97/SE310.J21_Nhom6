@@ -213,10 +213,10 @@ namespace DTO
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetNHANKHAUByMADINHDANH")]
-		public ISingleResult<GetNHANKHAUByMADINHDANHResult> GetNHANKHAUByMADINHDANH([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string madinhdanh)
+		public ISingleResult<GetNHANKHAUByMADINHDANHResult1> GetNHANKHAUByMADINHDANH([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string madinhdanh)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), madinhdanh);
-			return ((ISingleResult<GetNHANKHAUByMADINHDANHResult>)(result.ReturnValue));
+			return ((ISingleResult<GetNHANKHAUByMADINHDANHResult1>)(result.ReturnValue));
 		}
 	}
 	
@@ -3491,7 +3491,7 @@ namespace DTO
 		}
 	}
 	
-	public partial class GetNHANKHAUByMADINHDANHResult
+	public partial class GetNHANKHAUByMADINHDANHResult1
 	{
 		
 		private string _MADINHDANH;
@@ -3532,7 +3532,7 @@ namespace DTO
 		
 		private string _NGHENGHIEP;
 		
-		public GetNHANKHAUByMADINHDANHResult()
+		public GetNHANKHAUByMADINHDANHResult1()
 		{
 		}
 		

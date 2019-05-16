@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -57,6 +59,7 @@
     <Compile Include="HocSinhSinhVienDAO.cs" />
     <Compile Include="NhanKhauDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViDu\TruyVanSQL.cs" />
     <Compile Include="XaPhuongThiTranDAO.cs" />
   </ItemGroup>
   <ItemGroup>

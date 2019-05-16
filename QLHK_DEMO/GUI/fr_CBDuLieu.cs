@@ -71,6 +71,18 @@ namespace GUI
                 comboBox1.Items.Add(r.RowType.Name.ToString());
             }
 
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            var kq = from nk in qlhk.NHANKHAUs
+                     where nk.NHANKHAUTHUONGTRUs.Count > 0
+                     select new {
+                         Id = nk.MADINHDANH,
+                         Name = nk.HOTEN,
+                         DiaChiThuongTru = nk.NHANKHAUTHUONGTRUs.Select(q=>q.DIACHITHUONGTRU).First(),
+                         SoTienAn = nk.TIENANTIENSUs.Count
+                     };
+
+            dataGridView1.DataSource = kq.Skip(2).Take(2);
         }
 
         private void LoadData()

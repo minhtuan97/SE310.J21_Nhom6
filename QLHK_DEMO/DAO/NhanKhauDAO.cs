@@ -21,6 +21,15 @@ namespace DAO
             List<NhanKhau> x = kq.ToList();
             return x;
         }
+
+        public List<NHANKHAU> getNHANKHAU()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+            var kq = from nk in qlhk.NHANKHAUs
+                     select nk;
+
+            return kq.ToList();
+        }
         public override bool insert_table(NhanKhau data)
         {
             qlhk.NHANKHAUs.InsertOnSubmit(data.db);
