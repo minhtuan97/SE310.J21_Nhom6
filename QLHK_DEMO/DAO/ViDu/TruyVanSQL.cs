@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,7 +55,7 @@ namespace DAO.ViDu
             var kq = from nk in qlhk.NHANKHAUs
                      select nk;
 
-            foreach(NHANKHAU i in kq)
+            foreach (NHANKHAU i in kq)
             {
                 Console.WriteLine(i.MADINHDANH.ToString());
             }
@@ -64,7 +66,7 @@ namespace DAO.ViDu
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
             var kq = from ta in qlhk.TIENANTIENSUs
-                     where ta.TOIDANH=="Trộm cắp"
+                     where ta.TOIDANH == "Trộm cắp"
                      select ta;
         }
 
@@ -73,7 +75,7 @@ namespace DAO.ViDu
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     where nk.TIENANTIENSUs.Count > 5 
+                     where nk.TIENANTIENSUs.Count > 5
                      select nk;
         }
 
@@ -82,7 +84,7 @@ namespace DAO.ViDu
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     where nk.HOTEN== "Lê Thùy Trang"
+                     where nk.HOTEN == "Lê Thùy Trang"
                      select nk;
         }
 
@@ -91,7 +93,7 @@ namespace DAO.ViDu
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     where nk.NHANKHAUTAMTRUs.First().NOITAMTRU.Contains("Đông Hòa") && nk.TIENANTIENSUs.Count==0
+                     where nk.NHANKHAUTAMTRUs.First().NOITAMTRU.Contains("Đông Hòa") && nk.TIENANTIENSUs.Count == 0
                      select nk;
         }
 
@@ -112,7 +114,7 @@ namespace DAO.ViDu
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     where nk.NHANKHAUTHUONGTRUs.Count>0
+                     where nk.NHANKHAUTHUONGTRUs.Count > 0
                      select nk;
 
             foreach (NHANKHAU nk in kq)
@@ -270,7 +272,63 @@ namespace DAO.ViDu
         public static void SPROCgetAllNHANKHAU()
         {
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
-            NHANKHAU nk = qlhk.GetNHANKHAUByMADINHDANH("083456789019").First();
-        } 
+            var kq = qlhk.GetNHANKHAUByMADINHDANH("083456789019");
+
+            foreach (NHANKHAU i in kq)
+            {
+                i.TENKHAC = "Hòa An";
+            }
+
+            qlhk.SubmitChanges();
+        }
+
+        public static void truyVanNhieuKieuTraVe()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            IMultipleResults result = qlhk.GetByShape(1);
+
+            var nk = result.GetResult<NHANKHAU>();
+
+            foreach (NHANKHAU i in nk)
+            {
+            }
+        }
+
+        public static void truyVanFunction()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            var kq = from nk in qlhk.NHANKHAUs
+                     where qlhk.MyUpperFunction(nk.GIOITINH) == "NAM"
+                     select new
+                     {
+                         nk.MADINHDANH,
+                         nk.HOTEN,
+                         nk.NGAYSINH
+                     };
+        }
+        public static void themNHANKHAUts()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            //Lấy thông tin nhân khẩu
+            NHANKHAU nk = qlhk.NHANKHAUs.Single(q => q.MADINHDANH == "083456789019");
+
+            //Cập nhật thông tin nhân khẩu
+            nk.TENKHAC = "Hào";
+            nk.SDT = "033124123";
+
+            //Tạo một tiểu sử
+            TIEUSU ts = new TIEUSU();
+            ts.THOIGIANBATDAU = new DateTime(2018, 1, 1);
+            ts.THOIGIANKETTHUC = new DateTime(2018, 8, 1);
+            ts.CHOO = "Tân Lập, Đông Hòa, Dĩ An, Bình Dương";
+            ts.NGHENGHIEP = "VĐV Bóng đá";
+            ts.NOILAMVIEC = "Bình Dương";
+
+            nk.TIEUSUs.Add(ts);
+            qlhk.SubmitChanges();
+        }
     }
 }

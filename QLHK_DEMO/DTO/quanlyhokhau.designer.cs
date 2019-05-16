@@ -213,10 +213,23 @@ namespace DTO
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetNHANKHAUByMADINHDANH")]
-		public ISingleResult<GetNHANKHAUByMADINHDANHResult1> GetNHANKHAUByMADINHDANH([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string madinhdanh)
+		public ISingleResult<NHANKHAU> GetNHANKHAUByMADINHDANH([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(12)")] string madinhdanh)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), madinhdanh);
-			return ((ISingleResult<GetNHANKHAUByMADINHDANHResult1>)(result.ReturnValue));
+			return ((ISingleResult<NHANKHAU>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getByShape")]
+		public ISingleResult<getByShapeResult> getByShape([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> shape)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), shape);
+			return ((ISingleResult<getByShapeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.MyUpperFunction", IsComposable=true)]
+		public string MyUpperFunction([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(100)")] string inputstring)
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), inputstring).ReturnValue));
 		}
 	}
 	
@@ -3491,7 +3504,7 @@ namespace DTO
 		}
 	}
 	
-	public partial class GetNHANKHAUByMADINHDANHResult1
+	public partial class getByShapeResult
 	{
 		
 		private string _MADINHDANH;
@@ -3532,7 +3545,7 @@ namespace DTO
 		
 		private string _NGHENGHIEP;
 		
-		public GetNHANKHAUByMADINHDANHResult1()
+		public getByShapeResult()
 		{
 		}
 		

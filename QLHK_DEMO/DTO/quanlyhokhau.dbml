@@ -32,7 +32,7 @@
     </Type>
   </Table>
   <Table Name="dbo.NHANKHAU" Member="NHANKHAUs">
-    <Type Name="NHANKHAU">
+    <Type Name="NHANKHAU" Id="ID1">
       <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="HOTEN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TENKHAC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -164,7 +164,11 @@
   </Function>
   <Function Name="dbo.GetNHANKHAUByMADINHDANH" Method="GetNHANKHAUByMADINHDANH">
     <Parameter Name="madinhdanh" Type="System.String" DbType="VarChar(12)" />
-    <ElementType Name="GetNHANKHAUByMADINHDANHResult1">
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.getByShape" Method="getByShape">
+    <Parameter Name="shape" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getByShapeResult">
       <Column Name="MADINHDANH" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
       <Column Name="HOTEN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TENKHAC" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -185,5 +189,9 @@
       <Column Name="TRINHDONGOAINGU" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="NGHENGHIEP" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.MyUpperFunction" Method="MyUpperFunction" IsComposable="true">
+    <Parameter Name="inputstring" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.String" />
   </Function>
 </Database>

@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CanBoDTO.cs" />
+    <Compile Include="Checker\NHANKHAU.cs" />
+    <Compile Include="Checker\quanlyhokhauDataContext.cs" />
+    <Compile Include="Checker\TIEUSU.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />
     <Compile Include="NhanKhauTamTruDTO.cs" />

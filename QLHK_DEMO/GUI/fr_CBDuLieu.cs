@@ -82,7 +82,9 @@ namespace GUI
                          SoTienAn = nk.TIENANTIENSUs.Count
                      };
 
-            dataGridView1.DataSource = kq.Skip(2).Take(2);
+            //dataGridView1.DataSource = kq.Skip(2).Take(2);
+            DAO.ViDu.TruyVanSQL.truyVanFunction();
+            dataGridView1.DataSource = qlhk.GetNHANKHAUByMADINHDANH("083456789019");
         }
 
         private void LoadData()
