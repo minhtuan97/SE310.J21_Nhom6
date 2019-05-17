@@ -194,4 +194,25 @@
     <Parameter Name="inputstring" Type="System.String" DbType="VarChar(100)" />
     <Return Type="System.String" />
   </Function>
+  <Function Name="dbo.InsertTIEUSU" Method="InsertTIEUSU">
+    <Parameter Name="MATIEUSU" Parameter="mATIEUSU" Type="System.String" DbType="Char(9)" />
+    <Parameter Name="MADINHDANH" Parameter="mADINHDANH" Type="System.String" DbType="Char(12)" />
+    <Parameter Name="THOIGIANBATDAU" Parameter="tHOIGIANBATDAU" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="THOIGIANKETTHUC" Parameter="tHOIGIANKETTHUC" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="CHOO" Parameter="cHOO" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NGHENGHIEP" Parameter="nGHENGHIEP" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NOILAMVIEC" Parameter="nOILAMVIEC" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateTIEUSU" Method="UpdateTIEUSU">
+    <Parameter Name="MATIEUSU" Parameter="mATIEUSU" Type="System.String" DbType="Char(9)" />
+    <Parameter Name="MADINHDANH" Parameter="mADINHDANH" Type="System.String" DbType="Char(12)" />
+    <Parameter Name="THOIGIANBATDAU" Parameter="tHOIGIANBATDAU" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="THOIGIANKETTHUC" Parameter="tHOIGIANKETTHUC" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="CHOO" Parameter="cHOO" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NGHENGHIEP" Parameter="nGHENGHIEP" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NOILAMVIEC" Parameter="nOILAMVIEC" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Original_MATIEUSU" Parameter="original_MATIEUSU" Type="System.String" DbType="Char(9)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

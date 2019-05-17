@@ -37,13 +37,12 @@ namespace GUI
             //               id = c.Descendants("column").Where(e => (string)e.Attribute("name") == "MACANBO").FirstOrDefault().Value
             //           };
 
-            CanBoBUS cb = new CanBoBUS();
+            //CanBoBUS cb = new CanBoBUS();
+            //var data = cb.GetAll().Select(e=>new { id= e.dbcb.MACANBO});
 
-            var data = cb.GetAll().Select(e=>new { id= e.dbcb.MACANBO});
-            tbTaiKhoan.Text = data.ToList().First().id.ToString();
+            //tbTaiKhoan.Text = data.ToList().First().id.ToString();
 
-
-            DAO.ViDu.TruyVanSQL.truyVanWhere();
+            //tbTaiKhoan.Text = DAO.ViDu.TruyVanXML.layDatabase();
         }
 
         private void DangNhap()

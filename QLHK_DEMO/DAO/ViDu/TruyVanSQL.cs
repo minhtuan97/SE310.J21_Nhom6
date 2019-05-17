@@ -330,5 +330,39 @@ namespace DAO.ViDu
             nk.TIEUSUs.Add(ts);
             qlhk.SubmitChanges();
         }
+
+        public static void getNHANKHAUExcuteQuery()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            NHANKHAU nk = qlhk.getNHANKHAUByIDExcutequery("083456789019");
+
+            nk.SDT = "0313137771";
+
+            qlhk.SubmitChanges();
+        }
+
+        public static void getNHANKHAUSummary()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            NHANKHAUSummary nk = qlhk.getNHANKHAUByIDSummary("083456789019");
+        }
+
+        public static void deleteTIEUSUcommand()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            //lấy thông tin TIEUSU cần xóa
+            TIEUSU ts = qlhk.TIEUSUs.Single(q => q.MATIEUSU == "TS0000005");
+
+            //Xóa TIEUSU
+            qlhk.TIEUSUs.DeleteOnSubmit(ts);
+
+            //Cập nhật vào CSDL
+            qlhk.SubmitChanges();
+        }
     }
+
+    
 }

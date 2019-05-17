@@ -12,7 +12,8 @@ using DTO;
 using BUS;
 using DAO;
 using System.Data.Linq.Mapping;
-
+using System.Xml.Linq;
+using System.IO;
 
 namespace GUI
 {
@@ -71,20 +72,33 @@ namespace GUI
                 comboBox1.Items.Add(r.RowType.Name.ToString());
             }
 
-            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+            //quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
 
-            var kq = from nk in qlhk.NHANKHAUs
-                     where nk.NHANKHAUTHUONGTRUs.Count > 0
-                     select new {
-                         Id = nk.MADINHDANH,
-                         Name = nk.HOTEN,
-                         DiaChiThuongTru = nk.NHANKHAUTHUONGTRUs.Select(q=>q.DIACHITHUONGTRU).First(),
-                         SoTienAn = nk.TIENANTIENSUs.Count
-                     };
+            //var data = from nk in qlhk.NHANKHAUs
+            //         where nk.NHANKHAUTHUONGTRUs.Count > 0
+            //         select new
+            //         {
+            //             Id = nk.MADINHDANH,
+            //             Name = nk.HOTEN,
+            //             DiaChiThuongTru = nk.NHANKHAUTHUONGTRUs.Select(q => q.DIACHITHUONGTRU).First(),
+            //             SoTienAn = nk.TIENANTIENSUs.Count
+            //         };
 
-            //dataGridView1.DataSource = kq.Skip(2).Take(2);
-            DAO.ViDu.TruyVanSQL.truyVanFunction();
-            dataGridView1.DataSource = qlhk.GetNHANKHAUByMADINHDANH("083456789019");
+            //dataGridView1.DataSource = data.Skip(2).Take(2);
+            //DAO.ViDu.TruyVanSQL.truyVanFunction();
+
+
+            //XDocument qlhk = XDocument.Load(
+            //    Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            //var data = from c in qlhk.Descendants("nhankhau")
+            //           select new
+            //           {
+            //               madinhdanh = c.Attribute("MADINHDANH").Value,
+            //               hoten = c.Element("HOTEN").Value
+            //           };
+
+            dataGridView1.DataSource = DAO.ViDu.TruyVanXML.layTIEUSU();
         }
 
         private void LoadData()

@@ -231,6 +231,20 @@ namespace DTO
 		{
 			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), inputstring).ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.InsertTIEUSU")]
+		public int InsertTIEUSU([global::System.Data.Linq.Mapping.ParameterAttribute(Name="MATIEUSU", DbType="Char(9)")] string mATIEUSU, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MADINHDANH", DbType="Char(12)")] string mADINHDANH, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="THOIGIANBATDAU", DbType="SmallDateTime")] System.Nullable<System.DateTime> tHOIGIANBATDAU, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="THOIGIANKETTHUC", DbType="SmallDateTime")] System.Nullable<System.DateTime> tHOIGIANKETTHUC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CHOO", DbType="NVarChar(100)")] string cHOO, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NGHENGHIEP", DbType="NVarChar(100)")] string nGHENGHIEP, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NOILAMVIEC", DbType="NVarChar(100)")] string nOILAMVIEC)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), mATIEUSU, mADINHDANH, tHOIGIANBATDAU, tHOIGIANKETTHUC, cHOO, nGHENGHIEP, nOILAMVIEC);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UpdateTIEUSU")]
+		public int UpdateTIEUSU([global::System.Data.Linq.Mapping.ParameterAttribute(Name="MATIEUSU", DbType="Char(9)")] string mATIEUSU, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MADINHDANH", DbType="Char(12)")] string mADINHDANH, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="THOIGIANBATDAU", DbType="SmallDateTime")] System.Nullable<System.DateTime> tHOIGIANBATDAU, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="THOIGIANKETTHUC", DbType="SmallDateTime")] System.Nullable<System.DateTime> tHOIGIANKETTHUC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CHOO", DbType="NVarChar(100)")] string cHOO, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NGHENGHIEP", DbType="NVarChar(100)")] string nGHENGHIEP, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NOILAMVIEC", DbType="NVarChar(100)")] string nOILAMVIEC, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Original_MATIEUSU", DbType="Char(9)")] string original_MATIEUSU)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), mATIEUSU, mADINHDANH, tHOIGIANBATDAU, tHOIGIANKETTHUC, cHOO, nGHENGHIEP, nOILAMVIEC, original_MATIEUSU);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CANBO")]
