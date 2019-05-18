@@ -39,16 +39,16 @@ namespace DAO
         public override bool insert(SoTamTruDTO sotamtru)
         {
 
-            qlhk.SOTAMTRUs.InsertOnSubmit(sotamtru.db);
+            qlhk.SOTAMTRUs.Add(sotamtru.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
@@ -86,10 +86,8 @@ namespace DAO
         {
             try
             {
-                SoTamTruDTO stt = new SoTamTruDTO(qlhk.SOTAMTRUs.Single(x => x.SOSOTAMTRU == sosotamtru));
-                qlhk.SOTAMTRUs.DeleteOnSubmit(stt.db);
-
-
+                SoTamTruDTO stt = new SoTamTruDTO(qlhk.SOTAMTRUs.Where(x => x.SOSOTAMTRU == sosotamtru).FirstOrDefault());
+                qlhk.SOTAMTRUs.Remove(stt.db);
                 //Xóa nhân khẩu 
                 NhanKhauTamTruDAO nhankhautamtruDao = new NhanKhauTamTruDAO();
                 List<string> madinhdanh_list = getListMaDinhDanhBySoSoTamTru(sosotamtru);
@@ -99,9 +97,9 @@ namespace DAO
                 {
                     nhankhautamtruDao.XoaNKTT(madinhdanh_list[i]);
                 }
+                
+                qlhk.SaveChanges();
 
-
-                qlhk.SubmitChanges();
                 return true;
 
             }
@@ -144,12 +142,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.SOTAMTRUs.DeleteOnSubmit(detail);
+                qlhk.SOTAMTRUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -165,8 +163,8 @@ namespace DAO
             {
                 List<SoTamTruDTO> kq = this.getAll();
                 SoTamTruDTO[] arr = kq.ToArray();
-                qlhk.SOTAMTRUs.DeleteOnSubmit(arr[row].db);
-                qlhk.SubmitChanges();
+                qlhk.SOTAMTRUs.Remove(arr[row].db);
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -191,7 +189,7 @@ namespace DAO
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -207,7 +205,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sotamtru" + query;
-            var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
+            var res = qlhk.Database.SqlQuery<SOTAMTRU>(query).ToList();
             List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
             foreach (SOTAMTRU i in res)
             {
@@ -222,7 +220,7 @@ namespace DAO
         public List<SoTamTruDTO> TimKiemSoTamTru(string sosotamtru)
         {
             string query = "SELECT * FROM sotamtru where sosotamtru=" + sosotamtru;
-            var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
+            var res = qlhk.Database.SqlQuery<SOTAMTRU>(query).ToList();
             List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
             foreach (SOTAMTRU i in res)
             {
@@ -232,22 +230,22 @@ namespace DAO
 
             return lst;
         }
-        
+
 
 
 
         public override bool insert_table(SoTamTruDTO data)
         {
-            qlhk.SOTAMTRUs.InsertOnSubmit(data.db);
+            qlhk.SOTAMTRUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
 
@@ -267,14 +265,16 @@ namespace DAO
         {
             List<string> list_tennhankhau = new List<string>();
 
-            var q = from nhankhau in qlhk.NHANKHAUs join nhankhautamtru in qlhk.NHANKHAUTAMTRUs
+            var q = from nhankhau in qlhk.NHANKHAUs
+                    join nhankhautamtru in qlhk.NHANKHAUTAMTRUs
                     on nhankhau.MADINHDANH equals nhankhautamtru.MADINHDANH
-                    where nhankhautamtru.SOSOTAMTRU == sosotamtru select nhankhau;
+                    where nhankhautamtru.SOSOTAMTRU == sosotamtru
+                    select nhankhau;
 
             foreach (var tt in q)
             {
                 list_tennhankhau.Add(tt.HOTEN);
-            }         
+            }
             return list_tennhankhau;
         }
 
@@ -293,7 +293,7 @@ namespace DAO
 
                 foreach (var tt in q)
                 {
-                    list_ID.Add(tt.MANHANKHAUTAMTRU);
+                    list_ID.Add(tt.MANHAKHAUTAMTRU);
                 }
 
                 return list_ID.First();
@@ -338,7 +338,7 @@ namespace DAO
                         join nhankhau in qlhk.NHANKHAUs
                         on nhankhautamtru.MADINHDANH equals nhankhau.MADINHDANH
                         join sotamtru in qlhk.SOTAMTRUs
-                        on nhankhautamtru.MANHANKHAUTAMTRU equals sotamtru.MACHUHO
+                        on nhankhautamtru.MANHAKHAUTAMTRU equals sotamtru.MACHUHO
                         where sotamtru.SOSOTAMTRU == sosotamtru
                         select nhankhau;
 
@@ -398,11 +398,11 @@ namespace DAO
         {
             List<String> lst = new List<String>();
 
-            var query = from nk in qlhk.NHANKHAUTAMTRUs where nk.MANHANKHAUTAMTRU == manhankhautamtru select nk;
+            var query = from nk in qlhk.NHANKHAUTAMTRUs where nk.MANHAKHAUTAMTRU == manhankhautamtru select nk;
 
             foreach (NHANKHAUTAMTRU q in query)
             {
-                lst.Add(q.MANHANKHAUTAMTRU);
+                lst.Add(q.MANHAKHAUTAMTRU);
             }
 
             if (lst.Count() > 0)
@@ -419,12 +419,12 @@ namespace DAO
 
             var query = from nhankhautamtru in qlhk.NHANKHAUTAMTRUs join sotamtru in qlhk.SOTAMTRUs 
                         on nhankhautamtru.SOSOTAMTRU equals sotamtru.SOSOTAMTRU
-                        where nhankhautamtru.MANHANKHAUTAMTRU == manhankhautamtru && sotamtru.SOSOTAMTRU == sosotamtru
+                        where nhankhautamtru.MANHAKHAUTAMTRU == manhankhautamtru && sotamtru.SOSOTAMTRU == sosotamtru
                         select nhankhautamtru;
 
             foreach (NHANKHAUTAMTRU q in query)
             {
-                lst.Add(q.MANHANKHAUTAMTRU);
+                lst.Add(q.MANHAKHAUTAMTRU);
             }
 
             if (lst.Count() > 0)
@@ -506,7 +506,7 @@ namespace DAO
         {
             DateTime date = new DateTime(12 / 12 / 1800);
             List<DateTime> Date_list = new List<DateTime>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 Date_list.Add(xp.TUNGAY);
@@ -519,7 +519,7 @@ namespace DAO
         {
             DateTime date = new DateTime(12 / 12 / 1800);
             List<DateTime> Date_list = new List<DateTime>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 Date_list.Add(xp.DENNGAY);
@@ -532,7 +532,7 @@ namespace DAO
         public String getNoiTamTru(string manhankhautamtru)
         {
             List<String> list = new List<String>();
-            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHANKHAUTAMTRU == manhankhautamtru select x;
+            var q = from x in qlhk.NHANKHAUTAMTRUs where x.MANHAKHAUTAMTRU == manhankhautamtru select x;
             foreach (var xp in q)
             {
                 list.Add(xp.NOITAMTRU);
@@ -554,7 +554,7 @@ namespace DAO
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)

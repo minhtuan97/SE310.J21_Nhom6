@@ -46,7 +46,7 @@ namespace GUI
             DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r => r.dbnktt).ToList());
             DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
 
-            //var bindingList = new BindingList<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r=>r.dbnktt).ToList());
+            //var bindingList = new BindingList<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r => r.dbnktt).ToList());
             //var source = new BindingSource(bindingList, null);
             cbbChuHo.DisplayMember = "HOTEN";
             cbbChuHo.ValueMember = "MANHANKHAUTHUONGTRU";
@@ -90,7 +90,7 @@ namespace GUI
 
 
             tbSoSoHoKhau.Text = sosohokhau;
-            List<SoHoKhauDTO> ds = shk.TimKiem("sosohokhau='"+sosohokhau+"'");
+            List<SoHoKhauDTO> ds = shk.TimKiem("sosohokhau='" + sosohokhau + "'");
             shkDTO = ds[0];
 
             taoDanhSachNhanKhau();
@@ -152,7 +152,7 @@ namespace GUI
                     //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
                     updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                 }
-                //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
+                //nktt.doichuho(shkdto.nhankhau, cbbchuho.selectedvalue.tostring());
                 if (updateOK)
                 {
                     MessageBox.Show(this, "Tạo sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -177,7 +177,7 @@ namespace GUI
                         updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
                     }
                 }
-                //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
+               // nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
                 if (updateOK)
                 {
                     MessageBox.Show(this, "Cập nhật sổ hộ khẩu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -234,8 +234,8 @@ namespace GUI
 
             //DataTable table = (DataTable)dataGridView1.DataSource;
             //DataRow data = table.NewRow();
-            //DataRow data = ((DataRowView)dataGridView1.Rows[index].DataBoundItem).Row;
-            //DataRow data = table.Rows[index];
+           // DataRow data = ((DataRowView)dataGridView1.Rows[index].DataBoundItem).Row;
+           // DataRow data = table.Rows[index];
             nkDuocChon = shkDTO.NhanKhau[index];
 
             btnSuaNhanKhau.Visible = btnXoaNhanKhau.Visible = true;
@@ -284,7 +284,7 @@ namespace GUI
             nkDuocChon.dbnktt.SOHOKHAU = null;
             nkDuocChon.dbnktt.SOSOHOKHAU = null;
 
-            //nktt.XoaNKTT(nkDuocChon.MaNhanKhauThuongTru);
+           // nktt.XoaNKTT(nkDuocChon.MaNhanKhauThuongTru);
             if(nktt.Update(nkDuocChon))
                 MessageBox.Show(this, "Đã xóa nhân khẩu thành công!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else

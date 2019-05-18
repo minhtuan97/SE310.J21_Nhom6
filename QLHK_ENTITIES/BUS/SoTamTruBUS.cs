@@ -53,7 +53,9 @@ namespace BUS
         }
         public List<SoTamTruDTO> TimKiem(string query)
         {
+
             List<SoTamTruDTO> list = SoTamTru.TimKiem(query);
+
             if (list.Count > 0)
             {
                 foreach (SoTamTruDTO item in list)
@@ -70,7 +72,7 @@ namespace BUS
             return SoTamTru.TimKiemSoTamTru(sosotamtru);
         }
 
-        
+
 
         public bool DeleteExperiedSoTamTru()
         {
@@ -78,7 +80,7 @@ namespace BUS
         }
 
 
-       
+
 
         public BindingSource ImportToComboboxMaChuHo(string sosotamtru)
         {
@@ -89,6 +91,8 @@ namespace BUS
             bindingSource.DataSource = list_tennhankhau;
             return bindingSource;
         }
+
+
 
         public string convertTentoMaNhanKhauTamTru(string tennhankhau, string sosotamtru)
         {

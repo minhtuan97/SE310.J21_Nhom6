@@ -44,22 +44,22 @@ namespace DAO
 
         public override bool insert_table(SoHoKhauDTO data)
         {
-            qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
+            qlhk.SOHOKHAUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
 
             }
             return true;
         }
         public override bool insert(SoHoKhauDTO data)
         {
-            qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
+            qlhk.SOHOKHAUs.Add(data.db);
 
             //foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
             //{
@@ -67,13 +67,13 @@ namespace DAO
             //}
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
 
@@ -88,8 +88,8 @@ namespace DAO
                 {
                     if (item.db.SOSOHOKHAU == soSoHoKhau)
                     {
-                        qlhk.SOHOKHAUs.DeleteOnSubmit(item.db);
-                        qlhk.SubmitChanges();
+                        qlhk.SOHOKHAUs.Remove(item.db);
+                        qlhk.SaveChanges();
                         break;
                     }
                 }
@@ -110,12 +110,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.SOHOKHAUs.DeleteOnSubmit(detail);
+                qlhk.SOHOKHAUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -130,7 +130,7 @@ namespace DAO
             SoHoKhauDTO[] nktt = this.getAll().ToArray();
             try
             {
-                qlhk.SOHOKHAUs.DeleteOnSubmit(nktt[row].db);
+                qlhk.SOHOKHAUs.Remove(nktt[row].db);
                 return true;
             }
             catch (Exception e)
@@ -160,7 +160,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -174,7 +174,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sohokhau" + query;
-            var res = qlhk.ExecuteQuery<SOHOKHAU>(query).ToList();
+            var res = qlhk.Database.SqlQuery<SOHOKHAU>(query).ToList();
             List<SoHoKhauDTO> lst = new List<SoHoKhauDTO>();
             foreach (SOHOKHAU i in res)
             {
@@ -186,7 +186,7 @@ namespace DAO
             }
 
             return lst;
-            
+
         }
 
 

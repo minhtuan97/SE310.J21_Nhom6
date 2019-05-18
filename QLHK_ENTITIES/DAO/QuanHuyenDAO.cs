@@ -27,31 +27,31 @@ namespace DAO
 
         public override bool insert(QuanHuyenDTO quanHuyen)
         {
-            qlhk.QUANHUYENs.InsertOnSubmit(quanHuyen.db);
+            qlhk.QUANHUYENs.Add(quanHuyen.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
         public override bool insert_table(QuanHuyenDTO data)
         {
-            qlhk.QUANHUYENs.InsertOnSubmit(data.db);
+            qlhk.QUANHUYENs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
@@ -65,12 +65,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.QUANHUYENs.DeleteOnSubmit(detail);
+                qlhk.QUANHUYENs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -87,7 +87,7 @@ namespace DAO
             {
                 List<QuanHuyenDTO> kq = this.getAll();
                 QuanHuyenDTO[] arr = kq.ToArray();
-                qlhk.QUANHUYENs.DeleteOnSubmit(arr[row].db);
+                qlhk.QUANHUYENs.Remove(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace DAO
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM quanhuyen" + query;
-            var res = qlhk.ExecuteQuery<QUANHUYEN>(query).ToList();
+            var res = qlhk.Database.SqlQuery<QUANHUYEN>(query).ToList();
             List<QuanHuyenDTO> lst = new List<QuanHuyenDTO>();
             foreach (QUANHUYEN i in res)
             {
@@ -145,7 +145,7 @@ namespace DAO
             }
 
             return lst;
-            
+
         }
     }
 }

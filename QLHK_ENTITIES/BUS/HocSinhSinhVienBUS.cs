@@ -53,27 +53,27 @@ namespace BUS
             return objhssv.update(hssv);
         }
 
-        public DataTable TimKiem(string query)
-        {
-            return objhssv.TimKiem(query);
-        }
+        //public DataTable TimKiem(string query)
+        //{
+        //    return objhssv.TimKiem(query);
+        //}
 
-        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
-        {
-            return objhssv.TimKiemJoinNhanKhau(query);
-        }
+        //public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
+        //{
+        //    return objhssv.TimKiemJoinNhanKhau(query);
+        //}
 
-        public DataTable TimKiemtheoCuTru(string madinhdanh)
-        {
-            DataTable dt1 = objhssv.TimKiem(" WHERE madinhdanh='" + madinhdanh + "'");
-            DataSet nhanKhau = objnk.TimKiemTheoCuTru(madinhdanh);
-            DataTable dt2 = nhanKhau.Tables["thuongtru"].Rows.Count > 0? nhanKhau.Tables["thuongtru"]:nhanKhau.Tables["tamtru"];
+        //public DataTable TimKiemtheoCuTru(string madinhdanh)
+        //{
+            //DataTable dt1 = objhssv.TimKiem(" WHERE madinhdanh='" + madinhdanh + "'");
+            //DataSet nhanKhau = objnk.TimKiemTheoCuTru(madinhdanh);
+            //DataTable dt2 = nhanKhau.Tables["thuongtru"].Rows.Count > 0? nhanKhau.Tables["thuongtru"]:nhanKhau.Tables["tamtru"];
 
-            dt1.PrimaryKey = new DataColumn[] { dt1.Columns["madinhdanh"] };
-            dt2.PrimaryKey = new DataColumn[] { dt2.Columns["madinhdanh"] };
-            dt1.Merge(dt2);
-            return dt1;
-        }
+            //dt1.PrimaryKey = new DataColumn[] { dt1.Columns["madinhdanh"] };
+            //dt2.PrimaryKey = new DataColumn[] { dt2.Columns["madinhdanh"] };
+            //dt1.Merge(dt2);
+            //return dt1;
+        //}
 
         public override bool Add_Table(HocSinhSinhVienDTO hssv)
         {

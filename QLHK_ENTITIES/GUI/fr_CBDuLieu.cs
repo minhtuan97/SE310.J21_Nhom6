@@ -23,7 +23,7 @@ namespace GUI
         HocSinhSinhVienDTO hssv;
         HocSinhSinhVienBUS hssvbus;
         NhanKhauBUS nhankhaubus;
-        NhanKhau nhankhau;
+        NhanKhauDTO nhankhau;
         TienAnTienSuDTO tienantiensu;
         TienAnTienSuBUS tienantiensubus;
         TieuSuDTO tieusu;
@@ -64,12 +64,12 @@ namespace GUI
             canbobus = new CanBoBUS();
             nhankhautamvangbus = new NhanKhauTamVangBUS();
 
-            quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
-            var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
-            foreach (var r in datamodel.GetTables())
-            {
-                comboBox1.Items.Add(r.RowType.Name.ToString());
-            }
+            //quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
+            //var datamodel = new AttributeMappingSource().GetModel(typeof(quanlyhokhauDataContext));
+            //foreach (var r in datamodel.GetTables())
+            //{
+            //    comboBox1.Items.Add(r.RowType.Name.ToString());
+            //}
 
         }
 
@@ -429,7 +429,7 @@ namespace GUI
                                 string str_madinhdanh = TrinhTaoMa.TangMa12Kytu(str_gioitinh, date_ngaysinh.Year.ToString());
                                 dataGridView1.Rows[row].Cells["madinhdanh"].Value = str_madinhdanh;
 
-                                nhankhau = new NhanKhau(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh, 
+                                nhankhau = new NhanKhauDTO(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh, 
                                     str_noisinh, str_nguyenquan, str_dantoc, str_tongiao, str_quoctich, str_hochieu, 
                                     str_noithuongtru, str_diachihiennay, str_sdt, str_trinhdohocvan, str_trinhdochuyenmon, 
                                     str_biettiengdantoc, str_trinhdongoaingu, str_nghenghiep);
@@ -463,7 +463,7 @@ namespace GUI
                                 string str_trinhdongoaingu = dataGridView1.Rows[row].Cells["trinhdongoaingu"].Value.ToString();
                                 string str_nghenghiep = dataGridView1.Rows[row].Cells["nghenghiep"].Value.ToString();
 
-                                nhankhau = new NhanKhau(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh,
+                                nhankhau = new NhanKhauDTO(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh,
                                     str_noisinh, str_nguyenquan, str_dantoc, str_tongiao, str_quoctich, str_hochieu,
                                     str_noithuongtru, str_diachihiennay, str_sdt, str_trinhdohocvan, str_trinhdochuyenmon,
                                     str_biettiengdantoc, str_trinhdongoaingu, str_nghenghiep);

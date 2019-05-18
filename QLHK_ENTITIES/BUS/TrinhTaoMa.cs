@@ -11,15 +11,15 @@ namespace BUS
 {
     public static class TrinhTaoMa
     {
-        public static quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+        public static quanlyhokhauEntities qlhk = new quanlyhokhauEntities();
 
         #region các hàm lấy mã cuối cùng
         public static string getLastID_MaDinhDanh()
         {
-            string sql = "SELECT top 1 madinhdanh FROM nhankhau ORDER BY madinhdanh DESC;";
+            string sql = "SELECT madinhdanh FROM nhankhau ORDER BY madinhdanh DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -28,10 +28,10 @@ namespace BUS
         }
         public static string getLastID_SoSoHoKhau()
         {
-            string sql = "SELECT Top 1 sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC";
+            string sql = "SELECT sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -40,10 +40,10 @@ namespace BUS
         }
         public static string getLastID_MaNhanKhauThuongTru()
         {
-            string sql = "SELECT top 1 manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC;";
+            string sql = "SELECT manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -52,12 +52,13 @@ namespace BUS
         }
         public static string getLastID_SoSoTamTru()
         {
-            string sql = "SELECT top 1 sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC;";
+            string sql = "SELECT sosotamtru FROM sotamtru where sosotamtru LIKE '08%' ORDER BY sosotamtru DESC LIMIT 1;";
 
             try
             {
-                 return qlhk.ExecuteQuery<String>(sql).Single();
-            }catch(Exception e)
+                 return qlhk.Database.SqlQuery<String>(sql).Single();
+            }
+            catch(Exception e)
             {
                 return "080000000";
             }
@@ -66,10 +67,10 @@ namespace BUS
         }
         public static string getLastID_MaNhanKhauTamTru()
         {
-            string sql = "SELECT top 1 manhankhautamtru FROM nhankhautamtru where manhankhautamtru LIKE 'TT%' ORDER BY manhankhautamtru DESC;";
+            string sql = "SELECT manhakhautamtru FROM nhankhautamtru where manhakhautamtru LIKE 'TT%' ORDER BY manhakhautamtru DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -79,10 +80,10 @@ namespace BUS
 
         public static string getLastID_MaTieuSu()
         {
-            string sql = "SELECT top 1 matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC;";
+            string sql = "SELECT matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -92,10 +93,10 @@ namespace BUS
 
         public static string getLastID_MaTienAnTienSu()
         {
-            string sql = "SELECT top 1 matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC;";
+            string sql = "SELECT matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -105,10 +106,10 @@ namespace BUS
 
         public static string getLastID_CanBo()
         {
-            string sql = "SELECT top 1 macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC;";
+            string sql = "SELECT macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -117,10 +118,10 @@ namespace BUS
         }
         public static string getLastID_NhanKhauTamVang()
         {
-            string sql = "SELECT top 1 manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC;";
+            string sql = "SELECT manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC LIMIT 1;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return qlhk.Database.SqlQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -161,8 +162,18 @@ namespace BUS
             string sausocuoi = null;
             string kq = null;
 
-            //string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
-            //string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
+            string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
+
+            string madinhdanh;
+
+            try
+            {
+                madinhdanh = qlhk.Database.SqlQuery<String>(sql).Single();
+            }
+            catch(Exception e)
+            {
+                return "074219000001";
+            }
 
 
             int i_namsinh = Int16.Parse(namsinh);
@@ -184,7 +195,7 @@ namespace BUS
                 {
                     str_magioitinh = "2";
                 }
-                //if (String.Compare(gioitinh, "nu", true) == 0)
+                //if (String.Compare(gioitinh, "nu", true) == 0) 
                 else
                 {
                     str_magioitinh = "3";
@@ -232,8 +243,8 @@ namespace BUS
             string str_madinhdanh;
             try
             {
-                string sql = "select top 1 madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "' ORDER BY madinhdanh desc";
-                string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
+                sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "' ORDER BY madinhdanh DESC LIMIT 1";
+                madinhdanh = qlhk.Database.SqlQuery<String>(sql).Single();
                 str_madinhdanh = madinhdanh;
             }
             catch (Exception e)

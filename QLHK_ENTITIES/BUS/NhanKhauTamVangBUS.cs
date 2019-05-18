@@ -42,19 +42,19 @@ namespace BUS
             return obj.update(data);
         }
 
-        public List<NhanKhauTamVangDTO> TimKiem(string query)
-        {
-            return obj.TimKiemJoinNhanKhau(query);
-        }
+        //public List<NhanKhauTamVangDTO> TimKiem(string query)
+        //{
+        //    return obj.TimKiemJoinNhanKhau(query);
+        //}
 
 
-        public List<NhanKhauTamVangDTO> TimKiemnhankhau(string query)
-        {
-            return obj.TimKiemNhanKhau(query);
-        }
-        public int TimKiemThuongtru(string query)
-        {
-            return obj.TimKiemThuongtru(query);
-        }
+        //public List<NhanKhauTamVangDTO> TimKiemnhankhau(string query)
+        //{
+        //    return obj.TimKiemNhanKhau(query);
+        //}
+        //public int TimKiemThuongtru(string query)
+        //{
+        //    return obj.TimKiemThuongtru(query);
+        //}
     }
 }

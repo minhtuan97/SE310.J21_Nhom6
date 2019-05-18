@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class NhanKhauTamVangDTO: NhanKhau
+    public class NhanKhauTamVangDTO: NhanKhauDTO
     {
         public NHANKHAUTAMVANG db= new NHANKHAUTAMVANG();
        

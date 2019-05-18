@@ -22,19 +22,19 @@ namespace DTO
             dbcb.MANHANKHAUTHUONGTRU = str_manhankhauthuongtru;
         }
 
-        //public CanBoDTO(DataRow dt)
-        //{
-        //    if (dt.ItemArray.Length == 0)
-        //    {
-        //        return;
-        //    }
+        public CanBoDTO(DataRow dt)
+        {
+            if (dt.ItemArray.Length == 0)
+            {
+                return;
+            }
 
-        //    db.MACANBO = dt["macanbo"].ToString();
-        //    TenTaiKhoan = dt["tentaikhoan"].ToString();
-        //    MatKhau = dt["matkhau"].ToString();
-        //    LoaiCanBo = dt["loaicanbo"].ToString();
-        //    MaNhanKhauThuongTru = dt["manhankhauthuongtru"].ToString();
-        //}
+            //db.MACANBO = dt["macanbo"].ToString();
+            //TenTaiKhoan = dt["tentaikhoan"].ToString();
+            //MatKhau = dt["matkhau"].ToString();
+            //LoaiCanBo = dt["loaicanbo"].ToString();
+            //MaNhanKhauThuongTru = dt["manhankhauthuongtru"].ToString();
+        }
 
         public CanBoDTO(CANBO cb)
         {

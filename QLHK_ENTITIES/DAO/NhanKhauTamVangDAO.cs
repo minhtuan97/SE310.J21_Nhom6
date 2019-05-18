@@ -22,12 +22,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.NHANKHAUTAMVANGs.DeleteOnSubmit(detail);
+                qlhk.NHANKHAUTAMVANGs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -43,8 +43,8 @@ namespace DAO
             {
                 List<NhanKhauTamVangDTO> kq = this.getAll();
                 NhanKhauTamVangDTO[] arr = kq.ToArray();
-                qlhk.NHANKHAUTAMVANGs.DeleteOnSubmit(arr[row].db);
-                qlhk.SubmitChanges();
+                qlhk.NHANKHAUTAMVANGs.Remove(arr[row].db);
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -82,10 +82,10 @@ namespace DAO
 
 
 
-            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTAMVANGs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -121,16 +121,16 @@ namespace DAO
 
         public override bool insert_table(NhanKhauTamVangDTO data)
         {
-            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTAMVANGs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
        
@@ -155,7 +155,7 @@ namespace DAO
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -167,63 +167,63 @@ namespace DAO
         }
 
 
-        public List<NhanKhauTamVangDTO> TimKiemJoinNhanKhau(string query)
-        {
-            query = "SELECT * FROM nhankhautamvang" + query + " ORDER BY ngayketthuctamvang DESC";
-            var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query);
-            List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
-            try
-            {
-                foreach (NHANKHAUTAMVANG i in res)
-                {
-                    NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
-                    lst.Add(ts);
-                }
-                return lst;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
-        }
+        //public List<NhanKhauTamVangDTO> TimKiemJoinNhanKhau(string query)
+        //{
+        //    query = "SELECT * FROM nhankhautamvang" + query + " ORDER BY ngayketthuctamvang DESC";
+        //    var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query);
+        //    List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
+        //    try
+        //    {
+        //        foreach (NHANKHAUTAMVANG i in res)
+        //        {
+        //            NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
+        //            lst.Add(ts);
+        //        }
+        //        return lst;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        return null;
+        //    }
+        //}
 
 
-        public List<NhanKhauTamVangDTO> TimKiemNhanKhau(string query)
-        {
-            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM nhankhautamvang" + query;
-            var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
-            List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
-            foreach (NHANKHAUTAMVANG i in res)
-            {
-                NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
-                lst.Add(ts);
-            }
+        //public List<NhanKhauTamVangDTO> TimKiemNhanKhau(string query)
+        //{
+        //    if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+        //    query = "SELECT *, 'Delete' as 'Change' FROM nhankhautamvang" + query;
+        //    var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
+        //    List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
+        //    foreach (NHANKHAUTAMVANG i in res)
+        //    {
+        //        NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
+        //        lst.Add(ts);
+        //    }
 
-            return lst;
-        }
+        //    return lst;
+        //}
 
 
-        public int TimKiemThuongtru(string query)
-        {
+        //public int TimKiemThuongtru(string query)
+        //{
 
-            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT * FROM nhankhauthuongtru" + query;
-            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
-            List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
-            foreach (NHANKHAUTHUONGTRU i in res)
-            {
-                NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
-                lst.Add(ts);
-            }
+        //    if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+        //    query = "SELECT * FROM nhankhauthuongtru" + query;
+        //    var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
+        //    List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
+        //    foreach (NHANKHAUTHUONGTRU i in res)
+        //    {
+        //        NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
+        //        lst.Add(ts);
+        //    }
 
-            if (lst.Count() > 0)
-                return 0;
-            if (lst.Count() == 0)
-                return 1;
-            return -1;
-        }
+        //    if (lst.Count() > 0)
+        //        return 0;
+        //    if (lst.Count() == 0)
+        //        return 1;
+        //    return -1;
+        //}
 
 
 

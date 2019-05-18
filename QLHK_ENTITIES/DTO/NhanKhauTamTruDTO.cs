@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class NhanKhauTamTruDTO : NhanKhau
+    public class NhanKhauTamTruDTO : NhanKhauDTO
     {
         public NHANKHAUTAMTRU dbnktamtru = new NHANKHAUTAMTRU();
 
@@ -14,7 +14,7 @@ namespace DTO
 
         public NhanKhauTamTruDTO(string maNhanKhauTamTru, string noiTamTru, DateTime tuNgay, DateTime denNgay, string lyDo, string soSoTamTru, string str_MaDinhDanh)
         {
-            dbnktamtru.MANHANKHAUTAMTRU = maNhanKhauTamTru;
+            dbnktamtru.MANHAKHAUTAMTRU = maNhanKhauTamTru;
             dbnktamtru.NOITAMTRU = noiTamTru;
             dbnktamtru.TUNGAY = tuNgay;
             dbnktamtru.DENNGAY = denNgay;
@@ -32,7 +32,7 @@ namespace DTO
                 noiSinh,nguyenQuan, danToc, tonGiao, quocTich, hoChieu, noiThuongTru, diaChiHienNay, sDT, trinhDoHocVan,
                 trinhDoChuyenMon, bietTiengDanToc, trinhDoNgoaiNgu, ngheNghiep)
         {
-            dbnktamtru.MANHANKHAUTAMTRU = maNhanKhauTamTru;
+            dbnktamtru.MANHAKHAUTAMTRU = maNhanKhauTamTru;
             dbnktamtru.NOITAMTRU = noiTamTru;
             dbnktamtru.TUNGAY = tuNgay;
             dbnktamtru.DENNGAY = denNgay;
@@ -47,6 +47,12 @@ namespace DTO
         {
             dbnktamtru = nktt;
             db = nktt.NHANKHAU;
+        }
+
+        public NhanKhauTamTruDTO(NHANKHAU nk)
+        {
+            dbnktamtru = new NHANKHAUTAMTRU();
+            db = nk;
         }
 
         public NhanKhauTamTruDTO(NhanKhauTamTruDTO nktt)

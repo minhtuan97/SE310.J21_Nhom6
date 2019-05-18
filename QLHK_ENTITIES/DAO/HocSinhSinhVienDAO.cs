@@ -39,16 +39,16 @@ namespace DAO
 
         public override bool insert_table(HocSinhSinhVienDTO hssv)
         {
-            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv.dbhssv);
+            qlhk.HOCSINHSINHVIENs.Add(hssv.dbhssv);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
@@ -58,8 +58,8 @@ namespace DAO
             try
             {
                 HOCSINHSINHVIEN dept = qlhk.HOCSINHSINHVIENs.Single(x => x.MAHSSV == mssv);
-                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(dept);
-                qlhk.SubmitChanges();
+                qlhk.HOCSINHSINHVIENs.Remove(dept);
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -77,12 +77,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(detail);
+                qlhk.HOCSINHSINHVIENs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace DAO
             {
                 List<HocSinhSinhVienDTO> kq = this.getAll();
                 HocSinhSinhVienDTO[] arr = kq.ToArray();
-                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(arr[row].dbhssv);
+                qlhk.HOCSINHSINHVIENs.Remove(arr[row].dbhssv);
                 return true;
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -145,29 +145,29 @@ namespace DAO
             }
         }
 
-        public DataTable TimKiem(string query)
-        {
-            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien" + query;
-            var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query) as IEnumerable<DataRow>;
+        //public DataTable TimKiem(string query)
+        //{
+        //    if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+        //    query = "SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien" + query;
+        //    var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query) as IEnumerable<DataRow>;
 
-            return res.CopyToDataTable();
-        }
+        //    return res.CopyToDataTable();
+        //}
 
         // join 2 bảng ???
-        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
-        {
-            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT * FROM HOCSINHSINHVIEN JOIN NHANKHAU ON HOCSINHSINHVIEN.MADINHDANH=NHANKHAU.MADINHDANH " + query;
-            var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();
-            List<HocSinhSinhVienDTO> lst = new List<HocSinhSinhVienDTO>();
-            foreach (HOCSINHSINHVIEN i in res)
-            {
-                HocSinhSinhVienDTO ts = new HocSinhSinhVienDTO(i);
-                lst.Add(ts);
-            }
-            return lst;
-        }
+        //public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
+        //{
+        //    if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+        //    query = "SELECT * FROM HOCSINHSINHVIEN JOIN NHANKHAU ON HOCSINHSINHVIEN.MADINHDANH=NHANKHAU.MADINHDANH " + query;
+        //    var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();
+        //    List<HocSinhSinhVienDTO> lst = new List<HocSinhSinhVienDTO>();
+        //    foreach (HOCSINHSINHVIEN i in res)
+        //    {
+        //        HocSinhSinhVienDTO ts = new HocSinhSinhVienDTO(i);
+        //        lst.Add(ts);
+        //    }
+        //    return lst;
+        //}
         public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhauCuTru(string query)
         {
                 return null;
@@ -207,10 +207,10 @@ namespace DAO
 
         public override bool insert(HocSinhSinhVienDTO hssv)
         {
-            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv.dbhssv);
+            qlhk.HOCSINHSINHVIENs.Add(hssv.dbhssv);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)

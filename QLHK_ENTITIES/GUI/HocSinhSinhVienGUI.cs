@@ -30,7 +30,7 @@ namespace GUI
             tienAn = new TienAnTienSuBUS();
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh=''");
+            //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh=''");
 
         }
         private void clearData()
@@ -52,47 +52,47 @@ namespace GUI
         
         private void button_timkiem_Click(object sender, EventArgs e)
         {
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
-            if (source.Count > 0)
-            {
-                List<HocSinhSinhVienDTO> data = source;
-                if (data.Count > 0)
-                {
-                    foreach (HocSinhSinhVienDTO a in data)
-                    {
-                        textBox_madinhdanh.Text = a.dbhssv.MADINHDANH;
-                        textBox_truong.Text = a.dbhssv.TRUONG;
-                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
-                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
-                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
-                    }
-                }
-                dataGridView1.DataSource = null;
-                dataGridView1.Rows.Clear();
+            //List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
+            //if (source.Count > 0)
+            //{
+            //    List<HocSinhSinhVienDTO> data = source;
+            //    if (data.Count > 0)
+            //    {
+            //        foreach (HocSinhSinhVienDTO a in data)
+            //        {
+            //            textBox_madinhdanh.Text = a.dbhssv.MADINHDANH;
+            //            textBox_truong.Text = a.dbhssv.TRUONG;
+            //            textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
+            //            date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+            //            date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+            //        }
+            //    }
+            //    dataGridView1.DataSource = null;
+            //    dataGridView1.Rows.Clear();
                 
 
-                //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
-                try
-                {
-                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
-                    dataGridView1.DataSource = new BindingSource(bList, null);
-                    //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
-                    //{
-                    //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
-                    //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
-                    //}
-                    button_xoa.Enabled = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show(this, "Không tìm thấy học sinh sinh viên", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
+            //    try
+            //    {
+            //        var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+            //        dataGridView1.DataSource = new BindingSource(bList, null);
+            //        //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
+            //        //{
+            //        //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+            //        //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
+            //        //}
+            //        button_xoa.Enabled = true;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show(this, "Không tìm thấy học sinh sinh viên", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }
+            //}
 
         }
 
@@ -171,7 +171,7 @@ namespace GUI
         private void textBox_madinhdanh_TextChanged(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = tienAn.TimKiem("madinhdanh LIKE'%" + textBox_madinhdanh.Text + "%'");
+            //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh LIKE'%" + textBox_madinhdanh.Text + "%'");
         }
         private void textBox_diachithuongtru_Enter(object sender, EventArgs e)
         {
@@ -187,104 +187,104 @@ namespace GUI
         {
             List<ReplacementGroup> rg = new List<ReplacementGroup>();
             //DataTable source = hssvbus.TimKiemJoinNhanKhau("AND mssv='" + textBox_mssv.Text + "'").Tables[0];
-            DataTable source = hssvbus.TimKiemtheoCuTru(textBox_madinhdanh.Text);
+           // DataTable source = hssvbus.TimKiemtheoCuTru(textBox_madinhdanh.Text);
 
 
-            DataRow data = source.Rows[0];
-            List<string> listViPham = new List<string>();
-            foreach(DataGridViewRow item in dataGridView1.Rows)
-            {
-                if(item.Cells["toidanh"].Value!=null)
-                    listViPham.Add(item.Cells["toidanh"].Value.ToString());
-            }
-            string vipham = string.Join(", ",listViPham.ToArray());
-            vipham = string.IsNullOrEmpty(textBox_vipham.Text) ? vipham : textBox_vipham.Text + ", " + vipham;
+            //DataRow data = source.Rows[0];
+            //List<string> listViPham = new List<string>();
+            //foreach(DataGridViewRow item in dataGridView1.Rows)
+            //{
+            //    if(item.Cells["toidanh"].Value!=null)
+            //        listViPham.Add(item.Cells["toidanh"].Value.ToString());
+            //}
+            //string vipham = string.Join(", ",listViPham.ToArray());
+            //vipham = string.IsNullOrEmpty(textBox_vipham.Text) ? vipham : textBox_vipham.Text + ", " + vipham;
 
-            if (data.ItemArray.Length > 0)
-            {
-                rg.Add(new ReplacementGroup("<ten>", data["hoten"].ToString()));
-                rg.Add(new ReplacementGroup("<ngaySinh>", data["ngaysinh"].ToString().Split(' ')[0]));
-                rg.Add(new ReplacementGroup("<mssv>", data["mahssv"].ToString()));
-                rg.Add(new ReplacementGroup("<truong>", data["truong"].ToString()));
-                rg.Add(new ReplacementGroup("<maDinhDanh>", data["madinhdanh"].ToString()));
-                //rg.Add(new ReplacementGroup("<ngayCap>", data["ngaycap"].ToString().Split(' ')[0]));
-                //rg.Add(new ReplacementGroup("<diaChiThuongTru>", data["diachithuongtru"].ToString()));
-                rg.Add(new ReplacementGroup("<diaChiThuongTru>", data["diachithuongtru"].ToString()));
-                rg.Add(new ReplacementGroup("<diaChiTamTru>", ""));
-                int vtkhupho = data["noithuongtru"].ToString().IndexOf(",");
-                int thlen = data["noithuongtru"].ToString().Length;
-                rg.Add(new ReplacementGroup("<khupho>", data["noithuongtru"].ToString().Substring(vtkhupho    ,thlen-vtkhupho)));
-
-
-                rg.Add(new ReplacementGroup("<tuNgay>", data["thoigianbatdautamtruthuongtru"].ToString().Split(' ')[0]));
-                rg.Add(new ReplacementGroup("<denNgay>", data["thoigianketthuctamtruthuongtru"].ToString().Split(' ')[0]));
-
-                rg.Add(new ReplacementGroup("<viPham>", vipham));
-                rg.Add(new ReplacementGroup("<checkKhong>", vipham == "" ? "" : ""));
-                rg.Add(new ReplacementGroup("<checkCo>", vipham == "" ? "" : ""));
-
-                DateTime today = DateTime.Now;
-                rg.Add(new ReplacementGroup("<ngay>", today.Day.ToString()));
-                rg.Add(new ReplacementGroup("<thang>", today.Month.ToString()));
-                rg.Add(new ReplacementGroup("<nam>", today.Year.ToString()));
+            //if (data.ItemArray.Length > 0)
+            //{
+            //    rg.Add(new ReplacementGroup("<ten>", data["hoten"].ToString()));
+            //    rg.Add(new ReplacementGroup("<ngaySinh>", data["ngaysinh"].ToString().Split(' ')[0]));
+            //    rg.Add(new ReplacementGroup("<mssv>", data["mahssv"].ToString()));
+            //    rg.Add(new ReplacementGroup("<truong>", data["truong"].ToString()));
+            //    rg.Add(new ReplacementGroup("<maDinhDanh>", data["madinhdanh"].ToString()));
+            //    //rg.Add(new ReplacementGroup("<ngayCap>", data["ngaycap"].ToString().Split(' ')[0]));
+            //    //rg.Add(new ReplacementGroup("<diaChiThuongTru>", data["diachithuongtru"].ToString()));
+            //    rg.Add(new ReplacementGroup("<diaChiThuongTru>", data["diachithuongtru"].ToString()));
+            //    rg.Add(new ReplacementGroup("<diaChiTamTru>", ""));
+            //    int vtkhupho = data["noithuongtru"].ToString().IndexOf(",");
+            //    int thlen = data["noithuongtru"].ToString().Length;
+            //    rg.Add(new ReplacementGroup("<khupho>", data["noithuongtru"].ToString().Substring(vtkhupho    ,thlen-vtkhupho)));
 
 
-                string srcPath = System.Windows.Forms.Application.StartupPath + "\\MauIn\\Mau HSSV01.doc";
-                string dstPath = System.Windows.Forms.Application.StartupPath + "\\MauIn\\KetQua\\Mau HSSV01_" + textBox_mssv.Text + ".doc";
-                CreateWordHelper.CreateWordDocument(srcPath,dstPath, rg);
+            //    rg.Add(new ReplacementGroup("<tuNgay>", data["thoigianbatdautamtruthuongtru"].ToString().Split(' ')[0]));
+            //    rg.Add(new ReplacementGroup("<denNgay>", data["thoigianketthuctamtruthuongtru"].ToString().Split(' ')[0]));
 
-                MessageBox.Show(this, "Đã tạo thành công file thông tin với tên: " + dstPath, "Thành công",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show(this, "lỗi", "Không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    rg.Add(new ReplacementGroup("<viPham>", vipham));
+            //    rg.Add(new ReplacementGroup("<checkKhong>", vipham == "" ? "" : ""));
+            //    rg.Add(new ReplacementGroup("<checkCo>", vipham == "" ? "" : ""));
+
+            //    DateTime today = DateTime.Now;
+            //    rg.Add(new ReplacementGroup("<ngay>", today.Day.ToString()));
+            //    rg.Add(new ReplacementGroup("<thang>", today.Month.ToString()));
+            //    rg.Add(new ReplacementGroup("<nam>", today.Year.ToString()));
+
+
+            //    string srcPath = System.Windows.Forms.Application.StartupPath + "\\MauIn\\Mau HSSV01.doc";
+            //    string dstPath = System.Windows.Forms.Application.StartupPath + "\\MauIn\\KetQua\\Mau HSSV01_" + textBox_mssv.Text + ".doc";
+            //    CreateWordHelper.CreateWordDocument(srcPath,dstPath, rg);
+
+            //    MessageBox.Show(this, "Đã tạo thành công file thông tin với tên: " + dstPath, "Thành công",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    MessageBox.Show(this, "lỗi", "Không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
            
         }
 
         private void btnTimKiem2_Click(object sender, EventArgs e)
         {
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau("nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
-            if (source.Count > 0)
-            {
-                List<HocSinhSinhVienDTO> data = source;
-                if (data.Count > 0)
-                {
-                    foreach (HocSinhSinhVienDTO a in data)
-                    {
-                        textBox_mssv.Text = a.dbhssv.MAHSSV;
-                        textBox_truong.Text = a.dbhssv.TRUONG;
-                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
-                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
-                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
-                    }
-                }
-                dataGridView1.DataSource = null;
-                dataGridView1.Rows.Clear();
-                //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
-                try
-                {
-                    DataTable bList = DataHelper.ListToDatatable( tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
-                    dataGridView1.DataSource = bList;//new BindingSource(bList, null);
-                    //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
-                    //{
-                    //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
-                    //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
-                    //}
-                    button_xoa.Enabled = true;
+            //List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau("nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
+            //if (source.Count > 0)
+            //{
+            //    List<HocSinhSinhVienDTO> data = source;
+            //    if (data.Count > 0)
+            //    {
+            //        foreach (HocSinhSinhVienDTO a in data)
+            //        {
+            //            textBox_mssv.Text = a.dbhssv.MAHSSV;
+            //            textBox_truong.Text = a.dbhssv.TRUONG;
+            //            textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
+            //            date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+            //            date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+            //        }
+            //    }
+            //    dataGridView1.DataSource = null;
+            //    dataGridView1.Rows.Clear();
+            //    //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
+            //    try
+            //    {
+            //        DataTable bList = DataHelper.ListToDatatable( tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+            //        dataGridView1.DataSource = bList;//new BindingSource(bList, null);
+            //        //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
+            //        //{
+            //        //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+            //        //    dGVTienAnTienSu[dGVTienAnTienSu.ColumnCount - 1, i] = linkCell;
+            //        //}
+            //        button_xoa.Enabled = true;
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show(this, "Không tìm thấy học sinh sinh viên", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show(this, "Không tìm thấy học sinh sinh viên", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }
+            //}
            
         }
 

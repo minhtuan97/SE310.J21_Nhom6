@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class NhanKhauTamVangGUI : Form
     {
-        NhanKhau nk = new NhanKhau();
+        NhanKhauDTO nk = new NhanKhauDTO();
         NhanKhauTamVangDTO nktv;
         NhanKhauTamVangBUS nktvbus = new NhanKhauTamVangBUS();
         public NhanKhauTamVangGUI()
@@ -25,92 +25,92 @@ namespace GUI
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
 
-            List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhautamvang.madinhdanh='" + textBox_madinhdanh.Text + "'");
-            if (kq.Count!=0)
-            {
-                NhanKhauTamVangDTO a = kq[0];
+            //List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhautamvang.madinhdanh='" + textBox_madinhdanh.Text + "'");
+            //if (kq.Count!=0)
+            //{
+            //    NhanKhauTamVangDTO a = kq[0];
 
-                textBox_hoten.Text = a.db.NHANKHAU.HOTEN.ToString();
-                tbNgaySinh.Text = a.db.NHANKHAU.NGAYSINH.ToString();
-                tbdantoc.Text = a.db.NHANKHAU.DANTOC.ToString();
-                tbNgheNghiep.Text = a.db.NHANKHAU.NGHENGHIEP.ToString();
-                if (a.db.NHANKHAU.GIOITINH.ToString() == "nam")
-                {
-                    rdNam.Checked = true;
-                }
-                if (a.db.NHANKHAU.GIOITINH.ToString() == "nu")
-                {
-                    rdNu.Checked = true;
-                }
-                //tongiao
-                textBox_tongiao.Text = a.db.NHANKHAU.TONGIAO.ToString();
-                //nguyenquan
-                tbnguyenquan.Text = a.db.NHANKHAU.NGUYENQUAN.ToString();
-                //noisinh
-                tbNoiSinh.Text = a.db.NHANKHAU.NOISINH.ToString();
-                //quoctich
-                tbquoctich.Text = a.db.NHANKHAU.QUOCTICH.ToString();
-                //hochieu
-                tbhochieu.Text = a.db.NHANKHAU.HOCHIEU.ToString();
-                //sdt
-                tbsodienthoai.Text = a.db.NHANKHAU.SDT.ToString();
-                //ngaycap
-                //tbNgayCap.Text = dt["ngaycap"].ToString();
-                //noicap
-                //tbNoiCap.Text = dt["noicap"].ToString();
-                //noithuongtru
-                tbDCThuongTru.Text = a.db.NHANKHAU.NOITHUONGTRU.ToString();
-                //diachihientai
-                tbDCHienTai.Text = a.db.NHANKHAU.DIACHIHIENNAY.ToString();
+            //    textBox_hoten.Text = a.db.NHANKHAU.HOTEN.ToString();
+            //    tbNgaySinh.Text = a.db.NHANKHAU.NGAYSINH.ToString();
+            //    tbdantoc.Text = a.db.NHANKHAU.DANTOC.ToString();
+            //    tbNgheNghiep.Text = a.db.NHANKHAU.NGHENGHIEP.ToString();
+            //    if (a.db.NHANKHAU.GIOITINH.ToString() == "nam")
+            //    {
+            //        rdNam.Checked = true;
+            //    }
+            //    if (a.db.NHANKHAU.GIOITINH.ToString() == "nu")
+            //    {
+            //        rdNu.Checked = true;
+            //    }
+            //    //tongiao
+            //    textBox_tongiao.Text = a.db.NHANKHAU.TONGIAO.ToString();
+            //    //nguyenquan
+            //    tbnguyenquan.Text = a.db.NHANKHAU.NGUYENQUAN.ToString();
+            //    //noisinh
+            //    tbNoiSinh.Text = a.db.NHANKHAU.NOISINH.ToString();
+            //    //quoctich
+            //    tbquoctich.Text = a.db.NHANKHAU.QUOCTICH.ToString();
+            //    //hochieu
+            //    tbhochieu.Text = a.db.NHANKHAU.HOCHIEU.ToString();
+            //    //sdt
+            //    tbsodienthoai.Text = a.db.NHANKHAU.SDT.ToString();
+            //    //ngaycap
+            //    //tbNgayCap.Text = dt["ngaycap"].ToString();
+            //    //noicap
+            //    //tbNoiCap.Text = dt["noicap"].ToString();
+            //    //noithuongtru
+            //    tbDCThuongTru.Text = a.db.NHANKHAU.NOITHUONGTRU.ToString();
+            //    //diachihientai
+            //    tbDCHienTai.Text = a.db.NHANKHAU.DIACHIHIENNAY.ToString();
 
-                if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 1)
-                    rd_tamtru.Checked = true;
-                if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 0)
-                        rd_thuongtru.Checked = true;
-                DateTime secondDateTime = DateTime.Now;
+            //    if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 1)
+            //        rd_tamtru.Checked = true;
+            //    if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 0)
+            //            rd_thuongtru.Checked = true;
+            //    DateTime secondDateTime = DateTime.Now;
 
-                if (a.db.NGAYKETTHUCTAMVANG.ToString() == "")
+            //    if (a.db.NGAYKETTHUCTAMVANG.ToString() == "")
 
-                {
+            //    {
 
-                    label_matamvang.Text = null;
-                    tbLyDo.Text = null;
-                    textBox_noiden.Text = null;
-                    dtpNgayBatDau.Value = secondDateTime;
-                    dtpNgayKetThuc.Value = secondDateTime;
-                    return;
-                }
-                    DateTime ngayketthuc = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
-                //int compare = DateTime.Compare(ngayketthuc, secondDateTime);
-                if (secondDateTime<ngayketthuc)
-                {
-                    label_matamvang.Text = a.db.MANHANKHAUTAMVANG.ToString();
-                    tbLyDo.Text = a.db.LYDO.ToString();
-                    textBox_noiden.Text = a.db.NOIDEN.ToString();
-                    if (a.db.NGAYBATDAUTAMVANG.ToString() != "")
-                        dtpNgayBatDau.Value = DateTime.Parse(a.db.NGAYBATDAUTAMVANG.ToString());
-                    if (a.db.NGAYKETTHUCTAMVANG.ToString() != "")
-                        dtpNgayKetThuc.Value = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
-                }
-                else
-                {
-                    label_matamvang.Text = null;
-                    tbLyDo.Text = null;
-                    textBox_noiden.Text = null;
-                    dtpNgayBatDau.Value = secondDateTime;
-                    dtpNgayKetThuc.Value = secondDateTime;
-                }
+            //        label_matamvang.Text = null;
+            //        tbLyDo.Text = null;
+            //        textBox_noiden.Text = null;
+            //        dtpNgayBatDau.Value = secondDateTime;
+            //        dtpNgayKetThuc.Value = secondDateTime;
+            //        return;
+            //    }
+            //        DateTime ngayketthuc = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
+            //    //int compare = DateTime.Compare(ngayketthuc, secondDateTime);
+            //    if (secondDateTime<ngayketthuc)
+            //    {
+            //        label_matamvang.Text = a.db.MANHANKHAUTAMVANG.ToString();
+            //        tbLyDo.Text = a.db.LYDO.ToString();
+            //        textBox_noiden.Text = a.db.NOIDEN.ToString();
+            //        if (a.db.NGAYBATDAUTAMVANG.ToString() != "")
+            //            dtpNgayBatDau.Value = DateTime.Parse(a.db.NGAYBATDAUTAMVANG.ToString());
+            //        if (a.db.NGAYKETTHUCTAMVANG.ToString() != "")
+            //            dtpNgayKetThuc.Value = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
+            //    }
+            //    else
+            //    {
+            //        label_matamvang.Text = null;
+            //        tbLyDo.Text = null;
+            //        textBox_noiden.Text = null;
+            //        dtpNgayBatDau.Value = secondDateTime;
+            //        dtpNgayKetThuc.Value = secondDateTime;
+            //    }
 
 
 
-            }
-            else
-            {
-                textBox_hoten.Text = null;
+            //}
+            //else
+            //{
+            //    textBox_hoten.Text = null;
 
-                MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }
+            //}
 
 
         }

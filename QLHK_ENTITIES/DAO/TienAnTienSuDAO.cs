@@ -18,7 +18,7 @@ namespace DAO
             {
                 List<TienAnTienSuDTO> kq = this.getAll();
                 TienAnTienSuDTO[] arr = kq.ToArray();
-                qlhk.TIENANTIENSUs.DeleteOnSubmit(arr[row].db);
+                qlhk.TIENANTIENSUs.Remove(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -37,12 +37,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.TIENANTIENSUs.DeleteOnSubmit(detail);
+                qlhk.TIENANTIENSUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -58,11 +58,11 @@ namespace DAO
             if (ta == null || string.IsNullOrEmpty(ta.MATIENANTIENSU))
                 return false;
 
-            qlhk.TIENANTIENSUs.DeleteOnSubmit(ta);
+            qlhk.TIENANTIENSUs.Remove(ta);
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -86,32 +86,32 @@ namespace DAO
 
         public override bool insert(TienAnTienSuDTO data)
         {
-            qlhk.TIENANTIENSUs.InsertOnSubmit(data.db);
+            qlhk.TIENANTIENSUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
 
         public override bool insert_table(TienAnTienSuDTO data)
         {
-            qlhk.TIENANTIENSUs.InsertOnSubmit(data.db);
+            qlhk.TIENANTIENSUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
@@ -141,7 +141,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM tienantiensu" + query;
-            var res = qlhk.ExecuteQuery<TIENANTIENSU>(query).ToList();
+            var res = qlhk.Database.SqlQuery<TIENANTIENSU>(query).ToList();
             List<TienAnTienSuDTO> lst = new List<TienAnTienSuDTO>();
             foreach (TIENANTIENSU i in res)
             {

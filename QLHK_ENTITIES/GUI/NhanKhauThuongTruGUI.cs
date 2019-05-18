@@ -75,7 +75,7 @@ namespace GUI
                 //var bList = new BindingList<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
                 //dGVTieuSu.DataSource = new BindingSource( bList, null);
 
-                dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+               // dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieuSu.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
                 //dGVTieuSu.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nktt.TimKiemJoinNhanKhau("nhankhau.madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.dbnktt).ToList());
 
                 for (int i = 0; i < dGVTieuSu.Rows.Count; i++)
@@ -100,7 +100,7 @@ namespace GUI
 
                 //var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
                 //dGVTienAnTienSu.DataSource = new BindingSource(bList, null);
-                dGVTienAnTienSu.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
+                //dGVTienAnTienSu.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienAn.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'").Select(r => r.db).ToList());
 
                 for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                 {
@@ -364,7 +364,7 @@ namespace GUI
                     MessageBox.Show(this, "Lỗi!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-             
+
         }
 
         private void tbDCThuongTru_Enter(object sender, EventArgs e)
@@ -613,13 +613,13 @@ namespace GUI
             }
             else
             {
-                List<NhanKhau> kqnk = nk.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
-                if (kqnk.Count>0)
+                List<NhanKhauDTO> kqnk = nk.TimKiem("madinhdanh='" + tbmadinhdanh.Text + "'");
+                if (kqnk.Count > 0)
                 {
                     nkttDTO = new NhanKhauThuongTruDTO(kqnk[0].db);
                     fillData();
                 }
-                else 
+                else
                     MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

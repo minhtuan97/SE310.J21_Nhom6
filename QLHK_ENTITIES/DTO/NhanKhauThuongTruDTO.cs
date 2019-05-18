@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class NhanKhauThuongTruDTO:NhanKhau
+    public class NhanKhauThuongTruDTO:NhanKhauDTO
     {
         public NHANKHAUTHUONGTRU dbnktt = new NHANKHAUTHUONGTRU();
 
@@ -40,7 +40,7 @@ namespace DTO
             dbnktt.SOSOHOKHAU = soSoHoKhau;
         }
 
-        //public NhanKhauThuongTruDTO(DataRow dt):base(dt["madinhdanh"].ToString(),dt["hoten"].ToString(), dt["tenkhac"].ToString(), DateTime.Parse(dt["ngaysinh"].ToString()),
+        //public NhanKhauThuongTruDTO(DataRow dt) : base(dt["madinhdanh"].ToString(), dt["hoten"].ToString(), dt["tenkhac"].ToString(), DateTime.Parse(dt["ngaysinh"].ToString()),
         //    dt["gioitinh"].ToString(), dt["noisinh"].ToString(), dt["nguyenquan"].ToString(), dt["dantoc"].ToString(), dt["tongiao"].ToString(), dt["quoctich"].ToString(),
         //    dt["hochieu"].ToString(), dt["noithuongtru"].ToString(), dt["diachihiennay"].ToString(), dt["sdt"].ToString(), dt["trinhdohocvan"].ToString(),
         //    dt["trinhdochuyenmon"].ToString(), dt["biettiengdantoc"].ToString(), dt["trinhdongoaingu"].ToString(), dt["nghenghiep"].ToString())

@@ -37,8 +37,8 @@ namespace BUS
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            List<NhanKhau> ls = nk.TimKiem("madinhdanh='" + nktt.db.MADINHDANH + "'");
-            if (nk.insert(nktt)|| ls.Count > 0)
+            List<NhanKhauDTO> ls = nk.TimKiem("madinhdanh='" + nktt.db.MADINHDANH + "'");
+            if (nk.insert(nktt) || ls.Count > 0)
             {
                 if (obj.insert(nktt))
                     return true;

@@ -8,41 +8,41 @@ using DTO;
 
 namespace DAO
 {
-    public class NhanKhauDAO:DBConnection<NhanKhau>
+    public class NhanKhauDAO:DBConnection<NhanKhauDTO>
     {
         public NhanKhauDAO() : base() { }
-        public override List<NhanKhau> getAll()
+        public override List<NhanKhauDTO> getAll()
         {
-            NhanKhau nk = new NhanKhau();
+            NhanKhauDTO nk = new NhanKhauDTO();
             var kq = from nkdto in qlhk.NHANKHAUs
-                     select new NhanKhau
+                     select new NhanKhauDTO
                      {
                          db=nkdto
                      };
-            List<NhanKhau> x = kq.ToList();
+            List<NhanKhauDTO> x = kq.ToList();
             return x;
         }
-        public override bool insert_table(NhanKhau data)
+        public override bool insert_table(NhanKhauDTO data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
-        public override bool insert(NhanKhau nk)
+        public override bool insert(NhanKhauDTO nk)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(nk.db);
+            qlhk.NHANKHAUs.Add(nk.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -62,12 +62,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.NHANKHAUs.DeleteOnSubmit(detail);
+                qlhk.NHANKHAUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -81,9 +81,9 @@ namespace DAO
         {
             try
             {
-                List<NhanKhau> kq = this.getAll();
-                NhanKhau[] arr = kq.ToArray();
-                qlhk.NHANKHAUs.DeleteOnSubmit(arr[row].db);
+                List<NhanKhauDTO> kq = this.getAll();
+                NhanKhauDTO[] arr = kq.ToArray();
+                qlhk.NHANKHAUs.Remove(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -102,12 +102,12 @@ namespace DAO
 
             foreach (var detail in deleteOrderDetails)
             {
-                qlhk.NHANKHAUs.DeleteOnSubmit(detail);
+                qlhk.NHANKHAUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -117,7 +117,7 @@ namespace DAO
                 return false;
             }
         }
-        public override bool update(NhanKhau nk)
+        public override bool update(NhanKhauDTO nk)
         {
             // Query the database for the row to be updated.
             var query =
@@ -154,7 +154,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -164,15 +164,17 @@ namespace DAO
                 return false;
             }
         }
-        public  List<NhanKhau> TimKiem(string query)
+
+
+        public List<NhanKhauDTO> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM nhankhau" + query;
-            var res = qlhk.ExecuteQuery<NHANKHAU>(query).ToList();
-            List<NhanKhau> lst = new List<NhanKhau>();
+            var res = qlhk.Database.SqlQuery<NHANKHAU>(query).ToList();
+            List<NhanKhauDTO> lst = new List<NhanKhauDTO>();
             foreach (NHANKHAU i in res)
             {
-                NhanKhau ts = new NhanKhau(i);
+                NhanKhauDTO ts = new NhanKhauDTO(i);
                 lst.Add(ts);
             }
 
@@ -237,7 +239,7 @@ namespace DAO
                                 nk.BIETTIENGDANTOC,
                                 nk.TRINHDONGOAINGU,
                                 nk.NGHENGHIEP,
-                                nktt.MANHANKHAUTAMTRU,
+                                nktt.MANHAKHAUTAMTRU,
                                 nktt.NOITAMTRU,
                                 nktt.SOSOTAMTRU,
                                 nktt.LYDO,

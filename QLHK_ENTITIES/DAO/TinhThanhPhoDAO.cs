@@ -16,7 +16,7 @@ namespace DAO
         public override List<TinhThanhPhoDTO> getAll()
         {
             TinhThanhPhoDTO nk = new TinhThanhPhoDTO();
-            var kq = from tptv in qlhk.TINHTHANHPHOs
+            var kq = from tptv in qlhk.TINHTHANHPHOes
                      select new TinhThanhPhoDTO
                      {
                          db = tptv
@@ -26,49 +26,49 @@ namespace DAO
         }
         public override bool insert_table(TinhThanhPhoDTO data)
         {
-            qlhk.TINHTHANHPHOs.InsertOnSubmit(data.db);
+            qlhk.TINHTHANHPHOes.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                //qlhk.TINHTHANHPHOes();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
         public override bool insert(TinhThanhPhoDTO tinhThanh)
         {
-            qlhk.TINHTHANHPHOs.InsertOnSubmit(tinhThanh.db);
+            qlhk.TINHTHANHPHOes.Add(tinhThanh.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
         public bool deleteTTP(string id)
         {
             var kq =
-           from ttp in qlhk.TINHTHANHPHOs
+           from ttp in qlhk.TINHTHANHPHOes
            where ttp.matp == id
            select ttp;
 
             foreach (var detail in kq)
             {
-                qlhk.TINHTHANHPHOs.DeleteOnSubmit(detail);
+                qlhk.TINHTHANHPHOes.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -85,7 +85,7 @@ namespace DAO
             {
                 List<TinhThanhPhoDTO> kq = this.getAll();
                 TinhThanhPhoDTO[] arr = kq.ToArray();
-                qlhk.TINHTHANHPHOs.DeleteOnSubmit(arr[row].db);
+                qlhk.TINHTHANHPHOes.Remove(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace DAO
         public override bool update(TinhThanhPhoDTO tinhThanh)
         {
             var query =
-               from tptv in qlhk.TINHTHANHPHOs
+               from tptv in qlhk.TINHTHANHPHOes
                where tinhThanh.db.matp == tptv.matp
                select tptv;
 
@@ -115,7 +115,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -125,11 +125,13 @@ namespace DAO
                 return false;
             }
         }
+
+
         public List<TinhThanhPhoDTO> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM tinhthanhpho" + query;
-            var res = qlhk.ExecuteQuery<TINHTHANHPHO>(query).ToList();
+            var res = qlhk.Database.SqlQuery<TINHTHANHPHO>(query).ToList();
             List<TinhThanhPhoDTO> lst = new List<TinhThanhPhoDTO>();
             foreach (TINHTHANHPHO i in res)
             {

@@ -159,10 +159,20 @@ namespace GUI
             txt_NoiTamTru.Text = sotamtruDto.db.NOITAMTRU;
             ImportToComboboxMaChuHo();
 
-            taoDanhSachNhanKhau();
+            if (sotamtruDto == null || sotamtruDto.NhanKhau == null)
+                return;
+
+            datagridview.DataSource = null;
+            datagridview.Rows.Clear();
+            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(
+                sotamtruDto.NhanKhau.Select(r => r.dbnktamtru).ToList()
+            );
+
+            datagridview.DataSource = tbnktt;
+           
         }
 
-
+        //taoDanhSachNhanKhau();
 
         //Thêm một sổ tạm trú mới
         private void btnThem_Click(object sender, EventArgs e)
@@ -177,9 +187,8 @@ namespace GUI
 
             string sosotamtru = txt_SoSoTamTru.Text.ToString();
 
-            SoTamTruBUS sotamtru = new SoTamTruBUS();
 
-            string machuhotamtru = sotamtru.convertTentoMaNhanKhauTamTru(cbb_MaChuHo.Text.ToString(), sosotamtru);
+            string machuhotamtru = sotamtruBus.convertTentoMaNhanKhauTamTru(cbb_MaChuHo.Text.ToString(), sosotamtru);
 
     
             DateTime tungay = dt_TuNgay.Value.Date;
@@ -297,7 +306,8 @@ namespace GUI
             }
 
 
-            DialogResult dialogResult = MessageBox.Show("Bạn có muốn hủy tạm trú những nhân khẩu có sổ tạm trú " + sosotamtru + " không?", "Thông báo", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = 
+                MessageBox.Show("Bạn có muốn hủy tạm trú những nhân khẩu có sổ tạm trú " + sosotamtru + " không?", "Thông báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
 
@@ -326,14 +336,14 @@ namespace GUI
 
             datagridview.DataSource = null;
             datagridview.Rows.Clear();
-
-            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(sotamtruDto.NhanKhau.Select(r => r.dbnktamtru.NHANKHAU).ToList());
+            //List<NHANKHAU> nk = sotamtruDto.NhanKhau.Select(r => r.dbnktamtru.NHANKHAU).ToList();
+            //DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(nk);
             DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(sotamtruDto.NhanKhau.Select(r => r.dbnktamtru).ToList());
-            DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
-            tb.Columns.RemoveAt(tb.Columns.Count - 1);
-            tb.Columns.RemoveAt(tb.Columns.Count - 1);
+            //DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
+            //tb.Columns.RemoveAt(tb.Columns.Count - 1);
+            //tb.Columns.RemoveAt(tb.Columns.Count - 1);
 
-            datagridview.DataSource = tb;
+            datagridview.DataSource = tbnktt;
         }
 
         //Tìm một sổ tạm trú
@@ -400,10 +410,7 @@ namespace GUI
             DateTime denngay = dt_DenNgay.Value.Date;
 
 
-            //Kiểm tra thời hạn tạm trú
-            SoTamTruBUS Sotamtru = new SoTamTruBUS();
-
-            double songaygiahan = Sotamtru.CheckGiaHan(denngay, sosotamtru);
+            double songaygiahan = sotamtruBus.CheckGiaHan(denngay, sosotamtru);
             DateTime today = DateTime.Today;
             DateTime ngaytoida = today.AddDays(songaygiahan);
              if (songaygiahan!=0)
@@ -423,7 +430,7 @@ namespace GUI
                     ResetValueInput();
                     //Tim so tam tru
                     List<SoTamTruDTO> sotamtru = new List<SoTamTruDTO>();
-                    sotamtru = sotamtruBus.TimKiemSoTamTru(sosotamtru);
+                    //sotamtru = sotamtruBus.TimKiemSoTamTru(sosotamtru);
 
                     if (!sotamtruBus.ExistedSoTamTru(sosotamtru))
                     {

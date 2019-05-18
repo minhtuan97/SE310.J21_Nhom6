@@ -39,30 +39,31 @@ namespace DAO
         public override bool insert_table(NhanKhauThuongTruDTO data)
         {
             if(!String.IsNullOrEmpty(data.db.MADINHDANH))
-                qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+                qlhk.NHANKHAUs.Add(data.db);
             if (!String.IsNullOrEmpty(data.dbnktt.MADINHDANH))
-                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
+                qlhk.NHANKHAUTHUONGTRUs.Add(data.dbnktt);
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
         public override bool insert(NhanKhauThuongTruDTO data)
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.dbnktt);
             data.dbnktt.MADINHDANH = data.db.MADINHDANH;
+            qlhk.NHANKHAUTHUONGTRUs.Add(data.dbnktt);
+
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -78,8 +79,8 @@ namespace DAO
 
             try
             {
-                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(kq);
-                qlhk.SubmitChanges();
+                qlhk.NHANKHAUTHUONGTRUs.Remove(kq);
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -97,12 +98,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(detail);
+                qlhk.NHANKHAUTHUONGTRUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -118,7 +119,7 @@ namespace DAO
             NhanKhauThuongTruDTO[] nktt = this.getAll().ToArray();
             try
             {
-                qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(nktt[row].dbnktt);
+                qlhk.NHANKHAUTHUONGTRUs.Remove(nktt[row].dbnktt);
                 return true;
             }
             catch (Exception e)
@@ -138,7 +139,7 @@ namespace DAO
             nk.DIACHITHUONGTRU = shk.DIACHI;
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -146,8 +147,7 @@ namespace DAO
                 return false;
             }
         }
-        public override bool update(NhanKhauThuongTruDTO nktt)
-        {
+        public override bool update(NhanKhauThuongTruDTO nktt) {
             // Query the database for the row to be updated.
             var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU);
 
@@ -157,7 +157,7 @@ namespace DAO
             {
                 //if (kq.MANHANKHAUTHUONGTRU == nktt.dbnktt.MANHANKHAUTHUONGTRU)
                 //{
-                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH && nktt.db.MADINHDANH!=null)
+                if (kq.NHANKHAU.MADINHDANH != nktt.db.MADINHDANH && nktt.db.MADINHDANH != null)
                 {
                     if (nktt.dbnktt.NHANKHAU != null) kq.NHANKHAU = nktt.db;
                     kq.MADINHDANH = nktt.db.MADINHDANH;
@@ -179,21 +179,25 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 // Provide for exceptions.
-                return false;
+                return true;
             }
 
         }
+
+
+
+
         //public bool doiChuHo(List<NhanKhauThuongTruDTO> danhSach, string maDinhDanhChuHo)
         //{
         //    bool contain = false;
-        //    foreach(NhanKhauThuongTruDTO item in danhSach)
+        //    foreach (NhanKhauThuongTruDTO item in danhSach)
         //    {
         //        if (item.MaDinhDanh == maDinhDanhChuHo)
         //        {
@@ -207,14 +211,16 @@ namespace DAO
         //    }
         //    if (!contain) return false;
 
-        //    foreach(NhanKhauThuongTruDTO item in danhSach)
+        //    foreach (NhanKhauThuongTruDTO item in danhSach)
         //    {
         //        item.maChuHo = maDinhDanhChuHo;
 
         //        try
         //        {
-        //            update(item,-1);
-        //        } catch (Exception ex){
+        //            update(item, -1);
+        //        }
+        //        catch (Exception ex)
+        //        {
         //            return false;
         //        }
 
@@ -227,7 +233,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM NHANKHAUTHUONGTRU" + query;
-            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
+            var res = qlhk.Database.SqlQuery<NHANKHAUTHUONGTRU>(query).ToList();
             List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
             foreach (NHANKHAUTHUONGTRU i in res)
             {
@@ -242,7 +248,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" + query;
-            var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query);
+            var res = qlhk.Database.SqlQuery<NHANKHAUTHUONGTRU>(query);
             List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
             foreach (NHANKHAUTHUONGTRU i in res)
             {

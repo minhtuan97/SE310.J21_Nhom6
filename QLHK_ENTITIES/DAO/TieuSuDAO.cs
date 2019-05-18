@@ -34,12 +34,12 @@ namespace DAO
 
             foreach (var detail in kq)
             {
-                qlhk.TIEUSUs.DeleteOnSubmit(detail);
+                qlhk.TIEUSUs.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -56,11 +56,11 @@ namespace DAO
                 return false;
             
 
-             qlhk.TIEUSUs.DeleteOnSubmit(ts);
+             qlhk.TIEUSUs.Remove(ts);
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -77,7 +77,7 @@ namespace DAO
             {
                 List<TieuSuDTO> kq = this.getAll();
                 TieuSuDTO[] arr = kq.ToArray();
-                qlhk.TIEUSUs.DeleteOnSubmit(arr[row].db);
+                qlhk.TIEUSUs.Remove(arr[row].db);
                 return true;
             }
             catch (Exception e)
@@ -89,26 +89,26 @@ namespace DAO
 
         public override bool insert(TieuSuDTO data)
         {
-            qlhk.TIEUSUs.InsertOnSubmit(data.db);
+            qlhk.TIEUSUs.Remove(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }           
         }
 
         public override bool insert_table(TieuSuDTO data)
         {
-            qlhk.TIEUSUs.InsertOnSubmit(data.db);
+            qlhk.TIEUSUs.Add(data.db);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -144,7 +144,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -159,9 +159,9 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM tieusu" + query;
-            var res = qlhk.ExecuteQuery<TIEUSU>(query).ToList();
-            List<TieuSuDTO> lst = new List<TieuSuDTO> ();
-            foreach(TIEUSU i in res)
+            var res = qlhk.Database.SqlQuery<TIEUSU>(query).ToList();
+            List<TieuSuDTO> lst = new List<TieuSuDTO>();
+            foreach (TIEUSU i in res)
             {
                 TieuSuDTO ts = new TieuSuDTO(i);
                 lst.Add(ts);

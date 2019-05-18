@@ -17,6 +17,7 @@ namespace GUI
     {
         NhanKhauTamTruBUS nkttBus;
         NhanKhauTamTruDTO nkttDto;
+        NhanKhauBUS nk = new NhanKhauBUS();
         TieuSuBUS tieusuBus = new TieuSuBUS();
         TienAnTienSuBUS tienantiensuBus = new TienAnTienSuBUS();
         
@@ -69,8 +70,8 @@ namespace GUI
         /// 
         public string GioiTinh()
         {
-            if (rdNam.Checked) return "Nam";
-            else return "Nữ";
+            if (rdNam.Checked) return "nam";
+            else return "nu";
         }
 
         public void TaoMaDinhDanh()
@@ -250,7 +251,7 @@ namespace GUI
                 }
                 else
                 {
-
+                    MessageBox.Show("Error");
                 }
             }
 
@@ -295,8 +296,8 @@ namespace GUI
 
 
             string gioitinh = "";
-            if (rdNam.Checked) gioitinh = "Nam";
-            else gioitinh = "Nữ";
+            if (rdNam.Checked) gioitinh = "nam";
+            else gioitinh = "nu";
 
 
             string dantoc = txt_DanToc.Text.ToString();
@@ -330,15 +331,16 @@ namespace GUI
                 dantoc, tongiao, quoctich, hochieu, noithuongtru, diachihiennay, sdt, trinhdohocvan, 
                 trinhdochuyenmon, biettiengdantoc, trinhdongoaingu, nghenghiep);
 
+
             if (nkttBus.Add(nkttDto))
             {
-                MessageBox.Show("Thêm nhân khẩu tạm trú "+hoten+" thành công");
+                MessageBox.Show("Thêm nhân khẩu tạm trú " + hoten + " thành công");
                 nhankhautamtru_list.Add(txt_HoTen.Text.ToString());
                 ResetValueInput();
                 LoadDataGridView();
 
                 //Tạo mã tự động
-                GenerateAllID();            
+                GenerateAllID();
             }
             else
             {
@@ -502,10 +504,10 @@ namespace GUI
             try
             {
 
-                DataTable tb = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
-                tb.Columns.RemoveAt(tb.Columns.Count - 1);
+                //DataTable tb = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
+                //tb.Columns.RemoveAt(tb.Columns.Count - 1);
 
-                dtGV_TienAnTienSu.DataSource = tb;
+                //dtGV_TienAnTienSu.DataSource = tb;
 
             }
             catch (Exception ex)
@@ -1033,10 +1035,26 @@ namespace GUI
 
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-
             List<NhanKhauTamTruDTO> kq = nkttBus.TimKiemNKTT(madinhdanh);
+            List<NhanKhauDTO> kqnk = nk.TimKiem("madinhdanh='" + madinhdanh + "'");
+            if (kq.Count > 0)
+            {
+                NhanKhauTamTruDTO nktt = kq[0];
+                nkttDto = new NhanKhauTamTruDTO(nktt);
+            }
+            else
+            {
+                kqnk = nk.TimKiem("madinhdanh='" + madinhdanh + "'");
+                if (kqnk.Count > 0)
+                {
+                    nkttDto = new NhanKhauTamTruDTO(kqnk[0].db);
+                    //fillData();
+                }
+                else
+                    MessageBox.Show(this, "Nhân khẩu này không tồn tại!", "Tìm kiếm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
-            DataTable t1 = DataHelper.ListToDataTableWithChange<NHANKHAU>(kq.Select(r => r.db).ToList());
+            DataTable t1 = DataHelper.ListToDataTableWithChange<NHANKHAU>(kqnk.Select(r => r.db).ToList());
             DataTable t2 = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(kq.Select(r => r.dbnktamtru).ToList());
 
             dataGridView1.DataSource = DataHelper.mergeTwoTables(t1, t2, "MADINHDANH");
@@ -1046,7 +1064,7 @@ namespace GUI
                 NhanKhauTamTruDTO dt = kq[0];
                 nkttDto = new NhanKhauTamTruDTO(dt);
 
-                fillData();
+                //fillData();
             }
             else
             {
@@ -1073,7 +1091,7 @@ namespace GUI
             txt_TonGiao.Text = nkttDto.db.TONGIAO;
             txt_SoDienThoai.Text = nkttDto.db.SDT;
 
-            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
+            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHAKHAUTAMTRU;
             
             txtDiaChiHienNay.Text = nkttDto.db.DIACHIHIENNAY;
 
@@ -1088,7 +1106,7 @@ namespace GUI
             dt_TuNgay.Value = nkttDto.dbnktamtru.TUNGAY;
             dt_DenNgay.Value = nkttDto.dbnktamtru.DENNGAY;
 
-            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
+            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHAKHAUTAMTRU;
             txt_LyDo.Text = nkttDto.dbnktamtru.LYDO;
             txtSoSoTamTru1.Text = nkttDto.dbnktamtru.SOSOTAMTRU;
 

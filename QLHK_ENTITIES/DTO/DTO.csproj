@@ -48,9 +48,34 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpo.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.EntityFramework.8.0.15\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,51 +84,101 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CANBO.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="CanBoDTO.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />
+    <Compile Include="HOCSINHSINHVIEN.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHANKHAU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NHANKHAUTAMTRU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="NhanKhauTamTruDTO.cs" />
     <Compile Include="HocSinhSinhVienDTO.cs" />
+    <Compile Include="NHANKHAUTAMVANG.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="NhanKhauTamVangDTO.cs" />
+    <Compile Include="NHANKHAUTHUONGTRU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="QUANHUYEN.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="QuanHuyenDTO.cs" />
-    <Compile Include="quanlyhokhau.designer.cs">
+    <Compile Include="quanlyhokhauEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>quanlyhokhau.dbml</DependentUpon>
+      <DependentUpon>quanlyhokhauEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="quanlyhokhauEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="quanlyhokhauEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>quanlyhokhauEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="ReplacementGroup.cs" />
+    <Compile Include="SOHOKHAU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="SoHoKhauDTO.cs" />
+    <Compile Include="SOTAMTRU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="SoTamTruDTO.cs" />
+    <Compile Include="TIENANTIENSU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="TienAnTienSuDTO.cs" />
+    <Compile Include="TIEUSU.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="TieuSuDTO.cs" />
+    <Compile Include="TINHTHANHPHO.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="TinhThanhPhoDTO.cs" />
     <Compile Include="NhanKhauThuongTruDTO.cs" />
-    <Compile Include="NhanKhau.cs" />
+    <Compile Include="NhanKhauDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XAPHUONGTHITRAN.cs">
+      <DependentUpon>quanlyhokhauEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="XaPhuongThiTranDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="quanlyhokhau.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>quanlyhokhau.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="quanlyhokhau.dbml.layout">
-      <DependentUpon>quanlyhokhau.dbml</DependentUpon>
+    <EntityDeploy Include="quanlyhokhauEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>quanlyhokhauEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="quanlyhokhauEntities.edmx.diagram">
+      <DependentUpon>quanlyhokhauEntities.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DB\qlhk.xml">
@@ -115,6 +190,16 @@
     <Content Include="DB\quanlyhokhauDataContext_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>quanlyhokhauDataContext.mdf</DependentUpon>
+    </Content>
+    <Content Include="quanlyhokhauEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>quanlyhokhauEntities.edmx</DependentUpon>
+      <LastGenOutput>quanlyhokhauEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="quanlyhokhauEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>quanlyhokhauEntities.edmx</DependentUpon>
+      <LastGenOutput>quanlyhokhauEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

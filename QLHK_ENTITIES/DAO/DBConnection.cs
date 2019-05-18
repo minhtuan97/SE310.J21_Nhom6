@@ -12,15 +12,15 @@ namespace DAO
 {
     public abstract class DBConnection<T>
     {
-        public quanlyhokhauDataContext qlhk;
+        public quanlyhokhauEntities qlhk;
         
         public DBConnection()
         {
-            qlhk = new quanlyhokhauDataContext();
+            qlhk = new quanlyhokhauEntities();
         }
-        public static DataSet getData(string query)
-        {
-            throw new NotImplementedException();
+        //public static DataSet getData(string query)
+        //{
+            //throw new NotImplementedException();
 
             //MySqlDataAdapter mDataAdapter = new MySqlDataAdapter(query, connection);
             //DataSet Ds = new DataSet();
@@ -41,13 +41,14 @@ namespace DAO
             //{
             //    closeConnection();
             //}
-        }
-        public static List<String> getTableName() //EnvironmentVariableTarget
-        {
-            quanlyhokhauDataContext ql = new quanlyhokhauDataContext();
-            var listTables = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
-            return listTables;
-        }
+        //}
+        //public static List<String> getTableName() //EnvironmentVariableTarget
+        //{
+        //    quanlyhokhauEntities ql = new quanlyhokhauEntities();
+        //    //var listTables = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
+        //    var listTables = new List
+        //    return listTables;
+        //}
 
 
         public abstract List<T> getAll();

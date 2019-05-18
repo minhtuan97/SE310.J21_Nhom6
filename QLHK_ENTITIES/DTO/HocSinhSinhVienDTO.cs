@@ -28,7 +28,7 @@ namespace DTO
         public HocSinhSinhVienDTO(HOCSINHSINHVIEN dbs)
         {
             dbhssv = dbs;
-            dbnk = dbs.NHANKHAU;
+            //dbnk = dbs.NHANKHAU;
         }
     }
 }

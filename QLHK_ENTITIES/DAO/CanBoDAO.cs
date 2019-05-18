@@ -15,7 +15,7 @@ namespace DAO
         public CanBoDAO() : base() { }
         public override List<CanBoDTO> getAll()
         {
-            var kq = from canbo in qlhk.CANBOs
+            var kq = from canbo in qlhk.CANBOes
                      select new CanBoDTO
                      {
                          dbcb = canbo,
@@ -28,34 +28,34 @@ namespace DAO
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             //qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
-            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
+            qlhk.CANBOes.Add(data.dbcb);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
         public bool deleteCB(string id)
         {
             var kq =
-            from cb in qlhk.CANBOs
+            from cb in qlhk.CANBOes
             where cb.MACANBO == id
             select cb;
 
             foreach (var detail in kq)
             {
-                qlhk.CANBOs.DeleteOnSubmit(detail);
+                qlhk.CANBOes.Remove(detail);
             }
 
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace DAO
             {
                 List<CanBoDTO> kq = this.getAll();
                 CanBoDTO[] arr = kq.ToArray();
-                qlhk.CANBOs.DeleteOnSubmit(arr[row].dbcb);
+                qlhk.CANBOes.Remove(arr[row].dbcb);
                 return true;
             }
             catch (Exception e)
@@ -85,7 +85,7 @@ namespace DAO
         {
 
             // Query the database for the row to be updated.
-            var query = qlhk.CANBOs.Where(q => q.MACANBO == cb.dbcb.MACANBO);
+            var query = qlhk.CANBOes.Where(q => q.MACANBO == cb.dbcb.MACANBO);
 
             // Execute the query, and change the column values
             // you want to change.
@@ -100,7 +100,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -113,55 +113,55 @@ namespace DAO
         public override bool insert_table(CanBoDTO data)
         {
 
-            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
+            qlhk.CANBOes.Add(data.dbcb);
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return false;
             }
         }
-        public List<CanBoDTO> TimKiem(string query)
-        {
+        //public List<CanBoDTO> TimKiem(string query)
+        //{
 
-            if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM CANBO" + query;
-            var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
-            List<CanBoDTO> lst = new List<CanBoDTO>();
-            foreach (CANBO i in res)
-            {
-                CanBoDTO ts = new CanBoDTO(i);
-                lst.Add(ts);
-            }
+        //    if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
+        //    query = "SELECT *, 'Delete' as 'Change' FROM CANBO" + query;
+        //    var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
+        //    List<CanBoDTO> lst = new List<CanBoDTO>();
+        //    foreach (CANBO i in res)
+        //    {
+        //        CanBoDTO ts = new CanBoDTO(i);
+        //        lst.Add(ts);
+        //    }
 
-            return lst;
-        }
-        public List<CanBoDTO> TimKiemJoinNhanKhau(string query)
-        {
-            if (!String.IsNullOrEmpty(query)) query = " AND " + query;
-            query = "SELECT * FROM canbo, nhankhauthuongtru, nhankhau " +
-                    "WHERE canbo.manhankhauthuongtru = nhankhauthuongtru.manhankhauthuongtru AND nhankhau.madinhdanh=nhankhauthuongtru.manhankhau" + query;
-            var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
-            List<CanBoDTO> lst = new List<CanBoDTO>();
-            foreach (CANBO i in res)
-            {
-                CanBoDTO ts = new CanBoDTO(i);
-                lst.Add(ts);
-            }
+        //    return lst;
+        //}
+        //public List<CanBoDTO> TimKiemJoinNhanKhau(string query)
+        //{
+        //    if (!String.IsNullOrEmpty(query)) query = " AND " + query;
+        //    query = "SELECT * FROM canbo, nhankhauthuongtru, nhankhau " +
+        //            "WHERE canbo.manhankhauthuongtru = nhankhauthuongtru.manhankhauthuongtru AND nhankhau.madinhdanh=nhankhauthuongtru.manhankhau" + query;
+        //    var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
+        //    List<CanBoDTO> lst = new List<CanBoDTO>();
+        //    foreach (CANBO i in res)
+        //    {
+        //        CanBoDTO ts = new CanBoDTO(i);
+        //        lst.Add(ts);
+        //    }
 
-            return lst;
+        //    return lst;
 
            
-        }
+        //}
 
         public string GetMaNhanKhauThuongTruFromCanBo(string tendangnhap)
         {
-            return qlhk.CANBOs.Where(q => q.TENTAIKHOAN == tendangnhap).Select(r => r.MACANBO).FirstOrDefault();
+            return qlhk.CANBOes.Where(q => q.TENTAIKHOAN == tendangnhap).Select(r => r.MACANBO).FirstOrDefault();
         }
 
 
@@ -209,12 +209,12 @@ namespace DAO
         //Cập nhật mật khẩu cán bộ
         public bool CapNhatMatKhau(string tentaikhoan , string matkhau)
         {
-            var kq = qlhk.CANBOs.Where(q => q.TENTAIKHOAN == tentaikhoan).FirstOrDefault();
+            var kq = qlhk.CANBOes.Where(q => q.TENTAIKHOAN == tentaikhoan).FirstOrDefault();
 
             kq.MATKHAU = matkhau;
             try
             {
-                qlhk.SubmitChanges();
+                qlhk.SaveChanges();
                 return true;
             }
             catch (Exception e)

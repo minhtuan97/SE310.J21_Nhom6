@@ -20,7 +20,7 @@ namespace GUI
         NhanKhauThuongTruBUS nkthuongtru;
         NhanKhauTamTruBUS nktamtru;
 
-        NhanKhau nkDTO;
+        NhanKhauDTO nkDTO;
         NhanKhauThuongTruDTO nkthDTO;
         NhanKhauTamTruDTO nkttDTO;
         SoHoKhauDTO shkDTO;
@@ -89,16 +89,16 @@ namespace GUI
             if (rdHoKhau.Checked)
             {
                 shk = new SoHoKhauBUS();
-                List<SoHoKhauDTO> shkdto = shk.TimKiem("sosohokhau='" + value + "'");
-                if (shkdto.Count > 0)
-                {
-                    SoHoKhauGUI fr_SoHoKhau = new SoHoKhauGUI(value);
-                    fr_SoHoKhau.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy sổ hộ khẩu: " + value);
-                }
+               // List<SoHoKhauDTO> shkdto = shk.TimKiem("sosohokhau='" + value + "'");
+                //if (shkdto.Count > 0)
+                //{
+                //    SoHoKhauGUI fr_SoHoKhau = new SoHoKhauGUI(value);
+                //    fr_SoHoKhau.ShowDialog();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Không tìm thấy sổ hộ khẩu: " + value);
+                //}
                 return;
             }
 
@@ -106,16 +106,16 @@ namespace GUI
             if (rdTamTru.Checked)
             {
                 stt = new SoTamTruBUS();
-                List<SoTamTruDTO> sttdto = stt.TimKiem("sosotamtru='" + value + "'");
-                if (sttdto.Count > 0)
-                {
-                    SoTamTruGUI fr_SoTamTru = new SoTamTruGUI(value);
-                    fr_SoTamTru.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy sổ tạm trú: " + value);
-                }
+               // List<SoTamTruDTO> sttdto = stt.TimKiem("sosotamtru='" + value + "'");
+                //if (sttdto.Count > 0)
+                //{
+                //    SoTamTruGUI fr_SoTamTru = new SoTamTruGUI(value);
+                //    fr_SoTamTru.ShowDialog();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Không tìm thấy sổ tạm trú: " + value);
+                //}
                 return;
             }
 
@@ -125,24 +125,24 @@ namespace GUI
             {
                 //Tìm trong bảng nhân khẩu thường trú
                 nkthuongtru = new NhanKhauThuongTruBUS();
-                List<NhanKhauThuongTruDTO> nkth = nkthuongtru.TimKiem("madinhdanh='" + value + "'");
-                if (nkth.Count > 0)
-                {
-                    NhanKhauThuongTruGUI fr_NhanKhauThuongTru = new NhanKhauThuongTruGUI(value, 0);
-                    fr_NhanKhauThuongTru.ShowDialog();
-                    return;
-                }
+                //List<NhanKhauThuongTruDTO> nkth = nkthuongtru.TimKiem("madinhdanh='" + value + "'");
+                //if (nkth.Count > 0)
+                //{
+                //    NhanKhauThuongTruGUI fr_NhanKhauThuongTru = new NhanKhauThuongTruGUI(value, 0);
+                //    fr_NhanKhauThuongTru.ShowDialog();
+                //    return;
+                //}
 
 
                 //Tìm trong bảng nhân khẩu tạm trú
                 nktamtru = new NhanKhauTamTruBUS();
-                List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem("madinhdanh='" + value + "'");
-                if (nktt.Count > 0)
-                {
-                    NhanKhauTamTruGUI fr_NhanKhauTamTru = new NhanKhauTamTruGUI(value, "1");
-                    fr_NhanKhauTamTru.ShowDialog();
-                    return;
-                }
+               // List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem("madinhdanh='" + value + "'");
+                //if (nktt.Count > 0)
+                //{
+                //    NhanKhauTamTruGUI fr_NhanKhauTamTru = new NhanKhauTamTruGUI(value, "1");
+                //    fr_NhanKhauTamTru.ShowDialog();
+                //    return;
+                //}
 
                 MessageBox.Show("Không tìm thấy nhân khẩu có mã định danh:" + value);
 

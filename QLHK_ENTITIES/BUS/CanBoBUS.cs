@@ -36,10 +36,10 @@ namespace BUS
         {
             return objcb.insert_table(data);
         }
-        public List<CanBoDTO> TimKiem(string query)
-        {
-            return objcb.TimKiem(query).ToList();
-        }
+        //public List<CanBoDTO> TimKiem(string query)
+        //{
+        //    return objcb.TimKiem(query).ToList();
+        //}
 
         public string GetMaNhanKhauThuongTruFromCanBo(string tendangnhap)
         {

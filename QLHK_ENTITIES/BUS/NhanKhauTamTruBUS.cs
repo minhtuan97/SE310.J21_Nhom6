@@ -26,10 +26,11 @@ namespace BUS
             return objnktt.insert(nhankhautamtru);
         }
 
+
         public bool AddNKTT(NhanKhauTamTruDTO nhankhautamtru)
         {
-            if(nhankhautamtru.dbnktamtru.MANHANKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == "" 
-                // || nhankhautamtru.db.HOTEN == "" || nhankhautamtru.DanToc =="" || nhankhautamtru.NgheNghiep == "" || nhankhautamtru.QuocTich == ""
+            if(nhankhautamtru.dbnktamtru.MANHAKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == ""
+                 || nhankhautamtru.db.HOTEN == "" || nhankhautamtru.db.DANTOC == "" || nhankhautamtru.db.NGHENGHIEP == "" || nhankhautamtru.db.QUOCTICH == ""
               )
             {
                 return false;

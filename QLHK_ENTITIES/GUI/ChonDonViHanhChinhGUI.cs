@@ -26,9 +26,9 @@ namespace GUI
             xp = new XaPhuongThiTranBUS();
             InitializeComponent();
 
-            //cbbTinhThanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            //cbbTinhThanh.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cbbTinhThanh.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cbbTinhThanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            cbbTinhThanh.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbbTinhThanh.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             cbbTinhThanh.DisplayMember = "ten";
             cbbTinhThanh.ValueMember = "matp";
