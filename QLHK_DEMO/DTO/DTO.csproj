@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CanBoDTO.cs" />
+    <Compile Include="Checker\NHANKHAU.cs" />
+    <Compile Include="Checker\quanlyhokhauDataContext.cs" />
+    <Compile Include="Checker\TIEUSU.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />
     <Compile Include="NhanKhauTamTruDTO.cs" />
@@ -110,9 +113,9 @@
     <Content Include="DB\quanlyhokhauDataContext.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DB\quanlyhokhauDataContext_log.ldf">
+    <Content Include="DB\qlhk_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>quanlyhokhauDataContext.mdf</DependentUpon>
+      <DependentUpon>qlhk.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

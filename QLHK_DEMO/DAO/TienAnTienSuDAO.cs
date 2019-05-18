@@ -84,6 +84,14 @@ namespace DAO
             return x;
         }
 
+        public List<TIENANTIENSU> getTATS()
+        {
+            var kq = from tienantiensu in qlhk.TIENANTIENSUs
+                     select tienantiensu;
+
+            return kq.ToList();
+        }
+
         public override bool insert(TienAnTienSuDTO data)
         {
             qlhk.TIENANTIENSUs.InsertOnSubmit(data.db);
