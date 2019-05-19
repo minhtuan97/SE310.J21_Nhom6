@@ -165,5 +165,77 @@ namespace DAO.ViDu
             qlhk.Save(
                 Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
         }
+
+        public static void nodeLienKe()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            //Lấy thông tin node của nhân khẩu có MADINHDANH "074097000011"
+            var curNode = qlhk.Descendants("nhankhau").Single(q => q.Attribute("MADINHDANH").Value == "074097000011");
+
+            //Lấy thông tin nhân khẩu liền sau
+            var nextNode = curNode.NextNode;
+
+            //Lấy thông tin nhân khẩu liền trước
+            var prevNode = curNode.PreviousNode;
+
+            //Lấy thông tin Node đầu và cuối phân cấp
+            var firstNode = curNode.FirstNode;
+            var lastNode = curNode.LastNode;
+
+            //Lấy các Element, Attribute, Comment,... liền sau
+            var nextNodes = curNode.NodesAfterSelf();
+
+            //Lấy các Element, Attribute, Comment,... liền sau
+            var prevNodes = curNode.NodesBeforeSelf();
+
+            //Lấy các Element <nhankhau> liền sau
+            var nextNhankhau = curNode.ElementsAfterSelf("nhankhau");
+
+            //Lấy các Element <nhankhau> liền trước
+            var prevNhankhau = curNode.ElementsBeforeSelf("nhankhau");
+
+        }
+
+        public static void nodeTienThan()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            //Lấy thông tin node của nhân khẩu có MADINHDANH "074097000011"
+            var curNode = qlhk.Descendants("nhankhau").Single(q => q.Attribute("MADINHDANH").Value == "074097000011");
+
+            //Lấy thông tin Document
+            XDocument doc = curNode.Document; // trong trường hợp này, doc == qlhk
+
+            //Lấy thông tin Node cha của node hiện tại
+            var parentNode = curNode.Parent;
+
+            //Lấy các Node cấp trên
+            var ancNodes = curNode.Ancestors();
+        }
+
+        public static void nodeHauboi()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            //Lấy thông tin node của nhân khẩu có MADINHDANH "074097000011"
+            var curNode = qlhk.Descendants("nhankhau").Single(q => q.Attribute("MADINHDANH").Value == "074097000011");
+
+            //Lấy thông tin các Node con
+            var childNodes = curNode.Nodes();
+            var childComment = curNode.Nodes().OfType<XComment>(); // Trường hợp này, chỉ trả về các node con kiểu XComment
+
+            //Lấy thông các Element của node hiện tại
+            var childElements = curNode.Elements();
+
+            //Lấy thông tin Element con <HOTEN> của node hiện tại
+            var childElement = curNode.Element("HOTEN");
+
+            //Lấy các Element Con cháu của node hiện tại
+            var DescentantElems = curNode.Descendants();
+        }
     }
 }

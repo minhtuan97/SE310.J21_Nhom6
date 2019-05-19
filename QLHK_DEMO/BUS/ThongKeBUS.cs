@@ -10,11 +10,11 @@ namespace BUS
 {
     public static class ThongKeBUS
     {
-        static NhanKhau nk;
-        static NhanKhauThuongTruDTO nkth;
-        static NhanKhauTamTruDTO nktt;
-        static SoHoKhauDTO shk;
-        static SoTamTruDTO stt;
+        static NHANKHAU nk;
+        static NHANKHAUTHUONGTRU nkth;
+        static NHANKHAUTAMTRU nktt;
+        static SOHOKHAU shk;
+        static SOTAMTRU stt;
 
         public static string Dem1bang(string column, string aTable, string aGioiHan)
         {

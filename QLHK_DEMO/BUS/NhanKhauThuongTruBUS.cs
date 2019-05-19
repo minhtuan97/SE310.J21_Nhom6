@@ -9,72 +9,72 @@ using System.Data;
 
 namespace BUS
 {
-    public class NhanKhauThuongTruBUS: AbstractFormBUS<NhanKhauThuongTruDTO>
+    public class NhanKhauThuongTruBUS: AbstractFormBUS<NHANKHAUTHUONGTRU>
     {
         NhanKhauThuongTruDAO obj = new NhanKhauThuongTruDAO();
-        public override List<NhanKhauThuongTruDTO> GetAll()
+        public override List<NHANKHAUTHUONGTRU> GetAll()
         {
             return obj.getAll();
         }
-        public List<NhanKhauThuongTruDTO> GetAllJoinNhanKhau()
+        public List<NHANKHAUTHUONGTRU> GetAllJoinNhanKhau()
         {
             return obj.getAllJoinNhanKhau();
         }
-        public bool isValidNhanKhauTT(NhanKhauThuongTruDTO nktt)
+        public bool isValidNhanKhauTT(NHANKHAUTHUONGTRU nktt)
         {
-            if (!string.IsNullOrEmpty(nktt.db.HOTEN) &&! string.IsNullOrEmpty(nktt.db.GIOITINH) &&! string.IsNullOrEmpty(nktt.db.NGAYSINH.ToString())
-                &&! string.IsNullOrEmpty(nktt.db.DANTOC) &&! string.IsNullOrEmpty(nktt.db.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.db.MADINHDANH) 
-                /*&&! string.IsNullOrEmpty(nktt.db.HOCHIEU)*/ &&! string.IsNullOrEmpty(nktt.db.NOISINH) 
-                &&! string.IsNullOrEmpty(nktt.db.QUOCTICH) &&! string.IsNullOrEmpty(nktt.db.TONGIAO) &&! string.IsNullOrEmpty(nktt.db.SDT) 
-                && nktt.dbnktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.dbnktt.SOSOHOKHAU)*/ /*&&! string.IsNullOrEmpty(nktt.db.NOITHUONGTRU)*/
-                &&! string.IsNullOrEmpty(nktt.db.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.db.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.db.TRINHDOCHUYENMON) 
-                &&! string.IsNullOrEmpty(nktt.dbnktt.QUANHEVOICHUHO))
+            if (!string.IsNullOrEmpty(nktt.NHANKHAU.HOTEN) &&! string.IsNullOrEmpty(nktt.NHANKHAU.GIOITINH) &&! string.IsNullOrEmpty(nktt.NHANKHAU.NGAYSINH.ToString())
+                &&! string.IsNullOrEmpty(nktt.NHANKHAU.DANTOC) &&! string.IsNullOrEmpty(nktt.NHANKHAU.NGHENGHIEP) &&! string.IsNullOrEmpty(nktt.NHANKHAU.MADINHDANH) 
+                /*&&! string.IsNullOrEmpty(nktt.NHANKHAU.HOCHIEU)*/ &&! string.IsNullOrEmpty(nktt.NHANKHAU.NOISINH) 
+                &&! string.IsNullOrEmpty(nktt.NHANKHAU.QUOCTICH) &&! string.IsNullOrEmpty(nktt.NHANKHAU.TONGIAO) &&! string.IsNullOrEmpty(nktt.NHANKHAU.SDT) 
+                && nktt.MANHANKHAUTHUONGTRU.IndexOf("TH")==0 /*&&! string.IsNullOrEmpty(nktt.SOSOHOKHAU)*/ /*&&! string.IsNullOrEmpty(nktt.NHANKHAU.NOITHUONGTRU)*/
+                &&! string.IsNullOrEmpty(nktt.NHANKHAU.DIACHIHIENNAY) &&! string.IsNullOrEmpty(nktt.NHANKHAU.TRINHDOHOCVAN) &&! string.IsNullOrEmpty(nktt.NHANKHAU.TRINHDOCHUYENMON) 
+                &&! string.IsNullOrEmpty(nktt.QUANHEVOICHUHO))
                 return true;
             return false;
         }
-        public override bool Add(NhanKhauThuongTruDTO nktt)
+        public override bool Add(NHANKHAUTHUONGTRU nktt)
         {
             if (!isValidNhanKhauTT(nktt)) return false;
 
             NhanKhauDAO nk = new NhanKhauDAO();
-            List<NhanKhau> ls = nk.TimKiem("madinhdanh='" + nktt.db.MADINHDANH + "'");
-            if (nk.insert(nktt)|| ls.Count > 0)
-            {
+            List<NHANKHAU> ls = nk.TimKiem("madinhdanh='" + nktt.NHANKHAU.MADINHDANH + "'");
+            //if (nk.insert(nktt.NHANKHAU)|| ls.Count > 0)
+            //{
                 if (obj.insert(nktt))
                     return true;
-            }
+            //}
             return false;
         }
-        public override bool Add_Table(NhanKhauThuongTruDTO data)
+        public override bool Add_Table(NHANKHAUTHUONGTRU data)
         {
             return obj.insert_table(data);
         }
-        public bool XoaNKTT(NhanKhauThuongTruDTO nktt)
+        public bool XoaNKTT(NHANKHAUTHUONGTRU nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
             TieuSuDAO ts = new TieuSuDAO();
             TienAnTienSuDAO ta = new TienAnTienSuDAO();
-            string madinhdanh = nktt.dbnktt.MADINHDANH;
-            List<TieuSuDTO> tsdto = ts.TimKiem("madinhdanh='" + madinhdanh + "'");
-            List<TienAnTienSuDTO> tadto = ta.TimKiem("madinhdanh='" + madinhdanh + "'");
+            string madinhdanh = nktt.MADINHDANH;
+            List<TIEUSU> tsdto = ts.TimKiem("madinhdanh='" + madinhdanh + "'");
+            List<TIENANTIENSU> tadto = ta.TimKiem("madinhdanh='" + madinhdanh + "'");
 
-            foreach (TieuSuDTO s in tsdto)
+            foreach (TIEUSU s in tsdto)
             {
-                if (!ts.deleteTS(s.db))
+                if (!ts.deleteTS(s))
                 {
                     return false;
                 }
             }
 
-            foreach (TienAnTienSuDTO a in tadto)
+            foreach (TIENANTIENSU a in tadto)
             {
-                if (!ta.deleteTATS(a.db))
+                if (!ta.deleteTATS(a))
                 {
                     return false;
                 }
             }
 
-            if (obj.XoaNKTT(nktt.dbnktt.MANHANKHAUTHUONGTRU))
+            if (obj.XoaNKTT(nktt.MANHANKHAUTHUONGTRU))
             {
                 if (nk.delete(madinhdanh))
                     return true;
@@ -93,29 +93,29 @@ namespace BUS
         {
             return obj.updateTTThuongTru(manktt, shk);
         }
-        public bool UpdateNKTT(NhanKhauThuongTruDTO nktt)
+        public bool UpdateNKTT(NHANKHAUTHUONGTRU nktt)
         {
             return obj.update(nktt);
         }
-        public override bool Update(NhanKhauThuongTruDTO nktt)
+        public override bool Update(NHANKHAUTHUONGTRU nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
-            if (nk.update(nktt))
+            if (nk.update(nktt.NHANKHAU))
             {
                 if (obj.update(nktt))
                     return true;
             }
             return false;
         }
-        public List<NhanKhauThuongTruDTO> TimKiem(string query)
+        public List<NHANKHAUTHUONGTRU> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }
-        public List<NhanKhauThuongTruDTO> TimKiemJoinNhanKhau(string query)
+        public List<NHANKHAUTHUONGTRU> TimKiemJoinNhanKhau(string query)
         {
             return obj.TimKiemJoinNhanKhau(query);
         }
-        //public bool DoiChuHo(List<NhanKhauThuongTruDTO> danhsach, string madinhdanh)
+        //public bool DoiChuHo(List<NHANKHAUTHUONGTRU> danhsach, string madinhdanh)
         //{
         //    return obj.doiChuHo(danhsach, madinhdanh);
         //}

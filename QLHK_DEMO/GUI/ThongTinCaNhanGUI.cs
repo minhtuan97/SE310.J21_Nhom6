@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class ThongTinCaNhanGUI : Form
     {
-        CanBoDTO canbo;
+        CANBO canbo;
         CanBoBUS canboBus =  new CanBoBUS();
         string tentaikhoan = "1";
 
@@ -37,30 +37,30 @@ namespace GUI
 
             lblTaiKhoan.Text = tentaikhoan;
              
-            NhanKhauThuongTruDTO nktt = canboBus.getTTNhanKhauThuongTru(manhankhauthuongtru)[0];
-            tbhoten.Text = nktt.db.HOTEN;
-            tbdantoc.Text = nktt.db.DANTOC;
-            tbNgheNghiep.Text = nktt.db.NGHENGHIEP;
-            dtpNgaySinh.Value = nktt.db.NGAYSINH;
-            tbmadinhdanh.Text = nktt.db.MADINHDANH;
-            tbhochieu.Text = nktt.db.HOCHIEU;
-            tbnguyenquan.Text = nktt.db.NGUYENQUAN;
-            tbtongiao.Text = nktt.db.TONGIAO;
-            tbquoctich.Text = nktt.db.QUOCTICH;
-            tbsodienthoai.Text = nktt.db.SDT;
-            tbMaNKTT.Text = nktt.dbnktt.MANHANKHAUTHUONGTRU;
-            tbSoSHK.Text = nktt.dbnktt.SOSOHOKHAU;
-            tbDCThuongTru.Text = nktt.db.NOITHUONGTRU;
-            tbDCHienTai.Text = nktt.db.DIACHIHIENNAY;
-            tbTrinhDoHocVan.Text = nktt.db.TRINHDOHOCVAN;
-            tbTrinhDoCM.Text = nktt.db.TRINHDOCHUYENMON;
-            tbBietTiengDanToc.Text = nktt.db.BIETTIENGDANTOC;
-            tbTrinhDoNN.Text = nktt.db.TRINHDONGOAINGU;
-            tbQHVoiCH.Text = nktt.dbnktt.QUANHEVOICHUHO;
-            txt_NoiSinh.Text = nktt.db.NOISINH;
+            NHANKHAUTHUONGTRU nktt = canboBus.getTTNhanKhauThuongTru(manhankhauthuongtru)[0];
+            tbhoten.Text = nktt.NHANKHAU.HOTEN;
+            tbdantoc.Text = nktt.NHANKHAU.DANTOC;
+            tbNgheNghiep.Text = nktt.NHANKHAU.NGHENGHIEP;
+            dtpNgaySinh.Value = nktt.NHANKHAU.NGAYSINH;
+            tbmadinhdanh.Text = nktt.NHANKHAU.MADINHDANH;
+            tbhochieu.Text = nktt.NHANKHAU.HOCHIEU;
+            tbnguyenquan.Text = nktt.NHANKHAU.NGUYENQUAN;
+            tbtongiao.Text = nktt.NHANKHAU.TONGIAO;
+            tbquoctich.Text = nktt.NHANKHAU.QUOCTICH;
+            tbsodienthoai.Text = nktt.NHANKHAU.SDT;
+            tbMaNKTT.Text = nktt.MANHANKHAUTHUONGTRU;
+            tbSoSHK.Text = nktt.SOSOHOKHAU;
+            tbDCThuongTru.Text = nktt.NHANKHAU.NOITHUONGTRU;
+            tbDCHienTai.Text = nktt.NHANKHAU.DIACHIHIENNAY;
+            tbTrinhDoHocVan.Text = nktt.NHANKHAU.TRINHDOHOCVAN;
+            tbTrinhDoCM.Text = nktt.NHANKHAU.TRINHDOCHUYENMON;
+            tbBietTiengDanToc.Text = nktt.NHANKHAU.BIETTIENGDANTOC;
+            tbTrinhDoNN.Text = nktt.NHANKHAU.TRINHDONGOAINGU;
+            tbQHVoiCH.Text = nktt.QUANHEVOICHUHO;
+            txt_NoiSinh.Text = nktt.NHANKHAU.NOISINH;
             
 
-            string gt = nktt.db.GIOITINH;
+            string gt = nktt.NHANKHAU.GIOITINH;
             if (gt == "nu") rdNu.Checked = true;
             else rdNam.Checked = true;
 
@@ -74,7 +74,7 @@ namespace GUI
             
         }
         #endregion
-        public ThongTinCaNhanGUI(CanBoDTO cb)
+        public ThongTinCaNhanGUI(CANBO cb)
         {
             InitializeComponent();
             canbo = cb;

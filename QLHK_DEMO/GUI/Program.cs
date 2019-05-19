@@ -18,7 +18,7 @@ namespace GUI
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run(new fr_CBDuLieu());
+            Application.Run(new NhanKhauThuongTruGUI());
         }
     }
 }

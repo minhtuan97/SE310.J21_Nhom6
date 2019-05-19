@@ -10,14 +10,14 @@ using System.Data;
 
 namespace BUS
 {
-    public class NhanKhauBUS:AbstractFormBUS<NhanKhau>
+    public class NhanKhauBUS:AbstractFormBUS<NHANKHAU>
     {
         NhanKhauDAO objnhankhau = new NhanKhauDAO();
-        public override List<NhanKhau> GetAll()
+        public override List<NHANKHAU> GetAll()
         {
             return objnhankhau.getAll();
         }
-        public override bool Add(NhanKhau nk)
+        public override bool Add(NHANKHAU nk)
         {
             return objnhankhau.insert(nk);
         }
@@ -25,7 +25,7 @@ namespace BUS
         {
             return objnhankhau.delete(madinhdanh);
         }
-        public override bool Update(NhanKhau nk)
+        public override bool Update(NHANKHAU nk)
         {
             return objnhankhau.update(nk);
         }
@@ -37,11 +37,11 @@ namespace BUS
         {
             return objnhankhau.deleteNK(id);
         }
-        public override bool Add_Table(NhanKhau data)
+        public override bool Add_Table(NHANKHAU data)
         {
             return objnhankhau.insert_table(data);
         }
-        public List<NhanKhau> TimKiem(string query)
+        public List<NHANKHAU> TimKiem(string query)
         {
             return objnhankhau.TimKiem(query);
         }

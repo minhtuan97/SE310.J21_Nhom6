@@ -9,25 +9,22 @@ using DTO;
 
 namespace DAO
 {
-    public class QuanHuyenDAO:DBConnection<QuanHuyenDTO>
+    public class QuanHuyenDAO:DBConnection<QUANHUYEN>
     {
         public QuanHuyenDAO() : base() { }
 
-        public override List<QuanHuyenDTO> getAll()
+        public override List<QUANHUYEN> getAll()
         {
-            QuanHuyenDTO nk = new QuanHuyenDTO();
+            QUANHUYEN nk = new QUANHUYEN();
             var kq = from quanhuyendto in qlhk.QUANHUYENs
-                     select new QuanHuyenDTO
-                     {
-                         db = quanhuyendto
-                     };
-            List<QuanHuyenDTO> x = kq.ToList();
+                     select quanhuyendto;
+            List<QUANHUYEN> x = kq.ToList();
             return x;
         }
 
-        public override bool insert(QuanHuyenDTO quanHuyen)
+        public override bool insert(QUANHUYEN quanHuyen)
         {
-            qlhk.QUANHUYENs.InsertOnSubmit(quanHuyen.db);
+            qlhk.QUANHUYENs.InsertOnSubmit(quanHuyen);
             try
             {
                 qlhk.SubmitChanges();
@@ -40,9 +37,9 @@ namespace DAO
                 return false;
             }
         }
-        public override bool insert_table(QuanHuyenDTO data)
+        public override bool insert_table(QUANHUYEN data)
         {
-            qlhk.QUANHUYENs.InsertOnSubmit(data.db);
+            qlhk.QUANHUYENs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -85,9 +82,9 @@ namespace DAO
         {
             try
             {
-                List<QuanHuyenDTO> kq = this.getAll();
-                QuanHuyenDTO[] arr = kq.ToArray();
-                qlhk.QUANHUYENs.DeleteOnSubmit(arr[row].db);
+                List<QUANHUYEN> kq = this.getAll();
+                QUANHUYEN[] arr = kq.ToArray();
+                qlhk.QUANHUYENs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -97,11 +94,11 @@ namespace DAO
             return false;
         }
 
-        public override bool update(QuanHuyenDTO quanHuyen)
+        public override bool update(QUANHUYEN quanHuyen)
         {
             var query =
                from qhtv in qlhk.QUANHUYENs
-               where quanHuyen.db.maqh == qhtv.maqh
+               where quanHuyen.maqh == qhtv.maqh
                select qhtv;
 
             // Execute the query, and change the column values
@@ -109,10 +106,10 @@ namespace DAO
 
             foreach (QUANHUYEN kq in query)
             {
-                kq.maqh = quanHuyen.db.maqh;
-                kq.matp = quanHuyen.db.matp;
-                kq.kieu = quanHuyen.db.kieu;
-                kq.ten = quanHuyen.db.ten;
+                kq.maqh = quanHuyen.maqh;
+                kq.matp = quanHuyen.matp;
+                kq.kieu = quanHuyen.kieu;
+                kq.ten = quanHuyen.ten;
 
             
             }
@@ -131,20 +128,14 @@ namespace DAO
             }
         }
 
-        public List<QuanHuyenDTO> TimKiem(string query)
+        public List<QUANHUYEN> TimKiem(string query)
         {
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM quanhuyen" + query;
             var res = qlhk.ExecuteQuery<QUANHUYEN>(query).ToList();
-            List<QuanHuyenDTO> lst = new List<QuanHuyenDTO>();
-            foreach (QUANHUYEN i in res)
-            {
-                QuanHuyenDTO ts = new QuanHuyenDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
             
         }
     }

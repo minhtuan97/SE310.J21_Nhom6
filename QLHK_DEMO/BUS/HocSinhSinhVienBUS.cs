@@ -9,7 +9,7 @@ using System.Data;
 
 namespace BUS
 {
-    public class HocSinhSinhVienBUS : AbstractFormBUS<HocSinhSinhVienDTO>
+    public class HocSinhSinhVienBUS : AbstractFormBUS<HOCSINHSINHVIEN>
     {
         public HocSinhSinhVienBUS() : base() { }
 
@@ -17,17 +17,17 @@ namespace BUS
 
         NhanKhauDAO objnk = new NhanKhauDAO();
 
-        public override List<HocSinhSinhVienDTO> GetAll()
+        public override List<HOCSINHSINHVIEN> GetAll()
         {
             return objhssv.getAll();
         }
 
-        public List<HocSinhSinhVienDTO> GetAllJoinNhanKhau()
+        public List<HOCSINHSINHVIEN> GetAllJoinNhanKhau()
         {
             return objhssv.getAllJoinNhanKhau();
         }
 
-        public override bool Add(HocSinhSinhVienDTO hssv)
+        public override bool Add(HOCSINHSINHVIEN hssv)
         {
             if (isValidHSSV(hssv) == false)
                 return false;
@@ -48,7 +48,7 @@ namespace BUS
             return objhssv.deleteHSSV(id);
         }
 
-        public override bool Update(HocSinhSinhVienDTO hssv)
+        public override bool Update(HOCSINHSINHVIEN hssv)
         {
             return objhssv.update(hssv);
         }
@@ -58,7 +58,7 @@ namespace BUS
             return objhssv.TimKiem(query);
         }
 
-        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
+        public List<HOCSINHSINHVIEN> TimKiemJoinNhanKhau(string query)
         {
             return objhssv.TimKiemJoinNhanKhau(query);
         }
@@ -75,16 +75,16 @@ namespace BUS
             return dt1;
         }
 
-        public override bool Add_Table(HocSinhSinhVienDTO hssv)
+        public override bool Add_Table(HOCSINHSINHVIEN hssv)
         {
             return objhssv.insert_table(hssv);
         }
 
-        public bool isValidHSSV(HocSinhSinhVienDTO hssv)
+        public bool isValidHSSV(HOCSINHSINHVIEN hssv)
         {
-            if (!string.IsNullOrEmpty(hssv.dbhssv.MAHSSV) && !string.IsNullOrEmpty(hssv.dbhssv.MADINHDANH) && !string.IsNullOrEmpty(hssv.dbhssv.TRUONG)
-                && !string.IsNullOrEmpty(hssv.dbhssv.DIACHITHUONGTRU) && !string.IsNullOrEmpty(hssv.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString()) 
-                && !string.IsNullOrEmpty(hssv.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString()))
+            if (!string.IsNullOrEmpty(hssv.MAHSSV) && !string.IsNullOrEmpty(hssv.MADINHDANH) && !string.IsNullOrEmpty(hssv.TRUONG)
+                && !string.IsNullOrEmpty(hssv.DIACHITHUONGTRU) && !string.IsNullOrEmpty(hssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString()) 
+                && !string.IsNullOrEmpty(hssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString()))
                 return true;
             return false;
         }

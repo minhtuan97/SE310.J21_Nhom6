@@ -9,23 +9,23 @@ using System.Data;
 
 namespace BUS
 {
-    public class TienAnTienSuBUS : AbstractFormBUS<TienAnTienSuDTO>
+    public class TienAnTienSuBUS : AbstractFormBUS<TIENANTIENSU>
     {
         public TienAnTienSuBUS() : base() { }
 
         TienAnTienSuDAO tienantiensu = new TienAnTienSuDAO();
 
-        public override List<TienAnTienSuDTO> GetAll()
+        public override List<TIENANTIENSU> GetAll()
         {
             return tienantiensu.getAll();
         }
 
-        public override bool Add(TienAnTienSuDTO data)
+        public override bool Add(TIENANTIENSU data)
         {
             return tienantiensu.insert(data);
         }
 
-        public override bool Add_Table(TienAnTienSuDTO data)
+        public override bool Add_Table(TIENANTIENSU data)
         {
             return tienantiensu.insert_table(data);
         }
@@ -40,12 +40,12 @@ namespace BUS
             return tienantiensu.delete(r);
         }
 
-        public override bool Update(TienAnTienSuDTO data)
+        public override bool Update(TIENANTIENSU data)
         {
             return tienantiensu.update(data);
         }
 
-        public List<TienAnTienSuDTO> TimKiem(string query)
+        public List<TIENANTIENSU> TimKiem(string query)
         {
             return tienantiensu.TimKiem(query);
         }

@@ -9,17 +9,17 @@ using System.Data;
 
 namespace BUS
 {
-    public class NhanKhauTamVangBUS:AbstractFormBUS<NhanKhauTamVangDTO>
+    public class NhanKhauTamVangBUS:AbstractFormBUS<NHANKHAUTAMVANG>
     {
         NhanKhauTamVangDAO obj = new NhanKhauTamVangDAO();
         public NhanKhauTamVangBUS() : base() { }
 
-        public override bool Add(NhanKhauTamVangDTO data)
+        public override bool Add(NHANKHAUTAMVANG data)
         {
             return obj.insert(data);
         }
 
-        public override bool Add_Table(NhanKhauTamVangDTO data)
+        public override bool Add_Table(NHANKHAUTAMVANG data)
         {
             return obj.insert_table(data);
         }
@@ -32,23 +32,23 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override List<NhanKhauTamVangDTO> GetAll()
+        public override List<NHANKHAUTAMVANG> GetAll()
         {
             return obj.getAll();
         }
 
-        public override bool Update(NhanKhauTamVangDTO data)
+        public override bool Update(NHANKHAUTAMVANG data)
         {
             return obj.update(data);
         }
 
-        public List<NhanKhauTamVangDTO> TimKiem(string query)
+        public List<NHANKHAUTAMVANG> TimKiem(string query)
         {
             return obj.TimKiemJoinNhanKhau(query);
         }
 
 
-        public List<NhanKhauTamVangDTO> TimKiemnhankhau(string query)
+        public List<NHANKHAUTAMVANG> TimKiemnhankhau(string query)
         {
             return obj.TimKiemNhanKhau(query);
         }

@@ -16,14 +16,14 @@ namespace GUI
     {
         SoHoKhauBUS shk;
         NhanKhauThuongTruBUS nktt;
-        public SoHoKhauDTO shkDTO;
-        public NhanKhauThuongTruDTO nkDuocChon;
+        public SOHOKHAU shkDTO;
+        public NHANKHAUTHUONGTRU nkDuocChon;
 
         public SoHoKhauGUI()
         {
             shk = new SoHoKhauBUS();
             nktt = new NhanKhauThuongTruBUS();
-            shkDTO = new SoHoKhauDTO();
+            shkDTO = new SOHOKHAU();
             InitializeComponent();
 
             tbSoSoHoKhau.Text = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_SoHoKhauSoTamTru());
@@ -33,17 +33,17 @@ namespace GUI
         #region Các hàm hỗ trợ
         private void reloadSHK()
         {
-            if (shkDTO == null || shkDTO.db == null)
+            if (shkDTO == null)
                 return;
 
-            shkDTO = shk.TimKiem("sosohokhau='" + shkDTO.db.SOSOHOKHAU + "'")[0];
+            shkDTO = shk.TimKiem("sosohokhau='" + shkDTO.SOSOHOKHAU + "'")[0];
         }
         private void taoDanhSachNhanKhau()
         {
             if (shkDTO == null || shkDTO.NhanKhau == null)
                 return;
-            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(shkDTO.NhanKhau.Select(r => r.dbnktt.NHANKHAU).ToList());
-            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r => r.dbnktt).ToList());
+            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(shkDTO.NhanKhau.Select(r => r.NHANKHAU).ToList());
+            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r => r).ToList());
             DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
 
             //var bindingList = new BindingList<NHANKHAUTHUONGTRU>(shkDTO.NhanKhau.Select(r=>r.dbnktt).ToList());
@@ -58,11 +58,11 @@ namespace GUI
 
         private void fillData()
         {
-            tbSoSoHoKhau.Text = shkDTO.db.SOSOHOKHAU;
-            cbbChuHo.SelectedValue = shkDTO.db.MACHUHO;
-            dtpNgayCap.Value = shkDTO.db.NGAYCAP;
-            tbDiaChi.Text = shkDTO.db.DIACHI;
-            tbSoDangKy.Text = shkDTO.db.SODANGKY;
+            tbSoSoHoKhau.Text = shkDTO.SOSOHOKHAU;
+            cbbChuHo.SelectedValue = shkDTO.MACHUHO;
+            dtpNgayCap.Value = shkDTO.NGAYCAP;
+            tbDiaChi.Text = shkDTO.DIACHI;
+            tbSoDangKy.Text = shkDTO.SODANGKY;
             taoDanhSachNhanKhau();
 
         }
@@ -84,22 +84,22 @@ namespace GUI
 
             shk = new SoHoKhauBUS();
             nktt = new NhanKhauThuongTruBUS();
-            //shkDTO = new SoHoKhauDTO();
+            //shkDTO = new SOHOKHAU();
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
 
             tbSoSoHoKhau.Text = sosohokhau;
-            List<SoHoKhauDTO> ds = shk.TimKiem("sosohokhau='"+sosohokhau+"'");
+            List<SOHOKHAU> ds = shk.TimKiem("sosohokhau='"+sosohokhau+"'");
             shkDTO = ds[0];
 
             taoDanhSachNhanKhau();
 
 
-            cbbChuHo.SelectedValue = shkDTO.db.MACHUHO;
-            dtpNgayCap.Value = shkDTO.db.NGAYCAP;
-            tbDiaChi.Text = shkDTO.db.DIACHI;
-            tbSoDangKy.Text = shkDTO.db.SODANGKY;
+            cbbChuHo.SelectedValue = shkDTO.MACHUHO;
+            dtpNgayCap.Value = shkDTO.NGAYCAP;
+            tbDiaChi.Text = shkDTO.DIACHI;
+            tbSoDangKy.Text = shkDTO.SODANGKY;
         }
 
         private void SoHoKhauGUI_Load(object sender, EventArgs e)
@@ -118,9 +118,9 @@ namespace GUI
             using (NhanKhauThuongTruGUI a = new NhanKhauThuongTruGUI(tbSoSoHoKhau.Text, tbDiaChi.Text))
             {
                 a.ShowDialog(this);
-                if (a.nkttDTO != null && !String.IsNullOrEmpty(a.nkttDTO.dbnktt.MANHANKHAUTHUONGTRU))
+                if (a.nkttDTO != null && !String.IsNullOrEmpty(a.nkttDTO.MANHANKHAUTHUONGTRU))
                 {
-                    if (shkDTO.NhanKhau.Any(i => i.dbnktt.MANHANKHAUTHUONGTRU == a.nkttDTO.dbnktt.MANHANKHAUTHUONGTRU))
+                    if (shkDTO.NhanKhau.Any(i => i.MANHANKHAUTHUONGTRU == a.nkttDTO.MANHANKHAUTHUONGTRU))
                         return;
                     shkDTO.NhanKhau.Add(a.nkttDTO);
 
@@ -141,16 +141,16 @@ namespace GUI
                 return;
             }
             bool updateOK = true;
-            if (shkDTO.db==null||string.IsNullOrEmpty(shkDTO.db.SOSOHOKHAU))
+            if (shkDTO==null||string.IsNullOrEmpty(shkDTO.SOSOHOKHAU))
             {
-                shkDTO = new SoHoKhauDTO(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
+                shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
                 updateOK = shk.Add(shkDTO);
-                foreach(NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
+                foreach(NHANKHAUTHUONGTRU item in shkDTO.NhanKhau)
                 {
                     //item.dbnktt.SOHOKHAU = shkDTO.db;
                     //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
                     //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                    updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
+                    updateOK = nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO);
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
                 if (updateOK)
@@ -164,17 +164,17 @@ namespace GUI
             }
             else
             {
-                shkDTO = new SoHoKhauDTO(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
+                shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NhanKhau);
 
                 updateOK = shk.Update(shkDTO);
-                foreach (NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
+                foreach (NHANKHAUTHUONGTRU item in shkDTO.NhanKhau)
                 {
-                    if(item.dbnktt.SOSOHOKHAU != shkDTO.db.SOSOHOKHAU|| item.dbnktt.DIACHITHUONGTRU != shkDTO.db.DIACHI)
+                    if(item.SOSOHOKHAU != shkDTO.SOSOHOKHAU|| item.DIACHITHUONGTRU != shkDTO.DIACHI)
                     {
                         //item.dbnktt.SOHOKHAU = shkDTO.db;
                         //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
                         //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                        updateOK = nktt.updateTTThuongTru(item.dbnktt.MANHANKHAUTHUONGTRU, shkDTO.db);
+                        updateOK = nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO);
                     }
                 }
                 //nktt.DoiChuHo(shkDTO.NhanKhau, cbbChuHo.SelectedValue.ToString());
@@ -209,14 +209,14 @@ namespace GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            List<SoHoKhauDTO> kq = shk.TimKiem("sosohokhau='" + tbSoSoHoKhau.Text + "'");
+            List<SOHOKHAU> kq = shk.TimKiem("sosohokhau='" + tbSoSoHoKhau.Text + "'");
             if (kq.Count > 0)
             {
 
                 shkDTO = kq[0];
-                //foreach (NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
+                //foreach (NHANKHAUTHUONGTRU item in shkDTO.NhanKhau)
                 //{
-                //    shkDTO.NhanKhau.Add(new NhanKhauThuongTruDTO(item));
+                //    shkDTO.NhanKhau.Add(new NHANKHAUTHUONGTRU(item));
                 //}
                 fillData();
                 btnXoa.Enabled = true;
@@ -255,12 +255,12 @@ namespace GUI
                 return;
             }
 
-            using (NhanKhauThuongTruGUI a = new NhanKhauThuongTruGUI(nkDuocChon.dbnktt.MADINHDANH, -1,cbbChuHo.Text))
+            using (NhanKhauThuongTruGUI a = new NhanKhauThuongTruGUI(nkDuocChon.MADINHDANH, -1,cbbChuHo.Text))
             {
                 a.ShowDialog(this);
-                if (a.nkttDTO != null && !String.IsNullOrEmpty(a.nkttDTO.dbnktt.MADINHDANH))
+                if (a.nkttDTO != null && !String.IsNullOrEmpty(a.nkttDTO.MADINHDANH))
                 {
-                    if (shkDTO.NhanKhau.Any(i => i.dbnktt.MANHANKHAUTHUONGTRU == a.nkttDTO.dbnktt.MANHANKHAUTHUONGTRU))
+                    if (shkDTO.NhanKhau.Any(i => i.MANHANKHAUTHUONGTRU == a.nkttDTO.MANHANKHAUTHUONGTRU))
                         return;
                     reloadSHK();
 
@@ -281,8 +281,8 @@ namespace GUI
                 return;
             }
 
-            nkDuocChon.dbnktt.SOHOKHAU = null;
-            nkDuocChon.dbnktt.SOSOHOKHAU = null;
+            nkDuocChon.SOHOKHAU = null;
+            nkDuocChon.SOSOHOKHAU = null;
 
             //nktt.XoaNKTT(nkDuocChon.MaNhanKhauThuongTru);
             if(nktt.Update(nkDuocChon))
@@ -297,7 +297,7 @@ namespace GUI
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(shkDTO.db.SOSOHOKHAU))
+            if (string.IsNullOrEmpty(shkDTO.SOSOHOKHAU))
             {
                 MessageBox.Show(this, "Không có sổ hộ khẩu nào được chọn!", "Xóa sổ hộ khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -311,17 +311,17 @@ namespace GUI
                 //}
                 //else
                 //{
-                    foreach (NhanKhauThuongTruDTO item in shkDTO.NhanKhau)
+                    foreach (NHANKHAUTHUONGTRU item in shkDTO.NhanKhau)
                     {
-                        item.dbnktt.SOHOKHAU = null;
-                        item.dbnktt.SOSOHOKHAU = null;
-                        item.dbnktt.DIACHITHUONGTRU = null;
+                        item.SOHOKHAU = null;
+                        item.SOSOHOKHAU = null;
+                        item.DIACHITHUONGTRU = null;
                         condition = nktt.Update(item);
                     }
                 //}
                 
-                condition = shk.XoaSoHK(shkDTO.db.SOSOHOKHAU);
-                shkDTO = new SoHoKhauDTO();
+                condition = shk.XoaSoHK(shkDTO.SOSOHOKHAU);
+                shkDTO = new SOHOKHAU();
                 MessageBox.Show(this, "Xóa sổ hộ khẩu thành công!", "Xóa sổ hộ khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cleanData();
             }

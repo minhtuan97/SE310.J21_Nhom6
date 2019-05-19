@@ -17,7 +17,7 @@ namespace GUI
 {
     public partial class DangNhapGUI : DevExpress.XtraEditors.XtraForm
     {
-        CanBoDTO cb = new CanBoDTO();
+        CANBO cb = new CANBO();
         public DangNhapGUI()
         {
             InitializeComponent();
@@ -50,15 +50,11 @@ namespace GUI
 
 
 
-            List<CanBoDTO> dt = DangNhapBUS.TimKiem(tbTaiKhoan.Text, tbMatKhau.Text);
+            List<CANBO> dt = DangNhapBUS.TimKiem(tbTaiKhoan.Text, tbMatKhau.Text);
             
             if (dt != null)
             {
-                foreach (CanBoDTO kq in dt)
-                {
-                    cb = new CanBoDTO(kq);
-                }
-                Home home = new Home(cb);
+                Home home = new Home(dt.FirstOrDefault());
 
                 this.Hide();
                 home.Closed += (s, args) => this.Close();

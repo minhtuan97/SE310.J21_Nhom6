@@ -14,8 +14,8 @@ namespace GUI
 {
     public partial class NhanKhauTamVangGUI : Form
     {
-        NhanKhau nk = new NhanKhau();
-        NhanKhauTamVangDTO nktv;
+        NHANKHAU nk = new NHANKHAU();
+        NHANKHAUTAMVANG nktv;
         NhanKhauTamVangBUS nktvbus = new NhanKhauTamVangBUS();
         public NhanKhauTamVangGUI()
         {
@@ -25,43 +25,43 @@ namespace GUI
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
 
-            List<NhanKhauTamVangDTO> kq = nktvbus.TimKiem(" where nhankhautamvang.madinhdanh='" + textBox_madinhdanh.Text + "'");
+            List<NHANKHAUTAMVANG> kq = nktvbus.TimKiem(" where nhankhautamvang.madinhdanh='" + textBox_madinhdanh.Text + "'");
             if (kq.Count!=0)
             {
-                NhanKhauTamVangDTO a = kq[0];
+                NHANKHAUTAMVANG a = kq[0];
 
-                textBox_hoten.Text = a.db.NHANKHAU.HOTEN.ToString();
-                tbNgaySinh.Text = a.db.NHANKHAU.NGAYSINH.ToString();
-                tbdantoc.Text = a.db.NHANKHAU.DANTOC.ToString();
-                tbNgheNghiep.Text = a.db.NHANKHAU.NGHENGHIEP.ToString();
-                if (a.db.NHANKHAU.GIOITINH.ToString() == "nam")
+                textBox_hoten.Text = a.NHANKHAU.HOTEN.ToString();
+                tbNgaySinh.Text = a.NHANKHAU.NGAYSINH.ToString();
+                tbdantoc.Text = a.NHANKHAU.DANTOC.ToString();
+                tbNgheNghiep.Text = a.NHANKHAU.NGHENGHIEP.ToString();
+                if (a.NHANKHAU.GIOITINH.ToString() == "nam")
                 {
                     rdNam.Checked = true;
                 }
-                if (a.db.NHANKHAU.GIOITINH.ToString() == "nu")
+                if (a.NHANKHAU.GIOITINH.ToString() == "nu")
                 {
                     rdNu.Checked = true;
                 }
                 //tongiao
-                textBox_tongiao.Text = a.db.NHANKHAU.TONGIAO.ToString();
+                textBox_tongiao.Text = a.NHANKHAU.TONGIAO.ToString();
                 //nguyenquan
-                tbnguyenquan.Text = a.db.NHANKHAU.NGUYENQUAN.ToString();
+                tbnguyenquan.Text = a.NHANKHAU.NGUYENQUAN.ToString();
                 //noisinh
-                tbNoiSinh.Text = a.db.NHANKHAU.NOISINH.ToString();
+                tbNoiSinh.Text = a.NHANKHAU.NOISINH.ToString();
                 //quoctich
-                tbquoctich.Text = a.db.NHANKHAU.QUOCTICH.ToString();
+                tbquoctich.Text = a.NHANKHAU.QUOCTICH.ToString();
                 //hochieu
-                tbhochieu.Text = a.db.NHANKHAU.HOCHIEU.ToString();
+                tbhochieu.Text = a.NHANKHAU.HOCHIEU.ToString();
                 //sdt
-                tbsodienthoai.Text = a.db.NHANKHAU.SDT.ToString();
+                tbsodienthoai.Text = a.NHANKHAU.SDT.ToString();
                 //ngaycap
                 //tbNgayCap.Text = dt["ngaycap"].ToString();
                 //noicap
                 //tbNoiCap.Text = dt["noicap"].ToString();
                 //noithuongtru
-                tbDCThuongTru.Text = a.db.NHANKHAU.NOITHUONGTRU.ToString();
+                tbDCThuongTru.Text = a.NHANKHAU.NOITHUONGTRU.ToString();
                 //diachihientai
-                tbDCHienTai.Text = a.db.NHANKHAU.DIACHIHIENNAY.ToString();
+                tbDCHienTai.Text = a.NHANKHAU.DIACHIHIENNAY.ToString();
 
                 if (nktvbus.TimKiemThuongtru(" madinhdanh='" + textBox_madinhdanh.Text + "'") == 1)
                     rd_tamtru.Checked = true;
@@ -69,7 +69,7 @@ namespace GUI
                         rd_thuongtru.Checked = true;
                 DateTime secondDateTime = DateTime.Now;
 
-                if (a.db.NGAYKETTHUCTAMVANG.ToString() == "")
+                if (a.NGAYKETTHUCTAMVANG.ToString() == "")
 
                 {
 
@@ -80,17 +80,17 @@ namespace GUI
                     dtpNgayKetThuc.Value = secondDateTime;
                     return;
                 }
-                    DateTime ngayketthuc = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
+                    DateTime ngayketthuc = DateTime.Parse(a.NGAYKETTHUCTAMVANG.ToString());
                 //int compare = DateTime.Compare(ngayketthuc, secondDateTime);
                 if (secondDateTime<ngayketthuc)
                 {
-                    label_matamvang.Text = a.db.MANHANKHAUTAMVANG.ToString();
-                    tbLyDo.Text = a.db.LYDO.ToString();
-                    textBox_noiden.Text = a.db.NOIDEN.ToString();
-                    if (a.db.NGAYBATDAUTAMVANG.ToString() != "")
-                        dtpNgayBatDau.Value = DateTime.Parse(a.db.NGAYBATDAUTAMVANG.ToString());
-                    if (a.db.NGAYKETTHUCTAMVANG.ToString() != "")
-                        dtpNgayKetThuc.Value = DateTime.Parse(a.db.NGAYKETTHUCTAMVANG.ToString());
+                    label_matamvang.Text = a.MANHANKHAUTAMVANG.ToString();
+                    tbLyDo.Text = a.LYDO.ToString();
+                    textBox_noiden.Text = a.NOIDEN.ToString();
+                    if (a.NGAYBATDAUTAMVANG.ToString() != "")
+                        dtpNgayBatDau.Value = DateTime.Parse(a.NGAYBATDAUTAMVANG.ToString());
+                    if (a.NGAYKETTHUCTAMVANG.ToString() != "")
+                        dtpNgayKetThuc.Value = DateTime.Parse(a.NGAYKETTHUCTAMVANG.ToString());
                 }
                 else
                 {
@@ -145,7 +145,7 @@ namespace GUI
             //else
             //{
 
-            //    nktv = new NhanKhauTamVangDTO(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()), ngaybd, ngaykt, lydo, noiden, madinhdanh);
+            //    nktv = new NHANKHAUTAMVANG(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()), ngaybd, ngaykt, lydo, noiden, madinhdanh);
             //    if (nktvbus.Add(nktv) == true)
             //        MessageBox.Show("Thêm thành công");
             //    else
@@ -172,7 +172,7 @@ namespace GUI
             }
             else
             {
-                nktv = new NhanKhauTamVangDTO(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()),ngaybd, ngaykt, lydo,noiden, madinhdanh);
+                nktv = new NHANKHAUTAMVANG(TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_NhanKhauTamVang()),ngaybd, ngaykt, lydo,noiden, madinhdanh);
                 if(nktvbus.Add(nktv)==true)
                 {
                     MessageBox.Show("cap nhap thnah cong", "canh bao", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -214,7 +214,7 @@ namespace GUI
             else
             {
                 string matamvang = label_matamvang.Text.ToString();
-                nktv = new NhanKhauTamVangDTO(matamvang, ngaybd, ngaykt, lydo, noiden, madinhdanh);
+                nktv = new NHANKHAUTAMVANG(matamvang, ngaybd, ngaykt, lydo, noiden, madinhdanh);
                 if (nktvbus.Update(nktv) == true)
                     MessageBox.Show("Sửa thành công");
                 else

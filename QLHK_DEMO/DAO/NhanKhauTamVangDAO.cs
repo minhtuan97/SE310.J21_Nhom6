@@ -8,7 +8,7 @@ using DTO;
 
 namespace DAO
 {
-    public class NhanKhauTamVangDAO : DBConnection<NhanKhauTamVangDTO>
+    public class NhanKhauTamVangDAO : DBConnection<NHANKHAUTAMVANG>
     {
         public NhanKhauTamVangDAO() : base() { }
 
@@ -41,9 +41,9 @@ namespace DAO
         {
             try
             {
-                List<NhanKhauTamVangDTO> kq = this.getAll();
-                NhanKhauTamVangDTO[] arr = kq.ToArray();
-                qlhk.NHANKHAUTAMVANGs.DeleteOnSubmit(arr[row].db);
+                List<NHANKHAUTAMVANG> kq = this.getAll();
+                NHANKHAUTAMVANG[] arr = kq.ToArray();
+                qlhk.NHANKHAUTAMVANGs.DeleteOnSubmit(arr[row]);
                 qlhk.SubmitChanges();
                 return true;
             }
@@ -54,18 +54,15 @@ namespace DAO
             return false;
         }
 
-        public override List<NhanKhauTamVangDTO> getAll()
+        public override List<NHANKHAUTAMVANG> getAll()
         {
-            var kq = from nktt in qlhk.NHANKHAUTAMVANGs
-                     select new NhanKhauTamVangDTO
-                     {
-                         db = nktt,
-                     };
-            List<NhanKhauTamVangDTO> lst_NK = kq.ToList();
+            var kq = from nktv in qlhk.NHANKHAUTAMVANGs
+                     select nktv;
+            List<NHANKHAUTAMVANG> lst_NK = kq.ToList();
             return lst_NK; 
         }
 
-        public override bool insert(NhanKhauTamVangDTO data)
+        public override bool insert(NHANKHAUTAMVANG data)
         {
             //qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
             //try
@@ -82,7 +79,7 @@ namespace DAO
 
 
 
-            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -119,9 +116,9 @@ namespace DAO
 
 
 
-        public override bool insert_table(NhanKhauTamVangDTO data)
+        public override bool insert_table(NHANKHAUTAMVANG data)
         {
-            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUTAMVANGs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -136,20 +133,20 @@ namespace DAO
        
         }
 
-        public override bool update(NhanKhauTamVangDTO data)
+        public override bool update(NHANKHAUTAMVANG data)
         {
             //Query
 
 
-            var query = qlhk.NHANKHAUTAMVANGs.Where(r => r.MANHANKHAUTAMVANG == data.db.MANHANKHAUTAMVANG).ToList();
+            var query = qlhk.NHANKHAUTAMVANGs.Where(r => r.MANHANKHAUTAMVANG == data.MANHANKHAUTAMVANG).ToList();
             //var listmanktv = query.Select(r => r.MANHANKHAUTAMVANG).ToList();
             //Execute
             foreach (NHANKHAUTAMVANG NKTV in query)
             {
-                NKTV.NGAYBATDAUTAMVANG = data.db.NGAYBATDAUTAMVANG;
-                NKTV.NGAYKETTHUCTAMVANG = data.db.NGAYKETTHUCTAMVANG;
-                NKTV.LYDO = data.db.LYDO;
-                NKTV.NOIDEN = data.db.NOIDEN;
+                NKTV.NGAYBATDAUTAMVANG = data.NGAYBATDAUTAMVANG;
+                NKTV.NGAYKETTHUCTAMVANG = data.NGAYKETTHUCTAMVANG;
+                NKTV.LYDO = data.LYDO;
+                NKTV.NOIDEN = data.NOIDEN;
             }
 
 
@@ -167,19 +164,14 @@ namespace DAO
         }
 
 
-        public List<NhanKhauTamVangDTO> TimKiemJoinNhanKhau(string query)
+        public List<NHANKHAUTAMVANG> TimKiemJoinNhanKhau(string query)
         {
             query = "SELECT * FROM nhankhautamvang" + query + " ORDER BY ngayketthuctamvang DESC";
-            var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query);
-            List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
+            var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
             try
             {
-                foreach (NHANKHAUTAMVANG i in res)
-                {
-                    NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
-                    lst.Add(ts);
-                }
-                return lst;
+                
+                return res;
             }
             catch (Exception e)
             {
@@ -189,19 +181,13 @@ namespace DAO
         }
 
 
-        public List<NhanKhauTamVangDTO> TimKiemNhanKhau(string query)
+        public List<NHANKHAUTAMVANG> TimKiemNhanKhau(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM nhankhautamvang" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
-            List<NhanKhauTamVangDTO> lst = new List<NhanKhauTamVangDTO>();
-            foreach (NHANKHAUTAMVANG i in res)
-            {
-                NhanKhauTamVangDTO ts = new NhanKhauTamVangDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
 
 
@@ -211,16 +197,10 @@ namespace DAO
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM nhankhauthuongtru" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
-            List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
-            foreach (NHANKHAUTHUONGTRU i in res)
-            {
-                NhanKhauThuongTruDTO ts = new NhanKhauThuongTruDTO(i);
-                lst.Add(ts);
-            }
 
-            if (lst.Count() > 0)
+            if (res.Count() > 0)
                 return 0;
-            if (lst.Count() == 0)
+            if (res.Count() == 0)
                 return 1;
             return -1;
         }

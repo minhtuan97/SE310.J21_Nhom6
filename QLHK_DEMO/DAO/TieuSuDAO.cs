@@ -9,19 +9,16 @@ using DTO;
 
 namespace DAO
 {
-    public class TieuSuDAO : DBConnection<TieuSuDTO>
+    public class TieuSuDAO : DBConnection<TIEUSU>
     {
         
         public TieuSuDAO() : base() { }
 
-        public override List<TieuSuDTO> getAll()
+        public override List<TIEUSU> getAll()
         {
             var kq = from tieusu in qlhk.TIEUSUs
-                     select new TieuSuDTO
-                     {
-                         db = tieusu,
-                     };
-            List<TieuSuDTO> x = kq.ToList();
+                     select tieusu;
+            List<TIEUSU> x = kq.ToList();
             return x;
         }
 
@@ -75,9 +72,9 @@ namespace DAO
         {
             try
             {
-                List<TieuSuDTO> kq = this.getAll();
-                TieuSuDTO[] arr = kq.ToArray();
-                qlhk.TIEUSUs.DeleteOnSubmit(arr[row].db);
+                List<TIEUSU> kq = this.getAll();
+                TIEUSU[] arr = kq.ToArray();
+                qlhk.TIEUSUs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -87,9 +84,9 @@ namespace DAO
             return false;
         }
 
-        public override bool insert(TieuSuDTO data)
+        public override bool insert(TIEUSU data)
         {
-            qlhk.TIEUSUs.InsertOnSubmit(data.db);
+            qlhk.TIEUSUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -103,9 +100,9 @@ namespace DAO
             }           
         }
 
-        public override bool insert_table(TieuSuDTO data)
+        public override bool insert_table(TIEUSU data)
         {
-            qlhk.TIEUSUs.InsertOnSubmit(data.db);
+            qlhk.TIEUSUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -119,12 +116,12 @@ namespace DAO
             }
         }
 
-        public override bool update(TieuSuDTO tieusu)
+        public override bool update(TIEUSU tieusu)
         {
             // Query the database for the row to be updated.
             var query =
                 from ts in qlhk.TIEUSUs
-                where tieusu.db.MATIEUSU == ts.MATIEUSU
+                where tieusu.MATIEUSU == ts.MATIEUSU
                 select ts;
 
             // Execute the query, and change the column values
@@ -132,12 +129,12 @@ namespace DAO
 
             foreach (TIEUSU kq in query.ToList())
             {
-                kq.MADINHDANH = tieusu.db.MADINHDANH;
-                kq.THOIGIANBATDAU = tieusu.db.THOIGIANBATDAU;
-                kq.THOIGIANKETTHUC = tieusu.db.THOIGIANKETTHUC;
-                kq.CHOO = tieusu.db.CHOO;
-                kq.NGHENGHIEP = tieusu.db.NGHENGHIEP;
-                kq.NOILAMVIEC = tieusu.db.NOILAMVIEC;
+                kq.MADINHDANH = tieusu.MADINHDANH;
+                kq.THOIGIANBATDAU = tieusu.THOIGIANBATDAU;
+                kq.THOIGIANKETTHUC = tieusu.THOIGIANKETTHUC;
+                kq.CHOO = tieusu.CHOO;
+                kq.NGHENGHIEP = tieusu.NGHENGHIEP;
+                kq.NOILAMVIEC = tieusu.NOILAMVIEC;
                 // Insert any additional changes to column values.
             }
 
@@ -155,19 +152,13 @@ namespace DAO
             }
         }
 
-        public List<TieuSuDTO> TimKiem(string query)
+        public List<TIEUSU> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM tieusu" + query;
             var res = qlhk.ExecuteQuery<TIEUSU>(query).ToList();
-            List<TieuSuDTO> lst = new List<TieuSuDTO> ();
-            foreach(TIEUSU i in res)
-            {
-                TieuSuDTO ts = new TieuSuDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
     }
 }

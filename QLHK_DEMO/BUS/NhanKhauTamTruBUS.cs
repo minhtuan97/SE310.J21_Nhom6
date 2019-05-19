@@ -10,25 +10,25 @@ using System.Windows.Forms;
 
 namespace BUS
 {
-    public class NhanKhauTamTruBUS: AbstractFormBUS<NhanKhauTamTruDTO>
+    public class NhanKhauTamTruBUS: AbstractFormBUS<NHANKHAUTAMTRU>
     {
         NhanKhauTamTruDAO objnktt = new NhanKhauTamTruDAO();
-        public override List<NhanKhauTamTruDTO> GetAll()
+        public override List<NHANKHAUTAMTRU> GetAll()
         {
             return objnktt.getAll();
         }
-        public List<NhanKhauTamTruDTO> GetAllNhanKhauTamTru(string sosotamtru)
+        public List<NHANKHAUTAMTRU> GetAllNhanKhauTamTru(string sosotamtru)
         {
             return objnktt.getAllNhanKhauTT(sosotamtru);
         }
-        public override bool Add(NhanKhauTamTruDTO nhankhautamtru)
+        public override bool Add(NHANKHAUTAMTRU nhankhautamtru)
         {
             return objnktt.insert(nhankhautamtru);
         }
 
-        public bool AddNKTT(NhanKhauTamTruDTO nhankhautamtru)
+        public bool AddNKTT(NHANKHAUTAMTRU nhankhautamtru)
         {
-            if(nhankhautamtru.dbnktamtru.MANHANKHAUTAMTRU=="" || nhankhautamtru.db.MADINHDANH == "" 
+            if(nhankhautamtru.MANHANKHAUTAMTRU=="" || nhankhautamtru.NHANKHAU.MADINHDANH == "" 
                 // || nhankhautamtru.db.HOTEN == "" || nhankhautamtru.DanToc =="" || nhankhautamtru.NgheNghiep == "" || nhankhautamtru.QuocTich == ""
               )
             {
@@ -36,12 +36,12 @@ namespace BUS
             }
             SoTamTruBUS stt = new SoTamTruBUS();
 
-            if (stt.Existed_NhanKhau(nhankhautamtru.db.MADINHDANH))
+            if (stt.Existed_NhanKhau(nhankhautamtru.NHANKHAU.MADINHDANH))
             {
                 return false;
             }
 
-            double ngay = (nhankhautamtru.dbnktamtru.DENNGAY - nhankhautamtru.dbnktamtru.TUNGAY).TotalDays;
+            double ngay = (nhankhautamtru.DENNGAY - nhankhautamtru.TUNGAY).TotalDays;
             double sum = 730;
             if (ngay > sum)
             {
@@ -63,26 +63,26 @@ namespace BUS
         {
             return objnktt.delete(r);
         }
-        public bool UpdateNKTT(NhanKhauTamTruDTO nktt)
+        public bool UpdateNKTT(NHANKHAUTAMTRU nktt)
         {
             return objnktt.updatenktt(nktt);
         }
-        public override bool Update(NhanKhauTamTruDTO nhankhautamtru)
+        public override bool Update(NHANKHAUTAMTRU nhankhautamtru)
         {
             return objnktt.updateNhanKhauTamTru(nhankhautamtru);
         }
 
-        public List<NhanKhauTamTruDTO> TimKiem(string query)
+        public List<NHANKHAUTAMTRU> TimKiem(string query)
         {
             return objnktt.TimKiem(query);
         }
 
-        public List<NhanKhauTamTruDTO> TimKiemNKTT(string madinhdanh)
+        public List<NHANKHAUTAMTRU> TimKiemNKTT(string madinhdanh)
         {
             return objnktt.TimKiemNKTT(madinhdanh);
         }
 
-        public override bool Add_Table(NhanKhauTamTruDTO data)
+        public override bool Add_Table(NHANKHAUTAMTRU data)
         {
             return objnktt.insert_table(data);
         }
@@ -94,7 +94,7 @@ namespace BUS
         //
         //XỬ LÍ VỚI TIỀN ÁN TIỀN SỰ
         //
-        public List<TienAnTienSuDTO> GetTienAnTienSu(string madinhdanh)
+        public List<TIENANTIENSU> GetTienAnTienSu(string madinhdanh)
         {
             return objnktt.getTienAnTienSu(madinhdanh);
         }
@@ -108,7 +108,7 @@ namespace BUS
         //
         //XỬ LÍ VỚI TIỂU SỬ
         //
-        public List<TieuSuDTO> GetTieuSu(string madinhdanh)
+        public List<TIEUSU> GetTieuSu(string madinhdanh)
         {
             return objnktt.getTieuSu(madinhdanh);
         }

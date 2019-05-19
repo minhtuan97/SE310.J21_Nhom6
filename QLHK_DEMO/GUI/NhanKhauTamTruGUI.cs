@@ -16,7 +16,7 @@ namespace GUI
     public partial class NhanKhauTamTruGUI : Form
     {
         NhanKhauTamTruBUS nkttBus;
-        NhanKhauTamTruDTO nkttDto;
+        NHANKHAUTAMTRU nkttDto;
         TieuSuBUS tieusuBus = new TieuSuBUS();
         TienAnTienSuBUS tienantiensuBus = new TienAnTienSuBUS();
         
@@ -198,7 +198,7 @@ namespace GUI
         {
             InitializeComponent();
             this.sosotamtru = Sosotamtru;
-            dtGV_TienAnTienSu.DataSource = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.GetAll().Select(r=>r.db).ToList());
+            dtGV_TienAnTienSu.DataSource = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.GetAll().Select(r=>r).ToList());
 
         }
 
@@ -243,7 +243,7 @@ namespace GUI
             //Chua co so tam tru nay
             if (!soTamTruBUS.ExistedSoTamTru(sosotamtru))
             {
-                SoTamTruDTO stt = new SoTamTruDTO(sosotamtru, "", "", DateTime.Now, DateTime.Now);
+                SOTAMTRU stt = new SOTAMTRU(sosotamtru, "", "", DateTime.Now, DateTime.Now);
                 if (soTamTruBUS.Add(stt))
                 {
 
@@ -325,7 +325,7 @@ namespace GUI
             
 
 
-            nkttDto = new NhanKhauTamTruDTO(manhankhautamtru, noitamtru, ngaycap, denngay, lydo, 
+            nkttDto = new NHANKHAUTAMTRU(manhankhautamtru, noitamtru, ngaycap, denngay, lydo, 
                 sosotamtru, madinhdanh, hoten, tenkhac, ngaysinh, gioitinh, noisinh, nguyenquan, 
                 dantoc, tongiao, quoctich, hochieu, noithuongtru, diachihiennay, sdt, trinhdohocvan, 
                 trinhdochuyenmon, biettiengdantoc, trinhdongoaingu, nghenghiep);
@@ -419,7 +419,7 @@ namespace GUI
                 //THêm
 
 
-                nkttDto = new NhanKhauTamTruDTO(manhankhautamtru, noitamtru, tungay, denngay, lydo,
+                nkttDto = new NHANKHAUTAMTRU(manhankhautamtru, noitamtru, tungay, denngay, lydo,
                 sosotamtru, madinhdanh, hoten, tenkhac, ngaysinh, gioitinh, noisinh, nguyenquan,
                 dantoc, tongiao, quoctich, hochieu, noithuongtru, diachihiennay, sdt, trinhdohocvan,
                 trinhdochuyenmon, biettiengdantoc, trinhdongoaingu, nghenghiep);
@@ -502,7 +502,7 @@ namespace GUI
             try
             {
 
-                DataTable tb = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
+                DataTable tb = DataHelper.ListToDatatable<TIENANTIENSU>(tienantiensuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r).ToList());
                 tb.Columns.RemoveAt(tb.Columns.Count - 1);
 
                 dtGV_TienAnTienSu.DataSource = tb;
@@ -556,7 +556,7 @@ namespace GUI
             string hinhphat = txt_HinhPhat.Text.ToString();
             DateTime ngayphat = dtNgayPhat.Value.Date;
 
-            TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh,toidanh,hinhphat, banan,ngayphat);
+            TIENANTIENSU tienan = new TIENANTIENSU(matienan, madinhdanh,toidanh,hinhphat, banan,ngayphat);
             if (tienantiensuBus.Add(tienan))
             {
                 MessageBox.Show("Thêm tiền án tiền sự " + matienan + " cho nhân khẩu " + txt_HoTen.Text.ToString() + " thành công!");
@@ -582,13 +582,13 @@ namespace GUI
             DateTime ngayphat = Convert.ToDateTime(dtGV_TienAnTienSu.Rows[e.RowIndex].Cells[5].Value.ToString());
 
 
-            TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan,madinhdanh,banan,toidanh,hinhphat,ngayphat);
+            TIENANTIENSU tienan = new TIENANTIENSU(matienan,madinhdanh,banan,toidanh,hinhphat,ngayphat);
 
-            txt_MaTienAn.Text = tienan.db.MATIENANTIENSU;
-            txt_BanAn.Text = tienan.db.BANAN;
-            txtToiDanh.Text = tienan.db.TOIDANH;
-            txt_HinhPhat.Text = tienan.db.HINHPHAT;
-            dtNgayPhat.Value = tienan.db.NGAYPHAT; 
+            txt_MaTienAn.Text = tienan.MATIENANTIENSU;
+            txt_BanAn.Text = tienan.BANAN;
+            txtToiDanh.Text = tienan.TOIDANH;
+            txt_HinhPhat.Text = tienan.HINHPHAT;
+            dtNgayPhat.Value = tienan.NGAYPHAT; 
 
 
         }
@@ -669,7 +669,7 @@ namespace GUI
                 DateTime ngayphat = dtNgayPhat.Value.Date;
 
 
-                TienAnTienSuDTO tienan = new TienAnTienSuDTO(matienan, madinhdanh, banan, toidanh, hinhphat, ngayphat);
+                TIENANTIENSU tienan = new TIENANTIENSU(matienan, madinhdanh, banan, toidanh, hinhphat, ngayphat);
 
                 if (tienantiensuBus.Update(tienan))
                 {
@@ -702,7 +702,7 @@ namespace GUI
             try
             {
 
-                DataTable tb = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r.db).ToList());
+                DataTable tb = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusuBus.TimKiem("madinhdanh='" + txtMaDinhDanh1.Text + "'").Select(r => r).ToList());
                 tb.Columns.RemoveAt(tb.Columns.Count - 1);
 
                 dtGV_TieuSu.DataSource = tb;
@@ -759,7 +759,7 @@ namespace GUI
                 return;
             }
 
-            TieuSuDTO tieusu = new TieuSuDTO(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
+            TIEUSU tieusu = new TIEUSU(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
 
 
             if (tieusuBus.Add(tieusu))
@@ -786,13 +786,13 @@ namespace GUI
             string noilamviec = dtGV_TieuSu.Rows[e.RowIndex].Cells[6].Value.ToString();
 
 
-            TieuSuDTO tieusu = new TieuSuDTO(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
+            TIEUSU tieusu = new TIEUSU(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
 
-            txt_MaTieuSu.Text = tieusu.db.MATIEUSU;
-            dtThoiGianBatDau.Value = tieusu.db.THOIGIANBATDAU;
-            dtThoiGianKetThuc.Value = tieusu.db.THOIGIANKETTHUC;
-            txt_NoiLamViec.Text = tieusu.db.NOILAMVIEC;
-            txt_TieuSu_NgheNghiep.Text = tieusu.db.NGHENGHIEP;
+            txt_MaTieuSu.Text = tieusu.MATIEUSU;
+            dtThoiGianBatDau.Value = tieusu.THOIGIANBATDAU;
+            dtThoiGianKetThuc.Value = tieusu.THOIGIANKETTHUC;
+            txt_NoiLamViec.Text = tieusu.NOILAMVIEC;
+            txt_TieuSu_NgheNghiep.Text = tieusu.NGHENGHIEP;
             txtChoO.Text = choo;
         }
 
@@ -866,7 +866,7 @@ namespace GUI
                 string noilamviec = txt_NoiLamViec.Text.ToString();
                 
 
-                TieuSuDTO tieusu = new TieuSuDTO(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
+                TIEUSU tieusu = new TIEUSU(matieusu, madinhdanh, thoigianbatdau, thoigianketthuc, choo, nghenghiep, noilamviec);
 
 
                 if (tieusuBus.Update(tieusu))
@@ -1034,17 +1034,16 @@ namespace GUI
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
 
-            List<NhanKhauTamTruDTO> kq = nkttBus.TimKiemNKTT(madinhdanh);
+            List<NHANKHAUTAMTRU> kq = nkttBus.TimKiemNKTT(madinhdanh);
 
-            DataTable t1 = DataHelper.ListToDataTableWithChange<NHANKHAU>(kq.Select(r => r.db).ToList());
-            DataTable t2 = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(kq.Select(r => r.dbnktamtru).ToList());
+            DataTable t1 = DataHelper.ListToDataTableWithChange<NHANKHAU>(kq.Select(r => r.NHANKHAU).ToList());
+            DataTable t2 = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(kq.Select(r => r).ToList());
 
             dataGridView1.DataSource = DataHelper.mergeTwoTables(t1, t2, "MADINHDANH");
 
             if (kq.Count > 0)
             {
-                NhanKhauTamTruDTO dt = kq[0];
-                nkttDto = new NhanKhauTamTruDTO(dt);
+                nkttDto = kq[0];
 
                 fillData();
             }
@@ -1057,40 +1056,40 @@ namespace GUI
 
         private void fillData()
         {
-            txt_HoTen.Text = nkttDto.db.HOTEN;
-            txt_TenKhac.Text = nkttDto.db.TENKHAC;
-            rdNam.Checked = (nkttDto.db.GIOITINH == "Nam");
-            rdNu.Checked = (nkttDto.db.GIOITINH == "Nữ");
-            dt_NgaySinh.Value = nkttDto.db.NGAYSINH;
-            txt_DanToc.Text = nkttDto.db.DANTOC;
-            txt_NgheNghiep.Text = nkttDto.db.NGHENGHIEP;
-            txtMaDinhDanh1.Text = nkttDto.db.MADINHDANH;
-            txt_HoChieu.Text = nkttDto.db.HOCHIEU;
+            txt_HoTen.Text = nkttDto.NHANKHAU.HOTEN;
+            txt_TenKhac.Text = nkttDto.NHANKHAU.TENKHAC;
+            rdNam.Checked = (nkttDto.NHANKHAU.GIOITINH == "Nam");
+            rdNu.Checked = (nkttDto.NHANKHAU.GIOITINH == "Nữ");
+            dt_NgaySinh.Value = nkttDto.NHANKHAU.NGAYSINH;
+            txt_DanToc.Text = nkttDto.NHANKHAU.DANTOC;
+            txt_NgheNghiep.Text = nkttDto.NHANKHAU.NGHENGHIEP;
+            txtMaDinhDanh1.Text = nkttDto.NHANKHAU.MADINHDANH;
+            txt_HoChieu.Text = nkttDto.NHANKHAU.HOCHIEU;
 
-            txt_NguyenQuan.Text = nkttDto.db.NGUYENQUAN;
-            txtNoiSinh.Text = nkttDto.db.NOISINH;
-            txt_QuocTich.Text = nkttDto.db.QUOCTICH;
-            txt_TonGiao.Text = nkttDto.db.TONGIAO;
-            txt_SoDienThoai.Text = nkttDto.db.SDT;
+            txt_NguyenQuan.Text = nkttDto.NHANKHAU.NGUYENQUAN;
+            txtNoiSinh.Text = nkttDto.NHANKHAU.NOISINH;
+            txt_QuocTich.Text = nkttDto.NHANKHAU.QUOCTICH;
+            txt_TonGiao.Text = nkttDto.NHANKHAU.TONGIAO;
+            txt_SoDienThoai.Text = nkttDto.NHANKHAU.SDT;
 
-            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
+            txtMaNhanKhauTamTru1.Text = nkttDto.MANHANKHAUTAMTRU;
             
-            txtDiaChiHienNay.Text = nkttDto.db.DIACHIHIENNAY;
+            txtDiaChiHienNay.Text = nkttDto.NHANKHAU.DIACHIHIENNAY;
 
-            txt_TrinhDoHocVan.Text = nkttDto.db.TRINHDOHOCVAN;
-            txt_TrinhDoChuyenMon.Text = nkttDto.db.TRINHDOCHUYENMON;
-            txt_BietTiengDanToc.Text = nkttDto.db.BIETTIENGDANTOC;
-            txt_TrinhDoNgoaiNgu.Text = nkttDto.db.TRINHDONGOAINGU;
+            txt_TrinhDoHocVan.Text = nkttDto.NHANKHAU.TRINHDOHOCVAN;
+            txt_TrinhDoChuyenMon.Text = nkttDto.NHANKHAU.TRINHDOCHUYENMON;
+            txt_BietTiengDanToc.Text = nkttDto.NHANKHAU.BIETTIENGDANTOC;
+            txt_TrinhDoNgoaiNgu.Text = nkttDto.NHANKHAU.TRINHDONGOAINGU;
 
-            txtNoiThuongTru.Text = nkttDto.db.NOITHUONGTRU;
-            txtNoiTamTru.Text = nkttDto.dbnktamtru.NOITAMTRU;
+            txtNoiThuongTru.Text = nkttDto.NHANKHAU.NOITHUONGTRU;
+            txtNoiTamTru.Text = nkttDto.NOITAMTRU;
 
-            dt_TuNgay.Value = nkttDto.dbnktamtru.TUNGAY;
-            dt_DenNgay.Value = nkttDto.dbnktamtru.DENNGAY;
+            dt_TuNgay.Value = nkttDto.TUNGAY;
+            dt_DenNgay.Value = nkttDto.DENNGAY;
 
-            txtMaNhanKhauTamTru1.Text = nkttDto.dbnktamtru.MANHANKHAUTAMTRU;
-            txt_LyDo.Text = nkttDto.dbnktamtru.LYDO;
-            txtSoSoTamTru1.Text = nkttDto.dbnktamtru.SOSOTAMTRU;
+            txtMaNhanKhauTamTru1.Text = nkttDto.MANHANKHAUTAMTRU;
+            txt_LyDo.Text = nkttDto.LYDO;
+            txtSoSoTamTru1.Text = nkttDto.SOSOTAMTRU;
 
             LoadDataGridViewTienAN();
             LoadDataGridViewTieuSu();

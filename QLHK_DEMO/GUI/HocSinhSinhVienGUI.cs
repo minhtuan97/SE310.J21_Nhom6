@@ -19,7 +19,7 @@ namespace GUI
         NhanKhauThuongTruBUS thuongTru;
         NhanKhauTamTruBUS tamTru;
         HocSinhSinhVienBUS hssvbus;
-        HocSinhSinhVienDTO hssvdto;
+        HOCSINHSINHVIEN hssvdto;
         TienAnTienSuBUS tienAn;
 
         public HocSinhSinhVienGUI()
@@ -52,19 +52,19 @@ namespace GUI
         
         private void button_timkiem_Click(object sender, EventArgs e)
         {
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
+            List<HOCSINHSINHVIEN> source = hssvbus.TimKiemJoinNhanKhau(" mahssv='" + textBox_mssv.Text + "'");
             if (source.Count > 0)
             {
-                List<HocSinhSinhVienDTO> data = source;
+                List<HOCSINHSINHVIEN> data = source;
                 if (data.Count > 0)
                 {
-                    foreach (HocSinhSinhVienDTO a in data)
+                    foreach (HOCSINHSINHVIEN a in data)
                     {
-                        textBox_madinhdanh.Text = a.dbhssv.MADINHDANH;
-                        textBox_truong.Text = a.dbhssv.TRUONG;
-                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
-                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
-                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+                        textBox_madinhdanh.Text = a.MADINHDANH;
+                        textBox_truong.Text = a.TRUONG;
+                        textBox_diachithuongtru.Text = a.DIACHITHUONGTRU;
+                        date_batdau.Text = a.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+                        date_ketthuc.Text = a.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
                     }
                 }
                 dataGridView1.DataSource = null;
@@ -74,7 +74,7 @@ namespace GUI
                 //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
                 try
                 {
-                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+                    var bList = new BindingList<TIENANTIENSU>(tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r).ToList());
                     dataGridView1.DataSource = new BindingSource(bList, null);
                     //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                     //{
@@ -107,7 +107,7 @@ namespace GUI
             DateTime tgkt = date_ketthuc.Value.Date;
             string vipham = textBox_vipham.Text.ToString();
     
-            hssvdto = new HocSinhSinhVienDTO(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
+            hssvdto = new HOCSINHSINHVIEN(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
             if (hssvbus.Add(hssvdto))
             {
                 MessageBox.Show("Thêm thành công");
@@ -155,7 +155,7 @@ namespace GUI
             DateTime tgbd = date_batdau.Value.Date;
             DateTime tgkt = date_ketthuc.Value.Date;
             string vipham = textBox_vipham.Text.ToString();
-            hssvdto = new HocSinhSinhVienDTO(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
+            hssvdto = new HOCSINHSINHVIEN(mssv, madinhdanh, truong, diachi, tgbd, tgkt, vipham);
             if (hssvbus.Update(hssvdto))
             {
                 MessageBox.Show("Sửa thành công");
@@ -245,19 +245,19 @@ namespace GUI
 
         private void btnTimKiem2_Click(object sender, EventArgs e)
         {
-            List<HocSinhSinhVienDTO> source = hssvbus.TimKiemJoinNhanKhau("nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
+            List<HOCSINHSINHVIEN> source = hssvbus.TimKiemJoinNhanKhau("nhankhau.madinhdanh ='" + textBox_madinhdanh.Text + "'");
             if (source.Count > 0)
             {
-                List<HocSinhSinhVienDTO> data = source;
+                List<HOCSINHSINHVIEN> data = source;
                 if (data.Count > 0)
                 {
-                    foreach (HocSinhSinhVienDTO a in data)
+                    foreach (HOCSINHSINHVIEN a in data)
                     {
-                        textBox_mssv.Text = a.dbhssv.MAHSSV;
-                        textBox_truong.Text = a.dbhssv.TRUONG;
-                        textBox_diachithuongtru.Text = a.dbhssv.DIACHITHUONGTRU;
-                        date_batdau.Text = a.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
-                        date_ketthuc.Text = a.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
+                        textBox_mssv.Text = a.MAHSSV;
+                        textBox_truong.Text = a.TRUONG;
+                        textBox_diachithuongtru.Text = a.DIACHITHUONGTRU;
+                        date_batdau.Text = a.THOIGIANBATDAUTAMTRUTHUONGTRU.ToString();
+                        date_ketthuc.Text = a.THOIGIANKETTHUCTAMTRUTHUONGTRU.ToString();
                     }
                 }
                 dataGridView1.DataSource = null;
@@ -265,7 +265,7 @@ namespace GUI
                 //dataGridView1.DataSource = tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'");
                 try
                 {
-                    DataTable bList = DataHelper.ListToDatatable( tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r.db).ToList());
+                    DataTable bList = DataHelper.ListToDatatable( tienAn.TimKiem("madinhdanh = '" + textBox_madinhdanh.Text + "'").Select(r => r).ToList());
                     dataGridView1.DataSource = bList;//new BindingSource(bList, null);
                     //for (int i = 0; i < dGVTienAnTienSu.Rows.Count; i++)
                     //{

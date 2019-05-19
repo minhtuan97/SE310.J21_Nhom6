@@ -9,20 +9,20 @@ using System.Data;
 
 namespace BUS
 {
-    public class SoHoKhauBUS: AbstractFormBUS<SoHoKhauDTO>
+    public class SoHoKhauBUS: AbstractFormBUS<SOHOKHAU>
     {
         SoHoKhauDAO obj = new SoHoKhauDAO();
         NhanKhauThuongTruDAO nktt = new NhanKhauThuongTruDAO();
-        public override List<SoHoKhauDTO> GetAll()
+        public override List<SOHOKHAU> GetAll()
         {
             return obj.getAll();
         }
-        public override bool Add(SoHoKhauDTO sohk)
+        public override bool Add(SOHOKHAU sohk)
         {
             
             return obj.insert(sohk);
         }
-        public override bool Add_Table(SoHoKhauDTO data)
+        public override bool Add_Table(SOHOKHAU data)
         {
             return obj.insert_table(data);
         }
@@ -38,35 +38,35 @@ namespace BUS
         {
             return obj.delete(r);
         }
-        public override bool Update(SoHoKhauDTO sohk)
+        public override bool Update(SOHOKHAU sohk)
         {   
             return  obj.update(sohk);
         }
 
-        public List<SoHoKhauDTO> TimKiem(string query)
+        public List<SOHOKHAU> TimKiem(string query)
         {
-            List<SoHoKhauDTO>list = obj.TimKiem(query);
+            List<SOHOKHAU>list = obj.TimKiem(query);
             if (list.Count > 0)
             {
                 
-                foreach (SoHoKhauDTO item in list)
+                foreach (SOHOKHAU item in list)
                 {
-                    item.NhanKhau = nktt.TimKiem("SOSOHOKHAU='" + item.db.SOSOHOKHAU + "'");
+                    item.NhanKhau = nktt.TimKiem("SOSOHOKHAU='" + item.SOSOHOKHAU + "'");
                 }
             }
 
             return list;
         }
 
-        //public SoHoKhauDTO TimSo(string sosohokhau)
+        //public SOHOKHAU TimSo(string sosohokhau)
         //{
-        //    SoHoKhauDTO so;
+        //    SOHOKHAU so;
         //    DataTable ds = obj.TimKiem("sosohokhau='" + sosohokhau + "'").Tables[0];
         //    if (ds != null)
         //    {
         //        DataRow data = ds.Rows[0];
 
-        //        so = new SoHoKhauDTO(data["sosohokhau"].ToString(), data["machuho"].ToString(), data["diachi"].ToString(),
+        //        so = new SOHOKHAU(data["sosohokhau"].ToString(), data["machuho"].ToString(), data["diachi"].ToString(),
         //            DateTime.Parse(data["ngaycap"].ToString()), data["sodangky"].ToString());
 
 

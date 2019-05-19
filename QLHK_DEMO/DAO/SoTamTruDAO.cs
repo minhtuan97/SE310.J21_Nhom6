@@ -8,38 +8,32 @@ using DTO;
 
 namespace DAO
 {
-    public class SoTamTruDAO:DBConnection<SoTamTruDTO>
+    public class SoTamTruDAO:DBConnection<SOTAMTRU>
     {
         public SoTamTruDAO() : base() { }
 
-        public override List<SoTamTruDTO> getAll()
+        public override List<SOTAMTRU> getAll()
         {
             var kq = from stt in qlhk.SOTAMTRUs
-                     select new SoTamTruDTO
-                     {
-                         db = stt,
-                     };
-                List<SoTamTruDTO> lst = kq.ToList();
+                     select stt;
+                List<SOTAMTRU> lst = kq.ToList();
                 return lst;
         }
 
 
-        public List<SoTamTruDTO> getAllSoTamTru()
+        public List<SOTAMTRU> getAllSoTamTru()
         {
             var kq = from stt in qlhk.SOTAMTRUs
-                     select new SoTamTruDTO
-                     {
-                         db = stt,
-                     };
-            List<SoTamTruDTO> lst = kq.ToList();
+                     select stt;
+            List<SOTAMTRU> lst = kq.ToList();
             return lst;
         }
 
 
-        public override bool insert(SoTamTruDTO sotamtru)
+        public override bool insert(SOTAMTRU sotamtru)
         {
 
-            qlhk.SOTAMTRUs.InsertOnSubmit(sotamtru.db);
+            qlhk.SOTAMTRUs.InsertOnSubmit(sotamtru);
             try
             {
                 qlhk.SubmitChanges();
@@ -86,8 +80,8 @@ namespace DAO
         {
             try
             {
-                SoTamTruDTO stt = new SoTamTruDTO(qlhk.SOTAMTRUs.Single(x => x.SOSOTAMTRU == sosotamtru));
-                qlhk.SOTAMTRUs.DeleteOnSubmit(stt.db);
+                SOTAMTRU stt = qlhk.SOTAMTRUs.Single(x => x.SOSOTAMTRU == sosotamtru);
+                qlhk.SOTAMTRUs.DeleteOnSubmit(stt);
 
 
                 //Xóa nhân khẩu 
@@ -163,9 +157,9 @@ namespace DAO
         {
             try
             {
-                List<SoTamTruDTO> kq = this.getAll();
-                SoTamTruDTO[] arr = kq.ToArray();
-                qlhk.SOTAMTRUs.DeleteOnSubmit(arr[row].db);
+                List<SOTAMTRU> kq = this.getAll();
+                SOTAMTRU[] arr = kq.ToArray();
+                qlhk.SOTAMTRUs.DeleteOnSubmit(arr[row]);
                 qlhk.SubmitChanges();
                 return true;
             }
@@ -176,17 +170,17 @@ namespace DAO
             return false;
         }
 
-        public override bool update(SoTamTruDTO sotamtru)
+        public override bool update(SOTAMTRU sotamtru)
         {
-            List<SOTAMTRU> query = qlhk.SOTAMTRUs.Where(x => x.SOSOTAMTRU == sotamtru.db.SOSOTAMTRU).Select(x => x).ToList();
+            List<SOTAMTRU> query = qlhk.SOTAMTRUs.Where(x => x.SOSOTAMTRU == sotamtru.SOSOTAMTRU).Select(x => x).ToList();
 
             //Execute
             foreach (SOTAMTRU stt in query)
             {
-                stt.MACHUHO = sotamtru.db.MACHUHO;
-                stt.NOITAMTRU = sotamtru.db.NOITAMTRU;
-                stt.NGAYCAP = sotamtru.db.NGAYCAP;
-                stt.DENNGAY = sotamtru.db.DENNGAY;
+                stt.MACHUHO = sotamtru.MACHUHO;
+                stt.NOITAMTRU = sotamtru.NOITAMTRU;
+                stt.NGAYCAP = sotamtru.NGAYCAP;
+                stt.DENNGAY = sotamtru.DENNGAY;
             }
 
             try
@@ -203,42 +197,30 @@ namespace DAO
         }
 
 
-        public List<SoTamTruDTO> TimKiem(string query)
+        public List<SOTAMTRU> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sotamtru" + query;
             var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
-            List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
-            foreach (SOTAMTRU i in res)
-            {
-                SoTamTruDTO stt = new SoTamTruDTO(i);
-                lst.Add(stt);
-            }
 
-            return lst;
+            return res;
         }
 
 
-        public List<SoTamTruDTO> TimKiemSoTamTru(string sosotamtru)
+        public List<SOTAMTRU> TimKiemSoTamTru(string sosotamtru)
         {
             string query = "SELECT * FROM sotamtru where sosotamtru=" + sosotamtru;
             var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
-            List<SoTamTruDTO> lst = new List<SoTamTruDTO>();
-            foreach (SOTAMTRU i in res)
-            {
-                SoTamTruDTO ts = new SoTamTruDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
         
 
 
 
-        public override bool insert_table(SoTamTruDTO data)
+        public override bool insert_table(SOTAMTRU data)
         {
-            qlhk.SOTAMTRUs.InsertOnSubmit(data.db);
+            qlhk.SOTAMTRUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();

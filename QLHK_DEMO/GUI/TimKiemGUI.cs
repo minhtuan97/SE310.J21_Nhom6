@@ -20,11 +20,11 @@ namespace GUI
         NhanKhauThuongTruBUS nkthuongtru;
         NhanKhauTamTruBUS nktamtru;
 
-        NhanKhau nkDTO;
-        NhanKhauThuongTruDTO nkthDTO;
-        NhanKhauTamTruDTO nkttDTO;
-        SoHoKhauDTO shkDTO;
-        SoTamTruDTO sttDTO;
+        NHANKHAU nkDTO;
+        NHANKHAUTHUONGTRU nkthDTO;
+        NHANKHAUTAMTRU nkttDTO;
+        SOHOKHAU shkDTO;
+        SOTAMTRU sttDTO;
 
         public TimKiemGUI()
         {
@@ -58,7 +58,7 @@ namespace GUI
             // DataSet ds = shk.TimKiem("sosohokhau='" + tbTimKiem.Text + "'");
             //DataRow dt = ds.Tables["sohokhau"].Rows[0];
             //a.ShowDialog(this);
-            //shkDTO = new SoHoKhauDTO(dt["sosohokhau"].ToString(), dt["machuho"].ToString(), dt["diachi"].ToString()
+            //shkDTO = new SOHOKHAU(dt["sosohokhau"].ToString(), dt["machuho"].ToString(), dt["diachi"].ToString()
             //    , (DateTime)dt["ngaycap"], dt["sodangky"].ToString());
 
             //            shkDTO = a.shkDTO;
@@ -78,7 +78,7 @@ namespace GUI
             //DataSet ds = shk.TimKiem("sosohokhau='" + tbTimKiem.Text + "'");
             //DataRow dt = ds.Tables["sohokhau"].Rows[0];
             //a.ShowDialog(this);
-            //shkDTO = new SoHoKhauDTO(dt["sosohokhau"].ToString(), dt["machuho"].ToString(), dt["diachi"].ToString()
+            //shkDTO = new SOHOKHAU(dt["sosohokhau"].ToString(), dt["machuho"].ToString(), dt["diachi"].ToString()
             //    , (DateTime)dt["ngaycap"], dt["sodangky"].ToString());
             //            nkthDTO = a.nkttDTO;
             //        }
@@ -89,7 +89,7 @@ namespace GUI
             if (rdHoKhau.Checked)
             {
                 shk = new SoHoKhauBUS();
-                List<SoHoKhauDTO> shkdto = shk.TimKiem("sosohokhau='" + value + "'");
+                List<SOHOKHAU> shkdto = shk.TimKiem("sosohokhau='" + value + "'");
                 if (shkdto.Count > 0)
                 {
                     SoHoKhauGUI fr_SoHoKhau = new SoHoKhauGUI(value);
@@ -106,7 +106,7 @@ namespace GUI
             if (rdTamTru.Checked)
             {
                 stt = new SoTamTruBUS();
-                List<SoTamTruDTO> sttdto = stt.TimKiem("sosotamtru='" + value + "'");
+                List<SOTAMTRU> sttdto = stt.TimKiem("sosotamtru='" + value + "'");
                 if (sttdto.Count > 0)
                 {
                     SoTamTruGUI fr_SoTamTru = new SoTamTruGUI(value);
@@ -125,7 +125,7 @@ namespace GUI
             {
                 //Tìm trong bảng nhân khẩu thường trú
                 nkthuongtru = new NhanKhauThuongTruBUS();
-                List<NhanKhauThuongTruDTO> nkth = nkthuongtru.TimKiem("madinhdanh='" + value + "'");
+                List<NHANKHAUTHUONGTRU> nkth = nkthuongtru.TimKiem("madinhdanh='" + value + "'");
                 if (nkth.Count > 0)
                 {
                     NhanKhauThuongTruGUI fr_NhanKhauThuongTru = new NhanKhauThuongTruGUI(value, 0);
@@ -136,7 +136,7 @@ namespace GUI
 
                 //Tìm trong bảng nhân khẩu tạm trú
                 nktamtru = new NhanKhauTamTruBUS();
-                List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem("madinhdanh='" + value + "'");
+                List<NHANKHAUTAMTRU> nktt = nktamtru.TimKiem("madinhdanh='" + value + "'");
                 if (nktt.Count > 0)
                 {
                     NhanKhauTamTruGUI fr_NhanKhauTamTru = new NhanKhauTamTruGUI(value, "1");
