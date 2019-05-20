@@ -49,10 +49,10 @@ namespace BUS
             if (list.Count > 0)
             {
                 
-                foreach (SOHOKHAU item in list)
-                {
-                    item.NhanKhau = nktt.TimKiem("SOSOHOKHAU='" + item.SOSOHOKHAU + "'");
-                }
+                //foreach (SOHOKHAU item in list)
+                //{
+                //    item.NhanKhau = nktt.TimKiem("SOSOHOKHAU='" + item.SOSOHOKHAU + "'");
+                //}
             }
 
             return list;

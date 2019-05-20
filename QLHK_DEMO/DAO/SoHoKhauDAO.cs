@@ -27,7 +27,7 @@ namespace DAO
                               .Select(b1 => b1.MADINHDANH).SingleOrDefault()))
                               .Select(a1 => a1.HOTEN).SingleOrDefault();
 
-                so.NhanKhau = so.NHANKHAUTHUONGTRUs.ToList();
+                //so.NhanKhau = so.NHANKHAUTHUONGTRUs.ToList();
             }
             List<SOHOKHAU> x = kq.ToList();
             return x;

@@ -67,5 +67,18 @@ namespace GUI
             diaChi = "";
             this.Close();
         }
+
+
+        private void tbDiaChi_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                diaChi = (String.IsNullOrEmpty(tbDiaChi.Text) ? "" : tbDiaChi.Text + ", ")
+               + (String.IsNullOrEmpty(cbbXaPhuong.Text) ? "" : cbbXaPhuong.Text + ", ")
+               + (String.IsNullOrEmpty(cbbQuanHuyen.Text) ? "" : cbbQuanHuyen.Text + ", ")
+               + (String.IsNullOrEmpty(cbbTinhThanh.Text) ? "" : cbbTinhThanh.Text);
+                this.Close();
+            }
+        }
     }
 }

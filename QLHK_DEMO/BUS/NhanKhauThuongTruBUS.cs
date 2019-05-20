@@ -100,11 +100,11 @@ namespace BUS
         public override bool Update(NHANKHAUTHUONGTRU nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
-            if (nk.update(nktt.NHANKHAU))
-            {
+            //if (nk.update(nktt.NHANKHAU))
+            //{
                 if (obj.update(nktt))
                     return true;
-            }
+            //}
             return false;
         }
         public List<NHANKHAUTHUONGTRU> TimKiem(string query)
