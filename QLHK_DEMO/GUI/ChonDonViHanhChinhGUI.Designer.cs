@@ -42,6 +42,7 @@
             this.tbDiaChi.Name = "tbDiaChi";
             this.tbDiaChi.Size = new System.Drawing.Size(120, 20);
             this.tbDiaChi.TabIndex = 0;
+            this.tbDiaChi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDiaChi_KeyDown);
             // 
             // cbbXaPhuong
             // 

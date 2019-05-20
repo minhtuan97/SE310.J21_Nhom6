@@ -8,17 +8,14 @@ using DTO;
 
 namespace DAO
 {
-    public class NhanKhauDAO:DBConnection<NhanKhau>
+    public class NhanKhauDAO:DBConnection<NHANKHAU>
     {
         public NhanKhauDAO() : base() { }
-        public override List<NhanKhau> getAll()
+        public override List<NHANKHAU> getAll()
         {
             var kq = from nkdto in qlhk.NHANKHAUs
-                     select new NhanKhau
-                     {
-                         db=nkdto
-                     };
-            List<NhanKhau> x = kq.ToList();
+                     select nkdto;
+            List<NHANKHAU> x = kq.ToList();
             return x;
         }
 
@@ -30,9 +27,9 @@ namespace DAO
 
             return kq.ToList();
         }
-        public override bool insert_table(NhanKhau data)
+        public override bool insert_table(NHANKHAU data)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(data.db);
+            qlhk.NHANKHAUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -45,9 +42,9 @@ namespace DAO
                 return false;
             }
         }
-        public override bool insert(NhanKhau nk)
+        public override bool insert(NHANKHAU nk)
         {
-            qlhk.NHANKHAUs.InsertOnSubmit(nk.db);
+            qlhk.NHANKHAUs.InsertOnSubmit(nk);
             try
             {
                 qlhk.SubmitChanges();
@@ -89,9 +86,9 @@ namespace DAO
         {
             try
             {
-                List<NhanKhau> kq = this.getAll();
-                NhanKhau[] arr = kq.ToArray();
-                qlhk.NHANKHAUs.DeleteOnSubmit(arr[row].db);
+                List<NHANKHAU> kq = this.getAll();
+                NHANKHAU[] arr = kq.ToArray();
+                qlhk.NHANKHAUs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -125,38 +122,38 @@ namespace DAO
                 return false;
             }
         }
-        public override bool update(NhanKhau nk)
+        public override bool update(NHANKHAU nk)
         {
             // Query the database for the row to be updated.
             var query =
-                from nhankhau in qlhk.NHANKHAUs
-                where nk.db.MADINHDANH == nhankhau.MADINHDANH
-                select nhankhau;
+                from NHANKHAU in qlhk.NHANKHAUs
+                where nk.MADINHDANH == NHANKHAU.MADINHDANH
+                select NHANKHAU;
 
             // Execute the query, and change the column values
             // you want to change.
 
             foreach (NHANKHAU kq in query)
             {
-                kq.MADINHDANH = nk.db.MADINHDANH;
-                kq.HOTEN = nk.db.HOTEN;
-                kq.TENKHAC = nk.db.TENKHAC;
-                kq.NGAYSINH = nk.db.NGAYSINH;
-                kq.GIOITINH = nk.db.GIOITINH;
-                kq.NOISINH = nk.db.NOISINH;
-                kq.NGUYENQUAN = nk.db.NGUYENQUAN;
-                kq.DANTOC = nk.db.DANTOC;
-                kq.TONGIAO = nk.db.TONGIAO;
-                kq.QUOCTICH = nk.db.QUOCTICH;
-                kq.HOCHIEU = nk.db.HOCHIEU;
-                kq.NOITHUONGTRU = nk.db.NOITHUONGTRU;
-                kq.DIACHIHIENNAY = nk.db.DIACHIHIENNAY;
-                kq.SDT = nk.db.SDT;
-                kq.TRINHDOHOCVAN = nk.db.TRINHDOHOCVAN;
-                kq.TRINHDOCHUYENMON = nk.db.TRINHDOCHUYENMON;
-                kq.BIETTIENGDANTOC = nk.db.BIETTIENGDANTOC;
-                kq.TRINHDONGOAINGU = nk.db.TRINHDONGOAINGU;
-                kq.NGHENGHIEP = nk.db.NGHENGHIEP;
+                kq.MADINHDANH = nk.MADINHDANH;
+                kq.HOTEN = nk.HOTEN;
+                kq.TENKHAC = nk.TENKHAC;
+                kq.NGAYSINH = nk.NGAYSINH;
+                kq.GIOITINH = nk.GIOITINH;
+                kq.NOISINH = nk.NOISINH;
+                kq.NGUYENQUAN = nk.NGUYENQUAN;
+                kq.DANTOC = nk.DANTOC;
+                kq.TONGIAO = nk.TONGIAO;
+                kq.QUOCTICH = nk.QUOCTICH;
+                kq.HOCHIEU = nk.HOCHIEU;
+                kq.NOITHUONGTRU = nk.NOITHUONGTRU;
+                kq.DIACHIHIENNAY = nk.DIACHIHIENNAY;
+                kq.SDT = nk.SDT;
+                kq.TRINHDOHOCVAN = nk.TRINHDOHOCVAN;
+                kq.TRINHDOCHUYENMON = nk.TRINHDOCHUYENMON;
+                kq.BIETTIENGDANTOC = nk.BIETTIENGDANTOC;
+                kq.TRINHDONGOAINGU = nk.TRINHDONGOAINGU;
+                kq.NGHENGHIEP = nk.NGHENGHIEP;
             }
 
             // Submit the changes to the database.
@@ -172,19 +169,13 @@ namespace DAO
                 return false;
             }
         }
-        public  List<NhanKhau> TimKiem(string query)
+        public  List<NHANKHAU> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
-            query = "SELECT *, 'Delete' as 'Change' FROM nhankhau" + query;
+            query = "SELECT *, 'Delete' as 'Change' FROM NHANKHAU" + query;
             var res = qlhk.ExecuteQuery<NHANKHAU>(query).ToList();
-            List<NhanKhau> lst = new List<NhanKhau>();
-            foreach (NHANKHAU i in res)
-            {
-                NhanKhau ts = new NhanKhau(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
 
         public DataSet TimKiemTheoCuTru(string madinhdanh)

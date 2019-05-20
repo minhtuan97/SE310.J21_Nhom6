@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -59,39 +59,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanBoDTO.cs" />
+    <Compile Include="CANBO.cs" />
     <Compile Include="Checker\NHANKHAU.cs" />
     <Compile Include="Checker\quanlyhokhauDataContext.cs" />
     <Compile Include="Checker\TIEUSU.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />
-    <Compile Include="NhanKhauTamTruDTO.cs" />
-    <Compile Include="HocSinhSinhVienDTO.cs" />
-    <Compile Include="NhanKhauTamVangDTO.cs" />
+    <Compile Include="NHANKHAUTAMTRU.cs" />
+    <Compile Include="HOCSINHSINHVIEN.cs" />
+    <Compile Include="NHANKHAUTAMVANG.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="QuanHuyenDTO.cs" />
+    <Compile Include="QUANHUYEN.cs" />
     <Compile Include="quanlyhokhau.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>quanlyhokhau.dbml</DependentUpon>
     </Compile>
     <Compile Include="ReplacementGroup.cs" />
-    <Compile Include="SoHoKhauDTO.cs" />
-    <Compile Include="SoTamTruDTO.cs" />
-    <Compile Include="TienAnTienSuDTO.cs" />
-    <Compile Include="TieuSuDTO.cs" />
-    <Compile Include="TinhThanhPhoDTO.cs" />
-    <Compile Include="NhanKhauThuongTruDTO.cs" />
-    <Compile Include="NhanKhau.cs" />
+    <Compile Include="SOHOKHAU.cs" />
+    <Compile Include="SOTAMTRU.cs" />
+    <Compile Include="TIENANTIENSU.cs" />
+    <Compile Include="TIEUSU.cs" />
+    <Compile Include="TINHTHANHPHO.cs" />
+    <Compile Include="NHANKHAUTHUONGTRU.cs" />
+    <Compile Include="NHANKHAU.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XaPhuongThiTranDTO.cs" />
+    <Compile Include="XAPHUONGTHITRAN.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -109,9 +111,11 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB\qlhk.xml" />
-    <Content Include="DB\quanlyhokhauDataContext.mdf">
+    <Content Include="DB\qlhk.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\qlhk.xml">
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="DB\qlhk_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -20,30 +20,30 @@ namespace GUI
     public partial class fr_CBDuLieu : DevExpress.XtraEditors.XtraForm
     {
         CanBoBUS canbobus;
-        CanBoDTO canbo;
-        HocSinhSinhVienDTO hssv;
+        CANBO canbo;
+        HOCSINHSINHVIEN hssv;
         HocSinhSinhVienBUS hssvbus;
         NhanKhauBUS nhankhaubus;
-        NhanKhau nhankhau;
-        TienAnTienSuDTO tienantiensu;
+        NHANKHAU nhankhau;
+        TIENANTIENSU tienantiensu;
         TienAnTienSuBUS tienantiensubus;
-        TieuSuDTO tieusu;
+        TIEUSU tieusu;
         TieuSuBUS tieusubus;
-        QuanHuyenDTO quanhuyen;
+        QUANHUYEN quanhuyen;
         QuanHuyenBUS quanhuyenbus;
-        TinhThanhPhoDTO tinhthanhpho;
+        TINHTHANHPHO tinhthanhpho;
         TinhThanhPhoBUS tinhthanhphobus;
-        XaPhuongThiTranDTO xaphuongthitran;
+        XAPHUONGTHITRAN xaphuongthitran;
         XaPhuongThiTranBUS xaphuongthitranbus;
-        NhanKhauTamTruDTO nktamtru;
+        NHANKHAUTAMTRU nktamtru;
         NhanKhauTamTruBUS nktamtrubus;
-        NhanKhauThuongTruDTO nkthuongtru;
+        NHANKHAUTHUONGTRU nkthuongtru;
         NhanKhauThuongTruBUS nkthuongtrubus;
-        SoHoKhauDTO sohokhau;
+        SOHOKHAU sohokhau;
         SoHoKhauBUS sohokhaubus;
-        SoTamTruDTO sotamtru;
+        SOTAMTRU sotamtru;
         SoTamTruBUS sotamtrubus;
-        NhanKhauTamVangDTO nhankhautamvang;
+        NHANKHAUTAMVANG nhankhautamvang;
         NhanKhauTamVangBUS nhankhautamvangbus;
 
 
@@ -108,7 +108,7 @@ namespace GUI
                 case "CANBO":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<CANBO>(canbobus.GetAll().Select(r=>r.dbcb).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<CANBO>(canbobus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -123,7 +123,7 @@ namespace GUI
                 case "HOCSINHSINHVIEN":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange < HOCSINHSINHVIEN > (hssvbus.GetAll().Select(r => r.dbhssv).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange < HOCSINHSINHVIEN > (hssvbus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -139,7 +139,7 @@ namespace GUI
                 case "NHANKHAU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAU>(nhankhaubus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAU>(nhankhaubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -155,7 +155,7 @@ namespace GUI
                 case "NHANKHAUTAMVANG":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMVANG>(nhankhautamvangbus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMVANG>(nhankhautamvangbus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -170,7 +170,7 @@ namespace GUI
                 case "NHANKHAUTAMTRU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(nktamtrubus.GetAll().Select(r => r.dbnktamtru).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTAMTRU>(nktamtrubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -185,7 +185,7 @@ namespace GUI
                 case "NHANKHAUTHUONGTRU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nkthuongtrubus.GetAll().Select(r => r.dbnktt).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nkthuongtrubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -201,7 +201,7 @@ namespace GUI
                 case "SOHOKHAU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOHOKHAU>(sohokhaubus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOHOKHAU>(sohokhaubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -216,7 +216,7 @@ namespace GUI
                 case "SOTAMTRU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOTAMTRU>(sotamtrubus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<SOTAMTRU>(sotamtrubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -231,7 +231,7 @@ namespace GUI
                 case "TIENANTIENSU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienantiensubus.GetAll().Select(r=>r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIENANTIENSU>(tienantiensubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -246,7 +246,7 @@ namespace GUI
                 case "TIEUSU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusubus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TIEUSU>(tieusubus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -261,7 +261,7 @@ namespace GUI
                 case "TINHTHANHPHO":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TINHTHANHPHO>(tinhthanhphobus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<TINHTHANHPHO>(tinhthanhphobus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -276,7 +276,7 @@ namespace GUI
                 case "QUANHUYEN":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<QUANHUYEN>(quanhuyenbus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<QUANHUYEN>(quanhuyenbus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -291,7 +291,7 @@ namespace GUI
                 case "XAPHUONGTHITRAN":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<XAPHUONGTHITRAN>(xaphuongthitranbus.GetAll().Select(r => r.db).ToList());
+                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<XAPHUONGTHITRAN>(xaphuongthitranbus.GetAll().Select(r=>r).ToList());
                         for (int i = 0; i < dataGridView1.Rows.Count; i++)
                         {
                             DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
@@ -335,7 +335,7 @@ namespace GUI
                                 string tentaikhoan = dataGridView1.Rows[row].Cells["tentaikhoan"].Value.ToString();
                                 string matkhau = dataGridView1.Rows[row].Cells["matkhau"].Value.ToString();
                                 string loaicanbo = dataGridView1.Rows[row].Cells["loaicanbo"].Value.ToString();
-                                canbo = new CanBoDTO(macanbo, tentaikhoan, matkhau, loaicanbo, manhankhauthuongtru);
+                                canbo = new CANBO(macanbo, tentaikhoan, matkhau, loaicanbo, manhankhauthuongtru);
                                 canbobus.Add_Table(canbo);
                                 LoadData();
                             }
@@ -347,7 +347,7 @@ namespace GUI
                                 string tentaikhoan = dataGridView1.Rows[row].Cells["tentaikhoan"].Value.ToString();
                                 string matkhau = dataGridView1.Rows[row].Cells["matkhau"].Value.ToString();
                                 string loaicanbo = dataGridView1.Rows[row].Cells["loaicanbo"].Value.ToString();
-                                canbo = new CanBoDTO(macanbo, tentaikhoan, matkhau, loaicanbo, manhankhauthuongtru);
+                                canbo = new CANBO(macanbo, tentaikhoan, matkhau, loaicanbo, manhankhauthuongtru);
                                 canbobus.Update(canbo);
                                 LoadData();
                             }
@@ -387,7 +387,7 @@ namespace GUI
                                     string str_tgkttt = dataGridView1.Rows[row].Cells["thoigianketthuctamtruthuongtru"].Value.ToString();
                                     DateTime date_tgkttt = DateTime.Parse(str_tgkttt);
                                     string str_vipham = dataGridView1.Rows[row].Cells["vipham"].Value.ToString();
-                                    hssv = new HocSinhSinhVienDTO(str_mahssv, str_madinhdanh, str_truong, str_diachithuongtru, date_tgbdtt, date_tgkttt, str_vipham);
+                                    hssv = new HOCSINHSINHVIEN(str_mahssv, str_madinhdanh, str_truong, str_diachithuongtru, date_tgbdtt, date_tgkttt, str_vipham);
                                     hssvbus.Add_Table(hssv);
                                     LoadData();
                                 }
@@ -403,7 +403,7 @@ namespace GUI
                                     string str_tgkttt = dataGridView1.Rows[row].Cells["thoigianketthuctamtruthuongtru"].Value.ToString();
                                     DateTime date_tgkttt = DateTime.Parse(str_tgkttt);
                                     string str_vipham = dataGridView1.Rows[row].Cells["vipham"].Value.ToString();
-                                    hssv = new HocSinhSinhVienDTO(str_mahssv, str_madinhdanh, str_truong, str_diachithuongtru, date_tgbdtt, date_tgkttt, str_vipham);
+                                    hssv = new HOCSINHSINHVIEN(str_mahssv, str_madinhdanh, str_truong, str_diachithuongtru, date_tgbdtt, date_tgkttt, str_vipham);
                                     hssvbus.Update(hssv);
                                     LoadData();
                                 }
@@ -457,7 +457,7 @@ namespace GUI
                                 string str_madinhdanh = TrinhTaoMa.TangMa12Kytu(str_gioitinh, date_ngaysinh.Year.ToString());
                                 dataGridView1.Rows[row].Cells["madinhdanh"].Value = str_madinhdanh;
 
-                                nhankhau = new NhanKhau(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh, 
+                                nhankhau = new NHANKHAU(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh, 
                                     str_noisinh, str_nguyenquan, str_dantoc, str_tongiao, str_quoctich, str_hochieu, 
                                     str_noithuongtru, str_diachihiennay, str_sdt, str_trinhdohocvan, str_trinhdochuyenmon, 
                                     str_biettiengdantoc, str_trinhdongoaingu, str_nghenghiep);
@@ -491,7 +491,7 @@ namespace GUI
                                 string str_trinhdongoaingu = dataGridView1.Rows[row].Cells["trinhdongoaingu"].Value.ToString();
                                 string str_nghenghiep = dataGridView1.Rows[row].Cells["nghenghiep"].Value.ToString();
 
-                                nhankhau = new NhanKhau(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh,
+                                nhankhau = new NHANKHAU(str_madinhdanh, str_hoten, str_tenkhac, date_ngaysinh, str_gioitinh,
                                     str_noisinh, str_nguyenquan, str_dantoc, str_tongiao, str_quoctich, str_hochieu,
                                     str_noithuongtru, str_diachihiennay, str_sdt, str_trinhdohocvan, str_trinhdochuyenmon,
                                     str_biettiengdantoc, str_trinhdongoaingu, str_nghenghiep);
@@ -535,7 +535,7 @@ namespace GUI
                                     DateTime date_denngay = DateTime.Parse(denngay);
                                     string lydo = dataGridView1.Rows[row].Cells["lydo"].Value.ToString();
                                     string sosotamtru = dataGridView1.Rows[row].Cells["sosotamtru"].Value.ToString();
-                                    nktamtru = new NhanKhauTamTruDTO(manhankhautamtru, noitamtru, date_tungay, date_denngay, lydo, sosotamtru, madinhdanh);
+                                    nktamtru = new NHANKHAUTAMTRU(manhankhautamtru, noitamtru, date_tungay, date_denngay, lydo, sosotamtru, madinhdanh);
                                     nktamtrubus.Add_Table(nktamtru);
                                     LoadData();
                                     //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -561,7 +561,7 @@ namespace GUI
                                 DateTime date_denngay = DateTime.Parse(denngay);
                                 string lydo = dataGridView1.Rows[row].Cells["lydo"].Value.ToString();
                                 string sosotamtru = dataGridView1.Rows[row].Cells["sosotamtru"].Value.ToString();
-                                nktamtru = new NhanKhauTamTruDTO(manhankhautamtru, noitamtru, date_tungay, date_denngay, lydo, sosotamtru, madinhdanh);
+                                nktamtru = new NHANKHAUTAMTRU(manhankhautamtru, noitamtru, date_tungay, date_denngay, lydo, sosotamtru, madinhdanh);
                                 nktamtrubus.UpdateNKTT(nktamtru);
                                 LoadData();
                             }
@@ -600,7 +600,7 @@ namespace GUI
                                 string lydo = dataGridView1.Rows[row].Cells["lydo"].Value.ToString();
                                 string noiden = dataGridView1.Rows[row].Cells["noiden"].Value.ToString();
 
-                                nhankhautamvang = new NhanKhauTamVangDTO(manhankhautamvang, date_ngaybd, date_ngaykt, lydo, noiden, madinhdanh);
+                                nhankhautamvang = new NHANKHAUTAMVANG(manhankhautamvang, date_ngaybd, date_ngaykt, lydo, noiden, madinhdanh);
                                 nhankhautamvangbus.Add_Table(nhankhautamvang);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -620,7 +620,7 @@ namespace GUI
                                 DateTime date_ngaykt = DateTime.Parse(ngaykttv);
                                 string lydo = dataGridView1.Rows[row].Cells["lydo"].Value.ToString();
                                 string noiden = dataGridView1.Rows[row].Cells["noiden"].Value.ToString();
-                                nhankhautamvang = new NhanKhauTamVangDTO(manhankhautamvang, date_ngaybd, date_ngaykt, lydo, noiden, madinhdanh);
+                                nhankhautamvang = new NHANKHAUTAMVANG(manhankhautamvang, date_ngaybd, date_ngaykt, lydo, noiden, madinhdanh);
                                 nhankhautamvangbus.Update(nhankhautamvang);
                                 LoadData();
                             }
@@ -655,7 +655,7 @@ namespace GUI
                                 string diachithuongtru = dataGridView1.Rows[row].Cells["diachithuongtru"].Value.ToString();
                                 string quanhevoichuho = dataGridView1.Rows[row].Cells["quanhevoichuho"].Value.ToString();
                                 string sosohokhau = dataGridView1.Rows[row].Cells["sosohokhau"].Value.ToString();
-                                nkthuongtru = new NhanKhauThuongTruDTO(manhankhauthuongtru, diachithuongtru, quanhevoichuho, sosohokhau, madinhdanh);
+                                nkthuongtru = new NHANKHAUTHUONGTRU(manhankhauthuongtru, diachithuongtru, quanhevoichuho, sosohokhau, madinhdanh);
                                 nkthuongtrubus.Add_Table(nkthuongtru);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -670,7 +670,7 @@ namespace GUI
                                 string diachithuongtru = dataGridView1.Rows[row].Cells["diachithuongtru"].Value.ToString();
                                 string quanhevoichuho = dataGridView1.Rows[row].Cells["quanhevoichuho"].Value.ToString();
                                 string sosohokhau = dataGridView1.Rows[row].Cells["sosohokhau"].Value.ToString();
-                                nkthuongtru = new NhanKhauThuongTruDTO(manhankhauthuongtru, diachithuongtru, quanhevoichuho, sosohokhau, madinhdanh);
+                                nkthuongtru = new NHANKHAUTHUONGTRU(manhankhauthuongtru, diachithuongtru, quanhevoichuho, sosohokhau, madinhdanh);
                                 nkthuongtrubus.UpdateNKTT(nkthuongtru);
                                 LoadData();
                             }
@@ -707,7 +707,7 @@ namespace GUI
                                 DateTime date_ngaycap = DateTime.Parse(ngaycap);
                                 string sodangky = dataGridView1.Rows[row].Cells["sodangky"].Value.ToString();
 
-                                sohokhau = new SoHoKhauDTO(sosohokhau, chuho, diachithuongtru, date_ngaycap, sodangky);
+                                sohokhau = new SOHOKHAU(sosohokhau, chuho, diachithuongtru, date_ngaycap, sodangky);
                                 sohokhaubus.Add_Table(sohokhau);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -724,7 +724,7 @@ namespace GUI
                                 string ngaycap = dataGridView1.Rows[row].Cells["ngaycap"].Value.ToString();
                                 DateTime date_ngaycap = DateTime.Parse(ngaycap);
                                 string sodangky = dataGridView1.Rows[row].Cells["sodangky"].Value.ToString();
-                                sohokhau = new SoHoKhauDTO(sosohokhau, chuho, diachithuongtru, date_ngaycap, sodangky);
+                                sohokhau = new SOHOKHAU(sosohokhau, chuho, diachithuongtru, date_ngaycap, sodangky);
                                 sohokhaubus.Update(sohokhau);
                                 LoadData();
                             }
@@ -762,7 +762,7 @@ namespace GUI
                                 string denngay = dataGridView1.Rows[row].Cells["denngay"].Value.ToString();
                                 DateTime date_denngay = DateTime.Parse(denngay);
 
-                                sotamtru = new SoTamTruDTO(sosotamtru, chuho, noitamtru, date_ngaycap, date_denngay);
+                                sotamtru = new SOTAMTRU(sosotamtru, chuho, noitamtru, date_ngaycap, date_denngay);
                                 sotamtrubus.Add_Table(sotamtru);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -781,7 +781,7 @@ namespace GUI
                                 string denngay = dataGridView1.Rows[row].Cells["denngay"].Value.ToString();
                                 DateTime date_denngay = DateTime.Parse(denngay);
 
-                                sotamtru = new SoTamTruDTO(sosotamtru, chuho, noitamtru, date_ngaycap, date_denngay);
+                                sotamtru = new SOTAMTRU(sosotamtru, chuho, noitamtru, date_ngaycap, date_denngay);
                                 sotamtrubus.Update(sotamtru);
                                 LoadData();
                             }
@@ -820,7 +820,7 @@ namespace GUI
 
                                 string ngayphat = dataGridView1.Rows[row].Cells["ngayphat"].Value.ToString();
                                 DateTime date_ngayphat = DateTime.Parse(ngayphat);
-                                tienantiensu = new TienAnTienSuDTO(matienantiensu, madinhdanh, banan,toidanh,hinhphat,date_ngayphat);
+                                tienantiensu = new TIENANTIENSU(matienantiensu, madinhdanh, banan,toidanh,hinhphat,date_ngayphat);
                                 tienantiensubus.Add_Table(tienantiensu);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -838,7 +838,7 @@ namespace GUI
                                 string banan = dataGridView1.Rows[row].Cells["banan"].Value.ToString();
                                 string ngayphat = dataGridView1.Rows[row].Cells["ngayphat"].Value.ToString();
                                 DateTime date_ngayphat = DateTime.Parse(ngayphat);
-                                tienantiensu = new TienAnTienSuDTO(matienantiensu, madinhdanh, banan, toidanh, hinhphat, date_ngayphat); ;
+                                tienantiensu = new TIENANTIENSU(matienantiensu, madinhdanh, banan, toidanh, hinhphat, date_ngayphat); ;
                                 tienantiensubus.Update(tienantiensu);
                                 LoadData();
                             }
@@ -877,7 +877,7 @@ namespace GUI
                                 string choo = dataGridView1.Rows[row].Cells["choo"].Value.ToString();
                                 string nghenghiep = dataGridView1.Rows[row].Cells["nghenghiep"].Value.ToString();
                                 string noilamviec = dataGridView1.Rows[row].Cells["noilamviec"].Value.ToString();
-                                tieusu = new TieuSuDTO(matieusu, madinhdanh, date_tgbd, date_tgkt, choo, nghenghiep, noilamviec);
+                                tieusu = new TIEUSU(matieusu, madinhdanh, date_tgbd, date_tgkt, choo, nghenghiep, noilamviec);
                                 tieusubus.Add_Table(tieusu);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -897,7 +897,7 @@ namespace GUI
                                 string choo = dataGridView1.Rows[row].Cells["choo"].Value.ToString();
                                 string nghenghiep = dataGridView1.Rows[row].Cells["nghenghiep"].Value.ToString();
                                 string noilamviec = dataGridView1.Rows[row].Cells["noilamviec"].Value.ToString();
-                                tieusu = new TieuSuDTO(matieusu, madinhdanh, date_tgbd, date_tgkt, choo, nghenghiep, noilamviec);
+                                tieusu = new TIEUSU(matieusu, madinhdanh, date_tgbd, date_tgkt, choo, nghenghiep, noilamviec);
                                 tieusubus.Update(tieusu);
                                 LoadData();
                             }
@@ -930,7 +930,7 @@ namespace GUI
                                 string matp = dataGridView1.Rows[row].Cells["matp"].Value.ToString();
                                 string ten = dataGridView1.Rows[row].Cells["ten"].Value.ToString();
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
-                                tinhthanhpho = new TinhThanhPhoDTO(matp, ten, kieu);
+                                tinhthanhpho = new TINHTHANHPHO(matp, ten, kieu);
                                 tinhthanhphobus.Add_Table(tinhthanhpho);
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
                                 //dataGridView1.Rows[e.RowIndex].Cells[dataGridView1.ColumnCount - 1].Value = "Delete";
@@ -942,7 +942,7 @@ namespace GUI
                                 string matp = dataGridView1.Rows[row].Cells["matp"].Value.ToString();
                                 string ten = dataGridView1.Rows[row].Cells["ten"].Value.ToString();
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
-                                tinhthanhpho = new TinhThanhPhoDTO(matp, ten, kieu);
+                                tinhthanhpho = new TINHTHANHPHO(matp, ten, kieu);
                                 tinhthanhphobus.Update(tinhthanhpho);
                                 LoadData();
                             }
@@ -978,7 +978,7 @@ namespace GUI
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
                                 string matp = dataGridView1.Rows[row].Cells["matp"].Value.ToString();
 
-                                quanhuyen = new QuanHuyenDTO(maqh, ten, kieu, matp);
+                                quanhuyen = new QUANHUYEN(maqh, ten, kieu, matp);
                                 quanhuyenbus.Add_Table(quanhuyen);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -992,7 +992,7 @@ namespace GUI
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
                                 string matp = dataGridView1.Rows[row].Cells["matp"].Value.ToString();
 
-                                quanhuyen = new QuanHuyenDTO(maqh, ten, kieu, matp);
+                                quanhuyen = new QUANHUYEN(maqh, ten, kieu, matp);
                                 quanhuyenbus.Update(quanhuyen);
                                 LoadData();
                             }
@@ -1027,7 +1027,7 @@ namespace GUI
                                 string ten = dataGridView1.Rows[row].Cells["ten"].Value.ToString();
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
                                 string maqh= dataGridView1.Rows[row].Cells["maqh"].Value.ToString();
-                                xaphuongthitran = new XaPhuongThiTranDTO(maxp, ten, kieu, maqh);
+                                xaphuongthitran = new XAPHUONGTHITRAN(maxp, ten, kieu, maqh);
                                 xaphuongthitranbus.Add_Table(xaphuongthitran);
                                 LoadData();
                                 //dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count - 2);
@@ -1042,7 +1042,7 @@ namespace GUI
                                 string ten = dataGridView1.Rows[row].Cells["ten"].Value.ToString();
                                 string kieu = dataGridView1.Rows[row].Cells["kieu"].Value.ToString();
                                 string maqh = dataGridView1.Rows[row].Cells["maqh"].Value.ToString();
-                                xaphuongthitran = new XaPhuongThiTranDTO(maxp, ten, kieu, maqh);
+                                xaphuongthitran = new XAPHUONGTHITRAN(maxp, ten, kieu, maqh);
                                 xaphuongthitranbus.Update(xaphuongthitran);
                                 LoadData();
                             }

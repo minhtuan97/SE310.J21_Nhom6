@@ -10,25 +10,22 @@ using DTO;
 
 namespace DAO
 {
-    public class CanBoDAO : DBConnection<CanBoDTO>
+    public class CanBoDAO : DBConnection<CANBO>
     {
         public CanBoDAO() : base() { }
-        public override List<CanBoDTO> getAll()
+        public override List<CANBO> getAll()
         {
             var kq = from canbo in qlhk.CANBOs
-                     select new CanBoDTO
-                     {
-                         dbcb = canbo,
-                     };
+                     select canbo;
 
             return kq.ToList();
         }
 
-        public override bool insert(CanBoDTO data)
+        public override bool insert(CANBO data)
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
             //qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data.db);
-            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
+            qlhk.CANBOs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -69,9 +66,9 @@ namespace DAO
         {
             try
             {
-                List<CanBoDTO> kq = this.getAll();
-                CanBoDTO[] arr = kq.ToArray();
-                qlhk.CANBOs.DeleteOnSubmit(arr[row].dbcb);
+                List<CANBO> kq = this.getAll();
+                CANBO[] arr = kq.ToArray();
+                qlhk.CANBOs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -81,20 +78,20 @@ namespace DAO
             return false;
 
         }
-        public override bool update(CanBoDTO cb)
+        public override bool update(CANBO cb)
         {
 
             // Query the database for the row to be updated.
-            var query = qlhk.CANBOs.Where(q => q.MACANBO == cb.dbcb.MACANBO);
+            var query = qlhk.CANBOs.Where(q => q.MACANBO == cb.MACANBO);
 
             // Execute the query, and change the column values
             // you want to change.
             foreach (CANBO kq in query)
             {
-                kq.MANHANKHAUTHUONGTRU = cb.dbcb.MANHANKHAUTHUONGTRU;
-                kq.TENTAIKHOAN = cb.dbcb.TENTAIKHOAN;
-                kq.MATKHAU = cb.dbcb.MATKHAU;
-                kq.LOAICANBO = cb.dbcb.LOAICANBO;
+                kq.MANHANKHAUTHUONGTRU = cb.MANHANKHAUTHUONGTRU;
+                kq.TENTAIKHOAN = cb.TENTAIKHOAN;
+                kq.MATKHAU = cb.MATKHAU;
+                kq.LOAICANBO = cb.LOAICANBO;
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.
@@ -110,10 +107,10 @@ namespace DAO
                 return false;
             }
         }
-        public override bool insert_table(CanBoDTO data)
+        public override bool insert_table(CANBO data)
         {
 
-            qlhk.CANBOs.InsertOnSubmit(data.dbcb);
+            qlhk.CANBOs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -126,35 +123,23 @@ namespace DAO
                 return false;
             }
         }
-        public List<CanBoDTO> TimKiem(string query)
+        public List<CANBO> TimKiem(string query)
         {
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM CANBO" + query;
             var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
-            List<CanBoDTO> lst = new List<CanBoDTO>();
-            foreach (CANBO i in res)
-            {
-                CanBoDTO ts = new CanBoDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
-        public List<CanBoDTO> TimKiemJoinNhanKhau(string query)
+        public List<CANBO> TimKiemJoinNhanKhau(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM canbo, nhankhauthuongtru, nhankhau " +
                     "WHERE canbo.manhankhauthuongtru = nhankhauthuongtru.manhankhauthuongtru AND nhankhau.madinhdanh=nhankhauthuongtru.manhankhau" + query;
             var res = qlhk.ExecuteQuery<CANBO>(query).ToList();
-            List<CanBoDTO> lst = new List<CanBoDTO>();
-            foreach (CANBO i in res)
-            {
-                CanBoDTO ts = new CanBoDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
 
            
         }
@@ -192,15 +177,12 @@ namespace DAO
 
 
         //Lấy thông tin cán bộ từ bảng nhân khẩu
-        public List<NhanKhauThuongTruDTO> getThongTinNhanKhau(string manhankhauthuongtru)
+        public List<NHANKHAUTHUONGTRU> getThongTinNhanKhau(string manhankhauthuongtru)
         {
             var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
                      join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
-                     select new NhanKhauThuongTruDTO
-                     {
-                         dbnktt = nktt,
-                         db = nk
-                     };
+                     where nktt.MANHANKHAUTHUONGTRU == manhankhauthuongtru
+                     select nktt;
 
             return kq.ToList();
         }

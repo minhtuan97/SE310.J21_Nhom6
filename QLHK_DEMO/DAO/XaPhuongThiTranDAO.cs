@@ -9,25 +9,22 @@ using DTO;
 
 namespace DAO
 {
-    public class XaPhuongThiTranDAO:DBConnection<XaPhuongThiTranDTO>
+    public class XaPhuongThiTranDAO:DBConnection<XAPHUONGTHITRAN>
     {
         public XaPhuongThiTranDAO() : base() { }
 
-        public override List<XaPhuongThiTranDTO> getAll()
+        public override List<XAPHUONGTHITRAN> getAll()
         {
-            XaPhuongThiTranDTO nk = new XaPhuongThiTranDTO();
+            XAPHUONGTHITRAN nk = new XAPHUONGTHITRAN();
             var kq = from xptttv in qlhk.XAPHUONGTHITRANs
-                     select new XaPhuongThiTranDTO
-                     {
-                         db = xptttv
-                     };
-            List<XaPhuongThiTranDTO> x = kq.ToList();
+                     select xptttv;
+            List<XAPHUONGTHITRAN> x = kq.ToList();
             return x;
         }
 
-        public override bool insert(XaPhuongThiTranDTO xaphuong)
+        public override bool insert(XAPHUONGTHITRAN xaphuong)
         {
-            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(xaphuong.db);
+            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(xaphuong);
             try
             {
                 qlhk.SubmitChanges();
@@ -40,9 +37,9 @@ namespace DAO
                 return false;
             }
         }
-        public override bool insert_table(XaPhuongThiTranDTO data)
+        public override bool insert_table(XAPHUONGTHITRAN data)
         {
-            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(data.db);
+            qlhk.XAPHUONGTHITRANs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -83,9 +80,9 @@ namespace DAO
         {
             try
             {
-                List<XaPhuongThiTranDTO> kq = this.getAll();
-                XaPhuongThiTranDTO[] arr = kq.ToArray();
-                qlhk.XAPHUONGTHITRANs.DeleteOnSubmit(arr[row].db);
+                List<XAPHUONGTHITRAN> kq = this.getAll();
+                XAPHUONGTHITRAN[] arr = kq.ToArray();
+                qlhk.XAPHUONGTHITRANs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -95,11 +92,11 @@ namespace DAO
             return false;
         }
 
-        public override bool update(XaPhuongThiTranDTO xaphuong)
+        public override bool update(XAPHUONGTHITRAN xaphuong)
         {
             var query =
                 from xptttv in qlhk.XAPHUONGTHITRANs
-                where xaphuong.db.maxp == xptttv.maxp
+                where xaphuong.maxp == xptttv.maxp
                 select xptttv;
 
             // Execute the query, and change the column values
@@ -107,10 +104,10 @@ namespace DAO
 
             foreach (XAPHUONGTHITRAN kq in query)
             {
-                kq.maxp = xaphuong.db.maxp;
-                kq.maqh = xaphuong.db.maqh;
-                kq.kieu = xaphuong.db.kieu;
-                kq.ten = xaphuong.db.ten;
+                kq.maxp = xaphuong.maxp;
+                kq.maqh = xaphuong.maqh;
+                kq.kieu = xaphuong.kieu;
+                kq.ten = xaphuong.ten;
             }
 
             // Submit the changes to the database.
@@ -127,19 +124,13 @@ namespace DAO
             }
         }
 
-        public List<XaPhuongThiTranDTO> TimKiem(string query)
+        public List<XAPHUONGTHITRAN> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM xaphuongthitran" + query;
             var res = qlhk.ExecuteQuery<XAPHUONGTHITRAN>(query).ToList();
-            List<XaPhuongThiTranDTO> lst = new List<XaPhuongThiTranDTO>();
-            foreach (XAPHUONGTHITRAN i in res)
-            {
-                XaPhuongThiTranDTO ts = new XaPhuongThiTranDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
     }
 }

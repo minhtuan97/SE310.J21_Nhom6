@@ -15,7 +15,7 @@ namespace GUI
 {
     public partial class SoTamTruGUI : Form
     {
-        SoTamTruDTO sotamtruDto = new SoTamTruDTO();
+        SOTAMTRU sotamtruDto = new SOTAMTRU();
         SoTamTruBUS sotamtruBus = new SoTamTruBUS();
         NhanKhauTamTruBUS nktamtru = new NhanKhauTamTruBUS();
 
@@ -152,11 +152,11 @@ namespace GUI
 
         private void Filldata()
         {
-            txt_SoSoTamTru.Text = sotamtruDto.db.SOSOTAMTRU;
-            dt_TuNgay.Value = sotamtruDto.db.NGAYCAP;
-            dt_DenNgay.Value = sotamtruDto.db.DENNGAY;
+            txt_SoSoTamTru.Text = sotamtruDto.SOSOTAMTRU;
+            dt_TuNgay.Value = sotamtruDto.NGAYCAP;
+            dt_DenNgay.Value = sotamtruDto.DENNGAY;
 
-            txt_NoiTamTru.Text = sotamtruDto.db.NOITAMTRU;
+            txt_NoiTamTru.Text = sotamtruDto.NOITAMTRU;
             ImportToComboboxMaChuHo();
 
             taoDanhSachNhanKhau();
@@ -203,7 +203,7 @@ namespace GUI
 
 
 
-            sotamtruDto = new SoTamTruDTO(sosotamtru,machuhotamtru, choohiennay, tungay, denngay);
+            sotamtruDto = new SOTAMTRU(sosotamtru,machuhotamtru, choohiennay, tungay, denngay);
 
             if (sotamtruBus.Update(sotamtruDto))
             {
@@ -260,7 +260,7 @@ namespace GUI
 
                 
 
-                SoTamTruDTO sotamtru = new SoTamTruDTO(sosotamtru, machuhotamtru, choohiennay,TuNgay,DenNgay);
+                SOTAMTRU sotamtru = new SOTAMTRU(sosotamtru, machuhotamtru, choohiennay,TuNgay,DenNgay);
 
                 if (sotamtruBus.Update(sotamtru))
                 {
@@ -327,8 +327,8 @@ namespace GUI
             datagridview.DataSource = null;
             datagridview.Rows.Clear();
 
-            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(sotamtruDto.NhanKhau.Select(r => r.dbnktamtru.NHANKHAU).ToList());
-            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(sotamtruDto.NhanKhau.Select(r => r.dbnktamtru).ToList());
+            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(sotamtruDto.NhanKhau.Select(r => r.NHANKHAU).ToList());
+            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(sotamtruDto.NhanKhau.Select(r => r).ToList());
             DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
             tb.Columns.RemoveAt(tb.Columns.Count - 1);
             tb.Columns.RemoveAt(tb.Columns.Count - 1);
@@ -348,7 +348,7 @@ namespace GUI
             }
 
 
-            List<SoTamTruDTO> sotamtru = new List<SoTamTruDTO>();
+            List<SOTAMTRU> sotamtru = new List<SOTAMTRU>();
             sotamtru = sotamtruBus.TimKiem("sosotamtru='" + sosotamtru + "'");
 
 
@@ -422,7 +422,7 @@ namespace GUI
                     MessageBox.Show("Sửa thông tin sổ tạm trú " + sosotamtru + " thành công!");
                     ResetValueInput();
                     //Tim so tam tru
-                    List<SoTamTruDTO> sotamtru = new List<SoTamTruDTO>();
+                    List<SOTAMTRU> sotamtru = new List<SOTAMTRU>();
                     sotamtru = sotamtruBus.TimKiemSoTamTru(sosotamtru);
 
                     if (!sotamtruBus.ExistedSoTamTru(sosotamtru))
@@ -434,8 +434,7 @@ namespace GUI
                     //Tim thay so tam tru
                     if (sotamtru.Count > 0)
                     {
-                        SoTamTruDTO sotamtru_t = sotamtru[0];
-                        sotamtruDto = new SoTamTruDTO(sotamtru_t);
+                        sotamtruDto = sotamtru[0];
                         Filldata();
                     }
 
@@ -474,7 +473,7 @@ namespace GUI
             string madinhdanh = datagridview.Rows[e.RowIndex].Cells[0].Value.ToString();
             //Tìm trong bảng nhân khẩu tạm trú
             nktamtru = new NhanKhauTamTruBUS();
-            List<NhanKhauTamTruDTO> nktt = nktamtru.TimKiem("madinhdanh='" + madinhdanh + "'");
+            List<NHANKHAUTAMTRU> nktt = nktamtru.TimKiem("madinhdanh='" + madinhdanh + "'");
             if (nktt.Count > 0)
             {
                 NhanKhauTamTruGUI fr_NhanKhauTamTru = new NhanKhauTamTruGUI(madinhdanh, "1");

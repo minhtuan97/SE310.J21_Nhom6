@@ -9,42 +9,33 @@ using DTO;
 
 namespace DAO
 {
-    public class SoHoKhauDAO:DBConnection<SoHoKhauDTO>
+    public class SoHoKhauDAO:DBConnection<SOHOKHAU>
     {
         public SoHoKhauDAO() : base() { }
 
-        public override List<SoHoKhauDTO> getAll()
+        public override List<SOHOKHAU> getAll()
         {
-            //SoHoKhauDTO nk = new SoHoKhauDTO();
+            //SOHOKHAU nk = new SOHOKHAU();
             var kq = from shkt in qlhk.SOHOKHAUs
-                     select new SoHoKhauDTO
-                     {
-                         db = shkt,
-                         TenChuHo = qlhk.NHANKHAUs.Where(a => a.MADINHDANH == (
-                           qlhk.NHANKHAUTHUONGTRUs.Where(b => b.MANHANKHAUTHUONGTRU == shkt.MACHUHO)
-                           .Select(b1 => b1.MADINHDANH).SingleOrDefault()))
-                           .Select(a1 => a1.HOTEN).SingleOrDefault()
-                         //NhanKhau = qlhk.NHANKHAUTHUONGTRUs.Where(nk => nk.SOSOHOKHAU == shkt.SOSOHOKHAU).ToList(),
-
-                     };
+                     select shkt;
 
             //Lay thong tin nhan khau trong so ho khau
-            foreach (SoHoKhauDTO so in kq)
+            foreach (SOHOKHAU so in kq)
             {
-                so.NhanKhau = (from nktt in qlhk.NHANKHAUTHUONGTRUs
-                              where nktt.SOSOHOKHAU == so.db.SOSOHOKHAU
-                              select new NhanKhauThuongTruDTO
-                              {
-                                  dbnktt = nktt
-                              }).ToList();
+                so.TenChuHo = qlhk.NHANKHAUs.Where(a => a.MADINHDANH == (
+                              qlhk.NHANKHAUTHUONGTRUs.Where(b => b.MANHANKHAUTHUONGTRU == so.MACHUHO)
+                              .Select(b1 => b1.MADINHDANH).SingleOrDefault()))
+                              .Select(a1 => a1.HOTEN).SingleOrDefault();
+
+                //so.NhanKhau = so.NHANKHAUTHUONGTRUs.ToList();
             }
-            List<SoHoKhauDTO> x = kq.ToList();
+            List<SOHOKHAU> x = kq.ToList();
             return x;
         }
 
-        public override bool insert_table(SoHoKhauDTO data)
+        public override bool insert_table(SOHOKHAU data)
         {
-            qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
+            qlhk.SOHOKHAUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -57,9 +48,9 @@ namespace DAO
             }
             return true;
         }
-        public override bool insert(SoHoKhauDTO data)
+        public override bool insert(SOHOKHAU data)
         {
-            qlhk.SOHOKHAUs.InsertOnSubmit(data.db);
+            qlhk.SOHOKHAUs.InsertOnSubmit(data);
 
             //foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
             //{
@@ -81,14 +72,14 @@ namespace DAO
         public bool XoaSoHK(string soSoHoKhau)
         {
 
-            SoHoKhauDTO[] nktt = this.getAll().ToArray();
+            SOHOKHAU[] nktt = this.getAll().ToArray();
             try
             {
                 foreach (var item in nktt)
                 {
-                    if (item.db.SOSOHOKHAU == soSoHoKhau)
+                    if (item.SOSOHOKHAU == soSoHoKhau)
                     {
-                        qlhk.SOHOKHAUs.DeleteOnSubmit(item.db);
+                        qlhk.SOHOKHAUs.DeleteOnSubmit(item);
                         qlhk.SubmitChanges();
                         break;
                     }
@@ -127,10 +118,10 @@ namespace DAO
         }
         public override bool delete(int row)
         {
-            SoHoKhauDTO[] nktt = this.getAll().ToArray();
+            SOHOKHAU[] nktt = this.getAll().ToArray();
             try
             {
-                qlhk.SOHOKHAUs.DeleteOnSubmit(nktt[row].db);
+                qlhk.SOHOKHAUs.DeleteOnSubmit(nktt[row]);
                 return true;
             }
             catch (Exception e)
@@ -141,20 +132,20 @@ namespace DAO
 
         }
 
-        public override bool update(SoHoKhauDTO data)
+        public override bool update(SOHOKHAU data)
         {
 
             // Query the database for the row to be updated.
-            var query = qlhk.SOHOKHAUs.Where(q => q.SOSOHOKHAU == data.db.SOSOHOKHAU);
+            var query = qlhk.SOHOKHAUs.Where(q => q.SOSOHOKHAU == data.SOSOHOKHAU);
 
             // Execute the query, and change the column values
             // you want to change.
             foreach (SOHOKHAU kq in query)
             {
-                kq.MACHUHO = data.db.MACHUHO;
-                kq.DIACHI = data.db.DIACHI;
-                kq.NGAYCAP = data.db.NGAYCAP;
-                kq.SODANGKY = data.db.SODANGKY;
+                kq.MACHUHO = data.MACHUHO;
+                kq.DIACHI = data.DIACHI;
+                kq.NGAYCAP = data.NGAYCAP;
+                kq.SODANGKY = data.SODANGKY;
                 // Insert any additional changes to column values.
             }
             // Submit the changes to the database.
@@ -170,22 +161,13 @@ namespace DAO
                 return false;
             }
         }
-        public List<SoHoKhauDTO> TimKiem(string query)
+        public List<SOHOKHAU> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sohokhau" + query;
             var res = qlhk.ExecuteQuery<SOHOKHAU>(query).ToList();
-            List<SoHoKhauDTO> lst = new List<SoHoKhauDTO>();
-            foreach (SOHOKHAU i in res)
-            {
-                SoHoKhauDTO shk = new SoHoKhauDTO(i, qlhk.NHANKHAUs.Where(a => a.MADINHDANH == (
-                          qlhk.NHANKHAUTHUONGTRUs.Where(b => b.MANHANKHAUTHUONGTRU == i.MACHUHO)
-                          .Select(b1 => b1.MADINHDANH).SingleOrDefault()))
-                           .Select(a1 => a1.HOTEN).SingleOrDefault());
-                lst.Add(shk);
-            }
 
-            return lst;
+            return res;
             
         }
 

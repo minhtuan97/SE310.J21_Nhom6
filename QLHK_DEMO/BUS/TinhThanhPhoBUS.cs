@@ -9,15 +9,15 @@ using System.Data;
 
 namespace BUS
 {
-    public class TinhThanhPhoBUS: AbstractFormBUS<TinhThanhPhoDTO>
+    public class TinhThanhPhoBUS: AbstractFormBUS<TINHTHANHPHO>
     {
         TinhThanhPhoDAO obj = new TinhThanhPhoDAO();
 
-        public override List<TinhThanhPhoDTO> GetAll()
+        public override List<TINHTHANHPHO> GetAll()
         {
             return obj.getAll();
         }
-        public override bool Add(TinhThanhPhoDTO data)
+        public override bool Add(TINHTHANHPHO data)
         {
             return obj.insert(data);
         }
@@ -30,17 +30,17 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(TinhThanhPhoDTO data)
+        public override bool Update(TINHTHANHPHO data)
         {
             return obj.update(data);
         }
-        public override bool Add_Table(TinhThanhPhoDTO data)
+        public override bool Add_Table(TINHTHANHPHO data)
         {
             return obj.insert_table(data);
 
         }
 
-        public List<TinhThanhPhoDTO> TimKiem(string query)
+        public List<TINHTHANHPHO> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

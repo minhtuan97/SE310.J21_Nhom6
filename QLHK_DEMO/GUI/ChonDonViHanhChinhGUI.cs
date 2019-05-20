@@ -32,7 +32,7 @@ namespace GUI
 
             cbbTinhThanh.DisplayMember = "ten";
             cbbTinhThanh.ValueMember = "matp";
-            cbbTinhThanh.DataSource = ttp.GetAll().Select(r => r.db).ToList();
+            cbbTinhThanh.DataSource = ttp.GetAll().Select(r => r).ToList();
             cbbTinhThanh.SelectedValue = "74";
             cbbQuanHuyen.SelectedValue = "724";
 
@@ -43,14 +43,14 @@ namespace GUI
         {
             cbbQuanHuyen.DisplayMember = "ten";
             cbbQuanHuyen.ValueMember = "maqh";
-            cbbQuanHuyen.DataSource = qh.TimKiem("matp='"+cbbTinhThanh.SelectedValue.ToString()+"'").Select(r => r.db).ToList();
+            cbbQuanHuyen.DataSource = qh.TimKiem("matp='"+cbbTinhThanh.SelectedValue.ToString()+"'").Select(r => r).ToList();
         }
 
         private void cbbQuanHuyen_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbbXaPhuong.DisplayMember = "ten";
             cbbXaPhuong.ValueMember = "maxp";
-            cbbXaPhuong.DataSource = xp.TimKiem("maqh='" + cbbQuanHuyen.SelectedValue.ToString() + "'").Select(r => r.db).ToList();
+            cbbXaPhuong.DataSource = xp.TimKiem("maqh='" + cbbQuanHuyen.SelectedValue.ToString() + "'").Select(r => r).ToList();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -66,6 +66,19 @@ namespace GUI
         {
             diaChi = "";
             this.Close();
+        }
+
+
+        private void tbDiaChi_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                diaChi = (String.IsNullOrEmpty(tbDiaChi.Text) ? "" : tbDiaChi.Text + ", ")
+               + (String.IsNullOrEmpty(cbbXaPhuong.Text) ? "" : cbbXaPhuong.Text + ", ")
+               + (String.IsNullOrEmpty(cbbQuanHuyen.Text) ? "" : cbbQuanHuyen.Text + ", ")
+               + (String.IsNullOrEmpty(cbbTinhThanh.Text) ? "" : cbbTinhThanh.Text);
+                this.Close();
+            }
         }
     }
 }

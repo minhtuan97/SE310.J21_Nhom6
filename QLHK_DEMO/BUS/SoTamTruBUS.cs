@@ -11,31 +11,31 @@ using System.ComponentModel;
 
 namespace BUS
 {
-    public class SoTamTruBUS:AbstractFormBUS<SoTamTruDTO>
+    public class SoTamTruBUS:AbstractFormBUS<SOTAMTRU>
     {
         SoTamTruDAO SoTamTru = new SoTamTruDAO();
         NhanKhauTamTruDAO nktt = new NhanKhauTamTruDAO();
-        public override List<SoTamTruDTO> GetAll()
+        public override List<SOTAMTRU> GetAll()
         {
             return SoTamTru.getAll();
         }
 
-        public List<SoTamTruDTO> GetAllSoTamTru()
+        public List<SOTAMTRU> GetAllSoTamTru()
         {
             return SoTamTru.getAllSoTamTru();
         }
 
 
-        public override bool Update(SoTamTruDTO data)
+        public override bool Update(SOTAMTRU data)
         {
             return SoTamTru.update(data);
         }
 
-        public override bool Add(SoTamTruDTO sotamtru)
+        public override bool Add(SOTAMTRU sotamtru)
         {
             return SoTamTru.insert(sotamtru);
         }
-        public override bool Add_Table(SoTamTruDTO data)
+        public override bool Add_Table(SOTAMTRU data)
         {
             return SoTamTru.insert_table(data);
         }
@@ -51,21 +51,21 @@ namespace BUS
         {
             return SoTamTru.deleteSTT(id);
         }
-        public List<SoTamTruDTO> TimKiem(string query)
+        public List<SOTAMTRU> TimKiem(string query)
         {
-            List<SoTamTruDTO> list = SoTamTru.TimKiem(query);
+            List<SOTAMTRU> list = SoTamTru.TimKiem(query);
             if (list.Count > 0)
             {
-                foreach (SoTamTruDTO item in list)
+                foreach (SOTAMTRU item in list)
                 {
-                    item.NhanKhau = nktt.TimKiem("SOSOTAMTRU='" + item.db.SOSOTAMTRU + "'");
+                    item.NhanKhau = nktt.TimKiem("SOSOTAMTRU='" + item.SOSOTAMTRU + "'");
                 }
             }
 
             return list;
         }
 
-        public List<SoTamTruDTO> TimKiemSoTamTru(string sosotamtru)
+        public List<SOTAMTRU> TimKiemSoTamTru(string sosotamtru)
         {
             return SoTamTru.TimKiemSoTamTru(sosotamtru);
         }

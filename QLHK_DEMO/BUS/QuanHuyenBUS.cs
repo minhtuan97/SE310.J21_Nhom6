@@ -9,15 +9,15 @@ using System.Data;
 
 namespace BUS
 {
-    public class QuanHuyenBUS: AbstractFormBUS<QuanHuyenDTO>
+    public class QuanHuyenBUS: AbstractFormBUS<QUANHUYEN>
     {
         QuanHuyenDAO obj = new QuanHuyenDAO();
 
-        public override List<QuanHuyenDTO> GetAll()
+        public override List<QUANHUYEN> GetAll()
         {
             return obj.getAll();
         }
-        public override bool Add(QuanHuyenDTO data)
+        public override bool Add(QUANHUYEN data)
         {
             return obj.insert(data);
         }
@@ -30,16 +30,16 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(QuanHuyenDTO data)
+        public override bool Update(QUANHUYEN data)
         {
             return obj.update(data);
         }
-        public override bool Add_Table(QuanHuyenDTO data)
+        public override bool Add_Table(QUANHUYEN data)
         {
             return obj.insert_table(data);
         }
 
-        public List<QuanHuyenDTO> TimKiem(string query)
+        public List<QUANHUYEN> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }

@@ -8,7 +8,7 @@ using DTO;
 
 namespace DAO
 {
-    public class TienAnTienSuDAO : DBConnection<TienAnTienSuDTO>
+    public class TienAnTienSuDAO : DBConnection<TIENANTIENSU>
     {
         public TienAnTienSuDAO() : base() { }
 
@@ -16,9 +16,9 @@ namespace DAO
         {
             try
             {
-                List<TienAnTienSuDTO> kq = this.getAll();
-                TienAnTienSuDTO[] arr = kq.ToArray();
-                qlhk.TIENANTIENSUs.DeleteOnSubmit(arr[row].db);
+                List<TIENANTIENSU> kq = this.getAll();
+                TIENANTIENSU[] arr = kq.ToArray();
+                qlhk.TIENANTIENSUs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -73,14 +73,11 @@ namespace DAO
             }
         }
 
-        public override List<TienAnTienSuDTO> getAll()
+        public override List<TIENANTIENSU> getAll()
         {
             var kq = from tienantiensu in qlhk.TIENANTIENSUs
-                        select new TienAnTienSuDTO
-                        {
-                            db = tienantiensu,
-                        };
-            List<TienAnTienSuDTO> x = kq.ToList();
+                        select tienantiensu;
+            List<TIENANTIENSU> x = kq.ToList();
             return x;
         }
 
@@ -92,9 +89,9 @@ namespace DAO
             return kq.ToList();
         }
 
-        public override bool insert(TienAnTienSuDTO data)
+        public override bool insert(TIENANTIENSU data)
         {
-            qlhk.TIENANTIENSUs.InsertOnSubmit(data.db);
+            qlhk.TIENANTIENSUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -108,9 +105,9 @@ namespace DAO
             }
         }
 
-        public override bool insert_table(TienAnTienSuDTO data)
+        public override bool insert_table(TIENANTIENSU data)
         {
-            qlhk.TIENANTIENSUs.InsertOnSubmit(data.db);
+            qlhk.TIENANTIENSUs.InsertOnSubmit(data);
             try
             {
                 qlhk.SubmitChanges();
@@ -124,12 +121,12 @@ namespace DAO
             }
         }
 
-        public override bool update(TienAnTienSuDTO tienantiensu)
+        public override bool update(TIENANTIENSU tienantiensu)
         {
             // Query the database for the row to be updated.
             var query =
                 from ts in qlhk.TIENANTIENSUs
-                where tienantiensu.db.MATIENANTIENSU == ts.MATIENANTIENSU
+                where tienantiensu.MATIENANTIENSU == ts.MATIENANTIENSU
                 select ts;
 
             // Execute the query, and change the column values
@@ -137,12 +134,12 @@ namespace DAO
 
             foreach (TIENANTIENSU kq in query)
             {
-                kq.MATIENANTIENSU = tienantiensu.db.MATIENANTIENSU;
-                kq.MADINHDANH = tienantiensu.db.MADINHDANH;
-                kq.BANAN = tienantiensu.db.BANAN;
-                kq.TOIDANH = tienantiensu.db.TOIDANH;
-                kq.HINHPHAT = tienantiensu.db.HINHPHAT;
-                kq.NGAYPHAT = tienantiensu.db.NGAYPHAT;
+                kq.MATIENANTIENSU = tienantiensu.MATIENANTIENSU;
+                kq.MADINHDANH = tienantiensu.MADINHDANH;
+                kq.BANAN = tienantiensu.BANAN;
+                kq.TOIDANH = tienantiensu.TOIDANH;
+                kq.HINHPHAT = tienantiensu.HINHPHAT;
+                kq.NGAYPHAT = tienantiensu.NGAYPHAT;
                 // Insert any additional changes to column values.
             }
 
@@ -160,19 +157,13 @@ namespace DAO
             }
         }
 
-        public List<TienAnTienSuDTO> TimKiem(string query)
+        public List<TIENANTIENSU> TimKiem(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM tienantiensu" + query;
             var res = qlhk.ExecuteQuery<TIENANTIENSU>(query).ToList();
-            List<TienAnTienSuDTO> lst = new List<TienAnTienSuDTO>();
-            foreach (TIENANTIENSU i in res)
-            {
-                TienAnTienSuDTO ts = new TienAnTienSuDTO(i);
-                lst.Add(ts);
-            }
 
-            return lst;
+            return res;
         }
     }
 }

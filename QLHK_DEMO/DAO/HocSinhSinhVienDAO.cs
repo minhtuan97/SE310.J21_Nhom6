@@ -8,38 +8,32 @@ using DTO;
 
 namespace DAO
 {
-    public class HocSinhSinhVienDAO : DBConnection<HocSinhSinhVienDTO>
+    public class HocSinhSinhVienDAO : DBConnection<HOCSINHSINHVIEN>
     {
         public HocSinhSinhVienDAO() : base() { }
 
-        public override List<HocSinhSinhVienDTO> getAll()
+        public override List<HOCSINHSINHVIEN> getAll()
         {
             var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
-                     select new HocSinhSinhVienDTO
-                     {
-                         dbhssv = hocsinhsinhvien,
-                     };
-            List<HocSinhSinhVienDTO> x = kq.ToList();
+                     select hocsinhsinhvien;
+            List<HOCSINHSINHVIEN> x = kq.ToList();
             return x;
         }
 
         // join 2 bảng
-        public List<HocSinhSinhVienDTO> getAllJoinNhanKhau()
+        public List<HOCSINHSINHVIEN> getAllJoinNhanKhau()
         {
             var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
                      join nhankhau in qlhk.NHANKHAUs
                      on hocsinhsinhvien.MADINHDANH equals nhankhau.MADINHDANH
-                     select new HocSinhSinhVienDTO
-                     {
-                         dbhssv = hocsinhsinhvien,
-                     };
-            List<HocSinhSinhVienDTO> x = kq.ToList();
+                     select hocsinhsinhvien;
+            List<HOCSINHSINHVIEN> x = kq.ToList();
             return x;
         }
 
-        public override bool insert_table(HocSinhSinhVienDTO hssv)
+        public override bool insert_table(HOCSINHSINHVIEN hssv)
         {
-            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv.dbhssv);
+            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv);
             try
             {
                 qlhk.SubmitChanges();
@@ -96,9 +90,9 @@ namespace DAO
         {
             try
             {
-                List<HocSinhSinhVienDTO> kq = this.getAll();
-                HocSinhSinhVienDTO[] arr = kq.ToArray();
-                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(arr[row].dbhssv);
+                List<HOCSINHSINHVIEN> kq = this.getAll();
+                HOCSINHSINHVIEN[] arr = kq.ToArray();
+                qlhk.HOCSINHSINHVIENs.DeleteOnSubmit(arr[row]);
                 return true;
             }
             catch (Exception e)
@@ -108,12 +102,12 @@ namespace DAO
             return false;
         }
 
-        public override bool update(HocSinhSinhVienDTO hssv)
+        public override bool update(HOCSINHSINHVIEN hssv)
         {
             // Query the database for the row to be updated.
             var query =
                 from x in qlhk.HOCSINHSINHVIENs
-                where hssv.dbhssv.MAHSSV == x.MAHSSV
+                where hssv.MAHSSV == x.MAHSSV
                 select x;
 
             // Execute the query, and change the column values
@@ -121,13 +115,13 @@ namespace DAO
 
             foreach (HOCSINHSINHVIEN kq in query)
             {
-                //kq.MAHSSV = hssv.dbhssv.MAHSSV;
-                kq.MADINHDANH = hssv.dbhssv.MADINHDANH;
-                kq.TRUONG = hssv.dbhssv.TRUONG;
-                kq.DIACHITHUONGTRU = hssv.dbhssv.DIACHITHUONGTRU;
-                kq.THOIGIANBATDAUTAMTRUTHUONGTRU = hssv.dbhssv.THOIGIANBATDAUTAMTRUTHUONGTRU;
-                kq.THOIGIANKETTHUCTAMTRUTHUONGTRU = hssv.dbhssv.THOIGIANKETTHUCTAMTRUTHUONGTRU;
-                kq.VIPHAM = hssv.dbhssv.VIPHAM;
+                //kq.MAHSSV = hssv.MAHSSV;
+                kq.MADINHDANH = hssv.MADINHDANH;
+                kq.TRUONG = hssv.TRUONG;
+                kq.DIACHITHUONGTRU = hssv.DIACHITHUONGTRU;
+                kq.THOIGIANBATDAUTAMTRUTHUONGTRU = hssv.THOIGIANBATDAUTAMTRUTHUONGTRU;
+                kq.THOIGIANKETTHUCTAMTRUTHUONGTRU = hssv.THOIGIANKETTHUCTAMTRUTHUONGTRU;
+                kq.VIPHAM = hssv.VIPHAM;
                 // Insert any additional changes to column values.
             }
 
@@ -155,30 +149,25 @@ namespace DAO
         }
 
         // join 2 bảng ???
-        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhau(string query)
+        public List<HOCSINHSINHVIEN> TimKiemJoinNhanKhau(string query)
         {
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM HOCSINHSINHVIEN JOIN NHANKHAU ON HOCSINHSINHVIEN.MADINHDANH=NHANKHAU.MADINHDANH " + query;
             var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();
-            List<HocSinhSinhVienDTO> lst = new List<HocSinhSinhVienDTO>();
-            foreach (HOCSINHSINHVIEN i in res)
-            {
-                HocSinhSinhVienDTO ts = new HocSinhSinhVienDTO(i);
-                lst.Add(ts);
-            }
-            return lst;
+            
+            return res;
         }
-        public List<HocSinhSinhVienDTO> TimKiemJoinNhanKhauCuTru(string query)
+        public List<HOCSINHSINHVIEN> TimKiemJoinNhanKhauCuTru(string query)
         {
                 return null;
                 //    var kq = from hocsinhsinhvien in qlhk.HOCSINHSINHVIENs
                 //             join nhankhau in qlhk.NHANKHAUs
                 //             on hocsinhsinhvien.MADINHDANH equals query
-                //             select new HocSinhSinhVienDTO
+                //             select new HOCSINHSINHVIEN
                 //             {
-                //                 dbhssv = hocsinhsinhvien,
+                //                 = hocsinhsinhvien,
                 //             };
-                //    List<HocSinhSinhVienDTO> x = kq.ToList();
+                //    List<HOCSINHSINHVIEN> x = kq.ToList();
                 //    return x;
                 //        return null;
                 //    try
@@ -205,9 +194,9 @@ namespace DAO
                 //    return null;
             }
 
-        public override bool insert(HocSinhSinhVienDTO hssv)
+        public override bool insert(HOCSINHSINHVIEN hssv)
         {
-            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv.dbhssv);
+            qlhk.HOCSINHSINHVIENs.InsertOnSubmit(hssv);
             try
             {
                 qlhk.SubmitChanges();

@@ -14,18 +14,18 @@ namespace GUI
 {
     public partial class Home : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public CanBoDTO cb = new CanBoDTO();
+        public CANBO cb = new CANBO();
         public Home()
         {
             InitializeComponent();
             this.ForeColor = Color.Black;
         }
-        public Home(CanBoDTO cb)
+        public Home(CANBO cb)
         {
             InitializeComponent();
             this.ForeColor = Color.Black;
             this.cb = cb;
-            if (cb.dbcb.LOAICANBO == "1") ribbonPageGroup10.Visible = false;
+            if (cb.LOAICANBO == "1") ribbonPageGroup10.Visible = false;
         }
         private void Home_Load(object sender, EventArgs e)
         {
@@ -256,7 +256,7 @@ namespace GUI
             {
                 tabControl1.TabPages.Remove(page);
             }
-            ThongTinCaNhanGUI thongtin = new ThongTinCaNhanGUI(cb.dbcb.TENTAIKHOAN);
+            ThongTinCaNhanGUI thongtin = new ThongTinCaNhanGUI(cb.TENTAIKHOAN);
             int index = hamkiemtrtontai(tabControl1, thongtin);
             if (index >= 0)
             {

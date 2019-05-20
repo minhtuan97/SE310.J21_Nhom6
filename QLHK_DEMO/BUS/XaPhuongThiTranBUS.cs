@@ -11,19 +11,19 @@ namespace BUS
 {
     public class 
         
-        XaPhuongThiTranBUS: AbstractFormBUS<XaPhuongThiTranDTO>
+        XaPhuongThiTranBUS: AbstractFormBUS<XAPHUONGTHITRAN>
     {
         XaPhuongThiTranDAO obj = new XaPhuongThiTranDAO();
 
-        public override List<XaPhuongThiTranDTO> GetAll()
+        public override List<XAPHUONGTHITRAN> GetAll()
         {
             return obj.getAll();
         }
-        public override bool Add(XaPhuongThiTranDTO data)
+        public override bool Add(XAPHUONGTHITRAN data)
         {
             return obj.insert(data);
         }
-        public override bool Add_Table(XaPhuongThiTranDTO data)
+        public override bool Add_Table(XAPHUONGTHITRAN data)
         {
             return obj.insert_table(data);
         }
@@ -36,12 +36,12 @@ namespace BUS
             return obj.delete(r);
         }
 
-        public override bool Update(XaPhuongThiTranDTO data)
+        public override bool Update(XAPHUONGTHITRAN data)
         {
             return obj.update(data);
         }
 
-        public List<XaPhuongThiTranDTO> TimKiem(string query)
+        public List<XAPHUONGTHITRAN> TimKiem(string query)
         {
             return obj.TimKiem(query);
         }
