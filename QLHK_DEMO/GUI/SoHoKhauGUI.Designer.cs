@@ -49,6 +49,8 @@
             this.btnThem = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVNhanKhau)).BeginInit();
@@ -190,6 +192,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnNext);
+            this.groupBox2.Controls.Add(this.btnBack);
             this.groupBox2.Controls.Add(this.dGVNhanKhau);
             this.groupBox2.Location = new System.Drawing.Point(12, 224);
             this.groupBox2.Name = "groupBox2";
@@ -203,7 +207,7 @@
             this.dGVNhanKhau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVNhanKhau.Location = new System.Drawing.Point(9, 19);
             this.dGVNhanKhau.Name = "dGVNhanKhau";
-            this.dGVNhanKhau.Size = new System.Drawing.Size(735, 196);
+            this.dGVNhanKhau.Size = new System.Drawing.Size(735, 178);
             this.dGVNhanKhau.TabIndex = 0;
             this.dGVNhanKhau.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVNhanKhau_CellContentClick);
             this.dGVNhanKhau.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVNhanKhau_CellContentDoubleClick);
@@ -266,11 +270,35 @@
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.Enabled = false;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(668, 203);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(36, 29);
+            this.btnBack.TabIndex = 2;
+            this.btnBack.Text = "<";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Enabled = false;
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(708, 203);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(36, 29);
+            this.btnNext.TabIndex = 2;
+            this.btnNext.Text = ">";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
             // SoHoKhauGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 477);
+            this.ClientSize = new System.Drawing.Size(800, 476);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -310,5 +338,7 @@
         private System.Windows.Forms.Button btnSuaNhanKhau;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnBack;
     }
 }

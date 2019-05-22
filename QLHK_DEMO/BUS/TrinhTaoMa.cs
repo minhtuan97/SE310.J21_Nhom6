@@ -11,7 +11,6 @@ namespace BUS
 {
     public static class TrinhTaoMa
     {
-        
 
         #region các hàm lấy mã cuối cùng
         public static string getLastID_MaDinhDanh()
@@ -153,13 +152,27 @@ namespace BUS
             string chuoikq = str1 + str4 + str3;
             return chuoikq;
         }
-        public static string TangMa12Kytu(string gioitinh, string namsinh)
+        public static string TangMa12Kytu(string gioitinh, string namsinh, string diachi=null)
         {
             string str_matinh = "074";
             string str_magioitinh = null;
             string str_manamsinh = null;
             string sausocuoi = null;
             string kq = null;
+
+            if (string.IsNullOrEmpty(diachi))
+            {
+                List<TINHTHANHPHO> ttp = DBConnection<int>.qlhk.TINHTHANHPHOs.ToList();
+                string search = "";
+                string[] dc = diachi.Split( new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string d in dc)
+                {
+                    search = ttp.Where(q => q.ten == d).Select(r=>r.matp).FirstOrDefault();
+                }
+
+                str_matinh = string.IsNullOrEmpty(search) ? str_matinh : search;
+            }
 
             //string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
             //string madinhdanh = DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();

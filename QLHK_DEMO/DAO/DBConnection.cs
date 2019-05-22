@@ -13,7 +13,8 @@ namespace DAO
     public abstract class DBConnection<T>
     {
         public static quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
-        
+        public static Exception error = new Exception();
+
         public DBConnection()
         {
         }

@@ -20,6 +20,7 @@ namespace GUI
         public SOHOKHAU shkDTO;
         public NHANKHAUTHUONGTRU nkDuocChon;
         List<NHANKHAUTHUONGTRU> listNKMoi = new List<NHANKHAUTHUONGTRU>();
+        public int page = 0;
 
         public SoHoKhauGUI()
         {
@@ -42,20 +43,22 @@ namespace GUI
         }
         private void taoDanhSachNhanKhau()
         {
+
             if (shkDTO == null || shkDTO.NHANKHAUTHUONGTRUs == null)
                 return;
-            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(shkDTO.NHANKHAUTHUONGTRUs.Select(r => r.NHANKHAU).ToList());
-            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(shkDTO.NHANKHAUTHUONGTRUs.Select(r => r).ToList());
-            DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
 
-            if (listNKMoi.Count>0)
+            var lstNhanKhau = shkDTO.NHANKHAUTHUONGTRUs;
+            if (listNKMoi.Count > 0)
             {
-                DataTable tbnk2 = DataHelper.ListToDatatable<NHANKHAU>(listNKMoi.Select(r => r.NHANKHAU).ToList());
-                DataTable tbnktt2 = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(listNKMoi.Select(r => r).ToList());
-                DataTable tb2 = DataHelper.mergeTwoTables(tbnk2, tbnktt2, "MADINHDANH");
-
-                tb.Merge(tb2);
+                lstNhanKhau.AddRange(listNKMoi);
             }
+
+            checkPage();
+            var lstNK = lstNhanKhau.Skip(5*page).Take(5);
+
+            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(lstNK.Select(r => r.NHANKHAU).ToList());
+            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(lstNK.Select(r => r).ToList());
+            DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
           
 
             //var bindingList = new BindingList<NHANKHAUTHUONGTRU>(shkDTO.NHANKHAUTHUONGTRUs.Select(r=>r.dbnktt).ToList());
@@ -181,7 +184,8 @@ namespace GUI
                 }
                 else
                 {
-                    MessageBox.Show(this, "Tạo sổ hộ khẩu Thất bại!", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "Tạo sổ hộ khẩu Thất bại!\n" + shk.getError().Message + "\n" + nktt.getError().Message,
+                        "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -222,7 +226,8 @@ namespace GUI
                 }
                 else
                 {
-                    MessageBox.Show(this, "Cập nhật sổ hộ khẩu Thất bại!", "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "Cập nhật sổ hộ khẩu Thất bại\n" + shk.getError().Message + "\n" + nktt.getError().Message,
+                        "Thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -320,7 +325,8 @@ namespace GUI
             if(nktt.Update(nkDuocChon))
                 MessageBox.Show(this, "Đã xóa nhân khẩu thành công!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show(this, "Đã xóa nhân khẩu thất bại!", "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Đã xóa nhân khẩu thất bại!\n" + shk.getError().Message + "\n" + nktt.getError().Message,
+                    "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             reloadSHK();
             taoDanhSachNhanKhau();
@@ -354,9 +360,42 @@ namespace GUI
                 
                 condition = shk.XoaSoHK(shkDTO.SOSOHOKHAU);
                 shkDTO = new SOHOKHAU();
-                MessageBox.Show(this, "Xóa sổ hộ khẩu thành công!", "Xóa sổ hộ khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cleanData();
+                if (condition)
+                {
+                    MessageBox.Show(this, "Xóa sổ hộ khẩu thành công!", "Xóa sổ hộ khẩu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cleanData();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Xóa sổ hộ khẩu thất bại!", "Xóa sổ hộ khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
             }
+        }
+
+        private void checkPage()
+        {
+            if (shkDTO == null || shkDTO.NHANKHAUTHUONGTRUs == null)
+                return;
+
+            int total = shkDTO.NHANKHAUTHUONGTRUs.Count + listNKMoi.Count - 1;
+            btnBack.Enabled = total > 5 && page > 0;
+            btnNext.Enabled = total > 5 && page * 5 < total;
+
+            page = page < 0 ? 0 : page;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            page--;
+            taoDanhSachNhanKhau();
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            page++;
+            taoDanhSachNhanKhau();
         }
     }
 }

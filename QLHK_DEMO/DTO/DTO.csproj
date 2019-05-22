@@ -61,6 +61,9 @@
   <ItemGroup>
     <Compile Include="CANBO.cs" />
     <Compile Include="Checker\NHANKHAU.cs" />
+    <Compile Include="Checker\NHANKHAUTHUONGTRU.cs" />
+    <Compile Include="Checker\SOHOKHAU.cs" />
+    <Compile Include="Checker\TIENANTIENSU.cs" />
     <Compile Include="Checker\TIEUSU.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />

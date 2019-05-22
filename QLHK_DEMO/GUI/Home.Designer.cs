@@ -371,7 +371,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 143);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1200, 445);
+            this.tabControl1.Size = new System.Drawing.Size(1200, 517);
             this.tabControl1.TabIndex = 2;
             // 
             // galleryDropDown1
@@ -401,7 +401,7 @@
             this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 588);
+            this.ClientSize = new System.Drawing.Size(1200, 660);
             this.Controls.Add(this.imageSlider);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.ribbonControl1);

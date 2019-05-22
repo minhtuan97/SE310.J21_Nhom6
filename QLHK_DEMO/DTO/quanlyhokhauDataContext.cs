@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace DTO
 {
-    public class NHANKHAUSummary
+    public partial class NHANKHAUSummary
     {
         public string madinhdanh { get; set; }
         public string hoten { get; set; }

@@ -318,7 +318,7 @@ namespace GUI
             }
             else
             {
-                MessageBox.Show(this, "Lỗi!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Lỗi!\n" + nktt.getError().Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //}
             //catch (Exception ex)
@@ -346,7 +346,7 @@ namespace GUI
                 }
                 else
                 {
-                    MessageBox.Show(this, "Lỗi!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "Lỗi!\n" + nktt.getError().Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -379,7 +379,7 @@ namespace GUI
                     }
                     else
                     {
-                        MessageBox.Show(this, "Lỗi!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "Lỗi!\n" + nktt.getError().Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

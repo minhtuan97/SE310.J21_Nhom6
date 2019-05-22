@@ -44,7 +44,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 qlhk.SubmitChanges();
                 return false;
             }
@@ -52,16 +52,17 @@ namespace DAO
         public override bool insert(NHANKHAUTHUONGTRU data)
         {
             //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data);
-            data.MADINHDANH = data.NHANKHAU.MADINHDANH;
+            
             try
             {
+                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data);
+                data.MADINHDANH = data.NHANKHAU.MADINHDANH;
                 qlhk.SubmitChanges();
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                // qlhk.SubmitChanges();
                 return false;
             }
@@ -100,7 +101,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 return false;
                 // Provide for exceptions.
             }
@@ -180,7 +181,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 // Provide for exceptions.
                 return false;
             }

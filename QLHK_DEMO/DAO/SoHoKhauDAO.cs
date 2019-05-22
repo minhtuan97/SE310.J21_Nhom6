@@ -43,7 +43,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 qlhk.SubmitChanges();
 
             }
@@ -64,7 +64,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 qlhk.SubmitChanges();
                 return false;
             }
@@ -112,7 +112,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 return false;
                 // Provide for exceptions.
             }
@@ -157,7 +157,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 // Provide for exceptions.
                 return false;
             }
@@ -200,7 +200,7 @@ namespace DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                error = e;
                 // Provide for exceptions.
                 return false;
             }

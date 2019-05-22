@@ -15,6 +15,10 @@ namespace BUS
         {
             DBConnection<T>.qlhk.SubmitChanges();
         }
+        public Exception getError()
+        {
+            return DBConnection<T>.error;
+        }
         public abstract List<T> GetAll();
         //public abstract DataSet GetAll();
         public abstract bool Add(T data);
