@@ -36,8 +36,8 @@ namespace BUS
         {
             if (!isValidNhanKhauTT(nktt)) return false;
 
-            NhanKhauDAO nk = new NhanKhauDAO();
-            List<NHANKHAU> ls = nk.TimKiem("madinhdanh='" + nktt.NHANKHAU.MADINHDANH + "'");
+            //NhanKhauDAO nk = new NhanKhauDAO();
+            //List<NHANKHAU> ls = nk.TimKiem("madinhdanh='" + nktt.NHANKHAU.MADINHDANH + "'");
             //if (nk.insert(nktt.NHANKHAU)|| ls.Count > 0)
             //{
                 if (obj.insert(nktt))
@@ -89,9 +89,9 @@ namespace BUS
         {
             return obj.delete(r);
         }
-        public bool updateTTThuongTru(string manktt, SOHOKHAU shk)
+        public bool updateTTThuongTru(string manktt, string sshk)
         {
-            return obj.updateTTThuongTru(manktt, shk);
+            return obj.updateTTThuongTru(manktt, sshk);
         }
         public bool UpdateNKTT(NHANKHAUTHUONGTRU nktt)
         {
@@ -100,11 +100,11 @@ namespace BUS
         public override bool Update(NHANKHAUTHUONGTRU nktt)
         {
             NhanKhauDAO nk = new NhanKhauDAO();
-            //if (nk.update(nktt.NHANKHAU))
-            //{
+            if (nk.update(nktt.NHANKHAU))
+            {
                 if (obj.update(nktt))
                     return true;
-            //}
+            }
             return false;
         }
         public List<NHANKHAUTHUONGTRU> TimKiem(string query)

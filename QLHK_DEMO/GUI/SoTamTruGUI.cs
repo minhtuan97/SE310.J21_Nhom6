@@ -321,14 +321,14 @@ namespace GUI
 
         private void taoDanhSachNhanKhau()
         {
-            if (sotamtruDto == null || sotamtruDto.NhanKhau == null)
+            if (sotamtruDto == null || sotamtruDto.NHANKHAUTAMTRUs == null)
                 return;
 
             datagridview.DataSource = null;
             datagridview.Rows.Clear();
 
-            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(sotamtruDto.NhanKhau.Select(r => r.NHANKHAU).ToList());
-            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(sotamtruDto.NhanKhau.Select(r => r).ToList());
+            DataTable tbnk = DataHelper.ListToDatatable<NHANKHAU>(sotamtruDto.NHANKHAUTAMTRUs.Select(r => r.NHANKHAU).ToList());
+            DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTAMTRU>(sotamtruDto.NHANKHAUTAMTRUs.Select(r => r).ToList());
             DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
             tb.Columns.RemoveAt(tb.Columns.Count - 1);
             tb.Columns.RemoveAt(tb.Columns.Count - 1);

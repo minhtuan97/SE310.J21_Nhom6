@@ -11,7 +11,7 @@ namespace BUS
 {
     public static class TrinhTaoMa
     {
-        public static quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+        
 
         #region các hàm lấy mã cuối cùng
         public static string getLastID_MaDinhDanh()
@@ -19,7 +19,7 @@ namespace BUS
             string sql = "SELECT top 1 madinhdanh FROM nhankhau ORDER BY madinhdanh DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return  DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -31,7 +31,7 @@ namespace BUS
             string sql = "SELECT Top 1 sosohokhau FROM sohokhau where sosohokhau LIKE '08%' ORDER BY sosohokhau DESC";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -43,7 +43,7 @@ namespace BUS
             string sql = "SELECT top 1 manhankhauthuongtru FROM nhankhauthuongtru where manhankhauthuongtru LIKE 'TH%' ORDER BY manhankhauthuongtru DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -56,7 +56,7 @@ namespace BUS
 
             try
             {
-                 return qlhk.ExecuteQuery<String>(sql).Single();
+                 return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }catch(Exception e)
             {
                 return "080000000";
@@ -69,7 +69,7 @@ namespace BUS
             string sql = "SELECT top 1 manhankhautamtru FROM nhankhautamtru where manhankhautamtru LIKE 'TT%' ORDER BY manhankhautamtru DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ namespace BUS
             string sql = "SELECT top 1 matieusu FROM tieusu where matieusu LIKE 'TS%' ORDER BY matieusu DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace BUS
             string sql = "SELECT top 1 matienantiensu FROM tienantiensu where matienantiensu LIKE 'TA%' ORDER BY matienantiensu DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace BUS
             string sql = "SELECT top 1 macanbo FROM canbo where macanbo LIKE 'CB%' ORDER BY macanbo DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace BUS
             string sql = "SELECT top 1 manhankhautamvang FROM nhankhautamvang where manhankhautamvang LIKE 'TV%' ORDER BY manhankhautamvang DESC;";
             try
             {
-                return qlhk.ExecuteQuery<String>(sql).Single();
+                return DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace BUS
             string kq = null;
 
             //string sql = "select madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "'ORDER BY madinhdanh desc";
-            //string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
+            //string madinhdanh = DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
 
 
             int i_namsinh = Int16.Parse(namsinh);
@@ -233,7 +233,7 @@ namespace BUS
             try
             {
                 string sql = "select top 1 madinhdanh from nhankhau where gioitinh='" + gioitinh + "' and year(ngaysinh)='" + namsinh + "' ORDER BY madinhdanh desc";
-                string madinhdanh = qlhk.ExecuteQuery<String>(sql).Single();
+                string madinhdanh = DBConnection<int>.qlhk.ExecuteQuery<String>(sql).Single();
                 str_madinhdanh = madinhdanh;
             }
             catch (Exception e)

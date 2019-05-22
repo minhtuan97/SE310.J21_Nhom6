@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace DTO
     public partial class SOTAMTRU
     {
 
-        public List<NHANKHAUTAMTRU> NhanKhau = new List<NHANKHAUTAMTRU>();
+        //public List<NHANKHAUTAMTRU> NhanKhau = new List<NHANKHAUTAMTRU>();
 
 
         public SOTAMTRU(string soSoTamTru, string maChuHoTamTru, string noiTamTru, 
@@ -23,14 +24,14 @@ namespace DTO
         }
 
         public SOTAMTRU(string soSoTamTru, string maChuHoTamTru, string noiTamTru,
-        DateTime ngayCap, DateTime denNgay, List<NHANKHAUTAMTRU> nhanKhau) : this()
+        DateTime ngayCap, DateTime denNgay, EntitySet<NHANKHAUTAMTRU> nhanKhau) : this()
         {
             SOSOTAMTRU = soSoTamTru;
             MACHUHO = maChuHoTamTru;
             NOITAMTRU = noiTamTru;
             NGAYCAP = ngayCap;
             DENNGAY = denNgay;
-            NhanKhau = nhanKhau;
+            this.NHANKHAUTAMTRUs = nhanKhau;
         }
 
   

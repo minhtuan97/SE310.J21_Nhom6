@@ -21,7 +21,6 @@ namespace DAO
 
         public List<NHANKHAU> getNHANKHAU()
         {
-            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
             var kq = from nk in qlhk.NHANKHAUs
                      select nk;
 
@@ -169,8 +168,10 @@ namespace DAO
                 return false;
             }
         }
-        public  List<NHANKHAU> TimKiem(string query)
+        public List<NHANKHAU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM NHANKHAU" + query;
             var res = qlhk.ExecuteQuery<NHANKHAU>(query).ToList();
@@ -180,6 +181,8 @@ namespace DAO
 
         public DataSet TimKiemTheoCuTru(string madinhdanh)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             DataSet dataset = new DataSet();
             var querytht = (from nktt in qlhk.NHANKHAUTHUONGTRUs.AsEnumerable()
                                             join nk in qlhk.NHANKHAUs.AsEnumerable() on nktt.MADINHDANH equals nk.MADINHDANH

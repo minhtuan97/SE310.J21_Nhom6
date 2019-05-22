@@ -159,6 +159,8 @@ namespace DAO
 
         public List<TIENANTIENSU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM tienantiensu" + query;
             var res = qlhk.ExecuteQuery<TIENANTIENSU>(query).ToList();

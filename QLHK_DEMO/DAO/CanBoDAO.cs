@@ -125,6 +125,7 @@ namespace DAO
         }
         public List<CANBO> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM CANBO" + query;
@@ -134,6 +135,7 @@ namespace DAO
         }
         public List<CANBO> TimKiemJoinNhanKhau(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM canbo, nhankhauthuongtru, nhankhau " +
                     "WHERE canbo.manhankhauthuongtru = nhankhauthuongtru.manhankhauthuongtru AND nhankhau.madinhdanh=nhankhauthuongtru.manhankhau" + query;

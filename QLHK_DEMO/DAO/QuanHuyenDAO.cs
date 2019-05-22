@@ -130,6 +130,7 @@ namespace DAO
 
         public List<QUANHUYEN> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM quanhuyen" + query;

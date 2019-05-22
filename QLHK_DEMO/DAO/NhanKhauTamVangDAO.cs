@@ -166,6 +166,8 @@ namespace DAO
 
         public List<NHANKHAUTAMVANG> TimKiemJoinNhanKhau(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             query = "SELECT * FROM nhankhautamvang" + query + " ORDER BY ngayketthuctamvang DESC";
             var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
             try
@@ -183,6 +185,8 @@ namespace DAO
 
         public List<NHANKHAUTAMVANG> TimKiemNhanKhau(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM nhankhautamvang" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTAMVANG>(query).ToList();
@@ -193,6 +197,7 @@ namespace DAO
 
         public int TimKiemThuongtru(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
 
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM nhankhauthuongtru" + query;

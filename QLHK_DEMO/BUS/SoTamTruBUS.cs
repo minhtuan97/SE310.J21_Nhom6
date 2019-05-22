@@ -54,13 +54,13 @@ namespace BUS
         public List<SOTAMTRU> TimKiem(string query)
         {
             List<SOTAMTRU> list = SoTamTru.TimKiem(query);
-            if (list.Count > 0)
-            {
-                foreach (SOTAMTRU item in list)
-                {
-                    item.NhanKhau = nktt.TimKiem("SOSOTAMTRU='" + item.SOSOTAMTRU + "'");
-                }
-            }
+            //if (list.Count > 0)
+            //{
+            //    foreach (SOTAMTRU item in list)
+            //    {
+            //        item.NhanKhau = nktt.TimKiem("SOSOTAMTRU='" + item.SOSOTAMTRU + "'");
+            //    }
+            //}
 
             return list;
         }

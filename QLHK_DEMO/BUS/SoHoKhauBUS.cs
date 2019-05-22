@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DTO;
 using DAO;
 using System.Data;
+using System.Data.Linq;
 
 namespace BUS
 {
@@ -43,6 +44,10 @@ namespace BUS
             return  obj.update(sohk);
         }
 
+        public bool Update(SOHOKHAU sohk, EntitySet<NHANKHAUTHUONGTRU> nk)
+        {
+            return obj.update(sohk, nk);
+        }
         public List<SOHOKHAU> TimKiem(string query)
         {
             List<SOHOKHAU>list = obj.TimKiem(query);

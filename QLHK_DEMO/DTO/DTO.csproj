@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="CANBO.cs" />
     <Compile Include="Checker\NHANKHAU.cs" />
-    <Compile Include="Checker\quanlyhokhauDataContext.cs" />
     <Compile Include="Checker\TIEUSU.cs" />
     <Compile Include="DB\qlhkDataSet.cs" />
     <Compile Include="DB\qlhkObject.cs" />
@@ -79,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>quanlyhokhau.dbml</DependentUpon>
     </Compile>
+    <Compile Include="quanlyhokhauDataContext.cs" />
     <Compile Include="ReplacementGroup.cs" />
     <Compile Include="SOHOKHAU.cs" />
     <Compile Include="SOTAMTRU.cs" />

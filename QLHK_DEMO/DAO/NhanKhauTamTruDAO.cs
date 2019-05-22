@@ -275,6 +275,8 @@ namespace DAO
 
         public List<NHANKHAUTAMTRU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM nhankhautamtru" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTAMTRU>(query).ToList();
@@ -285,6 +287,8 @@ namespace DAO
 
         public List<NHANKHAUTAMTRU> TimKiemNKTT(string madinhdanh)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             String query = "SELECT * FROM nhankhautamtru where madinhdanh=" + madinhdanh;
             var res = qlhk.ExecuteQuery<NHANKHAUTAMTRU>(query).ToList();
 

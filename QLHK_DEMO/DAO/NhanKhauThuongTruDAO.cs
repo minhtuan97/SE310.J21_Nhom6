@@ -69,7 +69,6 @@ namespace DAO
         public bool XoaNKTT(string maNhanKhauthuongtru)
         {
             var kq = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == maNhanKhauthuongtru).SingleOrDefault();
-
             try
             {
                 qlhk.NHANKHAUTHUONGTRUs.DeleteOnSubmit(kq);
@@ -123,13 +122,16 @@ namespace DAO
 
         }
 
-        public bool updateTTThuongTru(string manktt, SOHOKHAU shk)
+        public bool updateTTThuongTru(string manktt, string sshk)
         {
             NHANKHAUTHUONGTRU nk = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == manktt).FirstOrDefault();
 
             //nk.SOHOKHAU = shk;
-            nk.SOSOHOKHAU = shk.SOSOHOKHAU;
+            //nk.SOSOHOKHAU = shk.SOSOHOKHAU;
+            SOHOKHAU shk = qlhk.SOHOKHAUs.Single(q => q.SOSOHOKHAU == sshk);
             nk.DIACHITHUONGTRU = shk.DIACHI;
+
+            shk.NHANKHAUTHUONGTRUs.Add(nk);
             try
             {
                 qlhk.SubmitChanges();
@@ -219,6 +221,8 @@ namespace DAO
         //}
         public List<NHANKHAUTHUONGTRU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM NHANKHAUTHUONGTRU" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();
@@ -228,6 +232,8 @@ namespace DAO
 
         public List<NHANKHAUTHUONGTRU> TimKiemJoinNhanKhau(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" + query;
             var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query).ToList();

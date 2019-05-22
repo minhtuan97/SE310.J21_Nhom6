@@ -199,18 +199,21 @@ namespace DAO
 
         public List<SOTAMTRU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sotamtru" + query;
             var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
-
+            
             return res;
         }
 
 
         public List<SOTAMTRU> TimKiemSoTamTru(string sosotamtru)
         {
-            string query = "SELECT * FROM sotamtru where sosotamtru=" + sosotamtru;
-            var res = qlhk.ExecuteQuery<SOTAMTRU>(query).ToList();
+            qlhk = new quanlyhokhauDataContext();
+            //string query = "SELECT * FROM sotamtru where sosotamtru=" + sosotamtru;
+            var res = qlhk.SOTAMTRUs.Where(q=>q.SOSOTAMTRU==sosotamtru).ToList();
 
             return res;
         }

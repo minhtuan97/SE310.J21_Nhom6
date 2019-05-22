@@ -126,6 +126,8 @@ namespace DAO
 
         public List<XAPHUONGTHITRAN> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM xaphuongthitran" + query;
             var res = qlhk.ExecuteQuery<XAPHUONGTHITRAN>(query).ToList();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,8 +162,54 @@ namespace DAO
                 return false;
             }
         }
+
+        public bool update(SOHOKHAU data, EntitySet<NHANKHAUTHUONGTRU> nk)
+        {
+
+            // Query the database for the row to be updated.
+            var query = qlhk.SOHOKHAUs.Where(q => q.SOSOHOKHAU == data.SOSOHOKHAU);
+
+            // Execute the query, and change the column values
+            // you want to change.
+            foreach (SOHOKHAU kq in query)
+            {
+                kq.MACHUHO = data.MACHUHO;
+                kq.DIACHI = data.DIACHI;
+                kq.NGAYCAP = data.NGAYCAP;
+                kq.SODANGKY = data.SODANGKY;
+                // Insert any additional changes to column values.
+                foreach (var item in nk)
+                {
+                    
+                    if (!kq.NHANKHAUTHUONGTRUs.Any(q=>q.MADINHDANH==item.MADINHDANH))
+                    {
+                        kq.NHANKHAUTHUONGTRUs.Add(item);
+                    }
+                    else if (item.SOSOHOKHAU != kq.SOSOHOKHAU || item.DIACHITHUONGTRU != kq.DIACHI)
+                    {
+                        item.SOSOHOKHAU = kq.SOSOHOKHAU;
+                        item.DIACHITHUONGTRU = kq.DIACHI;
+                    }
+                }
+            }
+            // Submit the changes to the database.
+            try
+            {
+                qlhk.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+                return false;
+            }
+        }
+
         public List<SOHOKHAU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM sohokhau" + query;
             var res = qlhk.ExecuteQuery<SOHOKHAU>(query).ToList();

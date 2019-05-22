@@ -154,6 +154,8 @@ namespace DAO
 
         public List<TIEUSU> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM tieusu" + query;
             var res = qlhk.ExecuteQuery<TIEUSU>(query).ToList();

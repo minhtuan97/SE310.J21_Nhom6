@@ -12,11 +12,10 @@ namespace DAO
 {
     public abstract class DBConnection<T>
     {
-        public quanlyhokhauDataContext qlhk;
+        public static quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
         
         public DBConnection()
         {
-            qlhk = new quanlyhokhauDataContext();
         }
         public static DataSet getData(string query)
         {

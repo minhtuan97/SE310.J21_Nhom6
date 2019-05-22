@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace GUI
         NhanKhauThuongTruBUS nktt;
         public SOHOKHAU shkDTO;
         public NHANKHAUTHUONGTRU nkDuocChon;
+        List<NHANKHAUTHUONGTRU> listNKMoi = new List<NHANKHAUTHUONGTRU>();
 
         public SoHoKhauGUI()
         {
@@ -46,30 +48,40 @@ namespace GUI
             DataTable tbnktt = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(shkDTO.NHANKHAUTHUONGTRUs.Select(r => r).ToList());
             DataTable tb = DataHelper.mergeTwoTables(tbnk, tbnktt, "MADINHDANH");
 
+            if (listNKMoi.Count>0)
+            {
+                DataTable tbnk2 = DataHelper.ListToDatatable<NHANKHAU>(listNKMoi.Select(r => r.NHANKHAU).ToList());
+                DataTable tbnktt2 = DataHelper.ListToDatatable<NHANKHAUTHUONGTRU>(listNKMoi.Select(r => r).ToList());
+                DataTable tb2 = DataHelper.mergeTwoTables(tbnk2, tbnktt2, "MADINHDANH");
+
+                tb.Merge(tb2);
+            }
+          
+
             //var bindingList = new BindingList<NHANKHAUTHUONGTRU>(shkDTO.NHANKHAUTHUONGTRUs.Select(r=>r.dbnktt).ToList());
             //var source = new BindingSource(bindingList, null);
             cbbChuHo.DisplayMember = "HOTEN";
             cbbChuHo.ValueMember = "MANHANKHAUTHUONGTRU";
 
-            dataGridView1.DataSource = tb;
+            dGVNhanKhau.DataSource = tb;
 
             cbbChuHo.DataSource = tb;
         }
 
         private void fillData()
         {
+            taoDanhSachNhanKhau();
             tbSoSoHoKhau.Text = shkDTO.SOSOHOKHAU;
             cbbChuHo.SelectedValue = shkDTO.MACHUHO;
             dtpNgayCap.Value = shkDTO.NGAYCAP;
             tbDiaChi.Text = shkDTO.DIACHI;
             tbSoDangKy.Text = shkDTO.SODANGKY;
-            taoDanhSachNhanKhau();
+            
 
         }
 
         private void cleanData()
         {
-
             shkDTO = new SOHOKHAU();
             tbSoSoHoKhau.Text = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_SoHoKhauSoTamTru());
             cbbChuHo.DataSource = null;
@@ -77,7 +89,7 @@ namespace GUI
             dtpNgayCap.Value = DateTime.Today;
             tbDiaChi.Text = "";
             tbSoDangKy.Text = TrinhTaoMa.random7();
-            dataGridView1.DataSource = null;
+            dGVNhanKhau.DataSource = null;
         }
         #endregion
 
@@ -124,7 +136,11 @@ namespace GUI
                 {
                     if (shkDTO.NHANKHAUTHUONGTRUs.Any(i => i.MANHANKHAUTHUONGTRU == a.nkttDTO.MANHANKHAUTHUONGTRU))
                         return;
-                    shkDTO.NHANKHAUTHUONGTRUs.Add(a.nkttDTO);
+                    //shkDTO.NHANKHAUTHUONGTRUs.Add(a.nkttDTO);
+                    if (!listNKMoi.Any(q=>q.MADINHDANH==a.nkttDTO.MADINHDANH))
+                    {
+                        listNKMoi.Add(a.nkttDTO);
+                    }
 
                     cbbChuHo.DataSource = null;
                     cbbChuHo.Items.Clear();
@@ -136,7 +152,7 @@ namespace GUI
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tbSoSoHoKhau.Text) ||cbbChuHo.SelectedValue==null || shkDTO.NHANKHAUTHUONGTRUs.Count==0
+            if (string.IsNullOrEmpty(tbSoSoHoKhau.Text) ||cbbChuHo.SelectedValue==null || (shkDTO.NHANKHAUTHUONGTRUs.Count==0 && listNKMoi.Count==0)
                 || string.IsNullOrEmpty(tbDiaChi.Text)|| string.IsNullOrEmpty(tbSoDangKy.Text))
             {
                 MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -145,15 +161,17 @@ namespace GUI
             bool updateOK = true;
             if (shkDTO==null||string.IsNullOrEmpty(shkDTO.SOSOHOKHAU))
             {
-                var lstNK = shkDTO.NHANKHAUTHUONGTRUs;
+                var lstNK = shkDTO.NHANKHAUTHUONGTRUs.ToList();
+                lstNK.AddRange(listNKMoi);
+
                 shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text);
-                updateOK = shk.Add(shkDTO);
+                updateOK = updateOK && shk.Add(shkDTO);
                 foreach (NHANKHAUTHUONGTRU item in lstNK)
                 {
                     //item.SOHOKHAU = shkDTO;
                     //item.SOSOHOKHAU = shkDTO.SOSOHOKHAU;
                     //item.DIACHITHUONGTRU = shkDTO.DIACHI;
-                    updateOK = nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO);
+                    updateOK = updateOK && nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO.SOSOHOKHAU);
                 }
 
                 //nktt.DoiChuHo(shkDTO.NHANKHAUTHUONGTRUs, cbbChuHo.SelectedValue.ToString());
@@ -168,19 +186,35 @@ namespace GUI
             }
             else
             {
-                shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text, shkDTO.NHANKHAUTHUONGTRUs);
+                //var lstNK = shkDTO.NHANKHAUTHUONGTRUs;
+                //shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text);
+                //updateOK = updateOK && shk.Update(shkDTO);
 
-                updateOK = shk.Update(shkDTO);
-                foreach (NHANKHAUTHUONGTRU item in shkDTO.NHANKHAUTHUONGTRUs)
+                //foreach (NHANKHAUTHUONGTRU item in lstNK)
+                //{
+                //    if(item.SOSOHOKHAU != shkDTO.SOSOHOKHAU|| item.DIACHITHUONGTRU != shkDTO.DIACHI)
+                //    {
+                //        //item.dbnktt.SOHOKHAU = shkDTO.db;
+                //        //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
+                //        //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
+                //        updateOK = updateOK && nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO);
+                //    }
+                //}
+
+                List<NHANKHAUTHUONGTRU> lstNK = shkDTO.NHANKHAUTHUONGTRUs.ToList();
+                lstNK.AddRange(listNKMoi);
+
+                shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text);
+                updateOK = updateOK && shk.Update(shkDTO);
+
+                foreach (NHANKHAUTHUONGTRU item in lstNK)
                 {
-                    if(item.SOSOHOKHAU != shkDTO.SOSOHOKHAU|| item.DIACHITHUONGTRU != shkDTO.DIACHI)
+                    if (item.SOSOHOKHAU != shkDTO.SOSOHOKHAU || item.DIACHITHUONGTRU != shkDTO.DIACHI)
                     {
-                        //item.dbnktt.SOHOKHAU = shkDTO.db;
-                        //item.dbnktt.SOSOHOKHAU = shkDTO.db.SOSOHOKHAU;
-                        //item.dbnktt.DIACHITHUONGTRU = shkDTO.db.DIACHI;
-                        updateOK = nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO);
+                        updateOK = updateOK && nktt.updateTTThuongTru(item.MANHANKHAUTHUONGTRU, shkDTO.SOSOHOKHAU);
                     }
                 }
+
                 //nktt.DoiChuHo(shkDTO.NHANKHAUTHUONGTRUs, cbbChuHo.SelectedValue.ToString());
                 if (updateOK)
                 {
@@ -192,6 +226,9 @@ namespace GUI
                 }
             }
 
+            listNKMoi.Clear();
+            listNKMoi = new List<NHANKHAUTHUONGTRU>();
+            reloadSHK();
             btnXoa.Enabled = true;
 
         }
@@ -233,20 +270,15 @@ namespace GUI
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dGVNhanKhau_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = dataGridView1.SelectedCells[0].RowIndex;
-
-            //DataTable table = (DataTable)dataGridView1.DataSource;
-            //DataRow data = table.NewRow();
-            //DataRow data = ((DataRowView)dataGridView1.Rows[index].DataBoundItem).Row;
-            //DataRow data = table.Rows[index];
+            int index = dGVNhanKhau.SelectedCells[0].RowIndex;
             nkDuocChon = shkDTO.NHANKHAUTHUONGTRUs[index];
 
             btnSuaNhanKhau.Visible = btnXoaNhanKhau.Visible = true;
         }
 
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dGVNhanKhau_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -263,17 +295,12 @@ namespace GUI
             using (NhanKhauThuongTruGUI a = new NhanKhauThuongTruGUI(nkDuocChon.MADINHDANH, -1,cbbChuHo.Text))
             {
                 a.ShowDialog(this);
-                if (a.nkttDTO != null && !String.IsNullOrEmpty(a.nkttDTO.MADINHDANH))
-                {
-                    if (shkDTO.NHANKHAUTHUONGTRUs.Any(i => i.MANHANKHAUTHUONGTRU == a.nkttDTO.MANHANKHAUTHUONGTRU))
-                        return;
-                    reloadSHK();
+                reloadSHK();
 
-                    cbbChuHo.DataSource = null;
-                    cbbChuHo.Items.Clear();
+                cbbChuHo.DataSource = null;
+                cbbChuHo.Items.Clear();
 
-                    taoDanhSachNhanKhau();
-                }
+                taoDanhSachNhanKhau();
             }
         }
 

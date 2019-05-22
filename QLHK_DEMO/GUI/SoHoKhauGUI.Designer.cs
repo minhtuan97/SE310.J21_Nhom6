@@ -43,7 +43,7 @@
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dGVNhanKhau = new System.Windows.Forms.DataGridView();
             this.btnXoaNhanKhau = new System.Windows.Forms.Button();
             this.btnSuaNhanKhau = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
@@ -51,7 +51,7 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVNhanKhau)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,7 +190,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dGVNhanKhau);
             this.groupBox2.Location = new System.Drawing.Point(12, 224);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(776, 241);
@@ -198,15 +198,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Phần thông tin nhân khẩu";
             // 
-            // dataGridView1
+            // dGVNhanKhau
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(735, 196);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
+            this.dGVNhanKhau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVNhanKhau.Location = new System.Drawing.Point(9, 19);
+            this.dGVNhanKhau.Name = "dGVNhanKhau";
+            this.dGVNhanKhau.Size = new System.Drawing.Size(735, 196);
+            this.dGVNhanKhau.TabIndex = 0;
+            this.dGVNhanKhau.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVNhanKhau_CellContentClick);
+            this.dGVNhanKhau.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVNhanKhau_CellContentDoubleClick);
             // 
             // btnXoaNhanKhau
             // 
@@ -281,7 +281,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVNhanKhau)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -300,7 +300,7 @@
         private System.Windows.Forms.TextBox tbSoDangKy;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dGVNhanKhau;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnOK;

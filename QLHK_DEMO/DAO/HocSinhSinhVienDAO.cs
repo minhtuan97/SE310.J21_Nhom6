@@ -141,6 +141,8 @@ namespace DAO
 
         public DataTable TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM hocsinhsinhvien" + query;
             var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query) as IEnumerable<DataRow>;
@@ -151,6 +153,8 @@ namespace DAO
         // join 2 bảng ???
         public List<HOCSINHSINHVIEN> TimKiemJoinNhanKhau(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT * FROM HOCSINHSINHVIEN JOIN NHANKHAU ON HOCSINHSINHVIEN.MADINHDANH=NHANKHAU.MADINHDANH " + query;
             var res = qlhk.ExecuteQuery<HOCSINHSINHVIEN>(query).ToList();

@@ -362,6 +362,32 @@ namespace DAO.ViDu
             //Cập nhật vào CSDL
             qlhk.SubmitChanges();
         }
+
+
+        public static void taoCanBo()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            //Thêm một cán bộ
+            //Khi chưa có Constructor tùy biến
+            CANBO cb1 = new CANBO();
+            cb1.MACANBO = "CB0000003";
+            cb1.MANHANKHAUTHUONGTRU = "TH0000004";
+            cb1.TENTAIKHOAN = "cbhk03";
+            cb1.MATKHAU = "123";
+            cb1.LOAICANBO = "0";
+
+            qlhk.CANBOs.InsertOnSubmit(cb1);
+            qlhk.SubmitChanges();
+
+            //Sử dụng Constructor tùy biến
+            CANBO cb2 = new CANBO("CB0000004", "TH0000005", "cbhk04", "111", "0");
+
+            qlhk.CANBOs.InsertOnSubmit(cb2);
+            qlhk.SubmitChanges();
+
+
+        }
     }
 
     

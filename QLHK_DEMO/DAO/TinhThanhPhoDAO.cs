@@ -124,6 +124,8 @@ namespace DAO
         }
         public List<TINHTHANHPHO> TimKiem(string query)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             if (!String.IsNullOrEmpty(query)) query = " WHERE " + query;
             query = "SELECT *, 'Delete' as 'Change' FROM tinhthanhpho" + query;
             var res = qlhk.ExecuteQuery<TINHTHANHPHO>(query).ToList();

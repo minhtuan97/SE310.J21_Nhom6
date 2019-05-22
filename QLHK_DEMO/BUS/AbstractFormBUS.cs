@@ -11,7 +11,10 @@ namespace BUS
 {
     public abstract class AbstractFormBUS<T>
     {
-        
+        public static void submitChangeDAO()
+        {
+            DBConnection<T>.qlhk.SubmitChanges();
+        }
         public abstract List<T> GetAll();
         //public abstract DataSet GetAll();
         public abstract bool Add(T data);
