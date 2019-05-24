@@ -7,16 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using DTO;
 using System.Data;
+using DTO.DB;
 
 namespace DAO
 {
     public abstract class DBConnection<T>
     {
         public quanlyhokhauDataContext qlhk;
+        public qlhkDataSet qlhkdaset;
         
         public DBConnection()
         {
             qlhk = new quanlyhokhauDataContext();
+            qlhkdaset = new qlhkDataSet();
         }
         public static DataSet getData(string query)
         {

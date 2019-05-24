@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
 using DTO;
-using DTO.DB;
+//using DTO.DB;
 
 namespace GUI
 {
@@ -19,9 +19,9 @@ namespace GUI
         public DangNhapGUI()
         {
             InitializeComponent();
-            qlhkDataSet ds = new qlhkDataSet();
+            //qlhkDataSet ds = new qlhkDataSet();
 
-            tbTaiKhoan.Text = ds.dbDataSet.Tables[0].Rows[0].ItemArray[0].ToString();
+            //tbTaiKhoan.Text = ds.dbDataSet.Tables[0].Rows[0].ItemArray[0].ToString();
         }
 
         private void DangNhap()

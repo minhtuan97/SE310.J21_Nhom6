@@ -4,13 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace DTO
 {
     public class NhanKhauThuongTruDTO:NhanKhau
     {
         public NHANKHAUTHUONGTRU dbnktt = new NHANKHAUTHUONGTRU();
-
+        
 
         public NhanKhauThuongTruDTO() { }
 
@@ -63,6 +62,7 @@ namespace DTO
         {
             dbnktt = new NHANKHAUTHUONGTRU();
             db = nk;
+            
         }
 
         public NhanKhauThuongTruDTO(NhanKhauThuongTruDTO nktt)

@@ -17,9 +17,16 @@ namespace DAO
             var kq = from nkdto in qlhk.NHANKHAUs
                      select new NhanKhau
                      {
-                         db=nkdto
+                         db = nkdto
                      };
             List<NhanKhau> x = kq.ToList();
+            //NhanKhau nk = new NhanKhau();
+            //var kq = from nkdto in qlhkdaset.NHANKHAU.As
+            //         select new NhanKhau
+            //         {
+            //             db = nkdto
+            //         };
+            //List<NhanKhau> x = kq.ToList();
             return x;
         }
         public override bool insert_table(NhanKhau data)

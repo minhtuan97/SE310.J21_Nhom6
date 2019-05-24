@@ -12,9 +12,34 @@ namespace BUS
     public class NhanKhauThuongTruBUS: AbstractFormBUS<NhanKhauThuongTruDTO>
     {
         NhanKhauThuongTruDAO obj = new NhanKhauThuongTruDAO();
+        
         public override List<NhanKhauThuongTruDTO> GetAll()
         {
             return obj.getAll();
+        }
+        public void UpdateDataTable()
+        {
+            obj.UpdateDataTable();
+        }
+        public DataTable CopyDataTable()
+        {
+            return obj.CopyDataTable();
+        }
+        public bool Equal()
+        {
+            return obj.Equal();
+        }
+        public DataTable Union()
+        {
+            return obj.Union();
+        }
+        public DataTable Except()
+        {
+            return obj.Except();
+        }
+        public  DataTable Intersect()
+        {
+            return obj.Intersect();
         }
         public List<NhanKhauThuongTruDTO> GetAllJoinNhanKhau()
         {

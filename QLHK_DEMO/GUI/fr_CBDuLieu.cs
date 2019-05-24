@@ -157,12 +157,25 @@ namespace GUI
                 case "NHANKHAUTHUONGTRU":
                     try
                     {
-                        dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nkthuongtrubus.GetAll().Select(r => r.dbnktt).ToList());
-                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                        {
-                            DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
-                            dataGridView1[dataGridView1.ColumnCount - 1, i] = linkCell;
-                        }
+                        //dataGridView1.DataSource = DataHelper.ListToDataTableWithChange<NHANKHAUTHUONGTRU>(nkthuongtrubus.Intersect().Select(r => r.dbnktt).ToList());
+                        //for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        //{
+                        //    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                        //    dataGridView1[dataGridView1.ColumnCount - 1, i] = linkCell;
+                        //}
+                        //DataTable a = nkthuongtrubus.Union();
+                        //dataGridView1.DataSource = a;
+                        //if(nkthuongtrubus.Equal())
+                        //{
+                        //    MessageBox.Show("Hai DataTable giong nhau");
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Hai DataTable khac nhau");
+                        //}
+                        nkthuongtrubus.UpdateDataTable();
+                        DataTable a = nkthuongtrubus.CopyDataTable();
+                        dataGridView1.DataSource = a;
                     }
                     catch (Exception ex)
                     {

@@ -13,15 +13,115 @@ namespace DAO
     {
         public NhanKhauThuongTruDAO() : base() { }
 
+        public void DeleteDataRow()
+        {
+            //Sử dụng Linq lấy EnumerableCollection<DataRow>
+            var rowsToUpdate = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                .Where(r => r.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ"));
+
+            //Cập nhật từng Row
+            foreach (var row in rowsToUpdate)
+            {
+                row.Delete();
+            }
+        }
+        public void UpdateDataTable()
+        {
+            //Sử dụng Linq lấy EnumerableCollection<DataRow>
+            var rowsToUpdate =qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                .Where(r => r.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ"));
+
+            //Cập nhật từng Row
+            foreach (var row in rowsToUpdate)
+            {
+                row.SetField("DIACHITHUONGTRU", "TP HCM");
+            }
+        }
+
+        public DataTable CopyDataTable()
+        {
+            IEnumerable<DataRow> kq1 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       select nktt;
+            DataTable tb = kq1.CopyToDataTable<DataRow>();
+            return tb;
+        }
         public override List<NhanKhauThuongTruDTO> getAll()
         {
-            var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
-                        select new NhanKhauThuongTruDTO {
-                            dbnktt=nktt
-                        };
-
+            var kq = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                     select new NhanKhauThuongTruDTO(nktt.Field<string>("MANHANKHAUTHUONGTRU"), 
+                     nktt.Field<string>("DIACHITHUONGTRU"), nktt.Field<string>("QUANHEVOICHUHO"), 
+                     nktt.Field<string>("SOSOHOKHAU"), nktt.Field<string>("MADINHDANH"));
             return kq.ToList();
+        }
+        public bool Equal()
+        {
+            IEnumerable<DataRow> kq1 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("DIACHITHUONGTRU").SequenceEqual("Tân Lập, Đông Hòa, Dĩ An, Bình Dương")
+                                       select nktt;
+            IEnumerable<DataRow> kq2 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ")
+                                       select nktt;
+            bool kq = kq1.SequenceEqual(kq1, System.Data.DataRowComparer.Default);
+            return kq;
+            //DataTable tb = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].Clone();
+            //foreach (DataRow dataRow in kq)
+            //{
+            //    tb.ImportRow(dataRow);
+            //}
 
+            //return tb;
+        }
+        public DataTable Union()
+        {
+            IEnumerable<DataRow> kq1 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("DIACHITHUONGTRU").SequenceEqual("Tân Lập, Đông Hòa, Dĩ An, Bình Dương")
+                                       select nktt;
+            IEnumerable<DataRow> kq2 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ")
+                                       select nktt;
+            var kq = kq1.Union(kq2, System.Data.DataRowComparer.Default);
+            DataTable tb = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].Clone();
+            foreach (DataRow dataRow in kq)
+            {
+                tb.ImportRow(dataRow);
+            }
+
+            return tb;
+        }
+        public DataTable Except()
+        {
+            IEnumerable<DataRow> kq1 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("DIACHITHUONGTRU").SequenceEqual("Tân Lập, Đông Hòa, Dĩ An, Bình Dương")
+                                       select nktt;
+            IEnumerable<DataRow> kq2 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ")
+                                       select nktt;
+            var kq = kq1.Except(kq2, System.Data.DataRowComparer.Default);
+            DataTable tb = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].Clone();
+            foreach (DataRow dataRow in kq)
+            {
+                tb.ImportRow(dataRow);
+            }
+
+            return tb;
+        }
+
+        public DataTable Intersect()
+        {
+            IEnumerable<DataRow> kq1 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("DIACHITHUONGTRU").SequenceEqual("Tân Lập, Đông Hòa, Dĩ An, Bình Dương")
+                                       select nktt;
+            IEnumerable<DataRow> kq2 = from nktt in qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+                                       where nktt.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ")
+                                       select nktt;
+            var kq = kq1.Intersect(kq2, System.Data.DataRowComparer.Default);
+            DataTable tb = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].Clone();
+            foreach (DataRow dataRow in kq)
+            {
+                tb.ImportRow(dataRow);
+            }
+
+            return tb;
         }
 
         public List<NhanKhauThuongTruDTO> getAllJoinNhanKhau()
@@ -242,6 +342,7 @@ namespace DAO
         {
             if (!String.IsNullOrEmpty(query)) query = " AND " + query;
             query = "SELECT * FROM nhankhauthuongtru, nhankhau where nhankhau.madinhdanh=nhankhauthuongtru.madinhdanh" + query;
+           // var result= qlhkdaset
             var res = qlhk.ExecuteQuery<NHANKHAUTHUONGTRU>(query);
             List<NhanKhauThuongTruDTO> lst = new List<NhanKhauThuongTruDTO>();
             foreach (NHANKHAUTHUONGTRU i in res)
@@ -252,6 +353,8 @@ namespace DAO
 
             return lst;
         }
+        
+
     }
     
 }
