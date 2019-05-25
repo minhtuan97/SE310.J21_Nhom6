@@ -160,7 +160,7 @@ namespace BUS
             string sausocuoi = null;
             string kq = null;
 
-            if (string.IsNullOrEmpty(diachi))
+            if (!string.IsNullOrEmpty(diachi))
             {
                 List<TINHTHANHPHO> ttp = DBConnection<int>.qlhk.TINHTHANHPHOs.ToList();
                 string search = "";
