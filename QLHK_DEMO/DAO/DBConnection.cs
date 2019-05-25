@@ -17,6 +17,7 @@ namespace DAO
 
         public DBConnection()
         {
+            qlhk = new quanlyhokhauDataContext();
         }
         public static DataSet getData(string query)
         {
@@ -48,7 +49,6 @@ namespace DAO
             var listTables = (from tables in ql.Mapping.GetTables() select tables.TableName).ToList();
             return listTables;
         }
-
 
         public abstract List<T> getAll();
         public abstract bool insert(T data);//can bo thao tac

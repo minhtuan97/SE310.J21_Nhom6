@@ -29,7 +29,7 @@ namespace DTO
             {
                 throw new Exception("So so ho khau can gom 9 ky tu va bat dau bang '08'!");
             }
-            if (!DIACHITHUONGTRU.Contains(","))
+            if (DIACHITHUONGTRU != null && !DIACHITHUONGTRU.Contains(","))
             {
                 throw new Exception("Dia chi nhap vao sai cu phap, can cach nhau giua cac don vi bang dau ','!");
             }

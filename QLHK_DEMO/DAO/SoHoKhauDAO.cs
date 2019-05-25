@@ -16,6 +16,8 @@ namespace DAO
 
         public override List<SOHOKHAU> getAll()
         {
+            qlhk = new quanlyhokhauDataContext();
+
             //SOHOKHAU nk = new SOHOKHAU();
             var kq = from shkt in qlhk.SOHOKHAUs
                      select shkt;
@@ -36,6 +38,8 @@ namespace DAO
 
         public override bool insert_table(SOHOKHAU data)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             qlhk.SOHOKHAUs.InsertOnSubmit(data);
             try
             {
@@ -51,6 +55,8 @@ namespace DAO
         }
         public override bool insert(SOHOKHAU data)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             qlhk.SOHOKHAUs.InsertOnSubmit(data);
 
             //foreach (NhanKhauThuongTruDTO item in data.NhanKhau)
@@ -65,26 +71,22 @@ namespace DAO
             catch (Exception e)
             {
                 error = e;
-                qlhk.SubmitChanges();
+
                 return false;
             }
 
         }
         public bool XoaSoHK(string soSoHoKhau)
         {
+            qlhk = new quanlyhokhauDataContext();
 
-            SOHOKHAU[] nktt = this.getAll().ToArray();
+            SOHOKHAU shk = qlhk.SOHOKHAUs.SingleOrDefault(q => q.SOSOHOKHAU == soSoHoKhau);
             try
             {
-                foreach (var item in nktt)
-                {
-                    if (item.SOSOHOKHAU == soSoHoKhau)
-                    {
-                        qlhk.SOHOKHAUs.DeleteOnSubmit(item);
-                        qlhk.SubmitChanges();
-                        break;
-                    }
-                }
+
+                qlhk.SOHOKHAUs.DeleteOnSubmit(shk);
+                qlhk.SubmitChanges();
+
                 return true;
             }
             catch (Exception e)
@@ -119,6 +121,8 @@ namespace DAO
         }
         public override bool delete(int row)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             SOHOKHAU[] nktt = this.getAll().ToArray();
             try
             {
@@ -135,6 +139,7 @@ namespace DAO
 
         public override bool update(SOHOKHAU data)
         {
+            qlhk = new quanlyhokhauDataContext();
 
             // Query the database for the row to be updated.
             var query = qlhk.SOHOKHAUs.Where(q => q.SOSOHOKHAU == data.SOSOHOKHAU);
@@ -165,6 +170,7 @@ namespace DAO
 
         public bool update(SOHOKHAU data, EntitySet<NHANKHAUTHUONGTRU> nk)
         {
+            qlhk = new quanlyhokhauDataContext();
 
             // Query the database for the row to be updated.
             var query = qlhk.SOHOKHAUs.Where(q => q.SOSOHOKHAU == data.SOSOHOKHAU);

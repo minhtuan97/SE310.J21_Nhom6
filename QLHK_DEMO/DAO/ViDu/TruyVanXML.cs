@@ -130,7 +130,7 @@ namespace DAO.ViDu
 
             //Thêm nhankhau này vào danh sách
             //Cách 1: Lấy danh sách tất cả nhân khẩu từ CSDL và thêm nhankhau vào danh sách
-            var data = qlhk.Descendants("NHANKHAUs").ToList();
+            var data = qlhk.Element("NHANKHAUs");
             data.Add(nk);
 
             //Cách 2: thêm trực tiếp nhân khẩu này bằng XDocument.Element
@@ -148,12 +148,12 @@ namespace DAO.ViDu
 
             //Xóa nhankhau ra khỏi danh sách
             //Cách 1: Lấy danh sách tất cả nhân khẩu từ CSDL rồi tìm và xóa nhankhau
-            var data = qlhk.Descendants("NHANKHAUs").ToList();
+            var data = qlhk.Descendants("NHANKHAUs");
             foreach(var nk in data)
             {
                 if (nk.Attribute("MADINHDANH").Value == "074097000011")
                 {
-                    data.Remove(nk);
+                    nk.Remove();
                     break;
                 }
             }

@@ -34,7 +34,7 @@ namespace DTO
             {
                 throw new Exception("Gioi tinh chi co the la 'nam' hoac 'nu'!");
             }
-            if (!NOITHUONGTRU.Contains(",")||!DIACHIHIENNAY.Contains(","))
+            if ((NOITHUONGTRU!=null && !NOITHUONGTRU.Contains(","))|| (DIACHIHIENNAY != null && !DIACHIHIENNAY.Contains(",")))
             {
                 throw new Exception("Dia chi nhap vao sai cu phap, can cach nhau giua cac don vi bang dau ','!");
             }

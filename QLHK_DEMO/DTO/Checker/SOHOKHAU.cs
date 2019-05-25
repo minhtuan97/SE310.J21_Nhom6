@@ -20,7 +20,7 @@ namespace DTO
             {
                 throw new Exception("Ma chu ho can gom 9 ky tu va bat dau bang 'TH'!");
             }
-            if (!DIACHI.Contains(","))
+            if (DIACHI != null && !DIACHI.Contains(","))
             {
                 throw new Exception("Dia chi nhap vao sai cu phap, can cach nhau giua cac don vi bang dau ','!");
             }

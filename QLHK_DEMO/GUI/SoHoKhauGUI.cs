@@ -44,10 +44,10 @@ namespace GUI
         private void taoDanhSachNhanKhau()
         {
 
-            if (shkDTO == null || shkDTO.NHANKHAUTHUONGTRUs == null)
+            if (shkDTO == null || (shkDTO.NHANKHAUTHUONGTRUs.Count==0&&listNKMoi.Count==0))
                 return;
 
-            var lstNhanKhau = shkDTO.NHANKHAUTHUONGTRUs;
+            var lstNhanKhau = shkDTO.NHANKHAUTHUONGTRUs.ToList();
             if (listNKMoi.Count > 0)
             {
                 lstNhanKhau.AddRange(listNKMoi);
@@ -86,6 +86,8 @@ namespace GUI
         private void cleanData()
         {
             shkDTO = new SOHOKHAU();
+            listNKMoi.Clear();
+            listNKMoi = new List<NHANKHAUTHUONGTRU>();
             tbSoSoHoKhau.Text = TrinhTaoMa.TangMa9kytu(TrinhTaoMa.getLastID_SoHoKhauSoTamTru());
             cbbChuHo.DataSource = null;
             cbbChuHo.SelectedValue = null;
@@ -168,6 +170,7 @@ namespace GUI
                 lstNK.AddRange(listNKMoi);
 
                 shkDTO = new SOHOKHAU(tbSoSoHoKhau.Text, cbbChuHo.SelectedValue.ToString(), tbDiaChi.Text, dtpNgayCap.Value, tbSoDangKy.Text);
+
                 updateOK = updateOK && shk.Add(shkDTO);
                 foreach (NHANKHAUTHUONGTRU item in lstNK)
                 {
@@ -328,6 +331,8 @@ namespace GUI
                 MessageBox.Show(this, "Đã xóa nhân khẩu thất bại!\n" + shk.getError().Message + "\n" + nktt.getError().Message,
                     "Xóa Nhân khẩu", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            listNKMoi.Clear();
+            listNKMoi = new List<NHANKHAUTHUONGTRU>();
             reloadSHK();
             taoDanhSachNhanKhau();
 
@@ -342,23 +347,23 @@ namespace GUI
             }
             if(MessageBox.Show(this, "Bạn có chắc chắn muốn xóa sổ này?", "Xóa sổ hộ khẩu", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                bool condition = false;
+                bool condition = true;
                 //if (MessageBox.Show(this, "Bạn có muốn xóa thông tin các nhân khẩu bên trong sổ này?", "Xóa sổ hộ khẩu", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 //{
 
                 //}
                 //else
                 //{
-                    foreach (NHANKHAUTHUONGTRU item in shkDTO.NHANKHAUTHUONGTRUs)
+                    foreach (NHANKHAUTHUONGTRU item in shkDTO.NHANKHAUTHUONGTRUs.ToList())
                     {
                         item.SOHOKHAU = null;
                         item.SOSOHOKHAU = null;
-                        item.DIACHITHUONGTRU = null;
-                        condition = nktt.Update(item);
+                        //item.DIACHITHUONGTRU = null;
+                        condition = condition&& nktt.Update(item);
                     }
                 //}
                 
-                condition = shk.XoaSoHK(shkDTO.SOSOHOKHAU);
+                condition = condition && shk.XoaSoHK(shkDTO.SOSOHOKHAU);
                 shkDTO = new SOHOKHAU();
                 if (condition)
                 {

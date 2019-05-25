@@ -24,6 +24,7 @@ namespace DAO
 
         public List<NHANKHAUTHUONGTRU> getAllJoinNhanKhau()
         {
+
             var kq = from nktt in qlhk.NHANKHAUTHUONGTRUs
                      join nk in qlhk.NHANKHAUs on nktt.MADINHDANH equals nk.MADINHDANH
                      select nktt;
@@ -32,7 +33,8 @@ namespace DAO
         }
         public override bool insert_table(NHANKHAUTHUONGTRU data)
         {
-            if(!String.IsNullOrEmpty(data.NHANKHAU.MADINHDANH))
+
+            if (!String.IsNullOrEmpty(data.NHANKHAU.MADINHDANH))
                 qlhk.NHANKHAUs.InsertOnSubmit(data.NHANKHAU);
             if (!String.IsNullOrEmpty(data.MADINHDANH))
                 qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data);
@@ -51,24 +53,26 @@ namespace DAO
         }
         public override bool insert(NHANKHAUTHUONGTRU data)
         {
-            //qlhk.NHANKHAUs.InsertOnSubmit(data.db);
-            
+            quanlyhokhauDataContext db = new quanlyhokhauDataContext();
+
             try
             {
-                qlhk.NHANKHAUTHUONGTRUs.InsertOnSubmit(data);
+                db.NHANKHAUTHUONGTRUs.InsertOnSubmit(data);
                 data.MADINHDANH = data.NHANKHAU.MADINHDANH;
-                qlhk.SubmitChanges();
+                db.SubmitChanges();
                 return true;
             }
             catch (Exception e)
             {
                 error = e;
-               // qlhk.SubmitChanges();
+
                 return false;
             }
         }
         public bool XoaNKTT(string maNhanKhauthuongtru)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             var kq = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == maNhanKhauthuongtru).SingleOrDefault();
             try
             {
@@ -84,6 +88,8 @@ namespace DAO
         }
         public bool deleteNKTT(string id)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             var kq =
             from nktt in qlhk.NHANKHAUTHUONGTRUs
             where nktt.MANHANKHAUTHUONGTRU == id
@@ -109,6 +115,8 @@ namespace DAO
 
         public override bool delete(int row)
         {
+            qlhk = new quanlyhokhauDataContext();
+
             NHANKHAUTHUONGTRU[] nktt = this.getAll().ToArray();
             try
             {
@@ -125,17 +133,19 @@ namespace DAO
 
         public bool updateTTThuongTru(string manktt, string sshk)
         {
-            NHANKHAUTHUONGTRU nk = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == manktt).FirstOrDefault();
+            quanlyhokhauDataContext db = new quanlyhokhauDataContext();
+
+            NHANKHAUTHUONGTRU nk = db.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == manktt).FirstOrDefault();
 
             //nk.SOHOKHAU = shk;
             //nk.SOSOHOKHAU = shk.SOSOHOKHAU;
-            SOHOKHAU shk = qlhk.SOHOKHAUs.Single(q => q.SOSOHOKHAU == sshk);
+            SOHOKHAU shk = db.SOHOKHAUs.Single(q => q.SOSOHOKHAU == sshk);
             nk.DIACHITHUONGTRU = shk.DIACHI;
 
             shk.NHANKHAUTHUONGTRUs.Add(nk);
             try
             {
-                qlhk.SubmitChanges();
+                db.SubmitChanges();
                 return true;
             }
             catch (Exception e)
@@ -145,8 +155,10 @@ namespace DAO
         }
         public override bool update(NHANKHAUTHUONGTRU nktt)
         {
+            quanlyhokhauDataContext db = new quanlyhokhauDataContext();
+
             // Query the database for the row to be updated.
-            var query = qlhk.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.MANHANKHAUTHUONGTRU);
+            var query = db.NHANKHAUTHUONGTRUs.Where(q => q.MANHANKHAUTHUONGTRU == nktt.MANHANKHAUTHUONGTRU);
 
             // Execute the query, and change the column values
             // you want to change.
@@ -154,9 +166,9 @@ namespace DAO
             {
                 //if (kq.MANHANKHAUTHUONGTRU == nktt.MANHANKHAUTHUONGTRU)
                 //{
-                if (kq.NHANKHAU.MADINHDANH != nktt.NHANKHAU.MADINHDANH && nktt.NHANKHAU.MADINHDANH!=null)
+                if (kq.NHANKHAU.MADINHDANH != nktt.NHANKHAU.MADINHDANH)
                 {
-                    if (nktt.NHANKHAU != null) kq.NHANKHAU = nktt.NHANKHAU;
+                    kq.NHANKHAU = db.NHANKHAUs.SingleOrDefault(q => q.MADINHDANH == nktt.MADINHDANH);
                     kq.MADINHDANH = nktt.NHANKHAU.MADINHDANH;
                 }
 
@@ -164,7 +176,7 @@ namespace DAO
                 kq.QUANHEVOICHUHO = nktt.QUANHEVOICHUHO;
                 if (kq.SOSOHOKHAU != nktt.SOSOHOKHAU)
                 {
-                    if (nktt.SOHOKHAU != null && nktt.SOSOHOKHAU != null) kq.SOHOKHAU = nktt.SOHOKHAU;
+                    kq.SOHOKHAU = db.SOHOKHAUs.SingleOrDefault(q => q.SOSOHOKHAU == nktt.SOSOHOKHAU);
                     kq.SOSOHOKHAU = nktt.SOSOHOKHAU;
                 }
 
@@ -176,7 +188,7 @@ namespace DAO
             // Submit the changes to the database.
             try
             {
-                qlhk.SubmitChanges();
+                db.SubmitChanges();
                 return true;
             }
             catch (Exception e)
