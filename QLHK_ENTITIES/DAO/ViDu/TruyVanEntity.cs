@@ -30,9 +30,7 @@ namespace DAO.ViDu
             quanlyhokhauEntities qlhk = new quanlyhokhauEntities();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     join nktt in qlhk.NHANKHAUTHUONGTRUs
-                     on nk.MADINHDANH equals nktt.MADINHDANH
-                     where nktt.DIACHITHUONGTRU.Contains("Đông Hòa")
+                     where nk.NHANKHAUTHUONGTRUs.FirstOrDefault().DIACHITHUONGTRU.Contains("Đông Hòa")
                      select nk;
 
             return kq.ToList();
@@ -45,8 +43,7 @@ namespace DAO.ViDu
             quanlyhokhauEntities qlhk = new quanlyhokhauEntities();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     join nktt in qlhk.NHANKHAUTHUONGTRUs
-                     on nk.MADINHDANH equals nktt.MADINHDANH
+                     where nk.NHANKHAUTHUONGTRUs.FirstOrDefault().MADINHDANH == nk.MADINHDANH
                      select nk;
 
             foreach(NHANKHAU nk in kq)

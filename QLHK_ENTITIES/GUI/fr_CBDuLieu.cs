@@ -84,7 +84,7 @@ namespace GUI
             //dataGridView1.DataSource = DAO.ViDu.TruyVanEntity.truyVanNHANKHAUNoiThuongTruDongHoa();
 
 
-            //3. Truy vấn các nhân khẩu thường trú và sửa tên khác thành rỗng
+            //3.Truy vấn các nhân khẩu thường trú và sửa tên khác thành rỗng
             //bool ex3 = DAO.ViDu.TruyVanEntity.suaTenKhacNKTTThanhRong();
             //if (ex3)
             //{
@@ -96,15 +96,15 @@ namespace GUI
             //}
 
             //4. Thêm một nhân khẩu có thông tin là tt mình
-            bool ex3 = DAO.ViDu.TruyVanEntity.themNHANKHAU();
-            if (ex3)
-            {
-                MessageBox.Show("Thêm thành công");
-            }
-            else
-            {
-                MessageBox.Show("Thêm không thành công");
-            }
+            //bool ex3 = DAO.ViDu.TruyVanEntity.themNHANKHAU();
+            //if (ex3)
+            //{
+            //    MessageBox.Show("Thêm thành công");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Thêm không thành công");
+            //}
 
 
             //5. Xóa nhân khẩu thường trú Lê Thùy Trang

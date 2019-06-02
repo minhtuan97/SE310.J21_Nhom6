@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 11, 2019 lúc 04:30 AM
+-- Thời gian đã tạo: Th6 02, 2019 lúc 08:36 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 5.6.40
 
@@ -80,6 +80,15 @@ CREATE TABLE `NHANKHAU` (
   `NGHENGHIEP` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `NHANKHAU`
+--
+
+INSERT INTO `NHANKHAU` (`MADINHDANH`, `HOTEN`, `TENKHAC`, `NGAYSINH`, `GIOITINH`, `NOISINH`, `NGUYENQUAN`, `DANTOC`, `TONGIAO`, `QUOCTICH`, `HOCHIEU`, `NOITHUONGTRU`, `DIACHIHIENNAY`, `SDT`, `TRINHDOHOCVAN`, `TRINHDOCHUYENMON`, `BIETTIENGDANTOC`, `TRINHDONGOAINGU`, `NGHENGHIEP`) VALUES
+('074219000001', 'Trần Nam', 'Nam', '1980-09-05', 'Nam', 'Hậu Giang', 'Hậu Giang', 'Kinh', 'Phật giáo', 'Việt Nam', '', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Thủ Đức, TPHCM', '0946283526', '12/12', NULL, 'Không', 'Tiếng ANh', 'Công chức nhà nước'),
+('074219000002', 'Trần Hùng', 'Hung', '1998-03-05', 'Nam', 'Bình Dương', 'Bình Dương', 'Kinh', 'Phật giáo', 'Việt Nam', '', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', '0946283526', '12/12', 'IT', 'Không', 'Tiếng ANh', 'Sinh Viên'),
+('083456789012', 'Lê Thùy Trang', 'Trang', '1980-01-01', 'Nữ', 'Khánh Hòa', 'Khánh Hòa', 'Kinh', 'Không', 'Việt Nam', NULL, 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', '0123456788', '12/12', NULL, NULL, 'Pháp', 'Công chức nhà nước');
+
 -- --------------------------------------------------------
 
 --
@@ -124,6 +133,15 @@ CREATE TABLE `NHANKHAUTHUONGTRU` (
   `QUANHEVOICHUHO` text COLLATE utf8_unicode_ci,
   `SOSOHOKHAU` char(9) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `NHANKHAUTHUONGTRU`
+--
+
+INSERT INTO `NHANKHAUTHUONGTRU` (`MANHANKHAUTHUONGTRU`, `MADINHDANH`, `DIACHITHUONGTRU`, `QUANHEVOICHUHO`, `SOSOHOKHAU`) VALUES
+('TH0000001', '074219000001', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Không', 'SH0000001'),
+('TH0000002', '083456789012', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Vợ', 'SH0000001'),
+('TH0000003', '074219000002', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', 'Con', 'SH0000001');
 
 -- --------------------------------------------------------
 
@@ -871,6 +889,13 @@ CREATE TABLE `SOHOKHAU` (
   `SODANGKY` char(7) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `SOHOKHAU`
+--
+
+INSERT INTO `SOHOKHAU` (`SOSOHOKHAU`, `MACHUHO`, `DIACHI`, `NGAYCAP`, `SODANGKY`) VALUES
+('SH0000001', 'TH0000002', 'Tân Lập, Đông Hòa, Dĩ An, Bình Dương', '2018-01-01', '1234568');
+
 -- --------------------------------------------------------
 
 --
@@ -884,13 +909,6 @@ CREATE TABLE `SOTAMTRU` (
   `NGAYCAP` date NOT NULL,
   `DENNGAY` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `SOTAMTRU`
---
-
-INSERT INTO `SOTAMTRU` (`SOSOTAMTRU`, `MACHUHO`, `NOITAMTRU`, `NGAYCAP`, `DENNGAY`) VALUES
-('080000001', '', '', '2019-05-11', '2019-05-11');
 
 -- --------------------------------------------------------
 
@@ -12301,10 +12319,6 @@ ALTER TABLE `CANBO`
 --
 ALTER TABLE `HOCSINHSINHVIEN`
   ADD CONSTRAINT `FK_HOCSINHS_LAHSSV_NHANKHAU` FOREIGN KEY (`MADINHDANH`) REFERENCES `NHANKHAU` (`MADINHDANH`);
-
---
--- Các ràng buộc cho bảng `NHANKHAU`
---
 
 --
 -- Các ràng buộc cho bảng `NHANKHAUTAMTRU`
