@@ -57,6 +57,7 @@
     <Compile Include="HocSinhSinhVienDAO.cs" />
     <Compile Include="NhanKhauDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViDu\TruyvanDataset.cs" />
     <Compile Include="XaPhuongThiTranDAO.cs" />
   </ItemGroup>
   <ItemGroup>

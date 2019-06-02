@@ -62,6 +62,15 @@ namespace DTO.DB
             dbDataSet.Tables.Add(TIEUSU);
             dbDataSet.Tables.Add(TINHTHANHPHO);
             dbDataSet.Tables.Add(XAPHUONGTHITRAN);
+
+
+
+            DataRelation nktt_nk = new DataRelation("FR_NKTT",
+                    NHANKHAU.Columns["MADINHDANH"],
+                    NHANKHAUTHUONGTRU.Columns["MADINHDANH"]);
+
+            dbDataSet.Relations.Add(nktt_nk);
+
         }
 
         private static string errorString = "";

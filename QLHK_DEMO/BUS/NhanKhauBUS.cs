@@ -13,6 +13,7 @@ namespace BUS
     public class NhanKhauBUS:AbstractFormBUS<NhanKhau>
     {
         NhanKhauDAO objnhankhau = new NhanKhauDAO();
+        
         public override List<NhanKhau> GetAll()
         {
             return objnhankhau.getAll();

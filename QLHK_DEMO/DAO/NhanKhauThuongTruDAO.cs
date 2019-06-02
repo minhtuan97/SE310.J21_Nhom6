@@ -13,14 +13,30 @@ namespace DAO
     {
         public NhanKhauThuongTruDAO() : base() { }
 
+        public void AddRow()
+        {
+            NhanKhauThuongTruDTO nktt = new NhanKhauThuongTruDTO("TH0000006", "BD", "em", "SH0000002", "083456789017");
+
+            var a = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"];
+            DataRow row = a.NewRow();
+            row["MANHANKHAUTHUONGTRU"] = nktt.dbnktt.MANHANKHAUTHUONGTRU;
+            row["MADINHDANH"] = nktt.dbnktt.MADINHDANH;
+            row["SOSOHOKHAU"] = nktt.dbnktt.SOSOHOKHAU;
+            row["DIACHITHUONGTRU"] = nktt.dbnktt.DIACHITHUONGTRU;
+            row["QUANHEVOICHUHO"] = nktt.dbnktt.QUANHEVOICHUHO;
+
+            a.Rows.Add(row);
+            var b = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"];
+
+        }
         public void DeleteDataRow()
         {
             //Sử dụng Linq lấy EnumerableCollection<DataRow>
-            var rowsToUpdate = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
+            var rowsToDelete = qlhkdaset.dbDataSet.Tables["NHANKHAUTHUONGTRU"].AsEnumerable()
                 .Where(r => r.Field<string>("QUANHEVOICHUHO").SequenceEqual("Vợ"));
 
             //Cập nhật từng Row
-            foreach (var row in rowsToUpdate)
+            foreach (var row in rowsToDelete)
             {
                 row.Delete();
             }

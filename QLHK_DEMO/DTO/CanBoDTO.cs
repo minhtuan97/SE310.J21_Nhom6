@@ -10,6 +10,7 @@ namespace DTO
     public class CanBoDTO: NhanKhauThuongTruDTO
     {
         public CANBO dbcb= new CANBO();
+
         public CanBoDTO() : base() { }
 
         public CanBoDTO(string maCanBo, string tenTaiKhoan, string matKhau, string loaiCanBo, string str_manhankhauthuongtru)

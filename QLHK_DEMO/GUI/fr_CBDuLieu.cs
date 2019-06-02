@@ -71,6 +71,9 @@ namespace GUI
                 comboBox1.Items.Add(r.RowType.Name.ToString());
             }
 
+            //dataGridView1.DataSource = DAO.ViDu.TruyvanDataset.AddRow();
+            //dataGridView1.DataSource = DAO.ViDu.TruyvanDataset.CopyDataTable();
+
         }
 
         private void LoadData()
@@ -173,7 +176,8 @@ namespace GUI
                         //{
                         //    MessageBox.Show("Hai DataTable khac nhau");
                         //}
-                        nkthuongtrubus.UpdateDataTable();
+                        //nkthuongtrubus.UpdateDataTable();
+                        //nkthuongtrubus.AddRow();
                         DataTable a = nkthuongtrubus.CopyDataTable();
                         dataGridView1.DataSource = a;
                     }
