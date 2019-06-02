@@ -44,5 +44,14 @@ namespace DTO
             db.TRINHDONGOAINGU = trinhDoNgoaiNgu;
             db.NGHENGHIEP = ngheNghiep;
         }
+
+        public NhanKhauDTO(string maDinhDanh, string hoTen, DateTime ngaySinh)
+        {
+            db.MADINHDANH = maDinhDanh;
+            db.HOTEN = hoTen;
+            db.NGAYSINH = ngaySinh;
+        }
+
+
     }
 }

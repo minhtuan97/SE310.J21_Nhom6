@@ -71,6 +71,52 @@ namespace GUI
             //    comboBox1.Items.Add(r.RowType.Name.ToString());
             //}
 
+
+
+
+
+
+            //1. Truy vấn tìm nhân khẩu Lê Thùy Trang
+            //dataGridView1.DataSource = DAO.ViDu.TruyVanEntity.truyVanNHANKHAULeThuyTrang();
+
+
+            //2.Truy vấn nhân khẩu có nơi thường trú là Đông Hòa
+            //dataGridView1.DataSource = DAO.ViDu.TruyVanEntity.truyVanNHANKHAUNoiThuongTruDongHoa();
+
+
+            //3. Truy vấn các nhân khẩu thường trú và sửa tên khác thành rỗng
+            //bool ex3 = DAO.ViDu.TruyVanEntity.suaTenKhacNKTTThanhRong();
+            //if (ex3)
+            //{
+            //    MessageBox.Show("Sửa thành công");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Sửa không thành công");
+            //}
+
+            //4. Thêm một nhân khẩu có thông tin là tt mình
+            bool ex3 = DAO.ViDu.TruyVanEntity.themNHANKHAU();
+            if (ex3)
+            {
+                MessageBox.Show("Thêm thành công");
+            }
+            else
+            {
+                MessageBox.Show("Thêm không thành công");
+            }
+
+
+            //5. Xóa nhân khẩu thường trú Lê Thùy Trang
+            //bool ex5 = DAO.ViDu.TruyVanEntity.xoaNHANKHAU();
+            //if (ex5)
+            //{
+            //    MessageBox.Show("Xóa thành công");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Xóa không thành công");
+            //}
         }
 
         private void LoadData()

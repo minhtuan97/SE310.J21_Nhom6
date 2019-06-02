@@ -81,6 +81,7 @@
     <Compile Include="HocSinhSinhVienDAO.cs" />
     <Compile Include="NhanKhauDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViDu\TruyVanEntity.cs" />
     <Compile Include="XaPhuongThiTranDAO.cs" />
   </ItemGroup>
   <ItemGroup>
