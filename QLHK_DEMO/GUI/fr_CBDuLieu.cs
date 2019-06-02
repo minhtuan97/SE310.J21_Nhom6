@@ -98,7 +98,7 @@ namespace GUI
             //               hoten = c.Element("HOTEN").Value
             //           };
 
-            dataGridView1.DataSource = DAO.ViDu.TruyVanXML.layTIEUSU();
+            dataGridView1.DataSource = DAO.ViDu.TruyVanXML.layNhanKhauLeThuyTrang();
         }
 
         private void LoadData()

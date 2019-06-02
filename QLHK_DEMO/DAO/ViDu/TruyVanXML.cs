@@ -20,8 +20,150 @@ namespace DAO.ViDu
         public string NOILAMVIEC { get; set; }
     }
 
+    public class NhanKhauXML
+    {
+        public string MADINHDANH { get; set; }
+        public string HOTEN { get; set; }
+        public string TENKHAC { get; set; }
+        public DateTime NGAYSINH { get; set; }
+        public string GIOITINH { get; set; }
+        public string NOISINH { get; set; }
+        public string NGUYENQUAN { get; set; }
+        public string DANTOC { get; set; }
+        public string TONGIAO { get; set; }
+        public string QUOCTICH { get; set; }
+        public string HOCHIEU { get; set; }
+        public string NOITHUONGTRU { get; set; }
+        public string DIACHIHIENNAY { get; set; }
+        public string SDT { get; set; }
+        public string TRINHDOHOCVAN { get; set; }
+        public string TRINHDOCHUYENMON { get; set; }
+        public string BIETTIENGDANTOC { get; set; }
+        public string TRINHDONGOAINGU { get; set; }
+        public string NGHENGHIEP { get; set; }
+    }
+
+
     public class TruyVanXML
     {
+        public static List<NhanKhauXML> layNhanKhauLeThuyTrang()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            var data = from c in qlhk.Descendants("nhankhau")
+                       where c.Element("HOTEN").Value == "Lê Thùy Trang"
+                       select new NhanKhauXML
+                       {
+                           MADINHDANH = c.Attribute("MADINHDANH").Value,
+                           HOTEN = c.Element("HOTEN").Value,
+                           TENKHAC = c.Element("TENKHAC").Value,
+                           NGAYSINH = DateTime.ParseExact(c.Element("NGAYSINH").Value, "yyyy-MM-dd", null),
+                           GIOITINH = c.Element("GIOITINH").Value,
+                           NOISINH = c.Element("NOISINH").Value,
+                           NGUYENQUAN = c.Element("NGUYENQUAN").Value,
+                           DANTOC = c.Element("DANTOC").Value,
+                           TONGIAO = c.Element("TONGIAO").Value,
+                           QUOCTICH = c.Element("QUOCTICH").Value,
+                           HOCHIEU = c.Element("HOCHIEU").Value,
+                           NOITHUONGTRU = c.Element("NOITHUONGTRU").Value,
+                           DIACHIHIENNAY = c.Element("DIACHIHIENNAY").Value,
+                           SDT = c.Element("SDT").Value,
+                           TRINHDOHOCVAN = c.Element("TRINHDOHOCVAN").Value,
+                           TRINHDOCHUYENMON = c.Element("TRINHDOCHUYENMON").Value,
+                           BIETTIENGDANTOC = c.Element("BIETTIENGDANTOC").Value,
+                           TRINHDONGOAINGU = c.Element("TRINHDONGOAINGU").Value,
+                           NGHENGHIEP = c.Element("NGHENGHIEP").Value
+                       };
+
+            return data.ToList();
+        }
+
+        public static List<NhanKhauXML> layNhanKhauThuongTruDongHoa()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            var data = from c in qlhk.Descendants("nhankhau")
+                       join t in qlhk.Descendants("nhankhauthuongtru")
+                       on c.Attribute("MADINHDANH").Value equals t.Element("MADINHDANH").Value
+                       where t.Element("DIACHITHUONGTRU").Value.Contains("Đông Hòa")
+                       select new NhanKhauXML
+                       {
+                           MADINHDANH = c.Attribute("MADINHDANH").Value,
+                           HOTEN = c.Element("HOTEN").Value,
+                           TENKHAC = c.Element("TENKHAC").Value,
+                           NGAYSINH = DateTime.ParseExact(c.Element("NGAYSINH").Value, "yyyy-MM-dd", null),
+                           GIOITINH = c.Element("GIOITINH").Value,
+                           NOISINH = c.Element("NOISINH").Value,
+                           NGUYENQUAN = c.Element("NGUYENQUAN").Value,
+                           DANTOC = c.Element("DANTOC").Value,
+                           TONGIAO = c.Element("TONGIAO").Value,
+                           QUOCTICH = c.Element("QUOCTICH").Value,
+                           HOCHIEU = c.Element("HOCHIEU").Value,
+                           NOITHUONGTRU = c.Element("NOITHUONGTRU").Value,
+                           DIACHIHIENNAY = c.Element("DIACHIHIENNAY").Value,
+                           SDT = c.Element("SDT").Value,
+                           TRINHDOHOCVAN = c.Element("TRINHDOHOCVAN").Value,
+                           TRINHDOCHUYENMON = c.Element("TRINHDOCHUYENMON").Value,
+                           BIETTIENGDANTOC = c.Element("BIETTIENGDANTOC").Value,
+                           TRINHDONGOAINGU = c.Element("TRINHDONGOAINGU").Value,
+                           NGHENGHIEP = c.Element("NGHENGHIEP").Value
+                       };
+
+            return data.ToList();
+        }
+
+        public static Boolean capNhapTenKhacNhanKhauThuongTru()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            var data = from c in qlhk.Descendants("nhankhau")
+                       join t in qlhk.Descendants("nhankhauthuongtru")
+                       on c.Attribute("MADINHDANH").Value equals t.Element("MADINHDANH").Value
+                       select c;
+            foreach(XElement x in data)
+            {
+                x.Element("TENKHAC").SetValue("");
+            }
+
+            qlhk.Save(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            return true;
+        }
+
+        public static void xoaNHANKHAULeThuyTrang()
+        {
+            XDocument qlhk = XDocument.Load(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+
+            //Xóa nhankhau ra khỏi danh sách
+            //Cách 1: Lấy danh sách tất cả nhân khẩu từ CSDL rồi tìm và xóa nhankhau
+            var data = qlhk.Descendants("NHANKHAUs");
+            foreach (var nk in data)
+            {
+                if (nk.Attribute("HOTEN").Value == "Lê Thùy Trang")
+                {
+                    nk.Remove();
+                    break;
+                }
+            }
+
+            //Cách 2: Truy vấn và xóa trực tiếp nhân khẩu này sử dụng XElement.Remove
+            qlhk.Descendants("nhankhau").Single(q => q.Attribute("HOTEN").Value == "Lê Thùy Trang").Remove();
+
+            //Lưu lại các thay đổi
+            qlhk.Save(
+                Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\DTO\\DB\\qlhk.xml");
+        }
+
+
+        /// <summary>
+        /// ///////////////////////////////
+        /// </summary>
+        /// <returns></returns>
         public static string layNHANKHAU()
         {
             XDocument qlhk = XDocument.Load(

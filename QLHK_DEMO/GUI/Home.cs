@@ -286,6 +286,9 @@ namespace GUI
             
         }
 
-        
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

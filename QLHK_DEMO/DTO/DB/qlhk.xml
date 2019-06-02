@@ -38,14 +38,14 @@
             <TENKHAC></TENKHAC>
             <NGAYSINH>1997-10-15</NGAYSINH>
             <GIOITINH>nam</GIOITINH>
-            <NOISINH>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOISINH>
-            <NGUYENQUAN>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
+            <NOISINH>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOISINH>
+            <NGUYENQUAN>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
             <DANTOC>Kinh</DANTOC>
             <TONGIAO>Không</TONGIAO>
             <QUOCTICH>Việt Nam</QUOCTICH>
             <HOCHIEU></HOCHIEU>
-            <NOITHUONGTRU>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
-            <DIACHIHIENNAY>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <NOITHUONGTRU>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
+            <DIACHIHIENNAY>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
             <SDT>0946283526</SDT>
             <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
             <TRINHDOCHUYENMON>Không</TRINHDOCHUYENMON>
@@ -65,7 +65,7 @@
             <QUOCTICH>Việt Nam</QUOCTICH>
             <HOCHIEU>Không</HOCHIEU>
             <NOITHUONGTRU>05 Tân Lập, Phường Vĩnh Hòa, Thành phố Nha Trang, Tỉnh Khánh Hòa</NOITHUONGTRU>
-            <DIACHIHIENNAY>42 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <DIACHIHIENNAY>42 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
             <SDT>0964639962</SDT>
             <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
             <TRINHDOCHUYENMON>Sinh Viên</TRINHDOCHUYENMON>
@@ -84,8 +84,8 @@
             <TONGIAO>Khong</TONGIAO>
             <QUOCTICH>Việt Nam</QUOCTICH>
             <HOCHIEU>không</HOCHIEU>
-            <NOITHUONGTRU>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
-            <DIACHIHIENNAY>41 Tân Lập , Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <NOITHUONGTRU>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
+            <DIACHIHIENNAY>41 Tân Lập , Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
             <SDT>0786616751</SDT>
             <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
             <TRINHDOCHUYENMON>tin học</TRINHDOCHUYENMON>
@@ -99,13 +99,13 @@
             <NGAYSINH>1975-08-13</NGAYSINH>
             <GIOITINH>nu</GIOITINH>
             <NOISINH>Tỉnh Bình Dương</NOISINH>
-            <NGUYENQUAN>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
+            <NGUYENQUAN>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
             <DANTOC>Kinh</DANTOC>
             <TONGIAO>Không</TONGIAO>
             <QUOCTICH>Việt Nam</QUOCTICH>
             <HOCHIEU>không</HOCHIEU>
-            <NOITHUONGTRU>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
-            <DIACHIHIENNAY>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <NOITHUONGTRU>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
+            <DIACHIHIENNAY>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
             <SDT>0786616721</SDT>
             <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
             <TRINHDOCHUYENMON>không</TRINHDOCHUYENMON>
@@ -113,19 +113,39 @@
             <TRINHDONGOAINGU>không</TRINHDONGOAINGU>
             <NGHENGHIEP>Công Nhân</NGHENGHIEP>
        </nhankhau>
+       <nhankhau MADINHDANH="083456789012">
+            <HOTEN>Lê Thùy Trang</HOTEN>
+            <TENKHAC>Trang Moon</TENKHAC>
+            <NGAYSINH>1999-01-10</NGAYSINH>
+            <GIOITINH>nu</GIOITINH>
+            <NOISINH>Tỉnh Bình Dương</NOISINH>
+            <NGUYENQUAN>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
+            <DANTOC>Kinh</DANTOC>
+            <TONGIAO>Không</TONGIAO>
+            <QUOCTICH>Việt Nam</QUOCTICH>
+            <HOCHIEU>không</HOCHIEU>
+            <NOITHUONGTRU>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
+            <DIACHIHIENNAY>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <SDT>0786616000</SDT>
+            <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
+            <TRINHDOCHUYENMON>không</TRINHDOCHUYENMON>
+            <BIETTIENGDANTOC>không</BIETTIENGDANTOC>
+            <TRINHDONGOAINGU>không</TRINHDONGOAINGU>
+            <NGHENGHIEP>Sinh Viên</NGHENGHIEP>
+       </nhankhau>
        <nhankhau MADINHDANH="074219000001">
             <HOTEN>Nguyễn Tấn Tài</HOTEN>
             <TENKHAC>Tèo</TENKHAC>
             <NGAYSINH>2019-01-07</NGAYSINH>
             <GIOITINH>nam</GIOITINH>
             <NOISINH>Thành phố Hà Nội</NOISINH>
-            <NGUYENQUAN>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
+            <NGUYENQUAN>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NGUYENQUAN>
             <DANTOC>Kinh</DANTOC>
             <TONGIAO>Phật</TONGIAO>
             <QUOCTICH>Việt Nam</QUOCTICH>
             <HOCHIEU>Hoa Kỳ</HOCHIEU>
-            <NOITHUONGTRU>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
-            <DIACHIHIENNAY>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
+            <NOITHUONGTRU>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITHUONGTRU>
+            <DIACHIHIENNAY>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHIHIENNAY>
             <SDT>0324535510</SDT>
             <TRINHDOHOCVAN>12/12</TRINHDOHOCVAN>
             <TRINHDOCHUYENMON>Quân nhân</TRINHDOCHUYENMON>
@@ -139,7 +159,7 @@
   <NHANKHAUTAMTRUs>
         <nhankhautamtru MANHANKHAUTAMTRU="TT0000001">
             <MADINHDANH>074097000001</MADINHDANH>
-            <NOITAMTRU>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
+            <NOITAMTRU>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
             <TUNGAY>2019-01-16</TUNGAY>
             <DENNGAY>2019-02-03</DENNGAY>
             <LYDO>Đi Làm</LYDO>
@@ -147,7 +167,7 @@
        </nhankhautamtru>
        <nhankhautamtru MANHANKHAUTAMTRU="TT0000002">
             <MADINHDANH>074097000002</MADINHDANH>
-            <NOITAMTRU>42 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
+            <NOITAMTRU>42 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
             <TUNGAY>2019-01-07</TUNGAY>
             <DENNGAY>2019-07-07</DENNGAY>
             <LYDO>Đi học đại học</LYDO>
@@ -170,19 +190,19 @@
   <NHANKHAUTHUONGTRUs>
         <nhankhauthuongtru MANHANKHAUTHUONGTRU="TH0000001">
             <MADINHDANH>074097007312</MADINHDANH>
-            <DIACHITHUONGTRU>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
+            <DIACHITHUONGTRU>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
             <QUANHEVOICHUHO>Chủ hộ</QUANHEVOICHUHO>
             <SOSOHOKHAU>080000001</SOSOHOKHAU>
        </nhankhauthuongtru>
        <nhankhauthuongtru MANHANKHAUTHUONGTRU="TH0000002">
             <MADINHDANH>074175000001</MADINHDANH>
-            <DIACHITHUONGTRU>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
+            <DIACHITHUONGTRU>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
             <QUANHEVOICHUHO>Vợ</QUANHEVOICHUHO>
             <SOSOHOKHAU>080000001</SOSOHOKHAU>
        </nhankhauthuongtru>
        <nhankhauthuongtru MANHANKHAUTHUONGTRU="TH0000003">
             <MADINHDANH>074219000001</MADINHDANH>
-            <DIACHITHUONGTRU>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
+            <DIACHITHUONGTRU>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHITHUONGTRU>
             <QUANHEVOICHUHO>Chủ Hộ</QUANHEVOICHUHO>
             <SOSOHOKHAU>080000004</SOSOHOKHAU>
        </nhankhauthuongtru>
@@ -3761,13 +3781,13 @@
   <SOHOKHAUs>
         <sohokhau SOSOHOKHAU="080000001">
             <MACHUHO>TH0000001</MACHUHO>
-            <DIACHI>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHI>
+            <DIACHI>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHI>
             <NGAYCAP>2019-01-07</NGAYCAP>
             <SODANGKY>0802460</SODANGKY>
        </sohokhau>
        <sohokhau SOSOHOKHAU="080000004">
             <MACHUHO>TH0000003</MACHUHO>
-            <DIACHI>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHI>
+            <DIACHI>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</DIACHI>
             <NGAYCAP>2019-01-07</NGAYCAP>
             <SODANGKY>7583132</SODANGKY>
        </sohokhau>
@@ -3777,13 +3797,13 @@
   <SOTAMTRUs>
         <sotamtru SOSOTAMTRU="080000002">
             <CHUHO>TT0000001</CHUHO>
-            <NOITAMTRU>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
+            <NOITAMTRU>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
             <NGAYCAP>2019-01-16</NGAYCAP>
             <DENNGAY>2019-02-03</DENNGAY>
        </sotamtru>
        <sotamtru SOSOTAMTRU="080000003">
             <CHUHO>TT0000002</CHUHO>
-            <NOITAMTRU>42 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
+            <NOITAMTRU>42 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOITAMTRU>
             <NGAYCAP>2019-01-07</NGAYCAP>
             <DENNGAY>2019-07-07</DENNGAY>
        </sotamtru>
@@ -3806,31 +3826,31 @@
             <MADINHDANH>074097007312</MADINHDANH>
             <THOIGIANBATDAU>2005-02-01</THOIGIANBATDAU>
             <THOIGIANKETTHUC>2008-05-01</THOIGIANKETTHUC>
-            <CHOO>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
+            <CHOO>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
             <NGHENGHIEP>buôn bán</NGHENGHIEP>
-            <NOILAMVIEC>41 Tân Lập, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
+            <NOILAMVIEC>41 Tân Lập, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
        </tieusu>
        <tieusu MATIEUSU="TS0000002">
             <MADINHDANH>074175000001</MADINHDANH>
             <THOIGIANBATDAU>2003-01-01</THOIGIANBATDAU>
             <THOIGIANKETTHUC>2006-01-01</THOIGIANKETTHUC>
-            <CHOO>Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
+            <CHOO>Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
             <NGHENGHIEP>Công nhân</NGHENGHIEP>
-            <NOILAMVIEC>Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
+            <NOILAMVIEC>Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
        </tieusu>
        <tieusu MATIEUSU="TS0000003">
             <MADINHDANH>074175000001</MADINHDANH>
             <THOIGIANBATDAU>2006-01-01</THOIGIANBATDAU>
             <THOIGIANKETTHUC>2008-01-01</THOIGIANKETTHUC>
-            <CHOO>Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
+            <CHOO>Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
             <NGHENGHIEP>Buôn bán</NGHENGHIEP>
-            <NOILAMVIEC>Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
+            <NOILAMVIEC>Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
        </tieusu>
        <tieusu MATIEUSU="TS0000004">
             <MADINHDANH>074097000001</MADINHDANH>
             <THOIGIANBATDAU>2000-02-24</THOIGIANBATDAU>
             <THOIGIANKETTHUC>2014-01-07</THOIGIANKETTHUC>
-            <CHOO>21 Khu Phố Tây A, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
+            <CHOO>21 Khu Phố Tây A, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
             <NGHENGHIEP>Học sinh</NGHENGHIEP>
             <NOILAMVIEC></NOILAMVIEC>
        </tieusu>
@@ -3848,15 +3868,15 @@
             <THOIGIANKETTHUC>2004-03-01</THOIGIANKETTHUC>
             <CHOO>1A Tô Vĩnh Diện</CHOO>
             <NGHENGHIEP>Cán bộ</NGHENGHIEP>
-            <NOILAMVIEC>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
+            <NOILAMVIEC>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
        </tieusu>
        <tieusu MATIEUSU="TS0000007">
             <MADINHDANH>074219000001</MADINHDANH>
             <THOIGIANBATDAU>2004-03-02</THOIGIANBATDAU>
             <THOIGIANKETTHUC>2012-12-12</THOIGIANKETTHUC>
-            <CHOO>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
+            <CHOO>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</CHOO>
             <NGHENGHIEP>Công An</NGHENGHIEP>
-            <NOILAMVIEC>1A Tô Vĩnh Diện, Phường Dĩ An, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
+            <NOILAMVIEC>1A Tô Vĩnh Diện, Phường Đông Hòa, Thị xã Dĩ An, Tỉnh Bình Dương</NOILAMVIEC>
        </tieusu>
       </TIEUSUs>
    
@@ -48849,7 +48869,7 @@
             <maqh>723</maqh>
        </xaphuongthitran>
        <xaphuongthitran maxp="25942">
-            <ten>Phường Dĩ An</ten>
+            <ten>Phường Đông Hòa</ten>
             <kieu>Phường</kieu>
             <maqh>724</maqh>
        </xaphuongthitran>
