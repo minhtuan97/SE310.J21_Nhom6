@@ -88,6 +88,15 @@ namespace DAO.ViDu
                      select nk;
         }
 
+        public static void truyVanNHANKHAUTHUONGTRU()
+        {
+            quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
+
+            var kq = from nk in qlhk.NHANKHAUs
+                     where nk.NHANKHAUTHUONGTRUs.First().DIACHITHUONGTRU.Contains("Đông Hòa")
+                     select nk;
+        }
+
         public static void truyVanNHANKHAUTAMTRUkoTATS()
         {
             quanlyhokhauDataContext qlhk = new quanlyhokhauDataContext();
