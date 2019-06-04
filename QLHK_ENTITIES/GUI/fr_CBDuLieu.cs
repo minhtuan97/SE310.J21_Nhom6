@@ -85,15 +85,15 @@ namespace GUI
 
 
             //3.Truy vấn các nhân khẩu thường trú và sửa tên khác thành rỗng
-            //bool ex3 = DAO.ViDu.TruyVanEntity.suaTenKhacNKTTThanhRong();
-            //if (ex3)
-            //{
-            //    MessageBox.Show("Sửa thành công");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Sửa không thành công");
-            //}
+            bool ex3 = DAO.ViDu.TruyVanEntity.suaTenKhacNKTTThanhRong();
+            if (ex3)
+            {
+                MessageBox.Show("Sửa thành công");
+            }
+            else
+            {
+                MessageBox.Show("Sửa không thành công");
+            }
 
             //4. Thêm một nhân khẩu có thông tin là tt mình
             //bool ex3 = DAO.ViDu.TruyVanEntity.themNHANKHAU();

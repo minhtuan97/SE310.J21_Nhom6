@@ -43,7 +43,7 @@ namespace DAO.ViDu
             quanlyhokhauEntities qlhk = new quanlyhokhauEntities();
 
             var kq = from nk in qlhk.NHANKHAUs
-                     where nk.NHANKHAUTHUONGTRUs.FirstOrDefault().MADINHDANH == nk.MADINHDANH
+                     where nk.NHANKHAUTHUONGTRUs.Count > 0
                      select nk;
 
             foreach(NHANKHAU nk in kq)
