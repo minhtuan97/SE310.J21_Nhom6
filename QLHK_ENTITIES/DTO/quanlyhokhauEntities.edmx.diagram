@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83b520b2157c4325af5e024ae310e6c5" Name="Diagram1" ZoomLevel="49">
+        <EntityTypeShape EntityType="quanlyhokhauModel.CANBO" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.HOCSINHSINHVIEN" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.NHANKHAU" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.NHANKHAUTAMTRU" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.NHANKHAUTAMVANG" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.NHANKHAUTHUONGTRU" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.QUANHUYEN" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.SOHOKHAU" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.SOTAMTRU" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.TIENANTIENSU" Width="1.5" PointX="3" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.TIEUSU" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.TINHTHANHPHO" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlyhokhauModel.XAPHUONGTHITRAN" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_CANBO_NKTT_CB_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_HOCSINHS_LAHSSV_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_NHANKHAU_NK_NKTAMT_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_NHANKHAU_NK_NKTAMV_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_NHANKHAU_NK_NKTHUO_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_TIENANTI_NK_TIENAN_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_TIEUSU_NK_TIEUSU_NHANKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_NHANKHAU_STT_NKTT_SOTAMTRU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_NHANKHAU_NKTT_SHK_SOHOKHAU" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_QUANHUYE_QH_TTP_TINHTHAN" ManuallyRouted="false" />
+        <AssociationConnector Association="quanlyhokhauModel.FK_XAPHUONG_QH_XP_QUANHUYEN" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
